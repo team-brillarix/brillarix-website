@@ -1,15 +1,126 @@
 import type { Metadata } from "next";
 import { Geist } from "next/font/google";
 import "./globals.css";
+import Header from "@/components/Header";
 
 const geist = Geist({
   variable: "--font-geist",
   subsets: ["latin"],
 });
 
+const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://brillarix.com";
+const siteName = "Brillarix";
+const defaultTitle = "Brillarix: Powering Digital Innovation with Low-Code & Custom Solutions";
+const defaultDescription = "Brillarix transforms ideas into high-performance web applications. Specializing in low-code platforms like Bubble.io, we blend code and no-code to create scalable, secure, and efficient digital solutions.";
+
 export const metadata: Metadata = {
-  title: "Brillarix: Powering Digital Innovation with Low-Code & Custom Solutions",
-  description: "Brillarix transforms ideas into high-performance web applications. Specializing in low-code platforms like Bubble.io, we blend code and no-code to create scalable, secure, and efficient digital solutions. ",
+  metadataBase: new URL(baseUrl),
+  title: {
+    default: defaultTitle,
+    template: `%s | ${siteName}`,
+  },
+  description: defaultDescription,
+  keywords: [
+    "low-code development",
+    "Bubble.io",
+    "custom web applications",
+    "no-code solutions",
+    "web development",
+    "digital transformation",
+    "software development",
+    "scalable applications",
+    "enterprise solutions",
+    "web app development",
+    "Bubble.io development",
+    "low-code platform",
+    "custom software",
+    "digital innovation",
+    "web application development",
+  ],
+  authors: [
+    {
+      name: "Brillarix",
+      url: baseUrl,
+    },
+  ],
+  creator: "Brillarix",
+  publisher: "Brillarix",
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: baseUrl,
+    siteName: siteName,
+    title: defaultTitle,
+    description: defaultDescription,
+    images: [
+      {
+        url: `${baseUrl}/og-image.jpg`,
+        width: 1200,
+        height: 630,
+        alt: "Brillarix - Powering Digital Innovation",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: defaultTitle,
+    description: defaultDescription,
+    images: [`${baseUrl}/twitter-image.jpg`],
+    creator: "@brillarixtech",
+    site: "@brillarixtech",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/icon-16x16.png", sizes: "16x16", type: "image/png" },
+      { url: "/icon-32x32.png", sizes: "32x32", type: "image/png" },
+    ],
+    apple: [
+      { url: "/apple-icon.png", sizes: "180x180", type: "image/png" },
+    ],
+    other: [
+      {
+        rel: "mask-icon",
+        url: "/safari-pinned-tab.svg",
+        color: "#000000",
+      },
+    ],
+  },
+  manifest: "/manifest.json",
+  category: "technology",
+  classification: "Business",
+  other: {
+    "apple-mobile-web-app-capable": "yes",
+    "apple-mobile-web-app-status-bar-style": "black-translucent",
+    "apple-mobile-web-app-title": siteName,
+    "mobile-web-app-capable": "yes",
+    "msapplication-TileColor": "#000000",
+    "msapplication-config": "/browserconfig.xml",
+    "theme-color": "#000000",
+    "color-scheme": "dark light",
+  },
+  verification: {
+    // google: "your-google-verification-code",
+  },
 };
 
 export default function RootLayout({
@@ -17,11 +128,87 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const organizationSchema = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: siteName,
+    url: baseUrl,
+    logo: `${baseUrl}/logos/Brillarix-White-Mode.svg`,
+    description: defaultDescription,
+    sameAs: [
+      // Add your social media profiles here
+    ],
+    contactPoint: {
+      "@type": "ContactPoint",
+      contactType: "Customer Service",
+    },
+  };
+
+  const websiteSchema = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: siteName,
+    url: baseUrl,
+    description: defaultDescription,
+    potentialAction: {
+      "@type": "SearchAction",
+      target: {
+        "@type": "EntryPoint",
+        urlTemplate: `${baseUrl}/search?q={search_term_string}`,
+      },
+      "query-input": "required name=search_term_string",
+    },
+  };
+
+  const serviceSchema = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    serviceType: "Web Development & Low-Code Solutions",
+    provider: {
+      "@type": "Organization",
+      name: siteName,
+    },
+    areaServed: "Worldwide",
+    description: defaultDescription,
+    offers: {
+      "@type": "Offer",
+      description: "Custom web application development and low-code solutions",
+    },
+  };
+
   return (
     <html lang="en">
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(organizationSchema),
+          }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(websiteSchema),
+          }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(serviceSchema),
+          }}
+        />
+        <meta name="geo.region" content="US" />
+        <meta name="geo.placename" content="United States" />
+        <meta name="language" content="English" />
+        <meta name="revisit-after" content="7 days" />
+        <meta name="distribution" content="global" />
+        <meta name="rating" content="general" />
+        <link rel="canonical" href={baseUrl} />
+      </head>
       <body
-        className={`${geist.variable} antialiased`}
+        className={`${geist.variable} antialiased container mx-auto`}
       >
+        <Header />
         {children}
       </body>
     </html>
