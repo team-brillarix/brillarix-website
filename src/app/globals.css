@@ -58,6 +58,50 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  /* Gray - dark */
+  --color-gray-dark-1: var(--gray-dark-1);
+  --color-gray-dark-2: var(--gray-dark-2);
+  --color-gray-dark-3: var(--gray-dark-3);
+  --color-gray-dark-4: var(--gray-dark-4);
+  --color-gray-dark-5: var(--gray-dark-5);
+  --color-gray-dark-6: var(--gray-dark-6);
+  --color-gray-dark-7: var(--gray-dark-7);
+  --color-gray-dark-8: var(--gray-dark-8);
+  --color-gray-dark-9: var(--gray-dark-9);
+  --color-gray-dark-10: var(--gray-dark-10);
+  /* Gray - light */
+  --color-gray-light-1: var(--gray-light-1);
+  --color-gray-light-2: var(--gray-light-2);
+  --color-gray-light-3: var(--gray-light-3);
+  --color-gray-light-4: var(--gray-light-4);
+  --color-gray-light-5: var(--gray-light-5);
+  --color-gray-light-6: var(--gray-light-6);
+  --color-gray-light-7: var(--gray-light-7);
+  --color-gray-light-8: var(--gray-light-8);
+  --color-gray-light-9: var(--gray-light-9);
+  --color-gray-light-10: var(--gray-light-10);
+  /* Greens */
+  --color-green: var(--green);
+  --color-green-dark: var(--green-dark);
+  --color-green-light-03: var(--green-light-03);
+  --color-green-light-02: var(--green-light-02);
+  --color-green-light-01: var(--green-light-01);
+  /* Oranges */
+  --color-orange: var(--orange);
+  --color-orange-dark: var(--orange-dark);
+  --color-orange-light-03: var(--orange-light-03);
+  --color-orange-light-02: var(--orange-light-02);
+  --color-orange-light-01: var(--orange-light-01);
+  /* Reds */
+  --color-red: var(--red);
+  --color-red-dark: var(--red-dark);
+  --color-red-light-03: var(--red-light-03);
+  --color-red-light-02: var(--red-light-02);
+  --color-red-light-01: var(--red-light-01);
+  /* Semantic aliases */
+  --color-success: var(--green);
+  --color-warning: var(--orange);
+  --color-danger: var(--red);
 }
 
 @media (prefers-color-scheme: dark) {
