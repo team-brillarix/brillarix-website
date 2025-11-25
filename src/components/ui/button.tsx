@@ -2,17 +2,41 @@ import React from "react";
 import { cn } from "@/lib/utils";
 
 export type ButtonVariant = "primary" | "secondary" | "tertiary";
+export type ButtonSize = "sm" | "md" | "lg";
 
 export interface ButtonProps
-  extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, "disabled"> {
+  extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, "disabled" | "size"> {
   variant?: ButtonVariant;
+  size?: ButtonSize;
   leftImage?: React.ReactNode;
   rightImage?: React.ReactNode;
   disabled?: boolean;
+  loading?: boolean;
+  error?: string;
+  helperText?: string;
   children: React.ReactNode;
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
   type?: "button" | "submit" | "reset";
+  id?: string;
 }
+
+const sizeClasses: Record<ButtonSize, { height: string; padding: string; text: string }> = {
+  sm: {
+    height: "h-10",
+    padding: "py-2 px-3",
+    text: "text-xs",
+  },
+  md: {
+    height: "h-11",
+    padding: "py-3 px-4",
+    text: "text-sm",
+  },
+  lg: {
+    height: "h-12",
+    padding: "py-3.5 px-5",
+    text: "text-base",
+  },
+};
 
 const variantStyles: Record<
   ButtonVariant,
@@ -46,10 +70,10 @@ const variantStyles: Record<
       "has-[:disabled]:focus-within:shadow-none"
     ),
     button: cn(
-      "w-fit h-11 rounded-lg py-3 px-4 gap-2.5",
+      "w-fit rounded-lg gap-2.5",
       "bg-gray-dark-4",
       "text-gray-light-2",
-      "font-medium text-sm leading-5",
+      "font-medium leading-5",
       "inline-flex items-center justify-center",
       "transition-all duration-500 ease-in-out",
       "hover:bg-gradient-to-r hover:from-gray-dark-3 hover:to-[#4B4B4B]",
@@ -112,10 +136,10 @@ const variantStyles: Record<
       "has-[:disabled]:focus-within:shadow-none"
     ),
     button: cn(
-      "w-full h-full rounded-lg py-3 px-4 gap-2.5",
+      "w-full h-full rounded-lg gap-2.5",
       "bg-gray-dark-1",
       "text-gray-light-3",
-      "font-medium text-sm leading-5",
+      "font-medium leading-5",
       "inline-flex items-center justify-center",
       "transition-all duration-500 ease-in-out",
       "hover:bg-gray-dark-1",
@@ -153,11 +177,11 @@ const variantStyles: Record<
       "has-[:disabled]:focus-within:shadow-none"
     ),
     button: cn(
-      "w-full h-full rounded-lg py-3 px-4 gap-2.5",
+      "w-full h-full rounded-lg gap-2.5",
       "bg-transparent",
       "text-gray-light-1",
       "underline",
-      "font-medium text-sm leading-5",
+      "font-medium leading-5",
       "inline-flex items-center justify-center",
       "transition-all duration-500 ease-in-out",
       "hover:bg-gray-dark-7",
@@ -191,43 +215,92 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   (
     {
       variant = "primary",
+      size = "md",
       leftImage,
       rightImage,
       disabled = false,
+      loading = false,
+      error,
+      helperText,
       children,
       className,
+      id,
       onClick,
       type = "button",
+      "aria-label": ariaLabel,
+      "aria-describedby": ariaDescribedBy,
       ...props
     },
     ref
   ) => {
+    const buttonId = React.useId();
+    const finalId = id || buttonId;
+    const errorId = `${finalId}-error`;
+    const helperId = `${finalId}-helper`;
+    const isDisabled = disabled || loading;
+
     const styles = variantStyles[variant];
+    const sizeClass = sizeClasses[size];
 
     return (
-      <span
-        className={cn(
-          styles.wrapper,
-          className
+      <div className="flex flex-col gap-1.5">
+        <span className={styles.wrapper}>
+          <button
+            ref={ref}
+            id={finalId}
+            type={type}
+            disabled={isDisabled}
+            onClick={onClick}
+            aria-invalid={error ? "true" : "false"}
+            aria-describedby={cn(
+              error ? errorId : undefined,
+              helperText && !error ? helperId : undefined,
+              ariaDescribedBy
+            )}
+            aria-label={ariaLabel}
+            aria-busy={loading ? "true" : undefined}
+            className={cn(
+              styles.button,
+              sizeClass.height,
+              sizeClass.padding,
+              sizeClass.text,
+              className
+            )}
+            {...props}
+          >
+            {loading && (
+              <span className="mr-2" aria-hidden="true">
+                <div className="h-4 w-4 animate-spin rounded-full border-2 border-current border-t-transparent" />
+              </span>
+            )}
+            {leftImage && !loading && (
+              <span className="inline-flex items-center">{leftImage}</span>
+            )}
+            {children}
+            {rightImage && !loading && (
+              <span className="inline-flex items-center">{rightImage}</span>
+            )}
+          </button>
+        </span>
+        {error && (
+          <span
+            id={errorId}
+            role="alert"
+            aria-live="polite"
+            className="text-xs font-medium text-red dark:text-red-light-03"
+          >
+            {error}
+          </span>
         )}
-      >
-        <button
-          ref={ref}
-          type={type}
-          disabled={disabled}
-          onClick={onClick}
-          className={styles.button}
-          {...props}
-        >
-          {leftImage && (
-            <span className="inline-flex items-center">{leftImage}</span>
-          )}
-          {children}
-          {rightImage && (
-            <span className="inline-flex items-center">{rightImage}</span>
-          )}
-        </button>
-      </span>
+        {helperText && !error && (
+          <span
+            id={helperId}
+            className="text-xs text-gray-600 dark:text-gray-500"
+          >
+            {helperText}
+          </span>
+        )}
+      </div>
     );
   }
 );
