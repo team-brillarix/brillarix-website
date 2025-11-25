@@ -19,18 +19,17 @@ export default function Header() {
                 {/* Logo Section */}
                 <Link
                     href="/"
-                    className="flex items-center shrink-0"
+                    className="flex items-center gap-2 shrink-0"
+                    aria-label="Brillarix Home"
                 >
-                    <div className="relative w-24 sm:w-28 md:w-32 h-8 sm:h-9 md:h-10">
-                        <Image
-                            src="/logos/Brillarix-Dark-Mode.png"
-                            alt="Brillarix Logo"
-                            fill
-                            className="object-contain"
-                            priority
-                            sizes="(max-width: 640px) 96px, (max-width: 768px) 112px, 128px"
-                        />
-                    </div>
+                    <Image
+                        src="/logos/Brillarix-Dark-Mode.png"
+                        alt="Brillarix Logo"
+                        width={160}
+                        height={40}
+                        className="h-8 sm:h-9 md:h-10 w-auto"
+                        priority
+                    />
                 </Link>
 
                 {/* Desktop Navigation Links */}
@@ -39,7 +38,7 @@ export default function Header() {
                         <Link
                             key={link.href}
                             href={link.href}
-                            className="text-white text-xs xl:text-sm font-medium hover:text-gray-dark-10 transition-colors whitespace-nowrap px-1"
+                            className="text-foreground text-xs xl:text-sm font-medium transition-all rounded-lg px-4 py-2 whitespace-nowrap active:bg-gray-dark-5 border border-transparent hover:border-gray-dark-3 hover:bg-gray-dark-5"
                         >
                             {link.label}
                         </Link>
@@ -142,7 +141,7 @@ export default function Header() {
                                                 <Link
                                                     href={link.href}
                                                     onClick={closeMenu}
-                                                    className="text-white text-sm font-medium hover:text-gray-dark-10 hover:bg-gray-dark-4 transition-all py-2.5 px-4 block"
+                                                    className="text-white text-sm font-medium transition-all py-2.5 px-4 block rounded-lg mx-2 hover:text-white hover:bg-gray-dark-4 active:bg-gray-dark-5"
                                                 >
                                                     {link.label}
                                                 </Link>
