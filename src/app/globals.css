@@ -3,49 +3,49 @@
 :root {
   /* --- Color palette (shared variables) --- */
   /* Gray - dark */
-  --gray-dark-1:  #121212;
-  --gray-dark-2:  #1E1E1E;
-  --gray-dark-3:  #292929;
-  --gray-dark-4:  #353535;
-  --gray-dark-5:  #424242;
-  --gray-dark-6:  #4E4E4E;
-  --gray-dark-7:  #5B5B5B;
-  --gray-dark-8:  #696969;
-  --gray-dark-9:  #989898;
+  --gray-dark-1: #121212;
+  --gray-dark-2: #1E1E1E;
+  --gray-dark-3: #292929;
+  --gray-dark-4: #353535;
+  --gray-dark-5: #424242;
+  --gray-dark-6: #4E4E4E;
+  --gray-dark-7: #5B5B5B;
+  --gray-dark-8: #696969;
+  --gray-dark-9: #989898;
   --gray-dark-10: #CACACA;
 
   /* Gray - light */
-  --gray-light-1:  #F1F1F1;
-  --gray-light-2:  #E3E3E3;
-  --gray-light-3:  #D5D5D5;
-  --gray-light-4:  #C7C7C7;
-  --gray-light-5:  #A8A8A8;
-  --gray-light-6:  #8A8A8A;
-  --gray-light-7:  #6D6D6D;
-  --gray-light-8:  #515151;
-  --gray-light-9:  #373737;
+  --gray-light-1: #F1F1F1;
+  --gray-light-2: #E3E3E3;
+  --gray-light-3: #D5D5D5;
+  --gray-light-4: #C7C7C7;
+  --gray-light-5: #A8A8A8;
+  --gray-light-6: #8A8A8A;
+  --gray-light-7: #6D6D6D;
+  --gray-light-8: #515151;
+  --gray-light-9: #373737;
   --gray-light-10: #1E1E1E;
 
   /* Greens */
-  --green:           #22A121;
-  --green-dark:      #1D8C1D;
-  --green-light-03:  #26B625;
-  --green-light-02:  #78E378;
-  --green-light-01:  #D7FDD7;
+  --green: #22A121;
+  --green-dark: #1D8C1D;
+  --green-light-03: #26B625;
+  --green-light-02: #78E378;
+  --green-light-01: #D7FDD7;
 
   /* Oranges */
-  --orange:          #FDA018;
-  --orange-dark:     #F89402;
+  --orange: #FDA018;
+  --orange-dark: #F89402;
   --orange-light-03: #FDAA30;
   --orange-light-02: #FEC97C;
   --orange-light-01: #FFECD1;
 
   /* Reds */
-  --red:             #D8201D;
-  --red-dark:        #C21D1A;
-  --red-light-03:    #E32F2B;
-  --red-light-02:    #F29E9C;
-  --red-light-01:    #FFEBEB;
+  --red: #D8201D;
+  --red-dark: #C21D1A;
+  --red-light-03: #E32F2B;
+  --red-light-02: #F29E9C;
+  --red-light-01: #FFEBEB;
 
   /* --- Semantic aliases used through the site --- */
   /* default (light) theme mapping */
@@ -56,8 +56,7 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-geist);
   /* Gray - dark */
   --color-gray-dark-1: var(--gray-dark-1);
   --color-gray-dark-2: var(--gray-dark-2);
@@ -107,7 +106,7 @@
 @media (prefers-color-scheme: dark) {
   :root {
     /* In dark mode prefer darker grays for backgrounds and lighter text */
-    --background: var(--gray-dark-1);
+    --background: #08090A;
     --foreground: var(--gray-light-1);
   }
 }
@@ -115,5 +114,5 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-geist), sans-serif;
 }
