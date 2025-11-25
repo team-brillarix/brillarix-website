@@ -10,6 +10,8 @@ export interface ButtonProps
   rightImage?: React.ReactNode;
   disabled?: boolean;
   children: React.ReactNode;
+  onClick?: React.MouseEventHandler<HTMLButtonElement>;
+  type?: "button" | "submit" | "reset";
 }
 
 const variantStyles: Record<
@@ -194,6 +196,8 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       disabled = false,
       children,
       className,
+      onClick,
+      type = "button",
       ...props
     },
     ref
@@ -209,7 +213,9 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       >
         <button
           ref={ref}
+          type={type}
           disabled={disabled}
+          onClick={onClick}
           className={styles.button}
           {...props}
         >
