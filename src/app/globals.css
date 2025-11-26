@@ -1,7 +1,6 @@
 @import "tailwindcss";
 
 :root {
-  /* --- Color palette (shared variables) --- */
   /* Gray - dark */
   --gray-dark-1: #121212;
   --gray-dark-2: #1E1E1E;
@@ -47,8 +46,6 @@
   --red-light-02: #F29E9C;
   --red-light-01: #FFEBEB;
 
-  /* --- Semantic aliases used through the site --- */
-  /* default (light) theme mapping */
   --background: var(--gray-light-1);
   --foreground: var(--gray-dark-10);
 }
@@ -97,7 +94,6 @@
   --color-red-light-03: var(--red-light-03);
   --color-red-light-02: var(--red-light-02);
   --color-red-light-01: var(--red-light-01);
-  /* Semantic aliases */
   --color-success: var(--green);
   --color-warning: var(--orange);
   --color-danger: var(--red);
@@ -108,6 +104,10 @@
     --background: #08090A;
     --foreground: var(--gray-light-1);
   }
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
@@ -126,4 +126,20 @@ body {
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
   border: 0;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+  box-shadow: inset 0 0 8px rgba(var(--background), 0.3);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--foreground);
+  border-radius: 30px;
+  opacity: 0.6;
 }
