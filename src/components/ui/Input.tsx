@@ -16,6 +16,7 @@ export interface InputProps
   rightIcon?: React.ReactNode;
   id?: string;
   required?: boolean;
+  labelClassName?: string;
 }
 
 const sizeClasses: Record<
@@ -34,7 +35,7 @@ const sizeClasses: Record<
   },
   lg: {
     input: "h-12 px-4 text-base",
-    label: "text-base",
+    label: "text-sm",
     icon: "h-5 w-5",
   },
 };
@@ -45,7 +46,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
       label,
       error,
       helperText,
-      size = "md",
+      size = "lg",
       variant = "default",
       loading = false,
       leftIcon,
@@ -56,6 +57,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
       value,
       onChange,
       required,
+      labelClassName,
       "aria-label": ariaLabel,
       "aria-describedby": ariaDescribedBy,
       ...props
@@ -71,15 +73,16 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
     const sizeClass = sizeClasses[size];
 
     return (
-      <div className="flex w-full flex-col gap-1.5">
+      <div className="flex w-full flex-col gap-1">
         {label && (
           <label
             htmlFor={finalId}
             className={cn(
-              "font-medium text-foreground",
-              "peer-disabled:opacity-50",
+              "font-medium text-white/40 leading-1.4",
+              "peer-disabled:opacity-20",
               sizeClass.label,
-              required && "after:ml-0.5 after:text-red after:content-['*']"
+              required && "after:ml-0.5 after:text-red after:content-['*']",
+              labelClassName
             )}
           >
             {label}
@@ -89,7 +92,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
           {leftIcon && (
             <div
               className={cn(
-                "absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 dark:text-gray-400",
+                "absolute left-3 top-1/2 -translate-y-1/2 text-gray-light-7 dark:text-gray-light-5",
                 "pointer-events-none",
                 sizeClass.icon
               )}
@@ -112,20 +115,20 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
             aria-label={ariaLabel || (label ? undefined : "Input")}
             aria-required={required}
             className={cn(
-              "w-full rounded-lg border-2 font-medium transition-all duration-200",
+              "w-full rounded-xl border py-3 px-4 font-medium transition-all duration-200",
               "bg-white dark:bg-gray-dark-2",
-              "border-gray-300 dark:border-gray-600",
-              "text-foreground placeholder:text-gray-500 dark:placeholder:text-gray-600",
-              "focus:outline-none focus:ring-2 focus:ring-green focus:border-green",
+              "border-white/8 dark:border-white/8",
+              "text-white leading-1.5 placeholder:text-gray-dark-7 dark:placeholder:text-gray-light-7",
+              "focus:outline-none focus:border-gray-light-2",
               "focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-gray-dark-1",
               "disabled:opacity-50 disabled:cursor-not-allowed",
-              "read-only:cursor-default read-only:bg-gray-100 dark:read-only:bg-gray-dark-3",
+              "read-only:cursor-default read-only:bg-gray-light-1 dark:read-only:bg-gray-dark-3",
               error
                 ? "border-red dark:border-red-light-03 focus:ring-red focus:border-red"
                 : undefined,
               variant === "outline" ? "bg-transparent" : undefined,
               variant === "filled"
-                ? "bg-gray-100 dark:bg-gray-dark-3 border-transparent focus:border-green"
+                ? "bg-gray-light-1 dark:bg-gray-dark-3 border-transparent focus:border-gray-light-2"
                 : undefined,
               leftIcon ? "pl-10" : undefined,
               rightIcon || loading ? "pr-10" : undefined,
@@ -142,13 +145,13 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
               )}
               aria-hidden="true"
             >
-              <div className="h-full w-full animate-spin rounded-full border-2 border-gray-300 border-t-green" />
+              <div className="h-full w-full animate-spin rounded-full border-2 border-gray-light-3" />
             </div>
           )}
           {!loading && rightIcon && (
             <div
               className={cn(
-                "absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 dark:text-gray-400",
+                "absolute right-3 top-1/2 -translate-y-1/2 text-gray-light-7 dark:text-gray-light-5",
                 "pointer-events-none",
                 sizeClass.icon
               )}
@@ -170,7 +173,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
         {helperText && !error && (
           <span
             id={helperId}
-            className="text-xs text-gray-600 dark:text-gray-500"
+            className="text-xs text-gray-dark-7 dark:text-gray-light-7"
           >
             {helperText}
           </span>
