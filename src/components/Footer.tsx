@@ -3,6 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { Button } from "@/components/ui/Button";
 import { footerNavigationLinks, footerSocialLinks, footerLegalLinks } from "@/constants/footer";
+import Copyright from "@/components/Copyright";
 
 export default function Footer() {
 
@@ -92,9 +93,9 @@ export default function Footer() {
 
             {/* Bottom */}
             <div className="bg-foreground rounded-b-3xl p-3">
-                <p className="text-center text-background text-sm sm:text-base font-medium">
-                    ©2025 Brillarix.com
-                </p>
+                <Copyright>
+                    © 2025 Brillarix
+                </Copyright>
             </div>
         </footer>
     );
