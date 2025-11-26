@@ -4,7 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-import { FiArrowRight } from "react-icons/fi";
+import { FiChevronRight } from "react-icons/fi";
 import { navigationLinks } from "@/constants/navigation";
 import { useMenu } from "@/hooks/useMenu";
 import { Button } from "@/components/ui/Button";
@@ -15,7 +15,7 @@ export default function Header() {
 
     return (
         <header className="w-full py-2 sm:py-3 md:py-4 px-2 sm:px-3 md:px-4 sticky top-0 z-30">
-            <nav className="mx-auto bg-[#41414180] rounded-full px-4 sm:px-4 md:px-6 py-2.5 sm:py-3 md:py-4 flex items-center justify-between gap-2 sm:gap-4 md:gap-6 lg:gap-8 backdrop-blur-sm border border-gray-dark-6">
+            <nav className="mx-auto w-fit bg-[#41414180] rounded-full px-4 sm:px-4 md:px-6 py-2.5 sm:py-3 md:py-4 flex items-center justify-between gap-2 sm:gap-4 md:gap-6 lg:gap-8 backdrop-blur-sm border border-gray-dark-6">
                 {/* Logo Section */}
                 <Link
                     href="/"
@@ -52,7 +52,7 @@ export default function Header() {
                         variant="primary"
                         onClick={() => router.push("/get-quote")}
                         rightImage={
-                            <FiArrowRight className="w-3 h-3 shrink-0" />
+                            <FiChevronRight className="w-3 h-3 shrink-0" />
                         }
                         className="text-xs sm:text-sm"
                     >
@@ -124,7 +124,7 @@ export default function Header() {
                                     animate={{ opacity: 1, scale: 1, y: 0 }}
                                     exit={{ opacity: 0, scale: 0.95, y: -10 }}
                                     transition={{ duration: 0.2, ease: "easeOut" }}
-                                    className="absolute right-0 top-full mt-3 w-64 sm:w-72 bg-gray-dark-3 rounded-xl border border-gray-dark-5 shadow-2xl z-50 overflow-hidden"
+                                    className="absolute right-0 top-full mt-4 w-64 sm:w-72 bg-gray-dark-3 rounded-xl border border-gray-dark-5 shadow-2xl z-50 overflow-hidden"
                                 >
                                     <div className="py-2">
                                         {/* Navigation Links */}
