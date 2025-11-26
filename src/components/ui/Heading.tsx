@@ -127,7 +127,7 @@ export const Heading = forwardRef<HTMLHeadingElement, HeadingProps>(function Hea
                     subtitleAs,
                     {
                         className: [
-                            'mt-1',
+                            'mt-4',
                             subtitleSize,
                             'text-gray-light-3',
                             'leading-relaxed',

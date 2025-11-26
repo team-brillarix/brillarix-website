@@ -1,7 +1,10 @@
+import TechStack from '@/components/TechStack';
+import { techStackData } from '@/constants/techStack';
+
 export default function Home() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background">
-
+    <div className="min-h-screen bg-background">
+      <TechStack categories={techStackData} />
     </div>
   );
 }
