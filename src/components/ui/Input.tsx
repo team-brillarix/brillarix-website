@@ -17,7 +17,6 @@ export interface InputProps
   id?: string;
   required?: boolean;
   labelClassName?: string;
-  inputClassName?: string;
 }
 
 const sizeClasses: Record<
