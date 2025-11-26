@@ -254,7 +254,6 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
             type={type}
             disabled={isDisabled}
             onClick={onClick}
-            aria-invalid={error ? "true" : "false"}
             aria-describedby={cn(
               error ? errorId : undefined,
               helperText && !error ? helperId : undefined,
