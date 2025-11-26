@@ -62,7 +62,7 @@ export const metadata: Metadata = {
     description: defaultDescription,
     images: [
       {
-        url: `${baseUrl}/og-image.jpg`,
+        url: `${baseUrl}/logos/Twitter-Image.png`,
         width: 1200,
         height: 630,
         alt: "Brillarix - Powering Digital Innovation",
@@ -73,7 +73,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: defaultTitle,
     description: defaultDescription,
-    images: [`${baseUrl}/twitter-image.jpg`],
+    images: [`${baseUrl}/logos/Twitter-Image.png`],
     creator: "@brillarixtech",
     site: "@brillarixtech",
   },
@@ -90,17 +90,17 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: [
-      { url: "/favicon.ico", sizes: "any" },
-      { url: "/icon-16x16.png", sizes: "16x16", type: "image/png" },
-      { url: "/icon-32x32.png", sizes: "32x32", type: "image/png" },
+      { url: "/logos/Logo-Dark-Mode.png", sizes: "any" },
+      { url: "/logos/Logo-Dark-Mode.png", sizes: "16x16", type: "image/png" },
+      { url: "/logos/Logo-Dark-Mode.png", sizes: "32x32", type: "image/png" },
     ],
     apple: [
-      { url: "/apple-icon.png", sizes: "180x180", type: "image/png" },
+      { url: "/logos/Logo-Dark-Mode.png", sizes: "180x180", type: "image/png" },
     ],
     other: [
       {
         rel: "mask-icon",
-        url: "/safari-pinned-tab.svg",
+        url: "/logos/Logo-Dark-Mode.png",
         color: "#000000",
       },
     ],
@@ -114,7 +114,6 @@ export const metadata: Metadata = {
     "apple-mobile-web-app-title": siteName,
     "mobile-web-app-capable": "yes",
     "msapplication-TileColor": "#000000",
-    "msapplication-config": "/browserconfig.xml",
     "theme-color": "#000000",
     "color-scheme": "dark light",
   },
