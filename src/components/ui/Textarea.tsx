@@ -1,8 +1,8 @@
+"use client";
 import React from "react";
 import { cn } from "@/lib/utils";
 
 export type TextareaSize = "sm" | "md" | "lg";
-export type TextareaVariant = "default" | "outline" | "filled";
 
 export interface TextareaProps
   extends Omit<React.TextareaHTMLAttributes<HTMLTextAreaElement>, "size"> {
@@ -10,9 +10,7 @@ export interface TextareaProps
   error?: string;
   helperText?: string;
   size?: TextareaSize;
-  variant?: TextareaVariant;
   loading?: boolean;
-  maxLength?: number;
   minHeight?: string;
   autoResize?: boolean;
   id?: string;
@@ -31,7 +29,7 @@ const sizeClasses: Record<TextareaSize, { textarea: string; label: string }> =
     },
     lg: {
       textarea: "px-4 py-3 text-base min-h-[120px]",
-      label: "text-base",
+      label: "text-sm",
     },
   };
 
@@ -42,9 +40,7 @@ export const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
       error,
       helperText,
       size = "md",
-      variant = "default",
       loading = false,
-      maxLength,
       minHeight,
       autoResize = false,
       className,
@@ -100,13 +96,13 @@ export const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
     );
 
     return (
-      <div className="flex w-full flex-col gap-1.5">
+      <div className="flex w-full flex-col gap-1">
         {label && (
           <label
             htmlFor={finalId}
             className={cn(
-              "font-medium text-foreground",
-              "peer-disabled:opacity-50",
+              "font-medium text-white/40 leading-1.4",
+              "peer-disabled:opacity-20",
               sizeClass.label,
               required && "after:ml-0.5 after:text-red after:content-['*']"
             )}
@@ -121,7 +117,6 @@ export const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
             disabled={isDisabled}
             value={value}
             onChange={handleChange}
-            maxLength={maxLength}
             aria-invalid={error ? "true" : "false"}
             aria-describedby={cn(
               error ? errorId : undefined,
@@ -135,20 +130,15 @@ export const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
               resize: autoResize ? "none" : "vertical",
             }}
             className={cn(
-              "w-full rounded-lg border-2 font-medium transition-all duration-200",
+              "w-full rounded-xl border font-medium transition-all duration-200",
               "bg-white dark:bg-gray-dark-2",
-              "border-gray-300 dark:border-gray-600",
-              "text-foreground placeholder:text-gray-500 dark:placeholder:text-gray-600",
-              "focus:outline-none focus:ring-2 focus:ring-green focus:border-green",
-              "focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-gray-dark-1",
+              "border-white/8 dark:border-white/8",
+              "text-white leading-relaxed placeholder:text-gray-dark-7 dark:placeholder:text-gray-light-7",
+              "focus:border-gray-light-2",
               "disabled:opacity-50 disabled:cursor-not-allowed",
-              "read-only:cursor-default read-only:bg-gray-100 dark:read-only:bg-gray-dark-3",
+              "read-only:cursor-default read-only:bg-gray-light-1 dark:read-only:bg-gray-dark-3",
               error
-                ? "border-red dark:border-red-light-03 focus:ring-red focus:border-red"
-                : undefined,
-              variant === "outline" ? "bg-transparent" : undefined,
-              variant === "filled"
-                ? "bg-gray-100 dark:bg-gray-dark-3 border-transparent focus:border-green"
+                ? "border-red dark:border-red-light-03 focus:border-red"
                 : undefined,
               sizeClass.textarea,
               autoResize ? "overflow-hidden" : undefined,
@@ -158,10 +148,10 @@ export const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
           />
           {loading && (
             <div
-              className="absolute right-3 top-3"
+              className="absolute right-3 top-3 z-10"
               aria-hidden="true"
             >
-              <div className="h-4 w-4 animate-spin rounded-full border-2 border-gray-300 border-t-green" />
+              <div className="h-4 w-4 animate-spin rounded-full border-2 border-gray-light-3 border-t-transparent" />
             </div>
           )}
         </div>
@@ -178,7 +168,7 @@ export const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
         {helperText && !error && (
           <span
             id={helperId}
-            className="text-xs text-gray-600 dark:text-gray-500"
+            className="text-xs text-gray-dark-7 dark:text-gray-light-7"
           >
             {helperText}
           </span>
