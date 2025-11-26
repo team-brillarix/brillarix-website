@@ -3,6 +3,7 @@
 import Image from 'next/image';
 import { Section } from '@/components/ui/Section';
 import { Heading } from '@/components/ui/Heading';
+import { MovingBorderContainer } from '@/components/ui/MovingBorder';
 
 interface TechItem {
   name: string;
@@ -32,21 +33,26 @@ export default function TechStack({
       headingVariant="h2"
       headingWeight="semibold"
     >
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8 md:gap-10 lg:gap-12">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 md:gap-10 lg:gap-12">
         {categories.map((category, categoryIndex) => (
-          <div key={categoryIndex} className={`tech-card-border tech-card-border-${categoryIndex}`}>
-            <div className="flex flex-col bg-background rounded-xl h-full">
+          <MovingBorderContainer
+            key={categoryIndex}
+            borderRadius="0.75rem"
+            duration={8000}
+            blobClassName="h-20 w-20 bg-gray-dark-7"
+            innerClassName="flex flex-col gap-4 sm:gap-5 md:gap-6 lg:gap-8 h-full w-full"
+          >
+            <div>
               <Heading
-                variant="h3"
-                as="h3"
+                variant="h6"
+                as="h6"
                 align="center"
                 weight="semibold"
-                className="text-lg sm:text-xl mb-6 sm:mb-8 pt-6 sm:pt-8"
               >
                 {category.title}
               </Heading>
 
-              <div className="flex flex-col gap-4 sm:gap-5 md:gap-6 px-6 sm:px-8 pb-6 sm:pb-8">
+              <div className="grid grid-cols-3 gap-4 sm:gap-5 md:gap-6 px-6 sm:px-8 pb-6 sm:pb-8">
                 {category.items.map((item, itemIndex) => (
                   <div key={itemIndex} className="flex flex-col items-center gap-3 sm:gap-4">
                     <div className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 bg-gray-dark-4 rounded-lg sm:rounded-xl flex items-center justify-center shadow-lg p-2 sm:p-3">
@@ -65,7 +71,7 @@ export default function TechStack({
                 ))}
               </div>
             </div>
-          </div>
+          </MovingBorderContainer>
         ))}
       </div>
     </Section>
