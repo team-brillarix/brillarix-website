@@ -7,13 +7,13 @@ import { footerNavigationLinks, footerSocialLinks, footerLegalLinks } from "@/co
 export default function Footer() {
 
     return (
-        <footer className="w-full py-2 sm:py-3 md:py-4 px-2 sm:px-3 md:px-4 flex flex-col gap-20">
+        <footer className="w-full py-2 sm:py-3 md:py-4 px-2 sm:px-3 md:px-4 flex flex-col">
             {/* Top */}
             <div className="rounded-t-3xl bg-linear-gradient-footer">
                 <div className="p-5 sm:p-6 md:p-10 lg:p-12">
                     {/* Logo and Links */}
                     <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6 lg:gap-8">
-                        {/* Logo and Brand Name */}
+                        {/* Logo */}
                         <Link
                             href="/"
                             className="flex items-center gap-2 shrink-0"
@@ -29,7 +29,7 @@ export default function Footer() {
                             />
                         </Link>
 
-                        {/* Navigation Links */}
+                        {/* Links */}
                         <nav className="flex flex-wrap items-center gap-4 sm:gap-6 lg:gap-8">
                             {footerNavigationLinks.map((link) => (
                                 <Button
@@ -45,7 +45,7 @@ export default function Footer() {
                     </div>
 
                     {/* Divider */}
-                    <div className="w-full h-px bg-gray-light-3 mt-8 sm:mt-10"></div>
+                    <div className="w-full h-px bg-gray-dark-3 mt-8 sm:mt-10"></div>
 
                     {/* Social Media and Legal Links */}
                     <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 sm:gap-4 pt-6 sm:pt-8">
@@ -61,6 +61,7 @@ export default function Footer() {
                                         rel="noopener noreferrer"
                                         variant="tertiary"
                                         aria-label={social.label}
+                                        className="border border-gray-dark-3 rounded-full! p-4!"
                                     >
                                         <Icon className="w-5 h-5 sm:w-6 sm:h-6" />
                                     </Button>
@@ -90,12 +91,10 @@ export default function Footer() {
             </div>
 
             {/* Bottom */}
-            <div className="bg-gray-light-2 rounded-b-3xl">
-                <div className="px-4 sm:px-4 md:px-6 py-4 sm:py-5">
-                    <p className="text-center text-gray-dark-10 text-sm sm:text-base font-medium">
-                        ©2025 Brillarix.com
-                    </p>
-                </div>
+            <div className="bg-foreground rounded-b-3xl p-3">
+                <p className="text-center text-background text-sm sm:text-base font-medium">
+                    ©2025 Brillarix.com
+                </p>
             </div>
         </footer>
     );
