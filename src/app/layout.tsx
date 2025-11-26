@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 
 const geist = Geist({
   variable: "--font-geist",
@@ -205,10 +206,15 @@ export default function RootLayout({
         <link rel="canonical" href={baseUrl} />
       </head>
       <body
-        className={`${geist.variable} antialiased container mx-auto`}
+        className={`${geist.variable} antialiased`}
       >
-        <Header />
-        {children}
+        <div className="w-full max-w-[1440px] mx-auto flex flex-col min-h-screen">
+          <Header />
+          <main className="flex-1">
+            {children}
+          </main>
+          <Footer />
+        </div>
       </body>
     </html>
   );

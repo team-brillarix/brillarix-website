@@ -1,4 +1,7 @@
+"use client";
+
 import React from "react";
+import Link from "next/link";
 import { cn } from "@/lib/utils";
 
 export type ButtonVariant = "primary" | "secondary" | "tertiary";
@@ -15,9 +18,12 @@ export interface ButtonProps
   error?: string;
   helperText?: string;
   children: React.ReactNode;
-  onClick?: React.MouseEventHandler<HTMLButtonElement>;
+  onClick?: React.MouseEventHandler<HTMLButtonElement | HTMLAnchorElement>;
   type?: "button" | "submit" | "reset";
   id?: string;
+  href?: string;
+  target?: string;
+  rel?: string;
 }
 
 const sizeClasses: Record<ButtonSize, { height: string; padding: string; text: string }> = {
@@ -182,25 +188,20 @@ const variantStyles: Record<
       "w-full h-full rounded-lg gap-2",
       "bg-transparent",
       "text-gray-light-1",
-      "underline",
       "font-medium leading-5",
       "inline-flex items-center justify-center",
       "cursor-pointer",
       "transition-all duration-500 ease-in-out",
       "hover:bg-gray-dark-7",
       "hover:text-gray-light-1",
-      "hover:underline",
       "active:transition-none",
       "active:bg-gray-light-7",
       "active:text-gray-light-5",
-      "active:underline",
       "focus:outline-none",
       "focus:bg-gray-light-8",
       "focus:text-gray-light-1",
-      "focus:underline",
       "disabled:bg-transparent",
       "disabled:text-gray-light-5",
-      "disabled:underline",
       "disabled:cursor-not-allowed",
       "disabled:hover:bg-transparent",
       "disabled:hover:text-gray-light-5",
@@ -214,7 +215,7 @@ const variantStyles: Record<
   },
 };
 
-export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
+export const Button = React.forwardRef<HTMLButtonElement | HTMLAnchorElement, ButtonProps>(
   (
     {
       variant = "primary",
@@ -230,6 +231,9 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       id,
       onClick,
       type = "button",
+      href,
+      target,
+      rel,
       "aria-label": ariaLabel,
       "aria-describedby": ariaDescribedBy,
       ...props
@@ -245,45 +249,80 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     const styles = variantStyles[variant];
     const sizeClass = sizeClasses[size];
 
+    const content = (
+      <>
+        {loading && (
+          <span className="mr-2" aria-hidden="true">
+            <div className="h-4 w-4 animate-spin rounded-full border-2 border-current border-t-transparent" />
+            <span className="sr-only">Loading...</span>
+          </span>
+        )}
+        {leftImage && !loading && (
+          <span className="inline-flex items-center">{leftImage}</span>
+        )}
+        {children}
+        {rightImage && !loading && (
+          <span className="inline-flex items-center">{rightImage}</span>
+        )}
+      </>
+    );
+
     return (
       <div className="flex flex-col gap-1.5">
         <span className={styles.wrapper}>
-          <button
-            ref={ref}
-            id={finalId}
-            type={type}
-            disabled={isDisabled}
-            onClick={onClick}
-            aria-describedby={cn(
-              error ? errorId : undefined,
-              helperText && !error ? helperId : undefined,
-              ariaDescribedBy
-            )}
-            aria-label={ariaLabel}
-            aria-busy={loading ? "true" : undefined}
-            className={cn(
-              styles.button,
-              sizeClass.height,
-              sizeClass.padding,
-              sizeClass.text,
-              className
-            )}
-            {...props}
-          >
-            {loading && (
-              <span className="mr-2" aria-hidden="true">
-                <div className="h-4 w-4 animate-spin rounded-full border-2 border-current border-t-transparent" />
-                <span className="sr-only">Loading...</span>
-              </span>
-            )}
-            {leftImage && !loading && (
-              <span className="inline-flex items-center">{leftImage}</span>
-            )}
-            {children}
-            {rightImage && !loading && (
-              <span className="inline-flex items-center">{rightImage}</span>
-            )}
-          </button>
+          {href ? (
+            <Link
+              ref={ref as React.ForwardedRef<HTMLAnchorElement>}
+              href={href}
+              target={target}
+              rel={rel}
+              id={finalId}
+              onClick={onClick}
+              aria-describedby={cn(
+                error ? errorId : undefined,
+                helperText && !error ? helperId : undefined,
+                ariaDescribedBy
+              )}
+              aria-label={ariaLabel}
+              aria-disabled={isDisabled}
+              className={cn(
+                styles.button,
+                sizeClass.height,
+                sizeClass.padding,
+                sizeClass.text,
+                isDisabled && "pointer-events-none opacity-50",
+                className
+              )}
+              {...(props as React.AnchorHTMLAttributes<HTMLAnchorElement>)}
+            >
+              {content}
+            </Link>
+          ) : (
+            <button
+              ref={ref as React.ForwardedRef<HTMLButtonElement>}
+              id={finalId}
+              type={type}
+              disabled={isDisabled}
+              onClick={onClick}
+              aria-describedby={cn(
+                error ? errorId : undefined,
+                helperText && !error ? helperId : undefined,
+                ariaDescribedBy
+              )}
+              aria-label={ariaLabel}
+              aria-busy={loading ? "true" : undefined}
+              className={cn(
+                styles.button,
+                sizeClass.height,
+                sizeClass.padding,
+                sizeClass.text,
+                className
+              )}
+              {...props}
+            >
+              {content}
+            </button>
+          )}
         </span>
         {error && (
           <span

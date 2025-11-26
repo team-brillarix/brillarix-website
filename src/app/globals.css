@@ -97,6 +97,8 @@
   --color-success: var(--green);
   --color-warning: var(--orange);
   --color-danger: var(--red);
+  /* Background gradients */
+  --background-image-linear-gradient-footer: linear-gradient(1.33deg, rgba(18, 18, 18, 0.2) 55.27%, rgba(76, 76, 76, 0.2) 98.28%);
 }
 
 @media (prefers-color-scheme: dark) {

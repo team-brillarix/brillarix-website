@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { FiChevronRight } from "react-icons/fi";
 import { navigationLinks } from "@/constants/navigation";
@@ -11,11 +10,10 @@ import { Button } from "@/components/ui/Button";
 
 export default function Header() {
     const { isMenuOpen, toggleMenu, closeMenu, menuRef } = useMenu();
-    const router = useRouter();
 
     return (
         <header className="w-full py-2 sm:py-3 md:py-4 px-2 sm:px-3 md:px-4 sticky top-0 z-30">
-            <nav className="mx-auto w-fit bg-[#41414180] rounded-full px-4 sm:px-4 md:px-6 py-2.5 sm:py-3 md:py-4 flex items-center justify-between gap-2 sm:gap-4 md:gap-6 lg:gap-8 backdrop-blur-sm border border-gray-dark-6">
+            <nav className="bg-[#41414180] rounded-full px-4 sm:px-4 md:px-6 py-2.5 sm:py-3 md:py-4 flex items-center justify-between gap-2 sm:gap-4 md:gap-6 lg:gap-8 backdrop-blur-sm border border-gray-dark-6">
                 {/* Logo Section */}
                 <Link
                     href="/"
@@ -35,13 +33,13 @@ export default function Header() {
                 {/* Desktop Navigation Links */}
                 <div className="hidden lg:flex items-center gap-4 xl:gap-6 flex-1 justify-center max-w-4xl">
                     {navigationLinks.map((link) => (
-                        <Link
+                        <Button
                             key={link.href}
                             href={link.href}
-                            className="text-foreground text-xs xl:text-sm font-medium transition-all rounded-lg px-4 py-2 whitespace-nowrap active:bg-gray-dark-5 border border-transparent hover:border-gray-dark-3 hover:bg-gray-dark-5"
+                            variant="tertiary"
                         >
                             {link.label}
-                        </Link>
+                        </Button>
                     ))}
                 </div>
 
@@ -49,12 +47,11 @@ export default function Header() {
                 <div className="flex items-center gap-3 sm:gap-4 shrink-0">
                     {/* Get a Quote Button */}
                     <Button
+                        href="/get-quote"
                         variant="primary"
-                        onClick={() => router.push("/get-quote")}
                         rightImage={
                             <FiChevronRight className="w-3 h-3 shrink-0" />
                         }
-                        className="text-xs sm:text-sm"
                     >
                         Get a Quote
                     </Button>
@@ -126,7 +123,7 @@ export default function Header() {
                                     transition={{ duration: 0.2, ease: "easeOut" }}
                                     className="absolute right-0 top-full mt-4 w-64 sm:w-72 bg-gray-dark-3 rounded-xl border border-gray-dark-5 shadow-2xl z-50 overflow-hidden"
                                 >
-                                    <div className="py-2">
+                                    <div className="p-2">
                                         {/* Navigation Links */}
                                         {navigationLinks.map((link, index) => (
                                             <motion.div
@@ -138,13 +135,13 @@ export default function Header() {
                                                     duration: 0.2,
                                                 }}
                                             >
-                                                <Link
+                                                <Button
                                                     href={link.href}
                                                     onClick={closeMenu}
-                                                    className="text-white text-sm font-medium transition-all py-2.5 px-4 block rounded-lg mx-2 hover:text-white hover:bg-gray-dark-4 active:bg-gray-dark-5"
+                                                    variant="tertiary"
                                                 >
                                                     {link.label}
-                                                </Link>
+                                                </Button>
                                             </motion.div>
                                         ))}
                                     </div>
