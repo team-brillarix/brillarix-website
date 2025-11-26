@@ -10,10 +10,10 @@ export default function Footer() {
     return (
         <footer className="w-full py-2 sm:py-3 md:py-4 px-2 sm:px-3 md:px-4 flex flex-col">
             {/* Top */}
-            <div className="rounded-t-3xl bg-linear-gradient-footer">
+            <div className="rounded-t-3xl bg-linear-gradient-footer border border-gray-dark-3">
                 <div className="p-5 sm:p-6 md:p-10 lg:p-12">
                     {/* Logo and Links */}
-                    <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6 lg:gap-8">
+                    <div className="flex flex-col sm:flex-row items-center sm:items-center sm:justify-between gap-6 lg:gap-8">
                         {/* Logo */}
                         <Link
                             href="/"
@@ -31,7 +31,7 @@ export default function Footer() {
                         </Link>
 
                         {/* Links */}
-                        <nav className="flex flex-wrap items-center gap-4 sm:gap-6 lg:gap-8">
+                        <nav className="grid grid-cols-2 sm:flex sm:flex-wrap items-center gap-4 sm:gap-6 lg:gap-8 w-full sm:w-auto">
                             {footerNavigationLinks.map((link) => (
                                 <Button
                                     key={link.href}
@@ -49,7 +49,7 @@ export default function Footer() {
                     <div className="w-full h-px bg-gray-dark-3 mt-8 sm:mt-10"></div>
 
                     {/* Social Media and Legal Links */}
-                    <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 sm:gap-4 pt-6 sm:pt-8">
+                    <div className="flex flex-col sm:flex-row items-center justify-between gap-6 sm:gap-4 pt-6 sm:pt-8">
                         {/* Social Media Icons */}
                         <div className="flex items-center gap-4">
                             {footerSocialLinks.map((social) => {
@@ -92,7 +92,7 @@ export default function Footer() {
             </div>
 
             {/* Bottom */}
-            <div className="bg-foreground rounded-b-3xl p-3">
+            <div className="bg-foreground rounded-b-3xl p-3 border border-gray-dark-3">
                 <Copyright>
                     © 2025 Brillarix
                 </Copyright>
