@@ -1,5 +1,8 @@
+"use client";
+
 import React from "react";
 import { cn } from "@/lib/utils";
+import { FaSquare, FaSquareCheck } from "react-icons/fa6";
 
 export type CheckboxSize = "sm" | "md" | "lg";
 export type CheckboxVariant = "default" | "outline";
@@ -44,6 +47,9 @@ export const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
       className,
       id,
       disabled,
+      checked: controlledChecked,
+      defaultChecked,
+      onChange,
       "aria-label": ariaLabel,
       "aria-describedby": ariaDescribedBy,
       ...props
@@ -55,18 +61,37 @@ export const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
     const errorId = `${finalId}-error`;
     const helperId = `${finalId}-helper`;
     const isDisabled = disabled || loading;
+    const [isChecked, setIsChecked] = React.useState(
+      controlledChecked ?? defaultChecked ?? false
+    );
 
     const sizeClass = sizeClasses[size];
 
+    React.useEffect(() => {
+      if (controlledChecked !== undefined) {
+        setIsChecked(controlledChecked);
+      }
+    }, [controlledChecked]);
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+      if (controlledChecked === undefined) {
+        setIsChecked(e.target.checked);
+      }
+      onChange?.(e);
+    };
+
     return (
       <div className="flex flex-col gap-1.5">
-        <div className="flex items-start gap-2.5">
+        <div className="group flex items-start gap-2.5">
           <div className="relative flex items-center pt-0.5">
             <input
               type="checkbox"
               id={finalId}
               ref={ref}
               disabled={isDisabled}
+              checked={controlledChecked !== undefined ? controlledChecked : isChecked}
+              defaultChecked={defaultChecked}
+              onChange={handleChange}
               aria-invalid={error ? "true" : "false"}
               aria-describedby={cn(
                 error ? errorId : undefined,
@@ -75,47 +100,62 @@ export const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
               )}
               aria-label={ariaLabel || (label ? undefined : "Checkbox")}
               className={cn(
-                "peer appearance-none rounded border-2 transition-all duration-200",
+                "peer sr-only",
+                sizeClass.checkbox
+              )}
+              {...props}
+            />
+            <label
+              htmlFor={finalId}
+              className={cn(
+                "relative flex items-center justify-center rounded transition-all duration-200",
                 "bg-white dark:bg-gray-dark-2",
-                "border-gray-400 dark:border-gray-600",
-                "text-green dark:text-green",
-                "focus:outline-none focus:ring-2 focus:ring-green focus:ring-offset-2",
-                "focus:ring-offset-white dark:focus:ring-offset-gray-dark-1",
+                "border border-transparent",
                 "cursor-pointer",
-                "checked:bg-green checked:border-green",
-                "checked:bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTIiIGhlaWdodD0iMTIiIHZpZXdCb3g9IjAgMCAxMiAxMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTEwIDNMNC41IDguNUwyIDYiIHN0cm9rZT0id2hpdGUiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+Cjwvc3ZnPg==')]",
-                "checked:bg-center checked:bg-no-repeat checked:bg-contain",
-                "hover:border-green dark:hover:border-green",
-                "disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:border-gray-400 dark:disabled:hover:border-gray-600",
-                "indeterminate:bg-green indeterminate:border-green",
+                "hover:border-gray-light-2 dark:hover:border-gray-light-5",
+                "group-hover:border-gray-light-2 dark:group-hover:border-gray-light-2",
+                "peer-disabled:opacity-50 peer-disabled:cursor-not-allowed",
+                "peer-disabled:hover:border-transparent peer-disabled:group-hover:border-transparent",
+                (controlledChecked !== undefined ? controlledChecked : isChecked) && "bg-gray-light-2 dark:bg-gray-dark-4",
                 variant === "outline" ? "bg-transparent" : undefined,
                 sizeClass.checkbox,
                 className
               )}
-              {...props}
-            />
+            >
+              {(controlledChecked !== undefined ? controlledChecked : isChecked) ? (
+                <FaSquareCheck className="h-full w-full text-gray-light-10 dark:text-gray-light-1" />
+              ) : (
+                <FaSquare className="h-full w-full text-gray-light-10 dark:text-gray-dark-1" />
+              )}
+            </label>
             {loading && (
               <div
-                className="absolute inset-0 flex items-center justify-center"
+                className="absolute inset-0 flex items-center justify-center pointer-events-none"
                 aria-hidden="true"
               >
-                <div className="h-2 w-2 animate-spin rounded-full border-2 border-gray-300 border-t-green" />
+                <div className="h-2 w-2 animate-spin rounded-full border-2 border-gray-light-3 border-t-gray-light-7 dark:border-gray-dark-6 dark:border-t-gray-light-5" />
               </div>
             )}
           </div>
           {(label || labelComponent) && (
-            <label
-              htmlFor={finalId}
+            <div
               className={cn(
-                "cursor-pointer select-none font-medium text-foreground",
-                "peer-hover:text-green dark:peer-hover:text-green",
+                "cursor-pointer select-none font-medium text-white/40",
                 "peer-disabled:cursor-not-allowed peer-disabled:opacity-50",
                 "transition-colors duration-200",
                 sizeClass.label
               )}
+              onClick={() => {
+                if (!isDisabled) {
+                  const input = document.getElementById(finalId) as HTMLInputElement;
+                  if (input) {
+                    input.click();
+                  }
+                }
+              }}
             >
               {labelComponent || label}
-            </label>
+            </div>
           )}
         </div>
         {error && (
@@ -131,7 +171,7 @@ export const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
         {helperText && !error && (
           <span
             id={helperId}
-            className="text-xs text-gray-600 dark:text-gray-500"
+            className="text-xs text-gray-dark-7 dark:text-gray-light-7"
           >
             {helperText}
           </span>
