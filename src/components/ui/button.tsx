@@ -58,7 +58,7 @@ const variantStyles: Record<
       "active:bg-transparent",
       "active:border-none",
       "active:shadow-none",
-      "focus-within:bg-transparent",
+      "focus-within:bg-gray-light-1",
       "focus-within:shadow-[0_0_4px_0_rgba(255,255,255,1)]",
       "has-[:disabled]:bg-gray-dark-6",
       "has-[:disabled]:pointer-events-none",
@@ -70,7 +70,7 @@ const variantStyles: Record<
       "has-[:disabled]:focus-within:shadow-none"
     ),
     button: cn(
-      "w-fit rounded-lg gap-2.5",
+      "w-fit rounded-lg gap-2",
       "bg-gray-dark-4",
       "text-gray-light-2",
       "font-medium leading-5",
@@ -137,7 +137,7 @@ const variantStyles: Record<
       "has-[:disabled]:focus-within:shadow-none"
     ),
     button: cn(
-      "w-full h-full rounded-lg gap-2.5",
+      "w-full h-full rounded-lg gap-2",
       "bg-gray-dark-1",
       "text-gray-light-3",
       "font-medium leading-5",
@@ -179,7 +179,7 @@ const variantStyles: Record<
       "has-[:disabled]:focus-within:shadow-none"
     ),
     button: cn(
-      "w-full h-full rounded-lg gap-2.5",
+      "w-full h-full rounded-lg gap-2",
       "bg-transparent",
       "text-gray-light-1",
       "underline",
@@ -274,6 +274,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
             {loading && (
               <span className="mr-2" aria-hidden="true">
                 <div className="h-4 w-4 animate-spin rounded-full border-2 border-current border-t-transparent" />
+                <span className="sr-only">Loading...</span>
               </span>
             )}
             {leftImage && !loading && (
