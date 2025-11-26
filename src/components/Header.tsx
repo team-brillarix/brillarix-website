@@ -121,7 +121,7 @@ export default function Header() {
                                     animate={{ opacity: 1, scale: 1, y: 0 }}
                                     exit={{ opacity: 0, scale: 0.95, y: -10 }}
                                     transition={{ duration: 0.2, ease: "easeOut" }}
-                                    className="absolute right-0 top-full mt-4 w-64 sm:w-72 bg-gray-dark-3 rounded-xl border border-gray-dark-5 shadow-2xl z-50 overflow-hidden"
+                                    className="absolute right-0 top-full mt-4 w-48 bg-gray-dark-3 rounded-xl border border-gray-dark-5 shadow-2xl z-50 overflow-hidden"
                                 >
                                     <div className="p-2">
                                         {/* Navigation Links */}
