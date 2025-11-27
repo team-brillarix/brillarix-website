@@ -101,6 +101,12 @@
   --background-image-linear-gradient-footer: linear-gradient(1.33deg, rgba(18, 18, 18, 0.2) 55.27%, rgba(76, 76, 76, 0.2) 98.28%);
 }
 
+@utility dot-shadow {
+  color: var(--gray-light-3);
+  box-shadow: 0 0 17px 0 var(--foreground);
+  filter: blur(0.5px);
+}
+
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #08090A;
