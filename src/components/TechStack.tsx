@@ -7,19 +7,11 @@ import { Heading } from '@/components/ui/Heading';
 import { MovingBorderContainer } from '@/components/ui/MovingBorder';
 import { techStackData } from '@/constants/techStack';
 
-interface TechStackProps {
-  title?: string;
-  subtitle?: string;
-}
-
-export default function TechStack({
-  title = "Cutting-Edge Technologies for Scalable Solutions",
-  subtitle = "We use the latest AI, no-code, and full-stack tools to deliver efficient, scalable results."
-}: TechStackProps) {
+export default function TechStack() {
   return (
     <Section
-      title={title}
-      subtitle={subtitle}
+      title="Cutting-Edge Technologies for Scalable Solutions"
+      subtitle="We use the latest AI, no-code, and full-stack tools to deliver efficient, scalable results."
       headingVariant="h2"
       headingWeight="semibold"
     >
