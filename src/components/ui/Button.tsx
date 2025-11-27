@@ -241,9 +241,10 @@ export const Button = React.forwardRef<HTMLButtonElement | HTMLAnchorElement, Bu
     ref
   ) => {
     const buttonId = React.useId();
-    const finalId = id || buttonId;
-    const errorId = `${finalId}-error`;
-    const helperId = `${finalId}-helper`;
+    const needsId = !!(error || helperText || id);
+    const finalId = id || (needsId ? buttonId : undefined);
+    const errorId = finalId ? `${finalId}-error` : undefined;
+    const helperId = finalId ? `${finalId}-helper` : undefined;
     const isDisabled = disabled || loading;
 
     const styles = variantStyles[variant];
@@ -276,7 +277,7 @@ export const Button = React.forwardRef<HTMLButtonElement | HTMLAnchorElement, Bu
               href={href}
               target={target}
               rel={rel}
-              id={finalId}
+              {...(finalId && { id: finalId })}
               onClick={onClick}
               aria-describedby={cn(
                 error ? errorId : undefined,
@@ -300,7 +301,7 @@ export const Button = React.forwardRef<HTMLButtonElement | HTMLAnchorElement, Bu
           ) : (
             <button
               ref={ref as React.ForwardedRef<HTMLButtonElement>}
-              id={finalId}
+              {...(finalId && { id: finalId })}
               type={type}
               disabled={isDisabled}
               onClick={onClick}

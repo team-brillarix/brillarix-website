@@ -78,7 +78,6 @@ type MovingBorderContainerProps = {
     children: React.ReactNode;
 };
 
-// Generic wrapper: place any content inside and get the moving border around it.
 export function MovingBorderContainer({
     borderRadius = "1rem",
     duration = 4000,
