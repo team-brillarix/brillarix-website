@@ -155,7 +155,6 @@ body {
     background-image: var(--background-image-border-gradient);
   }
 
-  /* Make the inner wrapper automatic so components only need to use `border-gradient` */
   .border-gradient>* {
     position: relative;
     width: 100%;

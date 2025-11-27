@@ -1,6 +1,7 @@
 'use client';
 
 import Image from 'next/image';
+import { motion } from 'motion/react';
 import { Section } from '@/components/ui/Section';
 import { Heading } from '@/components/ui/Heading';
 import { MovingBorderContainer } from '@/components/ui/MovingBorder';
@@ -36,7 +37,7 @@ export default function TechStack({
 
             <MovingBorderContainer
               borderRadius="1.5rem"
-              duration={8000}
+              duration={categoryIndex === 0 ? 6000 : categoryIndex === 1 ? 8000 : 10000}
               blobClassName="h-20 w-20 bg-gray-dark-7"
               innerClassName="grid grid-cols-3 gap-4 bg-gray-dark-1 p-5 sm:p-6 md:p-8"
             >
@@ -45,7 +46,11 @@ export default function TechStack({
                   key={itemIndex}
                   className="border-gradient rounded-lg w-20 h-20"
                 >
-                  <div className="flex flex-col items-center justify-center gap-1 rounded-lg bg-gray-dark-1 p-2">
+                  <motion.div
+                    className="flex flex-col items-center justify-center gap-1 rounded-lg bg-gray-dark-2 p-2 cursor-pointer"
+                    whileHover={{ margin: '4px' }}
+                    transition={{ duration: 0.2, ease: 'easeOut' }}
+                  >
                     <Image
                       src={item.image}
                       alt={`${item.name} logo`}
@@ -56,7 +61,7 @@ export default function TechStack({
                     <p className="text-xs text-gray-light-3 text-center leading-tight">
                       {item.name}
                     </p>
-                  </div>
+                  </motion.div>
                 </div>
               ))}
             </MovingBorderContainer>
