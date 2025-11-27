@@ -36,7 +36,7 @@ export default function TechStack() {
               {category.items.map((item, itemIndex) => (
                 <div
                   key={itemIndex}
-                  className="border-gradient rounded-lg w-20 h-20"
+                  className="border-gradient rounded-lg w-20 h-20 mt-[0.7]"
                 >
                   <motion.div
                     className="flex flex-col items-center justify-center gap-1 rounded-lg bg-gray-dark-2 p-2 cursor-pointer"

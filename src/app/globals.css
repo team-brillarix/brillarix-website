@@ -162,3 +162,20 @@ body {
     border-radius: inherit;
   }
 }
+
+
+.impact-swiper .swiper-pagination {
+  position: relative;
+  bottom: 0;
+  margin-top: 2rem;
+}
+
+.impact-swiper .swiper-pagination-bullet-white {
+  background: white;
+  opacity: 0.5;
+}
+
+.impact-swiper .swiper-pagination-bullet-active-white {
+  background: white;
+  opacity: 1;
+}
