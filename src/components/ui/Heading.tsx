@@ -27,24 +27,6 @@ const sizesCompact: Record<Variant, string> = {
     h6: 'text-sm sm:text-base md:text-lg',
 };
 
-const lineHeightsRegular: Record<Variant, string> = {
-    h1: 'leading-[60px]',
-    h2: 'leading-[48px]',
-    h3: 'leading-[40px]',
-    h4: 'leading-[36px]',
-    h5: 'leading-[32px]',
-    h6: 'leading-[28px]',
-};
-
-const lineHeightsBold: Record<Variant, string> = {
-    h1: 'leading-[72px]',
-    h2: 'leading-[58px]',
-    h3: 'leading-[55px]',
-    h4: 'leading-[48px]',
-    h5: 'leading-[32px]',
-    h6: 'leading-[28px]',
-};
-
 const weightClass: Record<Weight, string> = {
     regular: 'font-normal',
     medium: 'font-medium',
@@ -91,12 +73,9 @@ export const Heading = forwardRef<HTMLHeadingElement, HeadingProps>(function Hea
     const tag: HeadingTag = as ?? (variant === 'h1' ? 'h1' : variant);
     const sizeClass = (scale === 'compact' ? sizesCompact : sizesExpressive)[variant];
     const subtitleSize = scale === 'compact' ? 'text-sm' : 'text-base';
-    const isBold = weight === 'bold' || weight === 'extrabold';
-    const lineHeightClass = isBold ? lineHeightsBold[variant] : lineHeightsRegular[variant];
 
     const classes = [
         sizeClass,
-        lineHeightClass,
         weightClass[weight],
         alignClass[align],
         'tracking-tight',
@@ -117,7 +96,7 @@ export const Heading = forwardRef<HTMLHeadingElement, HeadingProps>(function Hea
                     ...rest,
                     ref,
                     className: classes,
-                    style: { textWrap: 'auto', letterSpacing: 'var(--track-tight)', ...(rest.style || {}) },
+                    style: { textWrap: 'auto', lineHeight: '1.2', ...(rest.style || {}) },
                 },
                 children
             )}
@@ -127,7 +106,7 @@ export const Heading = forwardRef<HTMLHeadingElement, HeadingProps>(function Hea
                     subtitleAs,
                     {
                         className: [
-                            'mt-4',
+                            'mt-2',
                             subtitleSize,
                             'text-gray-light-3',
                             'leading-relaxed',
