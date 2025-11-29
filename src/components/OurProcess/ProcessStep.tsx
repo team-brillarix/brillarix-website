@@ -1,4 +1,4 @@
-import { ProcessStep as ProcessStepType } from '@/constants/process';
+import { ProcessStep as ProcessStepType } from '@/types/process';
 import {
     FiSearch,
     FiZap,
@@ -31,14 +31,14 @@ export function ProcessStep({ step }: ProcessStepProps) {
                 </p>
             </div>
 
-            {/* Icon */}
+            {/* Step Icon & Title */}
             <div className="shrink-0">
                 <div className="w-16 h-16 md:w-20 md:h-20 lg:w-20 lg:h-20 rounded-xl border-2 border-gray-dark-3 bg-gray-dark-2 flex items-center justify-center">
                     <IconComponent className="w-8 h-8 md:w-10 md:h-10 lg:w-10 lg:h-10 text-gray-light-1" />
                 </div>
             </div>
 
-            {/* Content - Right Side */}
+            {/* Right Side Content */}
             <div className="flex-1 flex flex-col gap-2 md:gap-3">
                 <div>
                     <h3 className="text-lg md:text-xl lg:text-2xl font-semibold text-gray-light-1">

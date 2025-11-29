@@ -1,11 +1,4 @@
-export interface ProcessStep {
-  id: number;
-  timeSaved: string;
-  title: string;
-  subtitle: string;
-  description: string;
-  icon: string; // Icon name from react-icons
-}
+import { ProcessStep } from '@/types/process';
 
 export const processSteps: ProcessStep[] = [
   {
