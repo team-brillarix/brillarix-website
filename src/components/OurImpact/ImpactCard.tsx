@@ -1,6 +1,7 @@
 import { ImpactProject } from '@/constants/impact';
 import { Heading } from '@/components/ui/Heading';
 import { useEffect, useRef } from 'react';
+import Link from 'next/link';
 
 export function ImpactCard({ project, isActive }: { project: ImpactProject; isActive: boolean }) {
     const videoRef = useRef<HTMLVideoElement | null>(null);
@@ -18,7 +19,10 @@ export function ImpactCard({ project, isActive }: { project: ImpactProject; isAc
     }, [isActive]);
 
     return (
-        <div className="rounded-3xl overflow-hidden h-full flex flex-col">
+        <Link
+            href={`/projects/${project.id}`}
+            className="rounded-3xl overflow-hidden h-full flex flex-col hover:opacity-90 transition-opacity cursor-pointer"
+        >
             {/* Video */}
             <div className="relative w-full aspect-video">
                 <video
@@ -58,7 +62,7 @@ export function ImpactCard({ project, isActive }: { project: ImpactProject; isAc
                 </div>
             </div>
 
-        </div>
+        </Link>
     );
 }
 

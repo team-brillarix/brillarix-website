@@ -12,7 +12,7 @@ import { ImpactCard } from './ImpactCard';
 import 'swiper/css';
 import 'swiper/css/pagination';
 
-const buttonClassName = "absolute top-1/2 -translate-y-1/2 z-10 w-11 h-11 rounded-full bg-gray-dark-3 text-gray-light-1 flex items-center justify-center hover:bg-gray-dark-4 transition-colors opacity-80 hover:opacity-100";
+const buttonClassName = "absolute top-3/8 -translate-y-3/8 z-10 w-11 h-11 rounded-full bg-gray-dark-3 text-gray-light-1 flex items-center justify-center hover:bg-gray-dark-4 transition-colors opacity-80 hover:opacity-100";
 
 export default function OurImpact() {
     const swiperRef = useRef<SwiperType | null>(null);
@@ -70,22 +70,24 @@ export default function OurImpact() {
                     ))}
                 </Swiper>
 
-                <>
-                    <button
-                        onClick={() => swiperRef.current?.slidePrev()}
-                        className={`${buttonClassName} left-4`}
-                        aria-label="Previous slide"
-                    >
-                        <MdChevronLeft className="w-5 h-5 shrink-0" />
-                    </button>
-                    <button
-                        onClick={() => swiperRef.current?.slideNext()}
-                        className={`${buttonClassName} right-4`}
-                        aria-label="Next slide"
-                    >
-                        <MdChevronRight className="w-5 h-5 shrink-0" />
-                    </button>
-                </>
+                {isReady && (
+                    <>
+                        <button
+                            onClick={() => swiperRef.current?.slidePrev()}
+                            className={`${buttonClassName} left-4`}
+                            aria-label="Previous slide"
+                        >
+                            <MdChevronLeft className="w-5 h-5 shrink-0" />
+                        </button>
+                        <button
+                            onClick={() => swiperRef.current?.slideNext()}
+                            className={`${buttonClassName} right-4`}
+                            aria-label="Next slide"
+                        >
+                            <MdChevronRight className="w-5 h-5 shrink-0" />
+                        </button>
+                    </>
+                )}
             </div>
         </Section>
     );
