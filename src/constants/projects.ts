@@ -17,7 +17,7 @@ export const impactProjects: ImpactProject[] = [
     title: 'Cleeri',
     description:
       'Cleeri partnered with Brillarix to automate participant recruitment, screening, and data workflows for complex clinical studies.',
-    videoUrl: `https://res.cloudinary.com/${cloudName}/video/upload/projects/Cleeri.mp4`,
+    videoUrl: `https://res.cloudinary.com/${cloudName}/video/upload/v1764406774/Cleeri_fryh7y.mp4`,
     metrics: {
       label: 'Reduction in manual operations workload',
       value: '45%',
@@ -28,7 +28,7 @@ export const impactProjects: ImpactProject[] = [
     title: 'Trialynx',
     description:
       'We helped a B2B startup launch a production-ready MVP using a fully no-code stack, enabling rapid iteration and real user feedback.',
-    videoUrl: `https://res.cloudinary.com/${cloudName}/video/upload/projects/Trialynx.mp4`,
+    videoUrl: `https://res.cloudinary.com/${cloudName}/video/upload/v1764406780/Trialynx_zrcmyt.mp4`,
     metrics: {
       label: 'Time from idea to first paying customer',
       value: '6 weeks',
@@ -39,7 +39,7 @@ export const impactProjects: ImpactProject[] = [
     title: 'Visionary Clouds',
     description:
       'Advanced analytics pipelines transformed raw study data into real-time dashboards for sponsors and CRO teams.',
-    videoUrl: `https://res.cloudinary.com/${cloudName}/video/upload/projects/VisionaryClouds.mp4`,
+    videoUrl: `https://res.cloudinary.com/${cloudName}/video/upload/v1764406783/VisionaryClouds_m70imh.mp4`,
     metrics: {
       label: 'Faster access to decision-ready insights',
       value: '3x',
@@ -50,7 +50,7 @@ export const impactProjects: ImpactProject[] = [
     title: 'Signm',
     description:
       'Signm is a platform that allows you to sign documents with your team.',
-    videoUrl: `https://res.cloudinary.com/${cloudName}/video/upload/projects/Signm.mp4`,
+    videoUrl: `https://res.cloudinary.com/${cloudName}/video/upload/v1764406755/Signm_duk534.mp4`,
     metrics: {
       label: 'Decrease in onboarding time per patient',
       value: '35%',
@@ -61,7 +61,7 @@ export const impactProjects: ImpactProject[] = [
     title: 'Prompt Vault',
     description:
       'Prompt Vault is a platform that allows you to store and share your prompts with your team.',
-    videoUrl: `https://res.cloudinary.com/${cloudName}/video/upload/projects/PromptVault.mp4`,
+    videoUrl: `https://res.cloudinary.com/${cloudName}/video/upload/v1764406753/PromptVault_frbwbu.mp4`,
     metrics: {
       label: 'Increase in team productivity',
       value: '28%',
