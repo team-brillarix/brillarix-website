@@ -1,5 +1,5 @@
 import { notFound } from 'next/navigation';
-import { impactProjects, ImpactProject } from '@/constants/impact';
+import { impactProjects, ImpactProject } from '@/constants/projects';
 import { Heading } from '@/components/ui/Heading';
 import { Section } from '@/components/ui/Section';
 import Link from 'next/link';

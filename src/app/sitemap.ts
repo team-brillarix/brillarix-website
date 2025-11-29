@@ -1,5 +1,5 @@
 import { MetadataRoute } from 'next'
-import { impactProjects } from '@/constants/impact'
+import { impactProjects } from '@/constants/projects'
 
 const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://brillarix.com'
 

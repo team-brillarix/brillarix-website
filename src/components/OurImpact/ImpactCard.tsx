@@ -1,4 +1,4 @@
-import { ImpactProject } from '@/constants/impact';
+import { ImpactProject } from '@/constants/projects';
 import { Heading } from '@/components/ui/Heading';
 import { useEffect, useRef } from 'react';
 import Link from 'next/link';
@@ -21,7 +21,7 @@ export function ImpactCard({ project, isActive }: { project: ImpactProject; isAc
     return (
         <Link
             href={`/projects/${project.id}`}
-            className="rounded-3xl overflow-hidden h-full flex flex-col hover:opacity-90 transition-opacity cursor-pointer"
+            className="rounded-3xl overflow-hidden h-full flex flex-col transition-colors cursor-pointer border-2 border-gray-dark-3 hover:border-gray-dark-5"
         >
             {/* Video */}
             <div className="relative w-full aspect-video">
