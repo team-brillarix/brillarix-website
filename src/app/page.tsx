@@ -1,6 +1,7 @@
 import TechStack from '@/components/TechStack';
 import OurClients from '@/components/OurClients';
 import OurImpact from '@/components/OurImpact/OurImpact';
+import OurProcess from '@/components/OurProcess/OurProcess';
 
 export default function Home() {
   return (
@@ -8,6 +9,7 @@ export default function Home() {
       <OurClients />
       <OurImpact />
       <TechStack />
+      <OurProcess />
     </div>
   );
 }
