@@ -6,7 +6,7 @@ import { Autoplay, Pagination } from 'swiper/modules';
 import type { Swiper as SwiperType } from 'swiper';
 import { Section } from '@/components/ui/Section';
 import { impactProjects } from '@/constants/impact';
-import { IoChevronBack, IoChevronForward } from 'react-icons/io5';
+import { MdChevronLeft, MdChevronRight } from 'react-icons/md';
 import { ImpactCard } from './ImpactCard';
 
 import 'swiper/css';
@@ -36,12 +36,12 @@ export default function OurImpact() {
                 <Swiper
                     modules={[Autoplay, Pagination]}
                     spaceBetween={32}
-                    slidesPerView={1.2}
+                    slidesPerView={2}
                     centeredSlides={true}
                     breakpoints={{
-                        768: { slidesPerView: 1.5, spaceBetween: 28 },
-                        1024: { slidesPerView: 1.5, spaceBetween: 32 },
-                        1280: { slidesPerView: 1.5, spaceBetween: 36 },
+                        768: { slidesPerView: 2, spaceBetween: 28 },
+                        1024: { slidesPerView: 2, spaceBetween: 32 },
+                        1280: { slidesPerView: 2, spaceBetween: 36 },
                     }}
                     autoplay={{ delay: 10000, disableOnInteraction: false, pauseOnMouseEnter: false }}
                     pagination={{
@@ -76,14 +76,14 @@ export default function OurImpact() {
                         className={`${buttonClassName} left-4`}
                         aria-label="Previous slide"
                     >
-                        <IoChevronBack className="w-5 h-5" />
+                        <MdChevronLeft className="w-5 h-5 shrink-0" />
                     </button>
                     <button
                         onClick={() => swiperRef.current?.slideNext()}
                         className={`${buttonClassName} right-4`}
                         aria-label="Next slide"
                     >
-                        <IoChevronForward className="w-5 h-5" />
+                        <MdChevronRight className="w-5 h-5 shrink-0" />
                     </button>
                 </>
             </div>
