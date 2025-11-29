@@ -23,7 +23,6 @@ export default function OurImpact() {
         <Section
             title="Our Impact"
             subtitle="Brillarix turns ideas into results, delivering fast, scalable, and innovative solutions that drive growth and efficiency."
-            className="py-16 md:py-20 px-0"
         >
             <div
                 className="w-screen overflow-hidden relative"
