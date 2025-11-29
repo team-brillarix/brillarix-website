@@ -165,17 +165,23 @@ body {
 
 
 .impact-swiper .swiper-pagination {
-  position: relative;
-  bottom: 0;
+  position: relative !important;
+  bottom: 0 !important;
   margin-top: 2rem;
+  display: flex !important;
+  justify-content: center;
+  gap: 8px;
 }
 
-.impact-swiper .swiper-pagination-bullet-white {
+.impact-swiper .swiper-pagination-bullet {
+  width: 10px;
+  height: 10px;
   background: white;
   opacity: 0.5;
+  transition: opacity 0.3s;
 }
 
-.impact-swiper .swiper-pagination-bullet-active-white {
+.impact-swiper .swiper-pagination-bullet-active {
   background: white;
   opacity: 1;
 }

@@ -2,124 +2,100 @@ export interface ImpactProject {
   id: string;
   title: string;
   description: string;
-  theme: 'light' | 'dark';
-  logo?: string;
-  logoText?: string;
-  logoSubtext?: string;
-  navigation?: string[];
-  mainContent: {
-    type: 'image' | 'text';
-    content: string;
-    image?: string;
-  };
-  metrics?: {
+  videoUrl: string;
+  metrics: {
     label: string;
     value: string;
   };
-  button?: {
-    text: string;
-    variant: 'primary' | 'secondary';
-  };
-  socialIcons?: string[];
 }
 
 export const impactProjects: ImpactProject[] = [
   {
     id: '1',
-    title: 'Cleeri',
-    description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the',
-    theme: 'dark',
-    logo: '/logos/VisionaryClouds.png',
-    logoText: 'VISIONARY CLOUDS',
-    navigation: ['HOME', 'ABOUT US', 'SERVICES', 'OUR TEAM', 'PROJECTS', 'TESTIMONIALS', 'CONTACT US'],
-    mainContent: {
-      type: 'image',
-      content: 'Ice cream scooping image',
-      image: '/images/ice-cream.jpg', // Placeholder - you'll need to add actual image
-    },
+    title: 'Cleeri – AI Research Automation',
+    description:
+      'Cleeri partnered with Brillarix to automate participant recruitment, screening, and data workflows for complex clinical studies.',
+    videoUrl: 'https://www.w3schools.com/html/mov_bbb.mp4',
     metrics: {
-      label: 'Increase feature adoption by',
-      value: 'Up to 30%',
+      label: 'Reduction in manual operations workload',
+      value: '45%',
     },
-    socialIcons: ['instagram', 'vimeo', 'youtube'],
   },
   {
     id: '2',
-    title: '',
-    description: '',
-    theme: 'light',
-    button: {
-      text: 'GET STARTED',
-      variant: 'primary',
-    },
-    mainContent: {
-      type: 'text',
-      content: 'lot',
+    title: 'No-Code MVP Launch',
+    description:
+      'We helped a B2B startup launch a production-ready MVP using a fully no-code stack, enabling rapid iteration and real user feedback.',
+    videoUrl: 'https://www.w3schools.com/html/mov_bbb.mp4',
+    metrics: {
+      label: 'Time from idea to first paying customer',
+      value: '6 weeks',
     },
   },
   {
     id: '3',
-    title: 'AI-Powered Study',
-    description: 'Study Details I',
-    theme: 'light',
-    logoText: 'EZ',
-    logoSubtext: 'EZ RESEARCH SOLUTIONS',
-    mainContent: {
-      type: 'text',
-      content: 'Cons_col',
-    },
-    button: {
-      text: 'Get Started Today',
-      variant: 'secondary',
+    title: 'AI-Powered Study Insights',
+    description:
+      'Advanced analytics pipelines transformed raw study data into real-time dashboards for sponsors and CRO teams.',
+    videoUrl: 'https://www.w3schools.com/html/mov_bbb.mp4',
+    metrics: {
+      label: 'Faster access to decision-ready insights',
+      value: '3x',
     },
   },
   {
     id: '4',
-    title: 'Cleeri',
-    description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the',
-    theme: 'dark',
-    logo: '/logos/VisionaryClouds.png',
-    logoText: 'VISIONARY CLOUDS',
-    navigation: ['HOME', 'ABOUT US', 'SERVICES', 'OUR TEAM', 'PROJECTS', 'TESTIMONIALS', 'CONTACT US'],
-    mainContent: {
-      type: 'image',
-      content: 'Ice cream scooping image',
-      image: '/images/ice-cream.jpg', // Placeholder - you'll need to add actual image
-    },
+    title: 'Healthcare Workflow Platform',
+    description:
+      'A modular workflow engine that orchestrates patient onboarding, scheduling, and compliance tasks across multiple systems.',
+    videoUrl: 'https://www.w3schools.com/html/mov_bbb.mp4',
     metrics: {
-      label: 'Increase feature adoption by',
-      value: 'Up to 30%',
+      label: 'Decrease in onboarding time per patient',
+      value: '35%',
     },
-    socialIcons: ['instagram', 'vimeo', 'youtube'],
   },
   {
     id: '5',
-    title: '',
-    description: '',
-    theme: 'light',
-    button: {
-      text: 'GET STARTED',
-      variant: 'primary',
-    },
-    mainContent: {
-      type: 'text',
-      content: 'lot',
+    title: 'Global E‑Commerce Rollout',
+    description:
+      'We architected a scalable storefront experience that supports multiple currencies, regions, and localized content.',
+    videoUrl: 'https://www.w3schools.com/html/mov_bbb.mp4',
+    metrics: {
+      label: 'Improvement in conversion rate across key markets',
+      value: '+22%',
     },
   },
   {
     id: '6',
-    title: 'AI-Powered Study',
-    description: 'Study Details I',
-    theme: 'light',
-    logoText: 'EZ',
-    logoSubtext: 'EZ RESEARCH SOLUTIONS',
-    mainContent: {
-      type: 'text',
-      content: 'Cons_col',
+    title: 'Research Operations Hub',
+    description:
+      'A single pane of glass for research teams to manage participants, studies, and communication in one place.',
+    videoUrl: 'https://www.w3schools.com/html/mov_bbb.mp4',
+    metrics: {
+      label: 'Increase in study team productivity',
+      value: '28%',
     },
-    button: {
-      text: 'Get Started Today',
-      variant: 'secondary',
+  },
+  {
+    id: '7',
+    title: 'Internal Tools Modernization',
+    description:
+      'Legacy internal tools were rebuilt with modern, user-friendly interfaces that dramatically reduced training time.',
+    videoUrl: 'https://www.w3schools.com/html/mov_bbb.mp4',
+    metrics: {
+      label: 'Reduction in support tickets for internal tools',
+      value: '60%',
+    },
+  },
+  {
+    id: '8',
+    title: 'Founder Prototype Studio',
+    description:
+      'For early-stage founders, we rapidly prototype product experiences to validate ideas before heavy engineering investment.',
+    videoUrl: 'https://www.w3schools.com/html/mov_bbb.mp4',
+    metrics: {
+      label: 'Average time to first interactive prototype',
+      value: '10 days',
     },
   },
 ];
