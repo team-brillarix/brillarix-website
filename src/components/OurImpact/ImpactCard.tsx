@@ -36,18 +36,19 @@ export function ImpactCard({ project, isActive }: { project: ImpactProject; isAc
             </div>
 
             {/* Project Details */}
-            <div className="flex justify-between items-center gap-6 py-4 px-6 bg-gray-dark-1 h-full">
+            <div className="flex justify-between items-center gap-6 lg:gap-8 py-4 px-6 bg-gray-dark-1 h-full">
                 {/* Title and Description */}
-                <Heading
-                    variant="h5"
-                    align="left"
-                    weight="bold"
-                    subtitle={project.description}
-                    subtitleClassName='text-xs! mt-1!'
-                >
-                    {project.title}
-                </Heading>
-
+                <div className="flex-1 min-w-0">
+                    <Heading
+                        variant="h5"
+                        align="left"
+                        weight="bold"
+                        subtitle={project.description}
+                        subtitleClassName='text-xs! mt-1!'
+                    >
+                        {project.title}
+                    </Heading>
+                </div>
                 {/* Metrics */}
                 <div className="flex items-center gap-2">
                     <p className="text-sm text-gray-light-2">
@@ -61,7 +62,6 @@ export function ImpactCard({ project, isActive }: { project: ImpactProject; isAc
                     </div>
                 </div>
             </div>
-
         </Link>
     );
 }
