@@ -17,10 +17,9 @@ export default function TechStack() {
         {techStackData.map((category, categoryIndex) => (
           <div key={categoryIndex} className="flex flex-col gap-4 sm:gap-5 md:gap-6">
             <Heading
-              variant="h6"
-              as="h6"
+              variant="h5"
+              as="h5"
               align="center"
-              weight="semibold"
             >
               {category.title}
             </Heading>
@@ -34,7 +33,7 @@ export default function TechStack() {
               {category.items.map((item, itemIndex) => (
                 <div
                   key={itemIndex}
-                  className="border-gradient rounded-lg w-20 h-20 mt-[0.7]"
+                  className="border-gradient rounded-lg w-20 h-20"
                 >
                   <motion.div
                     className="flex flex-col items-center justify-center gap-1 rounded-lg bg-gray-dark-2 p-2 cursor-pointer"
