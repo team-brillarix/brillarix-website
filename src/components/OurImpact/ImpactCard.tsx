@@ -49,8 +49,9 @@ export function ImpactCard({ project, isActive }: { project: ImpactProject; isAc
                         {project.title}
                     </Heading>
                 </div>
+
                 {/* Metrics */}
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-4 max-w-[40%]">
                     <p className="text-sm text-gray-light-2">
                         {project.metrics.label}
                     </p>
