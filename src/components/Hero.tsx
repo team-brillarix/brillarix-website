@@ -1,6 +1,8 @@
 'use client';
 
 import Image from 'next/image';
+import { useState } from 'react';
+import { motion } from 'motion/react';
 import { Section } from '@/components/ui/Section';
 import { Heading } from '@/components/ui/Heading';
 import { Button } from '@/components/ui/Button';
@@ -21,25 +23,26 @@ const DotIcon = () => (
 );
 
 export default function Hero() {
+  const [activeSegment, setActiveSegment] = useState<'first' | 'second'>('first');
+
   return (
     <Section
-      className="pt-5 sm:pt-10 md:pt-20 bg-background hero-hex-bg"
-      title={
-        <>
-          Skip the delays. Our AI-driven team designs
-          <br className="hidden md:inline" />
-          &amp; builds at startup speed.
-        </>
-      }
-      subtitle="Brillarix blends cutting-edge AI, no-code platforms, and full-stack development to bring your product vision to life faster than traditional teams."
-      headingVariant="h1"
-      headingWeight="medium"
-      headingAlign="center"
-    >
+      className="pt-5 sm:pt-10 md:pt-20 bg-background">
       <div className="w-full flex flex-col items-center gap-6 sm:gap-10 md:gap-12">
-        <div className="flex flex-col items-center justify-center w-full gap-12">
-          {/* cards */}
-          <div className="grid grid-cols-1 lg:grid-cols-3 px-15 sm:px-25 md:px-35 gap-5">
+        <div className="flex flex-col hero-hex-bg gap-15 -mx-[calc((100vw-100%)/2)] px-[calc((100vw-100%)/2)] -mt-[40px] sm:-mt-[60px] md:-mt-[100px] lg:-mt-[120px] pt-[40px] sm:pt-[60px] md:pt-[100px] lg:pt-[120px]">
+          <Heading
+            variant="h1"
+            weight="medium"
+            align="center"
+            children="Skip the delays. Our AI-driven team designs
+            &amp; builds at startup speed."
+            subtitle="Brillarix blends cutting-edge AI, no-code platforms, and full-stack development to bring your product vision to life faster than traditional teams."
+            subtitleAs="p"
+            subtitleClassName="font-normal text-gray-light-3"
+          />
+          <div className="flex flex-col items-center justify-center w-full gap-12">
+            {/* cards */}
+            <div className="grid grid-cols-1 lg:grid-cols-3 px-15 sm:px-25 md:px-35 gap-5">
             <div className="flex flex-col gap-5 h-full">
               <div className="flex flex-col bg-gray-dark-1/70 rounded-3xl h-120 p-1 border border-gray-dark-3 gap-2">
                 <div className="flex flex-col h-118 p-6 rounded-3xl gap-4 surface-gradient-with-noise relative">
@@ -87,8 +90,15 @@ export default function Hero() {
                                 stroke-dasharray: 0.6 0.6;
                                 fill: none;
                             }
+                            .animated-segment {
+                                stroke: rgba(255, 255, 255, 0.9);
+                                stroke-width: 0.5;
+                                fill: none;
+                                filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.8));
+                            }
                             `}</style>
                         </defs>
+                        {/* Base connection lines */}
                         <path
                             className="connection-line"
                             d="M 15 22 V 38 Q 15 48 25 48 H 46"
@@ -97,6 +107,37 @@ export default function Hero() {
                             className="connection-line"
                             d="M 50 50 V 72 Q 50 82 60 82 H 80"
                         />
+                        {/* Animated bright segments */}
+                        {activeSegment === 'first' && (
+                            <motion.path
+                                key="first-segment"
+                                className="animated-segment"
+                                d="M 15 22 V 38 Q 15 48 25 48 H 46"
+                                strokeDasharray="5 10000"
+                                initial={{ strokeDashoffset: 0 }}
+                                animate={{ strokeDashoffset: -50 }}
+                                transition={{
+                                    duration: 2.5,
+                                    ease: "linear"
+                                }}
+                                onAnimationComplete={() => setActiveSegment('second')}
+                            />
+                        )}
+                        {activeSegment === 'second' && (
+                            <motion.path
+                                key="second-segment"
+                                className="animated-segment"
+                                d="M 50 55 V 72 Q 50 82 60 82 H 80"
+                                strokeDasharray="5 10000"
+                                initial={{ strokeDashoffset: 0 }}
+                                animate={{ strokeDashoffset: -50 }}
+                                transition={{
+                                    duration: 2.5,
+                                    ease: "linear"
+                                }}
+                                onAnimationComplete={() => setActiveSegment('first')}
+                            />
+                        )}
                       </svg>
                       
                       <div className="absolute top-[7%] left-[7%] z-20 pointer-events-auto">
@@ -125,13 +166,13 @@ export default function Hero() {
                         </div>
                       </div>
                       
-                      <div className="absolute flex items-center justify-center top-1/2 bg-gray-dark-2 rounded-lg h-12 w-12 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 pointer-events-auto">
+                      <div className="group absolute flex items-center justify-center top-1/2 bg-gray-dark-2 rounded-lg h-12 w-12 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 pointer-events-auto hover:bg-gray-dark-5">
                         <Image
                           src="/hero-icons/Arcticons.svg"
                           alt="Arcticons"
                           width={30}
                           height={16}
-                          className="object-contain transition-all duration-300 hover:scale-125 icon-hover"
+                          className="object-contain transition-all duration-300 group-hover:scale-125 hover:scale-125 icon-hover"
                         />
                       </div>
                       
@@ -148,7 +189,7 @@ export default function Hero() {
                   </div>
                 </div>
               </div>
-              <div className="flex flex-row text-xs items-center justify-start font-normal h-20 text-gray-light-1 gap-4 rounded-3xl bg-gray-dark-2 p-6 surface-gradient-with-noise relative">
+              <div className="flex flex-row text-xs items-center justify-start font-normal text-gray-light-1 gap-4 rounded-3xl bg-gray-dark-2 p-6 surface-gradient-with-noise relative">
                 <DotIcon />
                 <p>
                   Get your product to market faster, without the traditional delays.
@@ -156,14 +197,8 @@ export default function Hero() {
               </div>
             </div>
             <div className="flex flex-col gap-5 h-full">
-              <div className="flex flex-row text-xs h-20 items-center justify-start font-normal text-gray-light-1 gap-4 rounded-3xl bg-gray-dark-2 p-6 surface-gradient-with-noise relative">
-                <DotIcon />
-                <p>
-                  Custom solutions that grow with your business.
-                </p>
-              </div>
-              <div className="flex flex-col bg-gray-dark-1/70 rounded-3xl h-120 p-1 border border-gray-dark-3 gap-2">
-                <div className="flex flex-col justify-between h-118 p-6 rounded-3xl gap-4 surface-gradient-with-noise relative">
+              <div className="flex flex-col bg-gray-dark-1/70 rounded-3xl h-145 p-1 border border-gray-dark-3 gap-2">
+                <div className="flex flex-col justify-between p-6 rounded-3xl gap-4 h-143 surface-gradient-with-noise relative">
                   <div className="flex flex-row gap-4 items-center justify-start relative z-10">
                     <div className="flex w-17.5 h-17.5 items-center justify-center rounded-full border border-gray-light-6 bg-background">
                       <FiLayers size={20} color="gray-light-1" />
@@ -186,16 +221,28 @@ export default function Hero() {
                   <Image 
                     src="/hero-icons/full-stack-development.gif" 
                     alt="Full Stack Development Animation" 
-                    width={250} 
+                    width={250}
                     height={250}
                     className="w-full rounded-2xl object-contain"
                     priority
                     unoptimized
                   />
+                  <div className="flex flex-row text-xs items-center justify-start font-normal text-gray-light-1 gap-4 rounded-3xl bg-gray-dark-2 p-6 relative shadow-[0_4px_4px_0_rgba(0,0,0,0.05)]">
+                    <DotIcon />
+                    <p>
+                      Custom solutions that grow with your business.
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
             <div className="flex flex-col gap-5 h-full">
+              <div className="flex flex-row text-xs items-center justify-start font-normal text-gray-light-1 gap-4 rounded-3xl bg-gray-dark-2 p-6 surface-gradient-with-noise relative">
+                <DotIcon />
+                <p>
+                  Brand and product consulting that aligns with your business goals.
+                </p>
+              </div>
               <div className="flex flex-col bg-gray-dark-1/70 rounded-3xl h-120 p-1 border border-gray-dark-3 gap-2">
                 <div className="flex flex-col bg-[#020202] h-118 p-6 rounded-3xl gap-4">
                   <div className="flex flex-row gap-4 items-center justify-start">
@@ -228,14 +275,9 @@ export default function Hero() {
                   />
                 </div>
               </div>
-              <div className="flex flex-row text-xs items-center h-20 justify-start font-normal text-gray-light-1 gap-4 rounded-3xl bg-gray-dark-2 p-6 surface-gradient-with-noise relative">
-                <DotIcon />
-                <p>
-                  Brand and product consulting that aligns with your business goals.
-                </p>
-              </div>
             </div>
           </div>
+        </div>
         </div>
         
         <div className="flex flex-col items-center gap-6 sm:gap-10 md:gap-12 bg-background z-10 w-full">
