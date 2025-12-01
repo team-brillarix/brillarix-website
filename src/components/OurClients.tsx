@@ -52,8 +52,6 @@ export default function OurClients() {
     return (
         <Section
             title="Our Clients"
-            headingVariant="h2"
-            headingWeight="semibold"
             className="px-0"
         >
             <div className="w-screen overflow-hidden relative" style={{ marginLeft: 'calc(50% - 50vw)', marginRight: 'calc(50% - 50vw)' }}>

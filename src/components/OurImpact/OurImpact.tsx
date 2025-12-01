@@ -1,93 +1,87 @@
 "use client";
 
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Pagination } from 'swiper/modules';
 import type { Swiper as SwiperType } from 'swiper';
 import { Section } from '@/components/ui/Section';
-import { impactProjects } from '@/constants/impact';
-import { IoChevronBack, IoChevronForward } from 'react-icons/io5';
+import { impactProjects } from '@/constants/projects';
+import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 import { ImpactCard } from './ImpactCard';
 
 import 'swiper/css';
 import 'swiper/css/pagination';
 
+const buttonClassName = "absolute top-3/8 -translate-y-3/8 z-10 w-11 h-11 rounded-full bg-gray-dark-2 text-gray-light-1 flex items-center justify-center hover:bg-gray-dark-2 transition opacity-80 hover:opacity-100 cursor-pointer";
+
 export default function OurImpact() {
     const swiperRef = useRef<SwiperType | null>(null);
-    const hasMultipleProjects = impactProjects.length > 1;
+    const [isReady, setIsReady] = useState(false);
+    const [activeIndex, setActiveIndex] = useState(0);
 
     return (
         <Section
             title="Our Impact"
             subtitle="Brillarix turns ideas into results, delivering fast, scalable, and innovative solutions that drive growth and efficiency."
-            headingVariant="h2"
-            headingWeight="semibold"
-            className="bg-gray-dark-1 py-16 md:py-20 px-0"
         >
             <div
-                className="w-screen overflow-hidden relative pb-12"
+                className="w-screen overflow-hidden relative"
                 style={{ marginLeft: 'calc(50% - 50vw)', marginRight: 'calc(50% - 50vw)' }}
-                aria-label="Customer success stories carousel"
+                aria-label="Client Success Stories"
                 role="region"
             >
                 <Swiper
                     modules={[Autoplay, Pagination]}
                     spaceBetween={32}
-                    slidesPerView={1}
+                    slidesPerView={2}
+                    centeredSlides={true}
                     breakpoints={{
-                        640: { slidesPerView: 1, spaceBetween: 24 },
-                        768: { slidesPerView: 2, spaceBetween: 28 },
+                        768: { slidesPerView: 1.5, spaceBetween: 28 },
                         1024: { slidesPerView: 2, spaceBetween: 32 },
-                        1280: { slidesPerView: 3, spaceBetween: 36 },
+                        1280: { slidesPerView: 2, spaceBetween: 36 },
                     }}
-                    autoplay={
-                        hasMultipleProjects
-                            ? { delay: 4000, disableOnInteraction: false, pauseOnMouseEnter: true }
-                            : false
-                    }
-                    pagination={
-                        hasMultipleProjects
-                            ? {
-                                clickable: true,
-                                bulletClass: 'swiper-pagination-bullet-white',
-                                bulletActiveClass: 'swiper-pagination-bullet-active-white',
-                            }
-                            : false
-                    }
-                    loop={hasMultipleProjects}
-                    loopAdditionalSlides={2}
+                    autoplay={{ delay: 10000, disableOnInteraction: false, pauseOnMouseEnter: true }}
+                    pagination={{
+                        clickable: true,
+                        dynamicBullets: false
+                    }}
+                    loop
                     onSwiper={(swiper) => {
                         swiperRef.current = swiper;
+                        swiper.update();
+                        setActiveIndex(swiper.realIndex ?? 0);
+                        setIsReady(true);
                     }}
-                    speed={700}
+                    onSlideChange={(swiper) => {
+                        setActiveIndex(swiper.realIndex);
+                    }}
+                    speed={2000}
                     allowTouchMove={false}
                     grabCursor={false}
-                    allowSlidePrev={true}
-                    allowSlideNext={true}
-                    className="impact-swiper"
+                    className={`impact-swiper transition-opacity duration-300 ${isReady ? 'opacity-100' : 'opacity-0'}`}
                 >
-                    {impactProjects.map((project) => (
+                    {impactProjects.map((project, index) => (
                         <SwiperSlide key={project.id} style={{ height: 'auto' }}>
-                            <ImpactCard project={project} />
+                            <ImpactCard project={project} isActive={index === activeIndex} />
                         </SwiperSlide>
                     ))}
                 </Swiper>
 
-                {hasMultipleProjects && (
+                {isReady && (
                     <>
                         <button
                             onClick={() => swiperRef.current?.slidePrev()}
-                            className="absolute left-4 top-1/2 -translate-y-1/2 z-10 w-11 h-11 rounded-full bg-gray-dark-3 text-gray-light-1 flex items-center justify-center hover:bg-gray-dark-4 transition-colors opacity-80 hover:opacity-100"
+                            className={`${buttonClassName} left-4`}
                             aria-label="Previous slide"
                         >
-                            <IoChevronBack className="w-5 h-5" />
+                            <FiChevronLeft className="w-5 h-5 -ms-1" />
                         </button>
                         <button
                             onClick={() => swiperRef.current?.slideNext()}
-                            className="absolute right-4 top-1/2 -translate-y-1/2 z-10 w-11 h-11 rounded-full bg-gray-dark-3 text-gray-light-1 flex items-center justify-center hover:bg-gray-dark-4 transition-colors opacity-80 hover:opacity-100"
+                            className={`${buttonClassName} right-4`}
                             aria-label="Next slide"
                         >
-                            <IoChevronForward className="w-5 h-5" />
+                            <FiChevronRight className="w-5 h-5 -me-1" />
                         </button>
                     </>
                 )}
