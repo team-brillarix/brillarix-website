@@ -101,7 +101,7 @@
   --background-image-linear-gradient-footer: linear-gradient(1.33deg, rgba(18, 18, 18, 0.2) 55.27%, rgba(76, 76, 76, 0.2) 98.28%);
   --background-image-border-gradient: linear-gradient(180deg, #808080 0%, #2F2F2F 53.37%);
   /* Surface gradient */
-  --background-image-surface-gradient: linear-gradient(to bottom, #121212 0%, rgba(38, 38, 38, 0.7) 100%);
+  --background-image-surface-gradient: linear-gradient(to top right, #121212 0%, rgba(38, 38, 38, 0.7) 100%);
 }
 
 @utility dot-shadow {
@@ -287,4 +287,15 @@ body {
 .impact-swiper .swiper-pagination-bullet-active-white {
   background: white;
   opacity: 1;
+}
+
+/* Hero icon hover effect */
+.icon-hover {
+  filter: none;
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.icon-hover:hover {
+  /* Convert to #D5D5D5 using filter - approximates the gray color */
+  filter: brightness(0) saturate(100%) invert(84%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(100%) contrast(100%);
 }
