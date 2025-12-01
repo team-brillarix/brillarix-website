@@ -36,18 +36,28 @@ export function ProcessStep({ step }: ProcessStepProps) {
                 <IconComponent className="w-8 h-8 md:w-10 md:h-10 lg:w-10 lg:h-10 text-gray-light-1" />
             </div>
 
-            <Heading
-                variant="h5"
-                as="h3"
-                align="left"
-            >
-                {step.title}
-            </Heading>
-
-            <div className="flex-1 flex flex-col gap-2 md:gap-3">
+            <div className="shrink-0 md:w-48 lg:w-64 flex flex-col gap-1">
+                <Heading
+                    variant="h5"
+                    as="h3"
+                    align="left"
+                >
+                    {step.title}
+                </Heading>
                 <p className="text-sm md:text-base text-gray-light-3">
                     ({step.subtitle})
                 </p>
+            </div>
+
+            <div className="flex-1 flex flex-col gap-2 md:gap-3 min-w-0">
+                <Heading
+                    variant="h5"
+                    as="h4"
+                    align="left"
+                    weight="semibold"
+                >
+                    {step.descriptionTitle}
+                </Heading>
                 <p className="text-sm md:text-base text-gray-light-2 leading-relaxed">
                     {step.description}
                 </p>

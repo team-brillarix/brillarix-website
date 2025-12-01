@@ -42,7 +42,6 @@ export function ImpactCard({ project, isActive }: { project: ImpactProject; isAc
                     <Heading
                         variant="h5"
                         align="left"
-                        weight="bold"
                         subtitle={project.description}
                         subtitleClassName='text-xs! mt-1!'
                     >

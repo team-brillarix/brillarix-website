@@ -17,7 +17,7 @@ export function Section({
   title,
   subtitle,
   headingVariant = 'h2',
-  headingWeight = 'semibold',
+  headingWeight = 'bold',
   headingAlign = 'center',
   className = '',
   contentClassName = '',

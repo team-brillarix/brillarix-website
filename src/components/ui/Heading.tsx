@@ -56,7 +56,7 @@ export const Heading = forwardRef<HTMLHeadingElement, HeadingProps>(function Hea
         variant = 'h2',
         as,
         align = 'center',
-        weight = 'semibold',
+        weight = 'bold',
         eyebrow,
         scale = 'expressive',
         className = '',
