@@ -24,7 +24,7 @@ export function ProcessStep({ step }: ProcessStepProps) {
     const IconComponent = iconMap[step.icon] || FiSearch;
 
     return (
-        <div className="flex flex-col md:flex-row items-start gap-4 md:gap-6 lg:gap-8 w-full">
+        <div className="flex flex-col md:flex-row items-center gap-4 md:gap-6 lg:gap-8 w-full min-h-56">
             <div className="shrink-0 bg-gray-dark-1 self-stretch flex flex-col items-center justify-center gap-1 py-2 px-6">
                 <p className="text-gray-light-3 text-xs">Time Saved</p>
                 <p className="text-base md:text-lg lg:text-xl font-semibold text-gray-light-1">
@@ -51,14 +51,13 @@ export function ProcessStep({ step }: ProcessStepProps) {
 
             <div className="flex-1 flex flex-col gap-2 md:gap-3 min-w-0">
                 <Heading
-                    variant="h5"
+                    variant="h6"
                     as="h4"
                     align="left"
-                    weight="semibold"
                 >
                     {step.descriptionTitle}
                 </Heading>
-                <p className="text-sm md:text-base text-gray-light-2 leading-relaxed">
+                <p className="text-sm md:text-base text-gray-light-5 leading-relaxed">
                     {step.description}
                 </p>
             </div>
