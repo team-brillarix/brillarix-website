@@ -228,7 +228,7 @@ h6 {
 @layer utilities {
   .border-gradient {
     position: relative;
-    padding: 0.7px;
+    padding: 1px;
     background-image: var(--background-image-border-gradient);
   }
 
