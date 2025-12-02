@@ -128,7 +128,6 @@ body {
   color: var(--foreground);
   /* Rubik for body text */
   font-family: var(--font-rubik), system-ui, sans-serif;
-  overflow-x: hidden;
 }
 
 /* Space Grotesk for all headings */

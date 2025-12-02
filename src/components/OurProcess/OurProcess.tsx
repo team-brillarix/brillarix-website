@@ -12,7 +12,7 @@ From Concept to Launch, Faster Than Ever"
     >
       <div className="w-full flex flex-col">
         {processSteps.map((step, index) => (
-          <div key={step.id} className={index < processSteps.length - 1 ? "border-b border-gray-dark-4" : ""}>
+          <div key={step.id} className={index < processSteps.length ? "border-b border-gray-dark-4" : ""}>
             <ProcessStep step={step} />
           </div>
         ))}
