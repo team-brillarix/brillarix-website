@@ -27,7 +27,6 @@ export default function TechStack() {
             <MovingBorderContainer
               borderRadius="1.5rem"
               duration={categoryIndex === 0 ? 6000 : categoryIndex === 1 ? 8000 : 10000}
-              blobClassName="h-20 w-20 bg-gray-dark-7"
               innerClassName="grid grid-cols-3 gap-6 bg-gray-dark-1 p-5 sm:p-6 md:p-8"
             >
               {category.items.map((item, itemIndex) => (

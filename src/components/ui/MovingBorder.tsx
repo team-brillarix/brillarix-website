@@ -81,7 +81,7 @@ type MovingBorderContainerProps = {
 export function MovingBorderContainer({
     borderRadius = "1rem",
     duration = 4000,
-    blobClassName = "h-20 w-20 bg-gray-dark-6 opacity-90",
+    blobClassName = "h-20 w-20 bg-[radial-gradient(50%_19350%_at_50%_50%,_#B8B8B8_0%,_#292929_100%)] opacity-90",
     containerClassName,
     innerClassName,
     children,

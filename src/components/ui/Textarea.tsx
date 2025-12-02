@@ -96,15 +96,14 @@ export const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
     );
 
     return (
-      <div className="flex w-full flex-col gap-1">
+      <div className="flex w-full flex-col gap-2">
         {label && (
           <label
             htmlFor={finalId}
             className={cn(
               "font-medium text-white/40 leading-1.4",
               "peer-disabled:opacity-20",
-              sizeClass.label,
-              required && "after:ml-0.5 after:text-red after:content-['*']"
+              sizeClass.label
             )}
           >
             {label}
@@ -117,6 +116,7 @@ export const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
             disabled={isDisabled}
             value={value}
             onChange={handleChange}
+            required={required}
             aria-invalid={error ? "true" : "false"}
             aria-describedby={cn(
               error ? errorId : undefined,
@@ -127,18 +127,18 @@ export const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
             aria-required={required}
             style={{
               minHeight: minHeight || undefined,
-              resize: autoResize ? "none" : "vertical",
+              resize: "none",
             }}
             className={cn(
-              "w-full rounded-xl border font-medium transition-all duration-200",
-              "bg-white dark:bg-gray-dark-2",
-              "border-white/8 dark:border-white/8",
-              "text-white leading-relaxed placeholder:text-gray-dark-7 dark:placeholder:text-gray-light-7",
+              "w-full rounded-xl border font-normal transition-all duration-200",
+              "bg-transparent",
+              "border-white/8",
+              "text-white leading-relaxed placeholder:text-gray-dark-7",
               "focus:border-gray-light-2",
               "disabled:opacity-50 disabled:cursor-not-allowed",
-              "read-only:cursor-default read-only:bg-gray-light-1 dark:read-only:bg-gray-dark-3",
+              "read-only:cursor-default read-only:bg-gray-light-1",
               error
-                ? "border-red dark:border-red-light-03 focus:border-red"
+                ? "border-red focus:border-red"
                 : undefined,
               sizeClass.textarea,
               autoResize ? "overflow-hidden" : undefined,
@@ -160,7 +160,7 @@ export const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
             id={errorId}
             role="alert"
             aria-live="polite"
-            className="text-xs font-medium text-red dark:text-red-light-03"
+            className="text-xs font-medium text-red"
           >
             {error}
           </span>
@@ -168,7 +168,7 @@ export const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
         {helperText && !error && (
           <span
             id={helperId}
-            className="text-xs text-gray-dark-7 dark:text-gray-light-7"
+            className="text-xs text-gray-dark-7"
           >
             {helperText}
           </span>

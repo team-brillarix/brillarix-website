@@ -316,7 +316,7 @@ export const Button = React.forwardRef<HTMLButtonElement | HTMLAnchorElement, Bu
             id={errorId}
             role="alert"
             aria-live="polite"
-            className="text-xs font-medium text-red dark:text-red-light-03"
+            className="text-xs font-medium text-red"
           >
             {error}
           </span>
@@ -324,7 +324,7 @@ export const Button = React.forwardRef<HTMLButtonElement | HTMLAnchorElement, Bu
         {helperText && !error && (
           <span
             id={helperId}
-            className="text-xs text-gray-600 dark:text-gray-500"
+            className="text-xs text-gray-600"
           >
             {helperText}
           </span>

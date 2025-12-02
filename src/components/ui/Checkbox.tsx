@@ -109,23 +109,23 @@ export const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
               htmlFor={finalId}
               className={cn(
                 "relative flex items-center justify-center rounded transition-all duration-200",
-                "bg-white dark:bg-gray-dark-2",
+                "bg-white",
                 "border border-transparent",
                 "cursor-pointer",
-                "hover:border-gray-light-2 dark:hover:border-gray-light-5",
-                "group-hover:border-gray-light-2 dark:group-hover:border-gray-light-2",
+                "hover:border-gray-light-2",
+                "group-hover:border-gray-light-2",
                 "peer-disabled:opacity-50 peer-disabled:cursor-not-allowed",
                 "peer-disabled:hover:border-transparent peer-disabled:group-hover:border-transparent",
-                (controlledChecked !== undefined ? controlledChecked : isChecked) && "bg-gray-light-2 dark:bg-gray-dark-4",
+                (controlledChecked !== undefined ? controlledChecked : isChecked) && "bg-gray-light-2",
                 variant === "outline" ? "bg-transparent" : undefined,
                 sizeClass.checkbox,
                 className
               )}
             >
               {(controlledChecked !== undefined ? controlledChecked : isChecked) ? (
-                <FaSquareCheck className="h-full w-full text-gray-light-10 dark:text-gray-light-1" />
+                <FaSquareCheck className="h-full w-full text-gray-light-10" />
               ) : (
-                <FaSquare className="h-full w-full text-gray-light-10 dark:text-gray-dark-1" />
+                <FaSquare className="h-full w-full text-gray-light-10" />
               )}
             </label>
             {loading && (
@@ -133,7 +133,7 @@ export const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
                 className="absolute inset-0 flex items-center justify-center pointer-events-none"
                 aria-hidden="true"
               >
-                <div className="h-2 w-2 animate-spin rounded-full border-2 border-gray-light-3 border-t-gray-light-7 dark:border-gray-dark-6 dark:border-t-gray-light-5" />
+                <div className="h-2 w-2 animate-spin rounded-full border-2 border-gray-light-3 border-t-gray-light-7" />
               </div>
             )}
           </div>
@@ -163,7 +163,7 @@ export const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
             id={errorId}
             role="alert"
             aria-live="polite"
-            className="text-xs font-medium text-red dark:text-red-light-03"
+            className="text-xs font-medium text-red"
           >
             {error}
           </span>
@@ -171,7 +171,7 @@ export const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
         {helperText && !error && (
           <span
             id={helperId}
-            className="text-xs text-gray-dark-7 dark:text-gray-light-7"
+            className="text-xs text-gray-dark-7"
           >
             {helperText}
           </span>

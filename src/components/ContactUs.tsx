@@ -23,14 +23,21 @@ export default function ContactUs() {
         setFormData(prev => ({ ...prev, [field]: value }));
     };
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+        const form = e.currentTarget;
+        if (!form.checkValidity()) {
+            e.preventDefault();
+            e.stopPropagation();
+            return;
+        }
         e.preventDefault();
         console.log('Form submitted:', formData);
+        // Here you can add API call or email service integration
     };
 
     return (
         <Section>
-            <div className="w-full max-w-7xl mx-auto">
+            <div className="w-full">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 lg:gap-16">
                     <div className="flex flex-col gap-6">
                         <Heading
@@ -45,8 +52,7 @@ export default function ContactUs() {
                         <MovingBorderContainer
                             borderRadius="1rem"
                             duration={20000}
-                            blobClassName="h-20 w-20 bg-gray-dark-6 opacity-90"
-                            innerClassName="bg-gray-dark-2 p-6 md:p-8 flex flex-col gap-6"
+                            innerClassName="bg-gray-dark-1 p-6 md:p-8 flex flex-col gap-6"
                         >
                             <form onSubmit={handleSubmit} className="flex flex-col gap-6">
                                 <Input
@@ -54,6 +60,7 @@ export default function ContactUs() {
                                     value={formData.name}
                                     onChange={(e) => handleInputChange('name', e.target.value)}
                                     placeholder="Enter your name"
+                                    required
                                 />
 
                                 <Input
@@ -62,6 +69,7 @@ export default function ContactUs() {
                                     value={formData.email}
                                     onChange={(e) => handleInputChange('email', e.target.value)}
                                     placeholder="Enter your email"
+                                    required
                                 />
 
                                 <Dropdown
@@ -70,6 +78,7 @@ export default function ContactUs() {
                                     value={formData.areaOfInterest}
                                     onChange={(value) => handleInputChange('areaOfInterest', value)}
                                     placeholder="Select an area of interest"
+                                    required
                                 />
 
                                 <Textarea
@@ -78,6 +87,7 @@ export default function ContactUs() {
                                     onChange={(e) => handleInputChange('message', e.target.value)}
                                     minHeight="120px"
                                     placeholder="Enter your message"
+                                    required
                                 />
 
                                 <Button
@@ -112,7 +122,6 @@ export default function ContactUs() {
                             <MovingBorderContainer
                                 borderRadius="1rem"
                                 duration={24000}
-                                blobClassName="h-20 w-20 bg-gray-dark-6 opacity-90"
                                 innerClassName="bg-gray-dark-2 p-6"
                             >
                                 <div className="flex items-center justify-between gap-4">
@@ -137,7 +146,6 @@ export default function ContactUs() {
                             <MovingBorderContainer
                                 borderRadius="1rem"
                                 duration={28000}
-                                blobClassName="h-20 w-20 bg-gray-dark-6 opacity-90"
                                 innerClassName="bg-gray-dark-2 p-6 flex flex-col gap-3"
                             >
                                 <div className="flex items-center gap-3">
@@ -152,7 +160,6 @@ export default function ContactUs() {
                             <MovingBorderContainer
                                 borderRadius="1rem"
                                 duration={32000}
-                                blobClassName="h-20 w-20 bg-gray-dark-6 opacity-90"
                                 innerClassName="bg-gray-dark-2 p-6 flex flex-col gap-3"
                             >
                                 <div className="flex items-center gap-3">
