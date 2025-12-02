@@ -72,7 +72,7 @@ export default function InnovativeSolutions() {
         <div className="w-full flex flex-col py-12 gap-6 sm:gap-8">
           <Heading
             variant="h4"
-            as="h2"
+            as="h3"
             align="left"
             className="text-gray-light-1"
             subtitle="Our expert team builds custom, fully integrated websites that drive engagement and growth. 
@@ -84,31 +84,15 @@ export default function InnovativeSolutions() {
           />
 
           {/* Web Application Screenshot Placeholder */}
-          <div className="relative w-7xl h-182 overflow-hidden">
+          <div className="relative w-7xl h-182 rounded-3xl overflow-hidden">
             <div className="absolute z-20 w-7xl h-182 rounded-3xl overflow-hidden bg-linear-to-b from-[#000000]/0 to-[#08090A]"></div>
             <Image src="/innovative-solutions/bg-style-left.png" alt="Background Style" width={1000} height={1000} className="object-cover w-full h-full opacity-10" />
             <div className="w-full h-full overflow-hidden -top-[.33px]">
-              <div 
-                  className="absolute z-13 w-50 h-107 top-76 left-259 -rotate-z-10"
-                >
-                  <Image src="/innovative-solutions/IS-3.png" alt="Web Application Screenshot" width={200} height={428} className="object-cover" />
-              </div>
-              <div 
-                  className="absolute z-14 w-38 h-87 top-18 left-267 -rotate-z-10"
-                >
-                  <Image src="/innovative-solutions/IS-4.png" alt="Web Application Screenshot" width={152} height={350} className="object-cover" />
-              </div>
+              <Image src="/innovative-solutions/IS-3.png" alt="Web Application Screenshot" width={200} height={428} className="absolute z-13 w-50 h-107 top-76 left-259 object-cover" style={{ transform: 'matrix(0.98, -0.17, 0.5, 0.87, 0, 0)' }} />
+              <Image src="/innovative-solutions/IS-4.png" alt="Web Application Screenshot" width={152} height={350} className="absolute z-14 w-38 h-87 top-18 left-267 object-cover" style={{ transform: 'matrix(0.98, -0.17, 0.5, 0.87, 0, 0)' }} />
               <div className="absolute z-12 w-339 h-full top-[.33px]">
-                <div 
-                  className="absolute z-10 w-185 h-150 top-6 -left-5 -rotate-z-10"
-                >
-                  <Image src="/innovative-solutions/IS-1.png" alt="Web Application Screenshot" width={740} height={602} className="object-cover" />
-                </div>
-                <div 
-                  className="absolute z-11 w-185 h-138 top-37 left-94 -rotate-z-10"
-                >
-                  <Image src="/innovative-solutions/IS-2.png" alt="Web Application Screenshot" width={740} height={553} className="object-cover" />
-                </div>
+                <Image src="/innovative-solutions/IS-1.png" alt="Web Application Screenshot" width={740} height={602} className="absolute z-10 w-185 h-150 top-6 -left-5 object-cover" style={{ transform: 'matrix(0.98, -0.17, 0.5, 0.87, 0, 0)' }} />
+                <Image src="/innovative-solutions/IS-2.png" alt="Web Application Screenshot" width={740} height={553} className="absolute z-11 w-185 h-138 top-37 left-94 object-cover" style={{ transform: 'matrix(0.98, -0.17, 0.5, 0.87, 0, 0)' }} />
               </div>
             </div>
           </div>
@@ -130,7 +114,7 @@ export default function InnovativeSolutions() {
             <div className="flex flex-col gap-4 sm:gap-6">
               <Heading
                 variant="h4"
-                as="h2"
+                as="h3"
                 align="left"
                 className="text-gray-light-1"
                 subtitle="Bring your ideas to life with rapid prototyping and MVP development powered by AI and no-code tools. Save time and costs with automation, seamless database integrations, and scalable solutions – all with zero code required."
@@ -200,9 +184,8 @@ export default function InnovativeSolutions() {
             <div className="flex flex-col gap-4 sm:gap-6 pr-20">
               <Heading
                 variant="h4"
-                as="h2"
+                as="h3"
                 align="left"
-                weight="bold"
                 className="text-gray-light-1"
                 subtitle="Bring your mobile app ideas to life with our cross-platform development expertise. From design to deployment, we ensure your app is intuitive, scalable, and optimized for both iOS and Android devices."
                 subtitleAs="p"
