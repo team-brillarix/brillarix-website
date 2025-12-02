@@ -64,27 +64,25 @@ export default function InnovativeSolutions() {
       title="Innovative Solutions Tailored to Your Needs"
       subtitle="Empowering Your Business with AI, No-Code, and Full-Stack Development."
       headingVariant="h2"
-      headingWeight="bold"
       headingAlign="center"
       className="bg-background"
     >
       <div className="w-full flex flex-col">
         {/* End-to-End Full-Stack Development Section */}
         <div className="w-full flex flex-col py-12 gap-6 sm:gap-8">
-            <Heading
-              variant="h4"
-              as="h2"
-              align="left"
-              weight="bold"
-              className="text-gray-light-1"
-              subtitle="Our expert team builds custom, fully integrated websites that drive engagement and growth. 
+          <Heading
+            variant="h4"
+            as="h2"
+            align="left"
+            className="text-gray-light-1"
+            subtitle="Our expert team builds custom, fully integrated websites that drive engagement and growth. 
               Whether it's e-commerce, SaaS, or custom solutions, we ensure your site is optimized for 
               performance, security, and scalability."
-              subtitleAs='p'
-              subtitleClassName="text-base sm:text-lg text-gray-light-5 font-normal leading-relaxed max-w-4xl"
-              children="End-to-End Full-Stack Development"
-            />
-          
+            subtitleAs='p'
+            subtitleClassName="text-base sm:text-lg text-gray-light-5 font-normal leading-relaxed max-w-4xl"
+            children="End-to-End Full-Stack Development"
+          />
+
           {/* Web Application Screenshot Placeholder */}
           <div className="relative w-7xl h-182 overflow-hidden">
             <div className="absolute z-20 w-7xl h-182 rounded-3xl overflow-hidden bg-linear-to-b from-[#000000]/0 to-[#08090A]"></div>
@@ -134,7 +132,6 @@ export default function InnovativeSolutions() {
                 variant="h4"
                 as="h2"
                 align="left"
-                weight="bold"
                 className="text-gray-light-1"
                 subtitle="Bring your ideas to life with rapid prototyping and MVP development powered by AI and no-code tools. Save time and costs with automation, seamless database integrations, and scalable solutions – all with zero code required."
                 subtitleAs="p"
@@ -143,7 +140,7 @@ export default function InnovativeSolutions() {
                 Build Faster with AI-Powered No-Code Solutions
               </Heading>
             </div>
-            
+
             {/* Feature Buttons Grid */}
             <div className="relative grid grid-cols-2 grid-rows-3 gap-x-17 gap-y-13 p-10 rounded-3xl h-76 w-2xl overflow-hidden gap-4">
               {/* Background image with rounded corners clipped by parent */}
@@ -187,7 +184,7 @@ export default function InnovativeSolutions() {
                 );
               })}
             </div>
-            
+
             <Button
               variant="primary"
               href="/get-quote"
@@ -214,7 +211,7 @@ export default function InnovativeSolutions() {
                 Cross-Platform Mobile Apps That Scale
               </Heading>
             </div>
-            
+
             {/* Mobile App Screenshot */}
             <div className="relative w-2xl h-76 rounded-3xl overflow-hidden lg:mx-0">
               {/* Background pattern behind the phone */}
@@ -245,7 +242,7 @@ export default function InnovativeSolutions() {
                 </div>
               </div>
             </div>
-            
+
             <Button
               variant="primary"
               href="/get-quote"

@@ -72,7 +72,6 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                 <Heading
                     variant="h1"
                     align="left"
-                    weight="bold"
                     className="mb-4"
                 >
                     {project.title}

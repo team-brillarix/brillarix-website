@@ -43,46 +43,46 @@ export default function Hero() {
           <div className="flex flex-col items-center justify-center w-full gap-12">
             {/* cards */}
             <div className="grid grid-cols-1 lg:grid-cols-3 px-15 sm:px-25 md:px-35 gap-5">
-            <div className="flex flex-col gap-5 h-full">
-              <div className="flex flex-col bg-gray-dark-1/70 rounded-3xl h-120 p-1 border border-gray-dark-3 gap-2">
-                <div className="flex flex-col h-118 p-6 rounded-3xl gap-4 surface-gradient-with-noise relative">
-                  <div className="flex flex-row gap-4 items-center justify-start relative z-10">
-                    <div className="flex w-17.5 h-17.5 items-center justify-center rounded-full border border-gray-light-6 bg-background">
-                      <FiZap size={20} color="gray-light-1" />
-                    </div>
-                    <div className="flex flex-col gap-2 w-50">
-                      <Heading
-                        variant="h6"
-                        as="h3"
-                        align="left"
-                        weight="semibold"
-                        scale="compact"
-                        className="text-gray-light-1 font-medium"
-                        children="AI + No-Code Prototyping"
-                        subtitle="Build, test, and iterate at lightning speed with AI-powered no-code solutions."
-                        subtitleAs="p"
-                        subtitleClassName="text-xs font-normal text-gray-light-5"
-                      />
-                    </div>
-                  </div>
-                  <div className="relative w-full flex-1 min-h-0 overflow-hidden">
-                    <div className="grid grid-cols-7 grid-rows-6 gap-0 w-full h-full">
-                      {Array.from({ length: 42 }).map((_, index) => (
-                        <div
-                          key={index}
-                          className="border border-gray-dark-2"
+              <div className="flex flex-col gap-5 h-full">
+                <div className="flex flex-col bg-gray-dark-1/70 rounded-3xl h-120 p-1 border border-gray-dark-3 gap-2">
+                  <div className="flex flex-col h-118 p-6 rounded-3xl gap-4 surface-gradient-with-noise relative">
+                    <div className="flex flex-row gap-4 items-center justify-start relative z-10">
+                      <div className="flex w-17.5 h-17.5 items-center justify-center rounded-full border border-gray-light-6 bg-background">
+                        <FiZap size={20} color="gray-light-1" />
+                      </div>
+                      <div className="flex flex-col gap-2 w-50">
+                        <Heading
+                          variant="h6"
+                          as="h3"
+                          align="left"
+                          weight="semibold"
+                          scale="compact"
+                          className="text-gray-light-1 font-medium"
+                          children="AI + No-Code Prototyping"
+                          subtitle="Build, test, and iterate at lightning speed with AI-powered no-code solutions."
+                          subtitleAs="p"
+                          subtitleClassName="text-xs font-normal text-gray-light-5"
                         />
-                      ))}
+                      </div>
                     </div>
-                    
-                    <div className="absolute inset-0 pointer-events-none">
-                      <svg 
-                        className="absolute inset-0 w-full h-full z-10 pointer-events-none" 
-                        viewBox="0 0 100 100"
-                        preserveAspectRatio="none"
-                        style={{ overflow: 'visible' }}
+                    <div className="relative w-full flex-1 min-h-0 overflow-hidden">
+                      <div className="grid grid-cols-7 grid-rows-6 gap-0 w-full h-full">
+                        {Array.from({ length: 42 }).map((_, index) => (
+                          <div
+                            key={index}
+                            className="border border-gray-dark-2"
+                          />
+                        ))}
+                      </div>
+
+                      <div className="absolute inset-0 pointer-events-none">
+                        <svg
+                          className="absolute inset-0 w-full h-full z-10 pointer-events-none"
+                          viewBox="0 0 100 100"
+                          preserveAspectRatio="none"
+                          style={{ overflow: 'visible' }}
                         >
-                        <defs>
+                          <defs>
                             <style>{`
                             .connection-line {
                                 stroke: rgba(255, 255, 255, 0.3);
@@ -97,189 +97,187 @@ export default function Hero() {
                                 filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.8));
                             }
                             `}</style>
-                        </defs>
-                        {/* Base connection lines */}
-                        <path
+                          </defs>
+                          {/* Base connection lines */}
+                          <path
                             className="connection-line"
                             d="M 15 22 V 38 Q 15 48 25 48 H 46"
-                        />
-                        <path
+                          />
+                          <path
                             className="connection-line"
                             d="M 50 50 V 72 Q 50 82 60 82 H 80"
-                        />
-                        {/* Animated bright segments */}
-                        {activeSegment === 'first' && (
+                          />
+                          {/* Animated bright segments */}
+                          {activeSegment === 'first' && (
                             <motion.path
-                                key="first-segment"
-                                className="animated-segment"
-                                d="M 15 22 V 38 Q 15 48 25 48 H 46"
-                                strokeDasharray="5 10000"
-                                initial={{ strokeDashoffset: 0 }}
-                                animate={{ strokeDashoffset: -50 }}
-                                transition={{
-                                    duration: 2.5,
-                                    ease: "linear"
-                                }}
-                                onAnimationComplete={() => setActiveSegment('second')}
+                              key="first-segment"
+                              className="animated-segment"
+                              d="M 15 22 V 38 Q 15 48 25 48 H 46"
+                              strokeDasharray="5 10000"
+                              initial={{ strokeDashoffset: 0 }}
+                              animate={{ strokeDashoffset: -50 }}
+                              transition={{
+                                duration: 2.5,
+                                ease: "linear"
+                              }}
+                              onAnimationComplete={() => setActiveSegment('second')}
                             />
-                        )}
-                        {activeSegment === 'second' && (
+                          )}
+                          {activeSegment === 'second' && (
                             <motion.path
-                                key="second-segment"
-                                className="animated-segment"
-                                d="M 50 55 V 72 Q 50 82 60 82 H 80"
-                                strokeDasharray="5 10000"
-                                initial={{ strokeDashoffset: 0 }}
-                                animate={{ strokeDashoffset: -50 }}
-                                transition={{
-                                    duration: 2.5,
-                                    ease: "linear"
-                                }}
-                                onAnimationComplete={() => setActiveSegment('first')}
+                              key="second-segment"
+                              className="animated-segment"
+                              d="M 50 55 V 72 Q 50 82 60 82 H 80"
+                              strokeDasharray="5 10000"
+                              initial={{ strokeDashoffset: 0 }}
+                              animate={{ strokeDashoffset: -50 }}
+                              transition={{
+                                duration: 2.5,
+                                ease: "linear"
+                              }}
+                              onAnimationComplete={() => setActiveSegment('first')}
                             />
-                        )}
-                      </svg>
-                      
-                      <div className="absolute top-[7%] left-[7%] z-20 pointer-events-auto">
-                        <Image
-                          src="/hero-icons/Bulb.svg"
-                          alt="Bulb"
-                          width={48}
-                          height={48}
-                          className="object-contain transition-all duration-300 hover:scale-125 icon-hover"
-                        />
-                      </div>
-                      
-                      <div className="absolute border border-gray-dark-2 flex items-center justify-center rounded-full h-22 w-22 top-[5%] right-[3%] z-20">
-                        <div className="absolute border border-gray-dark-4 flex items-center justify-center rounded-full h-19 w-19">
-                          <div className="absolute border border-gray-dark-4 flex items-center justify-center rounded-full h-16 w-16">
-                            <div className="absolute border bg-gray-dark-3 h-12 w-12 flex items-center justify-center rounded-full">
-                              <Image
-                                src="/hero-icons/Speedtest.svg"
-                                alt="Speedtest"
-                                width={22}
-                                height={19}
-                                className="object-contain"
-                              />
+                          )}
+                        </svg>
+
+                        <div className="absolute top-[7%] left-[7%] z-20 pointer-events-auto">
+                          <Image
+                            src="/hero-icons/Bulb.svg"
+                            alt="Bulb"
+                            width={48}
+                            height={48}
+                            className="object-contain transition-all duration-300 hover:scale-125 icon-hover"
+                          />
+                        </div>
+
+                        <div className="absolute border border-gray-dark-2 flex items-center justify-center rounded-full h-22 w-22 top-[5%] right-[3%] z-20">
+                          <div className="absolute border border-gray-dark-4 flex items-center justify-center rounded-full h-19 w-19">
+                            <div className="absolute border border-gray-dark-4 flex items-center justify-center rounded-full h-16 w-16">
+                              <div className="absolute border bg-gray-dark-3 h-12 w-12 flex items-center justify-center rounded-full">
+                                <Image
+                                  src="/hero-icons/Speedtest.svg"
+                                  alt="Speedtest"
+                                  width={22}
+                                  height={19}
+                                  className="object-contain"
+                                />
+                              </div>
                             </div>
                           </div>
                         </div>
-                      </div>
-                      
-                      <div className="group absolute flex items-center justify-center top-1/2 bg-gray-dark-2 rounded-lg h-12 w-12 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 pointer-events-auto hover:bg-gray-dark-5">
-                        <Image
-                          src="/hero-icons/Arcticons.svg"
-                          alt="Arcticons"
-                          width={30}
-                          height={16}
-                          className="object-contain transition-all duration-300 group-hover:scale-125 hover:scale-125 icon-hover"
-                        />
-                      </div>
-                      
-                      <div className="absolute bottom-[7%] right-[5%] z-20 pointer-events-auto">
-                        <Image
-                          src="/hero-icons/Developer.svg"
-                          alt="Developer"
-                          width={56}
-                          height={56}
-                          className="object-contain transition-all duration-300 hover:scale-125 icon-hover"
-                        />
+
+                        <div className="group absolute flex items-center justify-center top-1/2 bg-gray-dark-2 rounded-lg h-12 w-12 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 pointer-events-auto hover:bg-gray-dark-5">
+                          <Image
+                            src="/hero-icons/Arcticons.svg"
+                            alt="Arcticons"
+                            width={30}
+                            height={16}
+                            className="object-contain transition-all duration-300 group-hover:scale-125 hover:scale-125 icon-hover"
+                          />
+                        </div>
+
+                        <div className="absolute bottom-[7%] right-[5%] z-20 pointer-events-auto">
+                          <Image
+                            src="/hero-icons/Developer.svg"
+                            alt="Developer"
+                            width={56}
+                            height={56}
+                            className="object-contain transition-all duration-300 hover:scale-125 icon-hover"
+                          />
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
+                <div className="flex flex-row text-xs items-center justify-start font-normal text-gray-light-1 gap-4 rounded-3xl bg-gray-dark-2 p-6 surface-gradient-with-noise relative">
+                  <DotIcon />
+                  <p>
+                    Get your product to market faster, without the traditional delays.
+                  </p>
+                </div>
               </div>
-              <div className="flex flex-row text-xs items-center justify-start font-normal text-gray-light-1 gap-4 rounded-3xl bg-gray-dark-2 p-6 surface-gradient-with-noise relative">
-                <DotIcon />
-                <p>
-                  Get your product to market faster, without the traditional delays.
-                </p>
-              </div>
-            </div>
-            <div className="flex flex-col gap-5 h-full">
-              <div className="flex flex-col bg-gray-dark-1/70 rounded-3xl h-145 p-1 border border-gray-dark-3 gap-2">
-                <div className="flex flex-col justify-between p-6 rounded-3xl gap-4 h-143 surface-gradient-with-noise relative">
-                  <div className="flex flex-row gap-4 items-center justify-start relative z-10">
-                    <div className="flex w-17.5 h-17.5 items-center justify-center rounded-full border border-gray-light-6 bg-background">
-                      <FiLayers size={20} color="gray-light-1" />
+              <div className="flex flex-col gap-5 h-full">
+                <div className="flex flex-col bg-gray-dark-1/70 rounded-3xl h-145 p-1 border border-gray-dark-3 gap-2">
+                  <div className="flex flex-col justify-between p-6 rounded-3xl gap-4 h-143 surface-gradient-with-noise relative">
+                    <div className="flex flex-row gap-4 items-center justify-start relative z-10">
+                      <div className="flex w-17.5 h-17.5 items-center justify-center rounded-full border border-gray-light-6 bg-background">
+                        <FiLayers size={20} color="gray-light-1" />
+                      </div>
+                      <div className="flex flex-col gap-2 w-50">
+                        <Heading
+                          variant="h6"
+                          as="h3"
+                          align="left"
+                          weight="semibold"
+                          scale="compact"
+                          className="text-gray-light-1 font-medium text-base"
+                          children="Full-Stack Development"
+                          subtitle="Seamless integration across front-end and back-end, built to scale."
+                          subtitleAs="p"
+                          subtitleClassName="text-xs font-normal text-gray-light-5"
+                        />
+                      </div>
                     </div>
-                    <div className="flex flex-col gap-2 w-50">
-                      <Heading
-                        variant="h6"
-                        as="h3"
-                        align="left"
-                        weight="semibold"
-                        scale="compact"
-                        className="text-gray-light-1 font-medium text-base"
-                        children="Full-Stack Development"
-                        subtitle="Seamless integration across front-end and back-end, built to scale."
-                        subtitleAs="p"
-                        subtitleClassName="text-xs font-normal text-gray-light-5"
-                      />
+                    <Image
+                      src="/hero-icons/full-stack-development.webp"
+                      alt="Full Stack Development Animation"
+                      width={250}
+                      height={250}
+                      className="w-full rounded-2xl object-contain"
+                      priority
+                    />
+                    <div className="flex flex-row text-xs items-center justify-start font-normal text-gray-light-1 gap-4 rounded-3xl bg-gray-dark-2 p-6 relative shadow-[0_4px_4px_0_rgba(0,0,0,0.05)]">
+                      <DotIcon />
+                      <p>
+                        Custom solutions that grow with your business.
+                      </p>
                     </div>
-                  </div>
-                  <Image 
-                    src="/hero-icons/full-stack-development.gif" 
-                    alt="Full Stack Development Animation" 
-                    width={250}
-                    height={250}
-                    className="w-full rounded-2xl object-contain"
-                    priority
-                    unoptimized
-                  />
-                  <div className="flex flex-row text-xs items-center justify-start font-normal text-gray-light-1 gap-4 rounded-3xl bg-gray-dark-2 p-6 relative shadow-[0_4px_4px_0_rgba(0,0,0,0.05)]">
-                    <DotIcon />
-                    <p>
-                      Custom solutions that grow with your business.
-                    </p>
                   </div>
                 </div>
               </div>
-            </div>
-            <div className="flex flex-col gap-5 h-full">
-              <div className="flex flex-row text-xs items-center justify-start font-normal text-gray-light-1 gap-4 rounded-3xl bg-gray-dark-2 p-6 surface-gradient-with-noise relative">
-                <DotIcon />
-                <p>
-                  Brand and product consulting that aligns with your business goals.
-                </p>
-              </div>
-              <div className="flex flex-col bg-gray-dark-1/70 rounded-3xl h-120 p-1 border border-gray-dark-3 gap-2">
-                <div className="flex flex-col bg-[#020202] h-118 p-6 rounded-3xl gap-4">
-                  <div className="flex flex-row gap-4 items-center justify-start">
-                    <div className="flex w-17.5 h-17.5 items-center justify-center rounded-full border border-gray-light-6 bg-background">
-                      <Image src="/hero-icons/Target.svg" alt="Target" width={20} height={20} />
+              <div className="flex flex-col gap-5 h-full">
+                <div className="flex flex-row text-xs items-center justify-start font-normal text-gray-light-1 gap-4 rounded-3xl bg-gray-dark-2 p-6 surface-gradient-with-noise relative">
+                  <DotIcon />
+                  <p>
+                    Brand and product consulting that aligns with your business goals.
+                  </p>
+                </div>
+                <div className="flex flex-col bg-gray-dark-1/70 rounded-3xl h-120 p-1 border border-gray-dark-3 gap-2">
+                  <div className="flex flex-col bg-[#020202] h-118 p-6 rounded-3xl gap-4">
+                    <div className="flex flex-row gap-4 items-center justify-start">
+                      <div className="flex w-17.5 h-17.5 items-center justify-center rounded-full border border-gray-light-6 bg-background">
+                        <Image src="/hero-icons/Target.svg" alt="Target" width={20} height={20} />
+                      </div>
+                      <div className="flex flex-col gap-2 w-50">
+                        <Heading
+                          variant="h6"
+                          as="h3"
+                          align="left"
+                          weight="semibold"
+                          scale="compact"
+                          className="text-gray-light-1 font-medium text-base"
+                          children="Strategy-Driven Consulting"
+                          subtitle="Position your product for long-term success with a strategy that works."
+                          subtitleAs="p"
+                          subtitleClassName="text-xs font-normal text-gray-light-5"
+                        />
+                      </div>
                     </div>
-                    <div className="flex flex-col gap-2 w-50">
-                      <Heading
-                        variant="h6"
-                        as="h3"
-                        align="left"
-                        weight="semibold"
-                        scale="compact"
-                        className="text-gray-light-1 font-medium text-base"
-                        children="Strategy-Driven Consulting"
-                        subtitle="Position your product for long-term success with a strategy that works."
-                        subtitleAs="p"
-                        subtitleClassName="text-xs font-normal text-gray-light-5"
-                      />
-                    </div>
+                    <Image
+                      src="/hero-icons/strategy-driven-consulting.webp"
+                      alt="Strategy Driven Consulting Animation"
+                      width={250}
+                      height={250}
+                      className="w-full rounded-2xl object-contain"
+                      priority
+                    />
                   </div>
-                  <Image 
-                    src="/hero-icons/strategy-driven-consulting.gif" 
-                    alt="Strategy Driven Consulting Animation" 
-                    width={250} 
-                    height={250}
-                    className="w-full rounded-2xl object-contain"
-                    priority
-                    unoptimized
-                  />
                 </div>
               </div>
             </div>
           </div>
         </div>
-        </div>
-        
+
         <div className="flex flex-col items-center gap-6 sm:gap-10 md:gap-12 bg-background z-10 w-full">
           <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6">
             <Button
