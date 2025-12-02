@@ -25,7 +25,7 @@ export function ProcessStep({ step }: ProcessStepProps) {
 
     return (
         <div className="flex flex-col md:flex-row items-center gap-4 md:gap-6 lg:gap-8 w-full min-h-56">
-            <div className="shrink-0 bg-gray-dark-1 self-stretch flex flex-col items-center justify-center gap-1 py-2 px-6">
+            <div className="shrink-0 bg-gray-dark-1 self-stretch flex flex-col items-center justify-center gap-1 py-2 px-6 -m-px">
                 <p className="text-gray-light-3 text-xs">Time Saved</p>
                 <p className="text-base md:text-lg lg:text-xl font-semibold text-gray-light-1">
                     {step.timeSaved}
