@@ -53,7 +53,8 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist);
+  /* Use Rubik as the default sans font (body text) */
+  --font-sans: var(--font-rubik);
   /* Gray - dark */
   --color-gray-dark-1: var(--gray-dark-1);
   --color-gray-dark-2: var(--gray-dark-2);
@@ -125,7 +126,19 @@ html {
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-geist), sans-serif;
+  /* Rubik for body text */
+  font-family: var(--font-rubik), system-ui, sans-serif;
+  overflow-x: hidden;
+}
+
+/* Space Grotesk for all headings */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-space-grotesk), system-ui, sans-serif;
 }
 
 /* Hexagon grid background used on the home page wrapper */

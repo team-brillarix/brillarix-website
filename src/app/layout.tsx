@@ -1,12 +1,19 @@
 import type { Metadata } from "next";
-import { Geist } from "next/font/google";
+import { Space_Grotesk, Rubik } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
-const geist = Geist({
-  variable: "--font-geist",
+const spaceGrotesk = Space_Grotesk({
+  variable: "--font-space-grotesk",
   subsets: ["latin"],
+  display: "swap",
+});
+
+const rubik = Rubik({
+  variable: "--font-rubik",
+  subsets: ["latin"],
+  display: "swap",
 });
 
 const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://brillarix.com";
@@ -206,7 +213,7 @@ export default function RootLayout({
         <link rel="canonical" href={baseUrl} />
       </head>
       <body
-        className={`${geist.variable} antialiased`}
+        className={`${spaceGrotesk.variable} ${rubik.variable} antialiased`}
       >
         <div className="w-full max-w-[1440px] mx-auto flex flex-col min-h-screen">
           <Header />
