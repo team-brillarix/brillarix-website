@@ -49,6 +49,7 @@ export interface HeadingProps extends React.HTMLAttributes<HTMLHeadingElement> {
     subtitle?: React.ReactNode;
     subtitleAs?: SubtitleTag;
     subtitleClassName?: string;
+    fullWidth?: boolean;
 }
 
 export const Heading = forwardRef<HTMLHeadingElement, HeadingProps>(function Heading(
@@ -64,6 +65,7 @@ export const Heading = forwardRef<HTMLHeadingElement, HeadingProps>(function Hea
         subtitle,
         subtitleAs = 'p',
         subtitleClassName = '',
+        fullWidth = false,
         ...rest
     },
     ref
@@ -83,7 +85,7 @@ export const Heading = forwardRef<HTMLHeadingElement, HeadingProps>(function Hea
     ].join(' ');
 
     return (
-        <header className={alignClass[align]}>
+        <header className={`${fullWidth ? 'w-full' : ''} ${alignClass[align]}`}>
             {eyebrow ? (
                 <div className="mb-2 text-xs uppercase tracking-[0.12em] text-gray-light-1">{eyebrow}</div>
             ) : null}

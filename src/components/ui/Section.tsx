@@ -8,6 +8,7 @@ interface SectionProps {
   headingVariant?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
   headingWeight?: 'regular' | 'medium' | 'semibold' | 'bold' | 'extrabold';
   headingAlign?: 'left' | 'center' | 'right';
+  headingFullWidth?: boolean;
   className?: string;
   contentClassName?: string;
 }
@@ -19,6 +20,7 @@ export function Section({
   headingVariant = 'h2',
   headingWeight = 'bold',
   headingAlign = 'center',
+  headingFullWidth = false,
   className = '',
   contentClassName = '',
 }: SectionProps) {
@@ -30,6 +32,7 @@ export function Section({
           align={headingAlign}
           weight={headingWeight}
           subtitle={subtitle}
+          fullWidth={headingFullWidth}
         >
           {title}
         </Heading>

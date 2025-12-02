@@ -79,7 +79,7 @@ const variantStyles: Record<
       "w-fit rounded-lg gap-2",
       "bg-gray-dark-4",
       "text-gray-light-2",
-      "font-medium leading-5",
+      "font-medium",
       "inline-flex items-center justify-center",
       "cursor-pointer",
       "transition-all duration-300 ease-in-out",
@@ -127,7 +127,7 @@ const variantStyles: Record<
       "w-fit rounded-lg gap-2",
       "bg-[#121212] [background-image:linear-gradient(180deg,rgba(81,81,81,0)_41.83%,rgba(81,81,81,0.2)_100%)]",
       "text-gray-light-3",
-      "font-medium leading-5",
+      "font-medium",
       "inline-flex items-center justify-center",
       "cursor-pointer",
       "transition-all duration-300 ease-in-out",
@@ -169,7 +169,7 @@ const variantStyles: Record<
       "w-full h-full rounded-lg gap-2",
       "bg-transparent",
       "text-gray-light-1",
-      "font-medium leading-5",
+      "font-medium",
       "inline-flex items-center justify-center",
       "cursor-pointer",
       "transition-all duration-300 ease-in-out",
@@ -276,6 +276,7 @@ export const Button = React.forwardRef<HTMLButtonElement | HTMLAnchorElement, Bu
                 sizeClass.height,
                 sizeClass.padding,
                 sizeClass.text,
+                "leading-none",
                 isDisabled && "pointer-events-none opacity-50",
                 className
               )}
@@ -302,6 +303,7 @@ export const Button = React.forwardRef<HTMLButtonElement | HTMLAnchorElement, Bu
                 sizeClass.height,
                 sizeClass.padding,
                 sizeClass.text,
+                "leading-none",
                 fullWidth && 'w-full',
                 className
               )}

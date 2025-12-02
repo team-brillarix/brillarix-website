@@ -32,25 +32,15 @@ export default function ContactUs() {
         }
         e.preventDefault();
         console.log('Form submitted:', formData);
-        // Here you can add API call or email service integration
     };
 
     return (
-        <Section>
+        <Section title="Contact us" subtitle="Have questions or need assistance? Our team is ready to support you with anything you need." headingAlign="left" headingFullWidth>
             <div className="w-full">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 lg:gap-16">
                     <div className="flex flex-col gap-6">
-                        <Heading
-                            variant="h2"
-                            as="h2"
-                            align="left"
-                            subtitle="Have questions or need assistance? Our team is ready to support you with anything you need."
-                        >
-                            Contact us
-                        </Heading>
-
                         <MovingBorderContainer
-                            borderRadius="1rem"
+                            borderRadius="1.5rem"
                             duration={20000}
                             innerClassName="bg-gray-dark-1 p-6 md:p-8 flex flex-col gap-6"
                         >
@@ -101,24 +91,25 @@ export default function ContactUs() {
                         </MovingBorderContainer>
                     </div>
 
-                    <div className="flex flex-col gap-6">
-                        <Heading
-                            variant="h3"
-                            as="h3"
-                            align="left"
-                            weight="bold"
-                        >
-                            What Can We Assist You With Today?
-                        </Heading>
+                    <div className="flex flex-col gap-6 justify-between">
+                        <div className="flex flex-col gap-4">
+                            <Heading
+                                variant="h5"
+                                as="h3"
+                                align="left"
+                            >
+                                What Can We Assist You With Today?
+                            </Heading>
 
-                        <ol className="flex flex-col gap-4 text-gray-light-1 text-base leading-relaxed list-decimal list-inside">
-                            <li>Need help exploring our offerings?</li>
-                            <li>Experiencing a technical problem or issue?</li>
-                            <li>Want to learn more about a specific service or feature?</li>
-                            <li>We value your feedback and suggestions to improve!</li>
-                        </ol>
+                            <ol className="flex flex-col gap-3 text-gray-light-5 leading-relaxed list-decimal list-inside">
+                                <li>Need help exploring our offerings?</li>
+                                <li>Experiencing a technical problem or issue?</li>
+                                <li>Want to learn more about a specific service or feature?</li>
+                                <li>We value your feedback and suggestions to improve!</li>
+                            </ol>
+                        </div>
 
-                        <div className="flex flex-col gap-4 mt-4">
+                        <div className="flex flex-col gap-6 lg:gap-8">
                             <MovingBorderContainer
                                 borderRadius="1rem"
                                 duration={24000}
@@ -143,33 +134,37 @@ export default function ContactUs() {
                                 </div>
                             </MovingBorderContainer>
 
-                            <MovingBorderContainer
-                                borderRadius="1rem"
-                                duration={28000}
-                                innerClassName="bg-gray-dark-2 p-6 flex flex-col gap-3"
-                            >
-                                <div className="flex items-center gap-3">
-                                    <FiPhone className="w-6 h-6 text-gray-light-1" />
-                                    <span className="text-gray-light-1 font-medium text-base">Phone</span>
-                                </div>
-                                <p className="text-gray-light-3 text-sm ml-9">
-                                    Office : 6232 1151 2211
-                                </p>
-                            </MovingBorderContainer>
+                            <div className="flex flex-row gap-6 lg:gap-8 w-full">
+                                <MovingBorderContainer
+                                    borderRadius="1rem"
+                                    duration={28000}
+                                    containerClassName="w-full"
+                                    innerClassName="bg-gray-dark-2 p-6 flex flex-col gap-3"
+                                >
+                                    <div className="flex items-center gap-3">
+                                        <FiPhone className="w-6 h-6 text-gray-light-1" />
+                                        <span className="text-gray-light-1 font-medium text-base">Phone</span>
+                                    </div>
+                                    <p className="text-gray-light-3 text-sm ml-9">
+                                        Office : 6232 1151 2211
+                                    </p>
+                                </MovingBorderContainer>
 
-                            <MovingBorderContainer
-                                borderRadius="1rem"
-                                duration={32000}
-                                innerClassName="bg-gray-dark-2 p-6 flex flex-col gap-3"
-                            >
-                                <div className="flex items-center gap-3">
-                                    <FiMail className="w-6 h-6 text-gray-light-1" />
-                                    <span className="text-gray-light-1 font-medium text-base">Email</span>
-                                </div>
-                                <p className="text-gray-light-3 text-sm ml-9">
-                                    contact@brillarix.com
-                                </p>
-                            </MovingBorderContainer>
+                                <MovingBorderContainer
+                                    borderRadius="1rem"
+                                    duration={32000}
+                                    containerClassName="w-full"
+                                    innerClassName="bg-gray-dark-2 p-6 flex flex-col gap-3"
+                                >
+                                    <div className="flex items-center gap-3">
+                                        <FiMail className="w-6 h-6 text-gray-light-1" />
+                                        <span className="text-gray-light-1 font-medium text-base">Email</span>
+                                    </div>
+                                    <p className="text-gray-light-3 text-sm ml-9">
+                                        contact@brillarix.com
+                                    </p>
+                                </MovingBorderContainer>
+                            </div>
                         </div>
                     </div>
                 </div>

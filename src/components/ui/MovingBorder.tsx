@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import {
     motion,
     useAnimationFrame,
@@ -86,8 +86,45 @@ export function MovingBorderContainer({
     innerClassName,
     children,
 }: MovingBorderContainerProps) {
+    const containerRef = useRef<HTMLDivElement>(null);
+    const [svgBorderRadius, setSvgBorderRadius] = useState<string>("30%");
+
+    useEffect(() => {
+        const updateBorderRadius = () => {
+            if (!containerRef.current) return;
+
+            const innerDiv = containerRef.current.querySelector('div[style*="border-radius"]') as HTMLElement;
+            if (!innerDiv) return;
+
+            const computedStyle = window.getComputedStyle(innerDiv);
+            const borderRadiusValue = computedStyle.borderRadius;
+            const match = borderRadiusValue.match(/(\d+\.?\d*)px/);
+            if (!match) return;
+
+            const pixels = parseFloat(match[1]);
+            const containerWidth = containerRef.current.offsetWidth;
+            const containerHeight = containerRef.current.offsetHeight;
+            const avgDimension = (containerWidth + containerHeight) / 2;
+            const percentage = (pixels / avgDimension) * 100;
+
+            setSvgBorderRadius(`${percentage}%`);
+        };
+
+        updateBorderRadius();
+
+        const resizeObserver = new ResizeObserver(updateBorderRadius);
+        if (containerRef.current) {
+            resizeObserver.observe(containerRef.current);
+        }
+
+        return () => {
+            resizeObserver.disconnect();
+        };
+    }, [borderRadius]);
+
     return (
         <div
+            ref={containerRef}
             className={cn(
                 "relative h-full overflow-hidden bg-gray-dark-3 p-px",
                 containerClassName,
@@ -98,7 +135,7 @@ export function MovingBorderContainer({
                 className="pointer-events-none absolute inset-0"
                 style={{ borderRadius: `calc(${borderRadius} * 0.96)` }}
             >
-                <MovingBorder duration={duration} rx="30%" ry="30%">
+                <MovingBorder duration={duration} rx={svgBorderRadius} ry={svgBorderRadius}>
                     <div className={blobClassName} />
                 </MovingBorder>
             </div>
@@ -182,5 +219,3 @@ export const MovingBorder = ({
         </>
     );
 };
-
-
