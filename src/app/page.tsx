@@ -5,6 +5,7 @@ import OurImpact from '@/components/OurImpact/OurImpact';
 import OurProcess from '@/components/OurProcess/OurProcess';
 import FAQ from '@/components/FAQ/FAQ';
 import InnovativeSolutions from '@/components/InnovativeSolutions';
+import Blogs from '@/components/Blogs/Blogs';
 
 export default function Home() {
   return (
@@ -16,6 +17,7 @@ export default function Home() {
       <TechStack />
       <OurProcess />
       <FAQ />
+      <Blogs />
     </div>
   );
 }
