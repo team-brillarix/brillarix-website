@@ -39,7 +39,7 @@ export const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
       label,
       error,
       helperText,
-      size = "md",
+      size = "lg",
       loading = false,
       minHeight,
       autoResize = false,

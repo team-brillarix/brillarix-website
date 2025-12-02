@@ -24,6 +24,7 @@ export interface ButtonProps
   href?: string;
   target?: string;
   rel?: string;
+  fullWidth?: boolean;
 }
 
 const sizeClasses: Record<ButtonSize, { height: string; padding: string; text: string }> = {
@@ -214,6 +215,7 @@ export const Button = React.forwardRef<HTMLButtonElement | HTMLAnchorElement, Bu
       href,
       target,
       rel,
+      fullWidth = false,
       "aria-label": ariaLabel,
       "aria-describedby": ariaDescribedBy,
       ...props
@@ -229,6 +231,9 @@ export const Button = React.forwardRef<HTMLButtonElement | HTMLAnchorElement, Bu
 
     const styles = variantStyles[variant];
     const sizeClass = sizeClasses[size];
+    const wrapperClassName = fullWidth
+      ? styles.wrapper.replace('w-fit', 'w-full').replace('inline-block', 'block')
+      : styles.wrapper;
 
     const content = (
       <>
@@ -250,7 +255,7 @@ export const Button = React.forwardRef<HTMLButtonElement | HTMLAnchorElement, Bu
 
     return (
       <div className="flex flex-col gap-1.5">
-        <span className={styles.wrapper}>
+        <span className={wrapperClassName}>
           {href ? (
             <Link
               ref={ref as React.ForwardedRef<HTMLAnchorElement>}
@@ -297,6 +302,7 @@ export const Button = React.forwardRef<HTMLButtonElement | HTMLAnchorElement, Bu
                 sizeClass.height,
                 sizeClass.padding,
                 sizeClass.text,
+                fullWidth && 'w-full',
                 className
               )}
               {...props}
