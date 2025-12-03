@@ -7,6 +7,7 @@ import FAQ from '@/components/FAQ/FAQ';
 import InnovativeSolutions from '@/components/InnovativeSolutions';
 import Blogs from '@/components/Blogs/Blogs';
 import ContactUs from '@/components/ContactUs';
+import TrustedByInnovators from '@/components/TrustedByInnovators/TrustedByInnovators';
 
 export default function Home() {
   return (
@@ -17,6 +18,7 @@ export default function Home() {
       <InnovativeSolutions />
       <TechStack />
       <OurProcess />
+      <TrustedByInnovators />
       <FAQ />
       <Blogs />
       <ContactUs />
