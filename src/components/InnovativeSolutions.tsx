@@ -8,130 +8,19 @@ import { Heading } from '@/components/ui/Heading';
 import { Button } from '@/components/ui/Button';
 import { FaAngleRight } from 'react-icons/fa';
 import Image from 'next/image';
+import {
+  sidebarItems,
+  noCodeFeatures,
+  animationSequence,
+  overlayVariants,
+  sidebarVariants,
+  imagePositionVariants,
+  imagePositionVariants2,
+  imagePositionVariants3,
+  imagePositionVariants4,
+} from '../constants/InnovativeSolutions.constants';
 
 export default function InnovativeSolutions() {
-  const sidebarItems = [
-    'Activity',
-    'Notepad',
-    'Lead Scoring',
-    'Recent Deals',
-    'Activity Updates',
-    'Deal Management',
-    'Task Management',
-    'Customer Contact Info',
-  ];
-
-  const noCodeFeatures = [
-    {
-      text: 'Rapid Prototyping & MVPs',
-      top: 'top-12.5',
-      left: 'left-9',
-    },
-    {
-      text: 'Scalable No-Code App Solutions',
-      top: 'top-12.5',
-      left: 'left-92',
-    },
-    {
-      text: 'AI-Driven Automation & Workflows',
-      top: 'top-34',
-      left: 'left-9',
-    },
-    {
-      text: 'Low-Code Deployment for Speed',
-      top: 'top-34',
-      left: 'left-92',
-    },
-    {
-      text: 'Seamless Database & Backend Integrations',
-      top: 'top-55',
-      left: 'left-9',
-    },
-    {
-      text: 'Custom AI Chatbots & Automations',
-      top: 'top-55',
-      left: 'left-92',
-    },
-  ];
-
-  const animationSequence = [2, 1, 5, 2];
-
-  const overlayVariants = {
-    hidden: { opacity: 0.7 },
-    visible: {
-      opacity: 0,
-      transition: { duration: 0.8 },
-    },
-  };
-
-  const sidebarVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { duration: 0.8 },
-    },
-  };
-
-  const imagePositionVariants = {
-    hidden: {
-      top: '19rem',
-      left: '64.75rem',
-    },
-    visible: {
-      top: '24rem',
-      left: '66.5rem',
-      transition: { 
-        duration: 0.8,
-        ease: 'easeOut' as const,
-      },
-    },
-  };
-
-  const imagePositionVariants2 = {
-    hidden: {
-      top: '4.5rem',
-      left: '66.75rem',
-    },
-    visible: {
-      top: '1.75rem',
-      left: '68.5rem',
-      transition: { 
-        duration: 0.8,
-        ease: 'easeOut' as const,
-      },
-    },
-  };
-
-  const imagePositionVariants3 = {
-    hidden: {
-      top: '1.5rem',
-      left: '-1.25rem',
-    },
-    visible: {
-      top: '-5rem',
-      left: '10rem',
-      transition: { 
-        duration: 0.8,
-        ease: 'easeOut' as const,
-      },
-    },
-  };
-
-  const imagePositionVariants4 = {
-    hidden: {
-      top: '9.25rem',
-      left: '23.5rem',
-    },
-    visible: {
-      top: '13.25rem',
-      left: '28.5rem',
-      transition: { 
-        duration: 0.8,
-        ease: 'easeOut' as const,
-      },
-    },
-  };
-
   const [activeFeatureIndex, setActiveFeatureIndex] = useState(animationSequence[0]);
   const [isParentInView, setIsParentInView] = useState(false);
 
@@ -274,7 +163,7 @@ export default function InnovativeSolutions() {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 z-0 border-y border-gray-dark-4">
-          <div className="flex flex-col gap-6 sm:gap-8 py-12 pr-12 hover:icon-hover border-t-diamond-gradient border-r-diamond-gradient">
+          <div className="flex flex-col gap-6 sm:gap-8 py-12 pr-12 hover:icon-hover border-t-diamond-gradient">
             <div className="flex flex-col gap-4 sm:gap-6">
               <Heading
                 variant="h4"
@@ -314,7 +203,7 @@ export default function InnovativeSolutions() {
                       <motion.div
                         layoutId="no-code-cursor"
                         className="pointer-events-none absolute top-5 -right-8 z-50"
-                        transition={{ type: 'spring', stiffness: 300, damping: 24 }}
+                        transition={{ type: 'spring', stiffness: 120, damping: 18 }}
                       >
                         <Image
                           src="/innovative-solutions/cursor-icon.svg"
@@ -341,7 +230,7 @@ export default function InnovativeSolutions() {
             </Button>
           </div>
 
-          <div className="flex flex-col gap-6 sm:gap-8 py-12 pl-12 border-b-diamond-gradient">
+          <div className="flex flex-col border-l-diamond-gradient gap-6 sm:gap-8 py-12 pl-12 border-b-diamond-gradient">
             <div className="flex flex-col gap-4 sm:gap-6 pr-20">
               <Heading
                 variant="h4"

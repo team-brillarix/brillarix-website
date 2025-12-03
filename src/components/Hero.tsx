@@ -28,6 +28,9 @@ export default function Hero() {
   return (
     <Section
       className="pt-5 sm:pt-10 md:pt-20 bg-background">
+      <div className="h-33 w-366 opacity-30 absolute top-0 left-0 bg-gray-light-9 origin-[717.457px_427.206px] rotate-[28.4742deg] blur-[73px] z-100">
+
+      </div>
       <div className="w-full flex flex-col items-center gap-6 sm:gap-10 md:gap-12">
         <div className="flex flex-col hero-hex-bg gap-15 -mx-[calc((100vw-100%)/2)] px-[calc((100vw-100%)/2)] -mt-[40px] sm:-mt-[60px] md:-mt-[100px] lg:-mt-[120px] pt-[40px] sm:pt-[60px] md:pt-[100px] lg:pt-[120px]">
           <Heading
@@ -293,15 +296,15 @@ export default function Hero() {
           </div>
 
           <div className="flex flex-col gap-12 w-206 items-center justify-center">
-            <div className="flex border-y w-full items-center justify-center border-gray-dark-3 py-2">
+            <div className="flex border-t-diamond-gradient border-b-diamond-gradient w-full items-center justify-center py-2">
               <p className="text-xs sm:text-sm text-gray-light-4 text-center max-w-2xl">
                 Trusted by innovators, startups, and enterprises to deliver scalable,
                 AI-powered solutions.
               </p>
             </div>
 
-            <div className="grid grid-cols-4 w-190 border-t border-gray-dark-3">
-              <div className="flex flex-col items-center gap-2 text-gray-light-4 border-r border-gray-dark-3 px-12 py-8 text-xs sm:text-sm">
+            <div className="grid grid-cols-4 w-190 border-t-diamond-gradient">
+              <div className="flex flex-col items-center gap-2 text-gray-light-4 border-r-diamond-gradient px-12 py-8 text-xs sm:text-sm">
                 <div className="h-25 w-25 rounded-full bg-gray-dark-1 border border-gray-dark-3 flex items-center justify-center overflow-hidden">
                   <Image
                     src="/hero-icons/Bubble.svg"
@@ -316,7 +319,7 @@ export default function Hero() {
                   <Image src="/hero-icons/Verified.svg" alt="Verified Tick" width={24} height={24} className="object-contain" />
                 </div>
               </div>
-              <div className="flex flex-col items-center gap-2 text-gray-light-4 border-r border-gray-dark-3 px-12 py-8 text-xs sm:text-sm">
+              <div className="flex flex-col items-center gap-2 text-gray-light-4 border-r-diamond-gradient px-12 py-8 text-xs sm:text-sm">
                 <div className="h-25 w-25 rounded-full bg-gray-dark-1 border border-gray-dark-3 flex items-center justify-center overflow-hidden">
                   <Heading variant="h5" weight="bold" children="50+" subtitle="Reviews" subtitleClassName="text-sm font-medium" />
                 </div>
@@ -326,7 +329,7 @@ export default function Hero() {
                   ))}
                 </div>
               </div>
-              <div className="flex flex-col items-center gap-2 text-gray-light-4 border-r border-gray-dark-3 px-12 py-8 text-xs sm:text-sm">
+              <div className="flex flex-col items-center gap-2 text-gray-light-4 border-r-diamond-gradient px-12 py-8 text-xs sm:text-sm">
                 <div className="h-25 w-25 rounded-full bg-gray-dark-1 border border-gray-dark-3 flex items-center justify-center overflow-hidden">
                   <Image
                     src="/hero-icons/Upwork.svg"
