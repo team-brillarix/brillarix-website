@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import "swiper/css";
 
 :root {
   /* Gray - dark */
@@ -285,8 +286,9 @@ h6 {
   }
 }
 
-/* Swiper pagination styles */
-.impact-swiper .swiper-pagination {
+/* Swiper */
+.impact-swiper .swiper-pagination,
+.blogs-swiper .swiper-pagination {
   position: relative !important;
   bottom: 0 !important;
   margin-top: 2rem !important;
@@ -295,7 +297,8 @@ h6 {
   gap: 4px;
 }
 
-.impact-swiper .swiper-pagination-bullet {
+.impact-swiper .swiper-pagination-bullet,
+.blogs-swiper .swiper-pagination-bullet {
   width: 10px;
   height: 10px;
   background: white;
@@ -303,19 +306,18 @@ h6 {
   transition: opacity 0.3s;
 }
 
-.impact-swiper .swiper-pagination-bullet-active {
+.impact-swiper .swiper-pagination-bullet-active,
+.blogs-swiper .swiper-pagination-bullet-active {
   background: white;
   opacity: 1;
 }
 
-/* Hero icon hover effect */
 .icon-hover {
   filter: none;
   transition: transform 0.3s ease, filter 0.3s ease;
 }
 
 .icon-hover:hover {
-  /* Convert to #D5D5D5 using filter - approximates the gray color */
   filter: brightness(0) saturate(100%) invert(84%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(100%) contrast(100%);
 }
 

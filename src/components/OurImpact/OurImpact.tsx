@@ -1,16 +1,11 @@
 "use client";
 
 import { useRef, useState } from 'react';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Autoplay, Pagination } from 'swiper/modules';
-import type { Swiper as SwiperType } from 'swiper';
+import { Swiper, SwiperSlide, Autoplay, Pagination, type SwiperType } from '@/lib/swiper';
 import { Section } from '@/components/ui/Section';
 import { impactProjects } from '@/constants/projects';
 import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 import { ImpactCard } from './ImpactCard';
-
-import 'swiper/css';
-import 'swiper/css/pagination';
 
 const buttonClassName = "absolute top-3/8 -translate-y-3/8 z-10 w-11 h-11 rounded-full bg-gray-dark-2 text-gray-light-1 flex items-center justify-center hover:bg-gray-dark-2 transition opacity-80 hover:opacity-100 cursor-pointer";
 

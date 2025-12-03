@@ -24,6 +24,7 @@ export interface ButtonProps
   href?: string;
   target?: string;
   rel?: string;
+  fullWidth?: boolean;
 }
 
 const sizeClasses: Record<ButtonSize, { height: string; padding: string; text: string }> = {
@@ -79,7 +80,7 @@ const variantStyles: Record<
       "w-fit rounded-lg gap-2",
       "bg-gray-dark-4",
       "text-gray-light-2",
-      "font-medium leading-5",
+      "font-medium",
       "inline-flex items-center justify-center",
       "cursor-pointer",
       "transition-all duration-300 ease-in-out",
@@ -127,7 +128,7 @@ const variantStyles: Record<
       "w-fit rounded-lg gap-2",
       "bg-[#121212] [background-image:linear-gradient(180deg,rgba(81,81,81,0)_41.83%,rgba(81,81,81,0.2)_100%)]",
       "text-gray-light-3",
-      "font-medium leading-5",
+      "font-medium",
       "inline-flex items-center justify-center",
       "cursor-pointer",
       "transition-all duration-300 ease-in-out",
@@ -169,7 +170,7 @@ const variantStyles: Record<
       "w-full h-full rounded-lg gap-2",
       "bg-transparent",
       "text-gray-light-1",
-      "font-medium leading-5",
+      "font-medium",
       "inline-flex items-center justify-center",
       "cursor-pointer",
       "transition-all duration-300 ease-in-out",
@@ -215,6 +216,7 @@ export const Button = React.forwardRef<HTMLButtonElement | HTMLAnchorElement, Bu
       href,
       target,
       rel,
+      fullWidth = false,
       "aria-label": ariaLabel,
       "aria-describedby": ariaDescribedBy,
       ...props
@@ -230,6 +232,9 @@ export const Button = React.forwardRef<HTMLButtonElement | HTMLAnchorElement, Bu
 
     const styles = variantStyles[variant];
     const sizeClass = sizeClasses[size];
+    const wrapperClassName = fullWidth
+      ? styles.wrapper.replace('w-fit', 'w-full').replace('inline-block', 'block')
+      : styles.wrapper;
 
     const content = (
       <>
@@ -251,7 +256,7 @@ export const Button = React.forwardRef<HTMLButtonElement | HTMLAnchorElement, Bu
 
     return (
       <div className="flex flex-col gap-1.5">
-        <span className={styles.wrapper}>
+        <span className={wrapperClassName}>
           {href ? (
             <Link
               ref={ref as React.ForwardedRef<HTMLAnchorElement>}
@@ -272,6 +277,7 @@ export const Button = React.forwardRef<HTMLButtonElement | HTMLAnchorElement, Bu
                 sizeClass.height,
                 sizeClass.padding,
                 sizeClass.text,
+                "leading-none",
                 isDisabled && "pointer-events-none opacity-50",
                 className
               )}
@@ -298,6 +304,8 @@ export const Button = React.forwardRef<HTMLButtonElement | HTMLAnchorElement, Bu
                 sizeClass.height,
                 sizeClass.padding,
                 sizeClass.text,
+                "leading-none",
+                fullWidth && 'w-full',
                 className
               )}
               {...props}
@@ -311,7 +319,7 @@ export const Button = React.forwardRef<HTMLButtonElement | HTMLAnchorElement, Bu
             id={errorId}
             role="alert"
             aria-live="polite"
-            className="text-xs font-medium text-red dark:text-red-light-03"
+            className="text-xs font-medium text-red"
           >
             {error}
           </span>
@@ -319,7 +327,7 @@ export const Button = React.forwardRef<HTMLButtonElement | HTMLAnchorElement, Bu
         {helperText && !error && (
           <span
             id={helperId}
-            className="text-xs text-gray-600 dark:text-gray-500"
+            className="text-xs text-gray-600"
           >
             {helperText}
           </span>

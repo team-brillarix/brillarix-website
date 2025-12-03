@@ -39,17 +39,17 @@ const sizeClasses: Record<
   sm: {
     dropdown: "h-8 px-3 text-sm",
     label: "text-xs",
-    icon: "h-3.5 w-3.5",
+    icon: "h-3 w-3",
   },
   md: {
     dropdown: "h-10 px-4 text-sm",
     label: "text-sm",
-    icon: "h-4 w-4",
+    icon: "h-3.5 w-3.5",
   },
   lg: {
     dropdown: "h-12 px-4 text-base",
     label: "text-sm",
-    icon: "h-5 w-5",
+    icon: "h-4 w-4",
   },
 };
 
@@ -142,15 +142,13 @@ export const Dropdown = React.forwardRef<HTMLDivElement, DropdownProps>(
     }, [focusedIndex]);
 
     return (
-      <div ref={ref} className="flex w-full flex-col gap-1">
+      <div ref={ref} className="flex w-full flex-col gap-2">
         {label && (
           <label
             htmlFor={finalId}
             className={cn(
               "font-medium text-white/40 leading-1.4 uppercase",
-              "peer-disabled:opacity-20",
               sizeClass.label,
-              required && "after:ml-0.5 after:text-red after:content-['*']",
               labelClassName
             )}
           >
@@ -175,22 +173,19 @@ export const Dropdown = React.forwardRef<HTMLDivElement, DropdownProps>(
             aria-label={ariaLabel || (label ? undefined : "Dropdown")}
             aria-required={required}
             className={cn(
-              "w-full rounded-xl py-3 px-4 font-medium transition-all duration-200",
-              "bg-white dark:bg-gray-dark-2",
-              "border border-white/8 dark:border-white/8",
+              "w-full rounded-xl py-3 px-4 font-normal transition-all duration-200",
+              "bg-transparent",
+              "border border-white/8",
               "leading-1.5",
-              selectedOption ? "text-white" : "text-gray-dark-7 dark:text-gray-light-7",
+              selectedOption ? "text-white" : "text-gray-dark-7",
               "focus:outline-none focus:border-gray-light-2",
+              "cursor-pointer",
               "disabled:opacity-50 disabled:cursor-not-allowed",
               "flex items-center justify-between",
               isMenuOpen && !error && "border-gray-light-2",
-              error
-                ? "border-red dark:border-red-light-03"
-                : undefined,
-              variant === "outline" ? "bg-transparent" : undefined,
-              variant === "filled"
-                ? "bg-gray-light-1 dark:bg-gray-dark-3 border-transparent focus:border-gray-light-2"
-                : undefined,
+              error && "border-red",
+              variant === "outline" && "bg-transparent",
+              variant === "filled" && "bg-gray-light-1 border-transparent focus:border-gray-light-2",
               sizeClass.dropdown,
               className
             )}
@@ -198,7 +193,7 @@ export const Dropdown = React.forwardRef<HTMLDivElement, DropdownProps>(
             <span>{displayValue}</span>
             <FaChevronDown
               className={cn(
-                "ml-2 text-gray-light-7 dark:text-gray-light-5 transition-transform duration-200",
+                "ml-2 text-gray-light-7 transition-transform duration-200",
                 isMenuOpen && "rotate-180",
                 sizeClass.icon
               )}
@@ -208,57 +203,64 @@ export const Dropdown = React.forwardRef<HTMLDivElement, DropdownProps>(
           {isMenuOpen && !disabled && (
             <div
               className={cn(
-                "w-full absolute z-50 mt-1 p-3 h-fit rounded-xl",
-                "bg-white dark:bg-background",
-                "border border-gray-light-2 dark:border-white/8",
+                "w-full absolute z-50 mt-2 p-3 rounded-xl",
+                "bg-background",
+                "border border-gray-dark-4"
               )}
               role="listbox"
             >
               {options.map((option, index) => (
-                <button
-                  key={option.value}
-                  ref={(el) => {
-                    optionsRef.current[index] = el;
-                  }}
-                  type="button"
-                  role="option"
-                  aria-selected={value === option.value}
-                  onClick={() => handleOptionClick(option.value)}
-                  onMouseEnter={() => setFocusedIndex(index)}
-                  className={cn(
-                    "w-full p-3 h-11 gap-2.5 text-left",
-                    "text-white leading-1.5 border-b border-gray-light-2 dark:border-gray-dark-2",
-                    "focus:bg-gray-dark-3 dark:focus:bg-gray-dark-4",
-                    (value === option.value || focusedIndex === index) &&
-                      "bg-gray-dark-3 dark:bg-gray-dark-4",
-                    sizeClass.dropdown.replace("h-", "min-h-")
+                <React.Fragment key={option.value}>
+                  <button
+                    ref={(el) => {
+                      optionsRef.current[index] = el;
+                    }}
+                    type="button"
+                    role="option"
+                    aria-selected={value === option.value}
+                    onClick={() => handleOptionClick(option.value)}
+                    onMouseEnter={() => setFocusedIndex(index)}
+                    className={cn(
+                      "w-full p-3 h-11 gap-2.5 text-left my-1",
+                      "text-gray-light-3 cursor-pointer rounded-lg font-medium",
+                      (value === option.value || focusedIndex === index) &&
+                      "bg-gray-dark-2",
+                      sizeClass.dropdown.replace("h-", "min-h-")
+                    )}
+                  >
+                    {option.label}
+                  </button>
+                  {index < options.length - 1 && (
+                    <div className="w-full h-px bg-gray-light-10" />
                   )}
-                >
-                  {option.label}
-                </button>
+                </React.Fragment>
               ))}
             </div>
           )}
         </div>
-        {error && (
-          <span
-            id={errorId}
-            role="alert"
-            aria-live="polite"
-            className="text-xs font-medium text-red dark:text-red-light-03"
-          >
-            {error}
-          </span>
-        )}
-        {helperText && !error && (
-          <span
-            id={helperId}
-            className="text-xs text-gray-dark-7 dark:text-gray-light-7"
-          >
-            {helperText}
-          </span>
-        )}
-      </div>
+        {
+          error && (
+            <span
+              id={errorId}
+              role="alert"
+              aria-live="polite"
+              className="text-xs font-medium text-red"
+            >
+              {error}
+            </span>
+          )
+        }
+        {
+          helperText && !error && (
+            <span
+              id={helperId}
+              className="text-xs text-gray-dark-7"
+            >
+              {helperText}
+            </span>
+          )
+        }
+      </div >
     );
   }
 );
