@@ -106,6 +106,9 @@
   --background-image-surface-gradient: linear-gradient(to top right, #121212 0%, rgba(38, 38, 38, 0.7) 100%);
   /* Corner border */
   --color-corner-border: rgba(213, 213, 213, 0.3);
+  /* Diamond gradient borders */
+  --background-image-diamond-gradient-horizontal: linear-gradient(to right, #292929 0%, #292929 20%, #B8B8B8 50%, #292929 80%, #292929 100%);
+  --background-image-diamond-gradient-vertical: linear-gradient(to bottom, #292929 0%, #292929 20%, #B8B8B8 50%, #292929 80%, #292929 100%);
 }
 
 @utility dot-shadow {
@@ -283,6 +286,150 @@ h6 {
     pointer-events: none;
     mix-blend-mode: overlay;
     z-index: 0;
+  }
+
+  /* Diamond gradient border utilities */
+  .border-t-diamond-gradient {
+    position: relative;
+  }
+
+  .border-r-diamond-gradient {
+    position: relative;
+  }
+
+  .border-b-diamond-gradient {
+    position: relative;
+  }
+
+  .border-l-diamond-gradient {
+    position: relative;
+  }
+
+  /* Top border - uses ::before */
+  .border-t-diamond-gradient::before {
+    content: '';
+    position: absolute;
+    top: -1px;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: var(--background-image-diamond-gradient-horizontal);
+    z-index: 30;
+    pointer-events: none;
+  }
+
+  /* Right border - uses ::after */
+  .border-r-diamond-gradient::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: -1px;
+    bottom: 0;
+    width: 1px;
+    background: var(--background-image-diamond-gradient-vertical);
+    z-index: 30;
+    pointer-events: none;
+  }
+
+  /* Bottom border - uses ::before when top is not present, ::after when top is present */
+  .border-b-diamond-gradient:not(.border-t-diamond-gradient)::before {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: var(--background-image-diamond-gradient-horizontal);
+    z-index: 30;
+    pointer-events: none;
+  }
+
+  /* Left border - uses ::after */
+  .border-l-diamond-gradient::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -1px;
+    bottom: 0;
+    width: 1px;
+    background: var(--background-image-diamond-gradient-vertical);
+    z-index: 30;
+    pointer-events: none;
+  }
+
+  /* Combined: Top + Bottom borders */
+  .border-t-diamond-gradient.border-b-diamond-gradient::before {
+    content: '';
+    position: absolute;
+    top: -1px;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: var(--background-image-diamond-gradient-horizontal);
+    z-index: 30;
+    pointer-events: none;
+  }
+
+  .border-t-diamond-gradient.border-b-diamond-gradient::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: var(--background-image-diamond-gradient-horizontal);
+    z-index: 30;
+    pointer-events: none;
+  }
+
+  /* Combined: Top + Right borders */
+  .border-t-diamond-gradient.border-r-diamond-gradient::before {
+    content: '';
+    position: absolute;
+    top: -1px;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: var(--background-image-diamond-gradient-horizontal);
+    z-index: 30;
+    pointer-events: none;
+  }
+
+  .border-t-diamond-gradient.border-r-diamond-gradient::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: -1px;
+    bottom: 0;
+    width: 1px;
+    background: var(--background-image-diamond-gradient-vertical);
+    z-index: 30;
+    pointer-events: none;
+  }
+
+  /* Combined: Bottom + Left borders */
+  .border-b-diamond-gradient.border-l-diamond-gradient::before {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: var(--background-image-diamond-gradient-horizontal);
+    z-index: 30;
+    pointer-events: none;
+  }
+
+  .border-b-diamond-gradient.border-l-diamond-gradient::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -1px;
+    bottom: 0;
+    width: 1px;
+    background: var(--background-image-diamond-gradient-vertical);
+    z-index: 30;
+    pointer-events: none;
   }
 }
 
