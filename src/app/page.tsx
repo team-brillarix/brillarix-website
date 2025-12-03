@@ -5,6 +5,7 @@ import OurImpact from '@/components/OurImpact/OurImpact';
 import OurProcess from '@/components/OurProcess/OurProcess';
 import FAQ from '@/components/FAQ/FAQ';
 import InnovativeSolutions from '@/components/InnovativeSolutions';
+import IndustryExpertise from '@/components/IndustryExpertise';
 import Blogs from '@/components/Blogs/Blogs';
 import ContactUs from '@/components/ContactUs';
 
@@ -17,6 +18,7 @@ export default function Home() {
       <InnovativeSolutions />
       <TechStack />
       <OurProcess />
+      <IndustryExpertise />
       <FAQ />
       <Blogs />
       <ContactUs />
