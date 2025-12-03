@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from 'react';
+import Image from 'next/image';
 import { Section } from '@/components/ui/Section';
 import { Heading } from '@/components/ui/Heading';
 import { Input } from '@/components/ui/Input';
@@ -10,6 +11,7 @@ import { Button } from '@/components/ui/Button';
 import { FiPhone, FiMail } from 'react-icons/fi';
 import { CONTACT_AREA_OF_INTEREST_OPTIONS } from '@/constants/dropdownOptions';
 import { MovingBorderContainer } from '@/components/ui/MovingBorder';
+import { CONTACT_INFO } from '@/constants/contact';
 
 export default function ContactUs() {
     const [formData, setFormData] = useState({
@@ -113,25 +115,29 @@ export default function ContactUs() {
                             <MovingBorderContainer
                                 borderRadius="1rem"
                                 duration={24000}
-                                innerClassName="bg-gray-dark-2 p-6"
+                                innerClassName="bg-gray-dark-2 p-6 flex items-center justify-between gap-4"
                             >
-                                <div className="flex items-center justify-between gap-4">
-                                    <div className="flex items-center gap-4">
-                                        <div className="w-12 h-12 rounded-full bg-[#1E3A5F] flex items-center justify-center shrink-0">
-                                            <span className="text-white font-bold text-lg">M</span>
-                                        </div>
-                                        <span className="text-gray-light-1 font-medium text-base">Book a Meeting</span>
+                                <div className="flex items-center gap-4">
+                                    <div className="w-12 h-12 rounded-full flex items-center justify-center shrink-0 border border-gray-dark-4">
+                                        <Image
+                                            src="/BookMeeting.svg"
+                                            alt="Book a Meeting"
+                                            width={20}
+                                            height={20}
+                                        />
                                     </div>
-                                    <Button
-                                        href="https://calendly.com"
-                                        target="_blank"
-                                        variant="primary"
-                                        size="sm"
-                                        className="bg-white text-gray-dark-1 hover:bg-gray-light-1"
-                                    >
-                                        <span className="text-sm font-semibold">Calendly</span>
-                                    </Button>
+                                    <span className="text-gray-light-1 font-medium">{CONTACT_INFO.calendly.label}</span>
                                 </div>
+
+                                <a href={CONTACT_INFO.calendly.url} target="_blank" className="bg-gray-light-2 py-3 px-4 flex items-center justify-center rounded-xl">
+                                    <Image
+                                        src="/tech-icons/Calendly.png"
+                                        alt="Calendly"
+                                        width={135}
+                                        height={32}
+                                    />
+                                </a>
+
                             </MovingBorderContainer>
 
                             <div className="flex flex-row gap-6 lg:gap-8 w-full">
@@ -139,30 +145,35 @@ export default function ContactUs() {
                                     borderRadius="1rem"
                                     duration={28000}
                                     containerClassName="w-full"
-                                    innerClassName="bg-gray-dark-2 p-6 flex flex-col gap-3"
+                                    innerClassName="bg-gray-dark-2 p-6 flex gap-4 items-center"
                                 >
-                                    <div className="flex items-center gap-3">
-                                        <FiPhone className="w-6 h-6 text-gray-light-1" />
-                                        <span className="text-gray-light-1 font-medium text-base">Phone</span>
+                                    <div className="w-12 h-12 rounded-full flex items-center justify-center shrink-0 border border-gray-dark-4">
+                                        <FiPhone className="w-5 h-5 text-gray-light-1" />
                                     </div>
-                                    <p className="text-gray-light-3 text-sm ml-9">
-                                        Office : 6232 1151 2211
-                                    </p>
+                                    <div className="flex flex-col gap-2">
+                                        <span className="text-gray-light-1 font-medium">{CONTACT_INFO.phone.label}</span>
+                                        <p className="text-gray-light-5">
+                                            Office : {CONTACT_INFO.phone.office}
+                                        </p>
+                                    </div>
+
                                 </MovingBorderContainer>
 
                                 <MovingBorderContainer
                                     borderRadius="1rem"
                                     duration={32000}
                                     containerClassName="w-full"
-                                    innerClassName="bg-gray-dark-2 p-6 flex flex-col gap-3"
+                                    innerClassName="bg-gray-dark-2 p-6 flex gap-3 items-center"
                                 >
-                                    <div className="flex items-center gap-3">
-                                        <FiMail className="w-6 h-6 text-gray-light-1" />
-                                        <span className="text-gray-light-1 font-medium text-base">Email</span>
+                                    <div className="w-12 h-12 rounded-full flex items-center justify-center shrink-0 border border-gray-dark-4">
+                                        <FiMail className="w-5 h-5 text-gray-light-1" />
                                     </div>
-                                    <p className="text-gray-light-3 text-sm ml-9">
-                                        contact@brillarix.com
-                                    </p>
+                                    <div className="flex flex-col gap-2">
+                                        <span className="text-gray-light-1 font-medium">{CONTACT_INFO.email.label}</span>
+                                        <p className="text-gray-light-5">
+                                            {CONTACT_INFO.email.address}
+                                        </p>
+                                    </div>
                                 </MovingBorderContainer>
                             </div>
                         </div>
