@@ -10,6 +10,17 @@ import { FaAngleRight } from 'react-icons/fa';
 import Image from 'next/image';
 
 export default function InnovativeSolutions() {
+  const sidebarItems = [
+    'Activity',
+    'Notepad',
+    'Lead Scoring',
+    'Recent Deals',
+    'Activity Updates',
+    'Deal Management',
+    'Task Management',
+    'Customer Contact Info',
+  ];
+
   const noCodeFeatures = [
     {
       text: 'Rapid Prototyping & MVPs',
@@ -43,10 +54,86 @@ export default function InnovativeSolutions() {
     },
   ];
 
-  // Animation path for the cursor icon:
   const animationSequence = [2, 1, 5, 2];
 
+  const overlayVariants = {
+    hidden: { opacity: 0.7 },
+    visible: {
+      opacity: 0,
+      transition: { duration: 0.8 },
+    },
+  };
+
+  const sidebarVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: { duration: 0.8 },
+    },
+  };
+
+  const imagePositionVariants = {
+    hidden: {
+      top: '19rem',
+      left: '64.75rem',
+    },
+    visible: {
+      top: '24rem',
+      left: '66.5rem',
+      transition: { 
+        duration: 0.8,
+        ease: 'easeOut' as const,
+      },
+    },
+  };
+
+  const imagePositionVariants2 = {
+    hidden: {
+      top: '4.5rem',
+      left: '66.75rem',
+    },
+    visible: {
+      top: '1.75rem',
+      left: '68.5rem',
+      transition: { 
+        duration: 0.8,
+        ease: 'easeOut' as const,
+      },
+    },
+  };
+
+  const imagePositionVariants3 = {
+    hidden: {
+      top: '1.5rem',
+      left: '-1.25rem',
+    },
+    visible: {
+      top: '-5rem',
+      left: '10rem',
+      transition: { 
+        duration: 0.8,
+        ease: 'easeOut' as const,
+      },
+    },
+  };
+
+  const imagePositionVariants4 = {
+    hidden: {
+      top: '9.25rem',
+      left: '23.5rem',
+    },
+    visible: {
+      top: '13.25rem',
+      left: '28.5rem',
+      transition: { 
+        duration: 0.8,
+        ease: 'easeOut' as const,
+      },
+    },
+  };
+
   const [activeFeatureIndex, setActiveFeatureIndex] = useState(animationSequence[0]);
+  const [isParentInView, setIsParentInView] = useState(false);
 
   useEffect(() => {
     let sequenceIndex = 0;
@@ -68,7 +155,6 @@ export default function InnovativeSolutions() {
       className="bg-background"
     >
       <div className="w-full flex flex-col">
-        {/* End-to-End Full-Stack Development Section */}
         <div className="w-full flex flex-col py-12 gap-6 sm:gap-8">
           <Heading
             variant="h4"
@@ -83,22 +169,102 @@ export default function InnovativeSolutions() {
             children="End-to-End Full-Stack Development"
           />
 
-          {/* Web Application Screenshot Placeholder */}
-          <div className="relative w-7xl h-182 rounded-3xl overflow-hidden">
-            <div className="absolute z-20 w-7xl h-182 rounded-3xl overflow-hidden bg-linear-to-b from-[#000000]/0 to-[#08090A]"></div>
+          <motion.div
+            className="group relative w-7xl h-182 rounded-3xl overflow-hidden"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ amount: 0.5 }}
+            onViewportEnter={() => setIsParentInView(true)}
+            onViewportLeave={() => setIsParentInView(false)}
+          >
+            <motion.div
+              className="flex flex-col gap-4 space-between absolute z-12 w-55 h-120 top-54 left-10"
+              variants={sidebarVariants}
+              initial="hidden"
+              animate={isParentInView ? "visible" : "hidden"}
+            >
+              {sidebarItems.map((item) => (
+                <div
+                  key={item}
+                  className="h-10 rounded-lg py-3 px-4 bg-[#D1D1D1]/10 backdrop-blur-sm corner-border"
+                >
+                  <p className="text-xs text-gray-light-1 font-normal whitespace-nowrap">{item}</p>
+                </div>
+              ))}
+            </motion.div>
+            <motion.div
+              className="absolute z-20 w-7xl h-182 rounded-3xl overflow-hidden bg-linear-to-b from-[#000000]/0 to-[#08090A]"
+              variants={overlayVariants}
+              initial="hidden"
+              animate={isParentInView ? "visible" : "hidden"}
+            />
             <Image src="/innovative-solutions/bg-style-left.png" alt="Background Style" width={1000} height={1000} className="object-cover w-full h-full opacity-10" />
-            <div className="w-full h-full overflow-hidden -top-[.33px]">
-              <Image src="/innovative-solutions/IS-3.png" alt="Web Application Screenshot" width={200} height={428} className="absolute z-13 w-50 h-107 top-76 left-259 object-cover" style={{ transform: 'matrix(0.98, -0.17, 0.5, 0.87, 0, 0)' }} />
-              <Image src="/innovative-solutions/IS-4.png" alt="Web Application Screenshot" width={152} height={350} className="absolute z-14 w-38 h-87 top-18 left-267 object-cover" style={{ transform: 'matrix(0.98, -0.17, 0.5, 0.87, 0, 0)' }} />
-              <div className="absolute z-12 w-339 h-full top-[.33px]">
-                <Image src="/innovative-solutions/IS-1.png" alt="Web Application Screenshot" width={740} height={602} className="absolute z-10 w-185 h-150 top-6 -left-5 object-cover" style={{ transform: 'matrix(0.98, -0.17, 0.5, 0.87, 0, 0)' }} />
-                <Image src="/innovative-solutions/IS-2.png" alt="Web Application Screenshot" width={740} height={553} className="absolute z-11 w-185 h-138 top-37 left-94 object-cover" style={{ transform: 'matrix(0.98, -0.17, 0.5, 0.87, 0, 0)' }} />
-              </div>
+            <div className="w-full h-full overflow-hidden">
+              <motion.div
+                className="absolute z-13 w-50 h-107"
+                variants={imagePositionVariants}
+                initial="hidden"
+                animate={isParentInView ? "visible" : "hidden"}
+              >
+                <Image
+                  src="/innovative-solutions/IS-3.png"
+                  alt="Web Application Screenshot"
+                  width={200}
+                  height={428}
+                  className="w-full h-full object-cover rounded-xl shadow-[0_6px_28px_0_rgba(72,72,72,0.5)]"
+                  style={{ transform: 'matrix(0.98, -0.17, 0.5, 0.87, 0, 0)' }}
+                />
+              </motion.div>
+              <motion.div
+                className="absolute z-14 w-38 h-87"
+                variants={imagePositionVariants2}
+                initial="hidden"
+                animate={isParentInView ? "visible" : "hidden"}
+              >
+                <Image
+                  src="/innovative-solutions/IS-4.png"
+                  alt="Web Application Screenshot"
+                  width={152}
+                  height={350}
+                  className="w-full h-full object-cover rounded-xl shadow-[0_6px_28px_0_rgba(72,72,72,0.5)]"
+                  style={{ transform: 'matrix(0.98, -0.17, 0.5, 0.87, 0, 0)' }}
+                />
+              </motion.div>
+              <motion.div
+                className="absolute z-10 w-185 h-150"
+                variants={imagePositionVariants3}
+                initial="hidden"
+                animate={isParentInView ? "visible" : "hidden"}
+              >
+                <Image
+                  src="/innovative-solutions/IS-1.png"
+                  alt="Web Application Screenshot"
+                  width={740}
+                  height={602}
+                  className="w-full h-full object-cover rounded-3xl shadow-[0_6px_28px_0_rgba(72,72,72,0.5)]"
+                  style={{ transform: 'matrix(0.98, -0.17, 0.5, 0.87, 0, 0)' }}
+                />
+              </motion.div>
+              <motion.div
+                className="absolute z-11 w-185 h-138"
+                variants={imagePositionVariants4}
+                initial="hidden"
+                animate={isParentInView ? "visible" : "hidden"}
+              >
+                <Image
+                  src="/innovative-solutions/IS-2.png"
+                  alt="Web Application Screenshot"
+                  width={740}
+                  height={553}
+                  className="w-full h-full object-cover rounded-3xl shadow-[0_6px_28px_0_rgba(72,72,72,0.5)]"
+                  style={{ transform: 'matrix(0.98, -0.17, 0.5, 0.87, 0, 0)' }}
+                />
+              </motion.div>
             </div>
-          </div>
+          </motion.div>
           </div>
           <Button
-            variant="primary"
+            variant="secondary"
             href="/get-quote"
             className="w-fit"
             rightImage={<FaAngleRight size={16} />}
@@ -107,9 +273,7 @@ export default function InnovativeSolutions() {
           </Button>
         </div>
 
-        {/* Two Column Layout for No-Code and Mobile Apps */}
         <div className="grid grid-cols-1 lg:grid-cols-2 z-0 border-y border-gray-dark-4">
-          {/* Build Faster with AI-Powered No-Code Solutions */}
           <div className="flex flex-col gap-6 sm:gap-8 py-12 pr-12 hover:icon-hover">
             <div className="flex flex-col gap-4 sm:gap-6">
               <Heading
@@ -125,9 +289,7 @@ export default function InnovativeSolutions() {
               </Heading>
             </div>
 
-            {/* Feature Buttons Grid */}
-            <div className="relative grid grid-cols-2 grid-rows-3 gap-x-17 gap-y-13 p-10 rounded-3xl h-76 w-2xl overflow-hidden gap-4">
-              {/* Background image with rounded corners clipped by parent */}
+            <div className="relative grid grid-cols-2 grid-rows-3 gap-x-17 gap-y-13 p-10 rounded-3xl h-76 overflow-hidden gap-4">
               <div className="absolute inset-0 -z-10">
                 <Image
                   src="/innovative-solutions/bg-style-left.png"
@@ -144,7 +306,7 @@ export default function InnovativeSolutions() {
                 return (
                   <div
                     key={feature.text}
-                    className={`absolute z-10 h-10 whitespace-nowrap w-fit text-xs font-medium leading-5 text-gray-light-1 ${feature.top} ${feature.left} py-3 px-4 rounded-lg bg-[#D1D1D1]/10 hover:shadow-[0_0_14px_0_rgba(249,249,249,0.25)] transition-shadow duration-300 ${isActive ? 'shadow-[0_0_14px_0_rgba(249,249,249,0.25)]' : ''}`}
+                    className={`absolute z-10 h-10 whitespace-nowrap w-fit text-xs font-medium text-gray-light-1 backdrop-blur-sm corner-border ${feature.top} ${feature.left} py-3 px-4 rounded-lg bg-[#D1D1D1]/10 hover:shadow-[0_0_14px_0_rgba(249,249,249,0.25)] transition-shadow duration-300 ${isActive ? 'shadow-[0_0_14px_0_rgba(249,249,249,0.25)]' : ''}`}
                   >
                     {feature.text}
 
@@ -170,7 +332,7 @@ export default function InnovativeSolutions() {
             </div>
 
             <Button
-              variant="primary"
+              variant="secondary"
               href="/get-quote"
               className="w-fit"
               rightImage={<FaAngleRight size={16} />}
@@ -179,7 +341,6 @@ export default function InnovativeSolutions() {
             </Button>
           </div>
 
-          {/* Cross-Platform Mobile Apps That Scale */}
           <div className="flex flex-col md:border-l md:border-gray-dark-4 gap-6 sm:gap-8 py-12 pl-12">
             <div className="flex flex-col gap-4 sm:gap-6 pr-20">
               <Heading
@@ -195,9 +356,7 @@ export default function InnovativeSolutions() {
               </Heading>
             </div>
 
-            {/* Mobile App Screenshot */}
-            <div className="relative w-2xl h-76 rounded-3xl overflow-hidden lg:mx-0">
-              {/* Background pattern behind the phone */}
+            <div className="relative h-76 rounded-3xl overflow-hidden lg:mx-0">
               <div className="absolute inset-0 -z-10">
                 <Image
                   src="/innovative-solutions/bg-style-left.png"
@@ -210,7 +369,6 @@ export default function InnovativeSolutions() {
                 />
               </div>
 
-              {/* Phone screenshot centered inside the card */}
               <div className="relative flex items-center justify-center h-full">
                 <div className="w-132 h-full">
                   <Image
@@ -227,7 +385,7 @@ export default function InnovativeSolutions() {
             </div>
 
             <Button
-              variant="primary"
+              variant="secondary"
               href="/get-quote"
               className="w-fit"
               rightImage={<FaAngleRight size={16} />}
@@ -239,4 +397,3 @@ export default function InnovativeSolutions() {
       </Section>
   );
 }
-
