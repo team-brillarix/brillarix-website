@@ -18,7 +18,7 @@ import {
   imagePositionVariants2,
   imagePositionVariants3,
   imagePositionVariants4,
-} from '../constants/InnovativeSolutions.constants';
+} from '../constants/InnovativeSolutions';
 
 export default function InnovativeSolutions() {
   const [activeFeatureIndex, setActiveFeatureIndex] = useState(animationSequence[0]);
