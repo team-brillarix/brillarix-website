@@ -56,6 +56,7 @@ const variantStyles: Record<
       "inline-block rounded-lg",
       "p-[1px]",
       "w-fit",
+      "bg-gradient-to-b from-gray-light-8 to-[#A6A6A6]",
       "transition-all duration-300 ease-in-out",
       "hover:bg-gradient-to-b hover:from-gray-dark-4 hover:to-white",
       "hover:shadow-[0_4px_6px_0_rgba(255,255,255,0.25)]",
