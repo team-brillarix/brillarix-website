@@ -8,6 +8,7 @@ import InnovativeSolutions from '@/components/InnovativeSolutions';
 import IndustryExpertise from '@/components/IndustryExpertise';
 import Blogs from '@/components/Blogs/Blogs';
 import ContactUs from '@/components/ContactUs';
+import TrustedByInnovators from '@/components/TrustedByInnovators/TrustedByInnovators';
 
 export default function Home() {
   return (
@@ -18,6 +19,7 @@ export default function Home() {
       <InnovativeSolutions />
       <TechStack />
       <OurProcess />
+      <TrustedByInnovators />
       <IndustryExpertise />
       <FAQ />
       <Blogs />
