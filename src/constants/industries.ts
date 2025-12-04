@@ -1,12 +1,10 @@
-import { FiLayers, FiShoppingCart, FiHeart, FiBarChart2, FiBook, FiSettings } from 'react-icons/fi';
-
 export interface Industry {
   id: string;
   title: string;
   headline: string;
   description: string;
   buttonText: string;
-  icon: React.ComponentType<{ className?: string }>;
+  icon: string;
 }
 
 export const industries: Industry[] = [
@@ -16,7 +14,7 @@ export const industries: Industry[] = [
     headline: 'Launch Your Startup at Lightning Speed',
     description: 'From idea to market in record time — with AI and no-code tools, your product is ready faster, scaling as you grow.',
     buttonText: 'Start Your Journey',
-    icon: FiLayers,
+    icon: '/industry/TechStartups.svg',
   },
   {
     id: 'ecommerce',
@@ -24,7 +22,7 @@ export const industries: Industry[] = [
     headline: 'Boost Conversions with Seamless E-Commerce',
     description: 'Create an optimized, scalable e-commerce platform with AI-driven insights and no-code solutions for faster growth.',
     buttonText: 'Transform Your Store',
-    icon: FiShoppingCart,
+    icon: '/industry/ECommerce.svg',
   },
   {
     id: 'healthcare',
@@ -32,7 +30,7 @@ export const industries: Industry[] = [
     headline: 'Smarter Healthcare Solutions, Delivered Faster',
     description: 'Automate processes, improve patient experiences, and build secure healthcare apps with AI-powered solutions.',
     buttonText: 'Innovate Healthcare',
-    icon: FiHeart,
+    icon: '/industry/HealthCare.svg',
   },
   {
     id: 'finance',
@@ -40,7 +38,7 @@ export const industries: Industry[] = [
     headline: 'Revolutionize Finance with AI & No-Code',
     description: 'From real-time data analytics to fraud prevention build scalable, secure financial solutions with speed and accuracy',
     buttonText: 'Future-Proof Finance',
-    icon: FiBarChart2,
+    icon: '/industry/Finance.svg',
   },
   {
     id: 'education',
@@ -48,7 +46,7 @@ export const industries: Industry[] = [
     headline: 'Transform Learning with AI and No-Code',
     description: 'Create personalized, scalable educational platforms that engage learners, powered by AI and no-code tools.',
     buttonText: 'Innovate Education',
-    icon: FiBook,
+    icon: '/industry/Education.svg',
   },
   {
     id: 'manufacturing',
@@ -56,7 +54,7 @@ export const industries: Industry[] = [
     headline: 'Optimize Operations with AI-Powered Automation',
     description: 'Automate processes, predict maintenance, and improve supply chain efficiency with AI-driven solutions tailored for manufacturing.',
     buttonText: 'Streamline Your Process',
-    icon: FiSettings,
+    icon: '/industry/Manufactturing.svg',
   },
 ];
 

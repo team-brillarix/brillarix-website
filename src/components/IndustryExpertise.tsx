@@ -1,5 +1,6 @@
 "use client";
 
+import Image from 'next/image';
 import { Section } from '@/components/ui/Section';
 import { Heading } from '@/components/ui/Heading';
 import { Button } from '@/components/ui/Button';
@@ -18,7 +19,6 @@ export default function IndustryExpertise() {
             {/* Industry Cards Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {industries.map((industry, index) => {
-                    const IconComponent = industry.icon;
                     return (
                         <MovingBorderContainer
                             key={industry.id}
@@ -30,7 +30,13 @@ export default function IndustryExpertise() {
                             <div className='flex p-3 gap-4 border-b border-gray-dark-3 items-center'>
                                 {/* Icon */}
                                 <div className="w-12 h-12 md:w-15 md:h-15 flex items-center justify-center bg-gray-dark-1 rounded-full border border-gray-dark-9 shrink-0">
-                                    <IconComponent className="w-6 h-6" />
+                                    <Image
+                                        src={industry.icon}
+                                        alt={industry.title}
+                                        width={24}
+                                        height={24}
+                                        className="w-6 h-6"
+                                    />
                                 </div>
 
                                 {/* Title */}
