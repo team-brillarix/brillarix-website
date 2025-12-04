@@ -1,27 +1,13 @@
 import { ProcessStep as ProcessStepType } from '@/types/process';
-import {
-    FiSearch,
-    FiZap,
-    FiCode,
-    FiBarChart,
-    FiRadio
-} from 'react-icons/fi';
+import Image from 'next/image';
 import { Heading } from '@/components/ui/Heading';
-
-const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
-    FiSearch,
-    FiZap,
-    FiCode,
-    FiBarChart,
-    FiRadio,
-};
 
 interface ProcessStepProps {
     step: ProcessStepType;
 }
 
 export function ProcessStep({ step }: ProcessStepProps) {
-    const IconComponent = iconMap[step.icon] || FiSearch;
+    const iconPath = `/process/${step.id}.svg`;
 
     return (
         <div className="flex flex-col md:flex-row items-center gap-4 md:gap-6 lg:gap-8 w-full min-h-56">
@@ -32,8 +18,13 @@ export function ProcessStep({ step }: ProcessStepProps) {
                 </p>
             </div>
 
-            <div className="shrink-0 w-16 h-16 md:w-28 md:h-28 lg:w-34 lg:h-34 rounded-3xl border border-gray-dark-8 bg-[linear-gradient(180deg,#1D1D1D_0%,#0D0D0D_100%)] flex items-center justify-center self-center">
-                <IconComponent className="w-8 h-8 md:w-10 md:h-10 lg:w-10 lg:h-10 text-gray-light-1" />
+            <div className="shrink-0 w-16 h-16 md:w-28 md:h-28 lg:w-34 lg:h-34 rounded-3xl border border-gray-dark-8 bg-[linear-gradient(180deg,#1D1D1D_0%,#0D0D0D_100%)] flex items-center justify-center self-center relative overflow-hidden">
+                <Image
+                    src={iconPath}
+                    alt={step.title}
+                    fill
+                    className='object-contain'
+                />
             </div>
 
             <div className="shrink-0 md:w-48 lg:w-64 flex flex-col gap-1">
