@@ -10,82 +10,115 @@ import Image from 'next/image';
 export default function TrustedByInnovators() {
   const swiperRef = useRef<SwiperType | null>(null);
   const sectionRef = useRef<HTMLDivElement>(null);
+  const observerRef = useRef<IntersectionObserver | null>(null);
+
+  const duplicatedData = Array(4).fill(innovatorsData).flat();
 
   useEffect(() => {
-    if (!sectionRef.current || !swiperRef.current) return;
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            swiperRef.current?.autoplay?.start();
-          } else {
-            swiperRef.current?.autoplay?.stop();
-          }
-        });
-      },
-      {
-        threshold: 0.1,
-      }
-    );
-
-    observer.observe(sectionRef.current);
-
     return () => {
-      observer.disconnect();
+      if (observerRef.current) {
+        observerRef.current.disconnect();
+      }
     };
   }, []);
 
   return (
     <div ref={sectionRef}>
       <Section
-        className="bg-background md:px-20 relative overflow-hidden"
+        className="bg-background py-16 md:py-20 px-4 sm:px-6 md:px-8 relative overflow-hidden"
         title="Trusted by Innovators to Deliver Exceptional Results"
         subtitle="Don't just take our word for it. Hear from the businesses we've empowered with smarter, faster solutions."
         headingVariant="h3"
         headingWeight="bold"
         headingAlign="center"
       >
-        <div className="absolute z-5 md:top-58 lg:top-46">
-          <Image src="/trusted-by-innovators/background.png" alt="Background Pattern" width={450} height={450} className="opacaty-60 z-5 object-cover" />
+        <div className="absolute z-0 top-32 md:top-58 lg:top-46 pointer-events-none">
+          <Image 
+            src="/trusted-by-innovators/background.png" 
+            alt="Background Pattern" 
+            width={450} 
+            height={450} 
+            className="opacity-60 object-cover" 
+          />
         </div>
-        {/* Content */}
-        <div className="relative w-full z-10">
-          {/* Cards Container - Swiper */}
-          <div className="w-full">
-            <Swiper
-              modules={[Autoplay]}
-              spaceBetween={20}
-              slidesPerView="auto"
-              breakpoints={{
-                640: {
-                  spaceBetween: 12,
-                },
-                768: {
-                  spaceBetween: 16,
-                },
-              }}
-              autoplay={{
-                delay: 3000,
-                disableOnInteraction: false,
-                pauseOnMouseEnter: true,
-              }}
-              loop={innovatorsData.length > 1}
-              onSwiper={(swiper) => {
-                swiperRef.current = swiper;
-              }}
-              className="trusted-innovators-swiper"
-            >
-              {innovatorsData.map((innovator) => (
-                <SwiperSlide key={innovator.id} style={{ width: 'auto' }}>
+
+        <div
+          className="w-full max-w-7xl mx-auto relative z-10"
+          aria-label="Trusted by Innovators"
+          role="region"
+        >
+          <Swiper
+            modules={[Autoplay]}
+            spaceBetween={20}
+            slidesPerView={1}
+            centeredSlides={false}
+            breakpoints={{
+              640: { 
+                slidesPerView: 1,
+                spaceBetween: 12,
+                centeredSlides: false 
+              },
+              768: { 
+                slidesPerView: 1.5,
+                spaceBetween: 16,
+                centeredSlides: false 
+              },
+              1024: { 
+                slidesPerView: 2,
+                spaceBetween: 20,
+                centeredSlides: false 
+              },
+            }}
+            autoplay={{
+              delay: 3000,
+              disableOnInteraction: false,
+              pauseOnMouseEnter: true,
+            }}
+            loop={true}
+            loopAdditionalSlides={Math.max(innovatorsData.length, 2)}
+            speed={2000}
+            allowTouchMove={true}
+            grabCursor={true}
+            watchSlidesProgress={true}
+            className="!overflow-hidden py-4"
+            onSwiper={(swiper) => {
+              swiperRef.current = swiper;
+              
+              if (sectionRef.current) {
+                if (observerRef.current) {
+                  observerRef.current.disconnect();
+                }
+
+                observerRef.current = new IntersectionObserver(
+                  (entries) => {
+                    entries.forEach((entry) => {
+                      if (entry.isIntersecting && swiperRef.current?.autoplay) {
+                        swiperRef.current.autoplay.start();
+                      } else if (swiperRef.current?.autoplay) {
+                        swiperRef.current.autoplay.stop();
+                      }
+                    });
+                  },
+                  {
+                    threshold: 0.1,
+                    rootMargin: '50px',
+                  }
+                );
+
+                observerRef.current.observe(sectionRef.current);
+              }
+            }}
+          >
+            {duplicatedData.map((innovator, index) => (
+              <SwiperSlide key={`${innovator.id}-${index}`} className="!h-auto">
+                <div className="h-full">
                   <InnovatorCard innovator={innovator} />
-                </SwiperSlide>
-              ))}
-            </Swiper>
-          </div>
+                </div>
+              </SwiperSlide>
+            ))}
+          </Swiper>
         </div>
       </Section>
     </div>
   );
 }
-
