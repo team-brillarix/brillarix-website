@@ -431,6 +431,31 @@ h6 {
     z-index: 30;
     pointer-events: none;
   }
+
+  /* Responsive helpers for diamond borders */
+  @media (min-width: 768px) {
+    /* Remove bottom diamond border at md and above while keeping it on smaller screens */
+    .no-md-bottom-diamond-gradient.border-b-diamond-gradient::before {
+      content: none;
+    }
+
+    /* Add right diamond border only at md and above */
+    .md-border-r-diamond-gradient {
+      position: relative;
+    }
+
+    .md-border-r-diamond-gradient::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: -1px;
+      bottom: 0;
+      width: 1px;
+      background: var(--background-image-diamond-gradient-vertical);
+      z-index: 30;
+      pointer-events: none;
+    }
+  }
 }
 
 /* Swiper */
