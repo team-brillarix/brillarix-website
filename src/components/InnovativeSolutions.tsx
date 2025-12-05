@@ -57,15 +57,21 @@ export default function InnovativeSolutions() {
             subtitleClassName="text-base sm:text-lg text-gray-light-5 font-normal leading-relaxed max-w-4xl"
             children="End-to-End Full-Stack Development"
           />
-
           <motion.div
-            className="group relative w-7xl h-182 rounded-3xl overflow-hidden"
+            className="group relative w-7xl self-center h-182 rounded-3xl overflow-hidden"
             initial="hidden"
             whileInView="visible"
             viewport={{ amount: 0.5 }}
+            transition={{ duration: 0.8, ease: 'easeOut' }}
             onViewportEnter={() => setIsParentInView(true)}
             onViewportLeave={() => setIsParentInView(false)}
           >
+            <motion.div
+              className={`absolute z-16 w-7xl h-182 rounded-3xl overflow-hidden ${!isParentInView ? 'bg-linear-to-b from-[#000000]/0 to-[#08090A]' : ''}`}
+              initial={{ opacity: 1 }}
+              animate={{ opacity: isParentInView ? 0 : 1 }}
+              transition={{ duration: 0.8 }}
+            />
             <motion.div
               className="flex flex-col gap-4 space-between absolute z-12 w-55 h-120 top-54 left-10"
               variants={sidebarVariants}
