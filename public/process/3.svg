@@ -1,1 +1,91 @@
-<svg width="96" height="96" viewBox="0 0 96 96" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="48" cy="48" r="47.7" stroke="#292929" stroke-width=".6"/><circle cx="48" cy="48" r="40.7" stroke="#353535" stroke-width=".6"/><circle cx="48" cy="48" r="32.7" fill="#1e1e1e" stroke="#424242" stroke-width=".6"/><rect x="28.35" y="28.35" width="39.3" height="39.3" rx="19.65" fill="#696969"/><rect x="28.35" y="28.35" width="39.3" height="39.3" rx="19.65" stroke="url(#a)" stroke-width=".7"/><path d="M41 47a1.96 1.96 0 0 0 1.406-.586q.265-.273.43-.633T43 45q0-.555-.023-1.11a7.4 7.4 0 0 1 .03-1.078q.055-.523.25-1.023.197-.5.618-.914.422-.421.977-.648T46 40v1a1.9 1.9 0 0 0-.773.156A2.03 2.03 0 0 0 44 43q0 .438.016.86.015.421.007.835a5 5 0 0 1-.078.797 4 4 0 0 1-.21.742q-.141.36-.407.672a3.6 3.6 0 0 1-.664.594q.406.273.664.594t.406.672q.15.351.211.734.063.382.07.797.009.414 0 .836L44 52q0 .414.156.773A2.03 2.03 0 0 0 46 54v1a3 3 0 0 1-2.125-.875 2.6 2.6 0 0 1-.61-.914 4.3 4.3 0 0 1-.25-1.016 7 7 0 0 1-.038-1.086Q43 50.547 43 50a1.96 1.96 0 0 0-.586-1.406 2.2 2.2 0 0 0-.64-.43A1.9 1.9 0 0 0 41 48zm9-7a3 3 0 0 1 2.125.875q.421.422.61.914.187.492.25 1.016.062.523.038 1.086Q53 44.453 53 45q0 .414.156.773A2.03 2.03 0 0 0 55 47v1a1.9 1.9 0 0 0-.773.156A2.03 2.03 0 0 0 53 50q0 .555.023 1.11.024.555-.03 1.078-.055.523-.25 1.023-.197.5-.618.914A3 3 0 0 1 50 55v-1a1.96 1.96 0 0 0 1.406-.586q.265-.273.43-.633T52 52q0-.437-.016-.86-.015-.421-.007-.835.007-.414.078-.797t.21-.742q.141-.36.407-.672.265-.313.664-.594a2.8 2.8 0 0 1-1.07-1.266 3.2 3.2 0 0 1-.211-.734 6 6 0 0 1-.07-.797 22 22 0 0 1 0-.836L52 43a1.96 1.96 0 0 0-.586-1.406 2.2 2.2 0 0 0-.64-.43A1.9 1.9 0 0 0 50 41z" fill="#f1f1f1"/><defs><linearGradient id="a" x1="48" y1="28" x2="48" y2="68" gradientUnits="userSpaceOnUse"><stop stop-color="gray"/><stop offset=".534" stop-color="#2f2f2f"/></linearGradient></defs></svg>
+<svg width="112" height="112" viewBox="0 0 112 112" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>
+      @keyframes ripple-outer {
+        0% {
+          r: 47.7;
+          opacity: 0.8;
+        }
+        50% {
+          r: 52;
+          opacity: 0.2;
+        }
+        100% {
+          r: 47.7;
+          opacity: 0.8;
+        }
+      }
+      @keyframes ripple-middle {
+        0% {
+          r: 40.7;
+          opacity: 0.9;
+        }
+        50% {
+          r: 45;
+          opacity: 0.3;
+        }
+        100% {
+          r: 40.7;
+          opacity: 0.9;
+        }
+      }
+      @keyframes ripple-inner {
+        0% {
+          r: 32.7;
+          opacity: 1;
+        }
+        50% {
+          r: 37;
+          opacity: 0.4;
+        }
+        100% {
+          r: 32.7;
+          opacity: 1;
+        }
+      }
+      @keyframes rotate-code {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+      @keyframes pulse-icon {
+        0%, 100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0.7;
+        }
+      }
+      .ripple-outer {
+        animation: ripple-outer 3s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+        transform-origin: 48px 48px;
+      }
+      .ripple-middle {
+        animation: ripple-middle 3s cubic-bezier(0.4, 0, 0.2, 1) 0.4s infinite;
+        transform-origin: 48px 48px;
+      }
+      .ripple-inner {
+        animation: ripple-inner 3s cubic-bezier(0.4, 0, 0.2, 1) 0.8s infinite;
+        transform-origin: 48px 48px;
+      }
+      .pulse-icon {
+        animation: pulse-icon 2s ease-in-out infinite;
+      }
+    </style>
+    <linearGradient id="a" x1="48" y1="28" x2="48" y2="68" gradientUnits="userSpaceOnUse">
+      <stop stop-color="gray"/>
+      <stop offset=".534" stop-color="#2f2f2f"/>
+    </linearGradient>
+  </defs>
+  <g transform="translate(8, 8)">
+    <circle cx="48" cy="48" r="47.7" class="ripple-outer" stroke="#292929" stroke-width=".6"/>
+    <circle cx="48" cy="48" r="40.7" class="ripple-middle" stroke="#353535" stroke-width=".6"/>
+    <circle cx="48" cy="48" r="32.7" class="ripple-inner" fill="#1e1e1e" stroke="#424242" stroke-width=".6"/>
+    <rect x="28.35" y="28.35" width="39.3" height="39.3" rx="19.65" fill="#696969" class="pulse-icon"/>
+    <rect x="28.35" y="28.35" width="39.3" height="39.3" rx="19.65" stroke="url(#a)" stroke-width=".7" class="pulse-icon"/>
+    <path d="M41 47a1.96 1.96 0 0 0 1.406-.586q.265-.273.43-.633T43 45q0-.555-.023-1.11a7.4 7.4 0 0 1 .03-1.078q.055-.523.25-1.023.197-.5.618-.914.422-.421.977-.648T46 40v1a1.9 1.9 0 0 0-.773.156A2.03 2.03 0 0 0 44 43q0 .438.016.86.015.421.007.835a5 5 0 0 1-.078.797 4 4 0 0 1-.21.742q-.141.36-.407.672a3.6 3.6 0 0 1-.664.594q.406.273.664.594t.406.672q.15.351.211.734.063.382.07.797.009.414 0 .836L44 52q0 .414.156.773A2.03 2.03 0 0 0 46 54v1a3 3 0 0 1-2.125-.875 2.6 2.6 0 0 1-.61-.914 4.3 4.3 0 0 1-.25-1.016 7 7 0 0 1-.038-1.086Q43 50.547 43 50a1.96 1.96 0 0 0-.586-1.406 2.2 2.2 0 0 0-.64-.43A1.9 1.9 0 0 0 41 48zm9-7a3 3 0 0 1 2.125.875q.421.422.61.914.187.492.25 1.016.062.523.038 1.086Q53 44.453 53 45q0 .414.156.773A2.03 2.03 0 0 0 55 47v1a1.9 1.9 0 0 0-.773.156A2.03 2.03 0 0 0 53 50q0 .555.023 1.11.024.555-.03 1.078-.055.523-.25 1.023-.197.5-.618.914A3 3 0 0 1 50 55v-1a1.96 1.96 0 0 0 1.406-.586q.265-.273.43-.633T52 52q0-.437-.016-.86-.015-.421-.007-.835.007-.414.078-.797t.21-.742q.141-.36.407-.672.265-.313.664-.594a2.8 2.8 0 0 1-1.07-1.266 3.2 3.2 0 0 1-.211-.734 6 6 0 0 1-.07-.797 22 22 0 0 1 0-.836L52 43a1.96 1.96 0 0 0-.586-1.406 2.2 2.2 0 0 0-.64-.43A1.9 1.9 0 0 0 50 41z" fill="#f1f1f1" class="pulse-icon"/>
+  </g>
+</svg>
