@@ -32,9 +32,9 @@ export default function Hero() {
       gridEndPoint: { x: 3.5, y: 3 },
       gridWaypoints: [
         { x: 1, y: 2.7, type: 'vertical' },
-        { 
-          x: 1, 
-          y: 3, 
+        {
+          x: 1,
+          y: 3,
           type: 'quadratic',
           controlPoint: { x: 1, y: 3 },
           curveEndPoint: { x: 1.35, y: 3 },
@@ -51,9 +51,9 @@ export default function Hero() {
       gridEndPoint: { x: 6.01, y: 5.01 },
       gridWaypoints: [
         { x: 3.5, y: 4.68, type: 'vertical' },
-        { 
-          x: 3.5, 
-          y: 5, 
+        {
+          x: 3.5,
+          y: 5,
           type: 'quadratic',
           controlPoint: { x: 3.5, y: 5 },
           curveEndPoint: { x: 3.85, y: 5 },
@@ -125,7 +125,7 @@ export default function Hero() {
                       } as React.CSSProperties}>
                         <ConnectionPaths paths={connectionPaths} gridCols={7} gridRows={6} />
 
-                        <div 
+                        <div
                           className="absolute z-20 pointer-events-auto"
                           style={{
                             left: 'calc(var(--grid-col-width) * 0 + var(--grid-col-width))',
@@ -142,7 +142,7 @@ export default function Hero() {
                           />
                         </div>
 
-                        <div 
+                        <div
                           className="absolute border border-gray-dark-2 flex items-center justify-center rounded-full h-16 w-16 sm:h-18 sm:w-18 md:h-22 md:w-22 z-20"
                           style={{
                             left: 'calc(var(--grid-col-width) * 6 - var(--grid-col-width)*.5)',
@@ -165,7 +165,7 @@ export default function Hero() {
                           </div>
                         </div>
 
-                        <div 
+                        <div
                           className="group absolute flex items-center justify-center bg-gray-dark-2 rounded-lg h-10 w-10 sm:h-11 sm:w-11 md:h-12 md:w-12 z-20 pointer-events-auto hover:bg-gray-dark-5"
                           style={{
                             left: 'calc(var(--grid-col-width) * 3.5)',
@@ -182,7 +182,7 @@ export default function Hero() {
                           />
                         </div>
 
-                        <div 
+                        <div
                           className="absolute z-20 pointer-events-auto"
                           style={{
                             left: 'calc(var(--grid-col-width) * 6 + var(--grid-col-width) * 0.01)',
@@ -336,7 +336,10 @@ export default function Hero() {
               </div>
               <div className="flex flex-col items-center gap-2 text-gray-light-4 border-b-diamond-gradient no-md-bottom-diamond-gradient md-border-r-diamond-gradient px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 py-6 sm:py-8 text-xs sm:text-sm">
                 <div className="h-25 w-25 rounded-full bg-gray-dark-1 border border-gray-dark-3 flex items-center justify-center overflow-hidden">
-                  <Heading variant="h5" weight="bold" children="50+" subtitle="Reviews" subtitleClassName="text-sm font-medium" />
+                  <div className="flex flex-col items-center justify-center font-bold gap-2">
+                    <h5 className="text-2xl leading-none">50+</h5>
+                    <span className="text-sm font-medium leading-none">Reviews</span>
+                  </div>
                 </div>
                 <div className="flex justify-center flex-row py-1 px-2 h-8 items-center gap-2.5">
                   {Array.from({ length: 5 }).map((_, index) => (

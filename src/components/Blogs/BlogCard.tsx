@@ -10,7 +10,7 @@ interface BlogCardProps {
 export function BlogCard({ blog }: BlogCardProps) {
   return (
     <Link
-      href={blog.link}
+      href={`/blog/${blog.id}`}
       className="bg-gray-dark-1 rounded-3xl h-full flex flex-col p-4 lg:p-6 border border-gray-dark-3 gap-6 transition-colors cursor-pointer hover:border-gray-dark-5"
     >
       {/* Image */}

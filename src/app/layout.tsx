@@ -3,6 +3,7 @@ import { Space_Grotesk, Rubik } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import Loader from "@/components/Loader";
 
 const spaceGrotesk = Space_Grotesk({
   variable: "--font-space-grotesk",
@@ -211,10 +212,12 @@ export default function RootLayout({
         <meta name="distribution" content="global" />
         <meta name="rating" content="general" />
         <link rel="canonical" href={baseUrl} />
+        <link rel="preload" href="/logos/Brillarix-Dark-Mode.png" as="image" />
       </head>
       <body
         className={`${spaceGrotesk.variable} ${rubik.variable} antialiased`}
       >
+        <Loader />
         <div className="w-full max-w-[1440px] mx-auto flex flex-col min-h-screen">
           <Header />
           <main className="flex-1">
