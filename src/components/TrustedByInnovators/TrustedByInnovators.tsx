@@ -32,7 +32,7 @@ export default function TrustedByInnovators() {
         headingWeight="bold"
         headingAlign="center"
       >
-        <div className="absolute z-0 top-32 md:top-58 lg:top-46 pointer-events-none">
+        <div className="absolute z-0 top-42 md:top-58 lg:top-46 pointer-events-none">
           <Image 
             src="/trusted-by-innovators/background.png" 
             alt="Background Pattern" 
