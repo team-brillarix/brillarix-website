@@ -68,16 +68,16 @@ export const sidebarVariants = {
 
 export const imagePositionVariants = {
   hidden: {
-    top: '19rem',
-    left: '64.75rem',
+    top: '41.8%',
+    left: '80.9%',
     transition: { 
       duration: 0.8,
       ease: 'easeOut' as const,
     },
   },
   visible: {
-    top: '24rem',
-    left: '66.5rem',
+    top: '48.4%',
+    left: '83.1%',
     transition: { 
       duration: 0.8,
       ease: 'easeOut' as const,
@@ -87,16 +87,16 @@ export const imagePositionVariants = {
 
 export const imagePositionVariants2 = {
   hidden: {
-    top: '4.5rem',
-    left: '66.75rem',
+    top: '9.9%',
+    left: '83.4%',
     transition: { 
       duration: 0.8,
       ease: 'easeOut' as const,
     },
   },
   visible: {
-    top: '1.75rem',
-    left: '68.5rem',
+    top: '3.8%',
+    left: '85.6%',
     transition: { 
       duration: 0.8,
       ease: 'easeOut' as const,
@@ -106,16 +106,16 @@ export const imagePositionVariants2 = {
 
 export const imagePositionVariants3 = {
   hidden: {
-    top: '1.5rem',
-    left: '-1.25rem',
+    top: '3.3%',
+    left: '-1.6%',
     transition: { 
       duration: 0.8,
       ease: 'easeOut' as const,
     },
   },
   visible: {
-    top: '-5rem',
-    left: '10rem',
+    top: '-6.9%',
+    left: '7.8%',
     transition: { 
       duration: 0.8,
       ease: 'easeOut' as const,
@@ -125,16 +125,16 @@ export const imagePositionVariants3 = {
 
 export const imagePositionVariants4 = {
   hidden: {
-    top: '9.25rem',
-    left: '23.5rem',
+    top: '20.3%',
+    left: '29.4%',
     transition: { 
       duration: 0.8,
       ease: 'easeOut' as const,
     },
   },
   visible: {
-    top: '13.25rem',
-    left: '28.5rem',
+    top: '29.1%',
+    left: '35.6%',
     transition: { 
       duration: 0.8,
       ease: 'easeOut' as const,

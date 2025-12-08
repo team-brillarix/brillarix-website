@@ -58,7 +58,7 @@ export default function InnovativeSolutions() {
             children="End-to-End Full-Stack Development"
           />
           <motion.div
-            className="group relative w-7xl self-center h-182 rounded-3xl overflow-hidden"
+            className="group relative min-h-75 max-w-7xl md:h-182 self-center rounded-3xl overflow-hidden"
             initial="hidden"
             whileInView="visible"
             viewport={{ amount: 0.5 }}
@@ -73,7 +73,7 @@ export default function InnovativeSolutions() {
               transition={{ duration: 0.8 }}
             />
             <motion.div
-              className="flex flex-col gap-4 space-between absolute z-12 w-55 h-120 top-54 left-10"
+              className="flex flex-col gap-1.5 md:gap-4 space-between absolute z-12 w-[35%] sm:w-[30%] md:w-55 max-w-55 top-[2%] sm:top-[5%] md:top-54 left-[2%] sm:left-[3%] md:left-10 h-auto max-h-[96%] md:h-120 overflow-y-auto"
               variants={sidebarVariants}
               initial="hidden"
               animate={isParentInView ? "visible" : "hidden"}
@@ -81,14 +81,14 @@ export default function InnovativeSolutions() {
               {sidebarItems.map((item) => (
                 <div
                   key={item}
-                  className="h-10 rounded-lg py-3 px-4 bg-[#D1D1D1]/10 backdrop-blur-sm corner-border"
+                  className="h-auto min-h-7 md:h-10 rounded-lg py-1.5 sm:py-2 md:py-3 px-2 sm:px-3 md:px-4 bg-[#D1D1D1]/10 backdrop-blur-sm corner-border shrink-0"
                 >
-                  <p className="text-xs text-gray-light-1 font-normal whitespace-nowrap">{item}</p>
+                  <p className="text-[10px] md:text-xs text-gray-light-1 font-normal whitespace-nowrap">{item}</p>
                 </div>
               ))}
             </motion.div>
             <motion.div
-              className="absolute z-20 w-7xl h-182 rounded-3xl overflow-hidden bg-linear-to-b from-[#000000]/0 to-[#08090A]"
+              className="absolute z-20 max-w-7xl h-182 rounded-3xl overflow-hidden bg-linear-to-b from-[#000000]/0 to-[#08090A]"
               variants={overlayVariants}
               initial="hidden"
               animate={isParentInView ? "visible" : "hidden"}
@@ -96,7 +96,7 @@ export default function InnovativeSolutions() {
             <Image src="/innovative-solutions/bg-style-left.png" alt="Background Style" width={1000} height={1000} className="object-cover w-full h-full opacity-10" />
             <div className="w-full h-full overflow-hidden">
               <motion.div
-                className="absolute z-13 w-50 h-107"
+                className="absolute z-13 max-w-50 max-h-107"
                 variants={imagePositionVariants}
                 initial="hidden"
                 animate={isParentInView ? "visible" : "hidden"}
@@ -111,7 +111,7 @@ export default function InnovativeSolutions() {
                 />
               </motion.div>
               <motion.div
-                className="absolute z-14 w-38 h-87"
+                className="absolute z-14 max-w-38 max-h-87"
                 variants={imagePositionVariants2}
                 initial="hidden"
                 animate={isParentInView ? "visible" : "hidden"}
@@ -126,7 +126,7 @@ export default function InnovativeSolutions() {
                 />
               </motion.div>
               <motion.div
-                className="absolute z-10 w-185 h-150"
+                className="absolute z-10 max-w-185 max-h-150"
                 variants={imagePositionVariants3}
                 initial="hidden"
                 animate={isParentInView ? "visible" : "hidden"}
@@ -141,7 +141,7 @@ export default function InnovativeSolutions() {
                 />
               </motion.div>
               <motion.div
-                className="absolute z-11 w-185 h-138"
+                className="absolute z-11 max-w-185 max-h-138"
                 variants={imagePositionVariants4}
                 initial="hidden"
                 animate={isParentInView ? "visible" : "hidden"}
