@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { motion } from 'framer-motion';
 
 import { Section } from '@/components/ui/Section';
@@ -23,6 +23,9 @@ import {
 export default function InnovativeSolutions() {
   const [activeFeatureIndex, setActiveFeatureIndex] = useState(animationSequence[0]);
   const [isParentInView, setIsParentInView] = useState(false);
+  const [cursorPosition, setCursorPosition] = useState({ top: 0, left: 0 });
+  const featureRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const containerRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     let sequenceIndex = 0;
@@ -34,6 +37,37 @@ export default function InnovativeSolutions() {
 
     return () => clearInterval(interval);
   }, []);
+
+  useEffect(() => {
+    const updateCursorPosition = () => {
+      const activeRef = featureRefs.current[activeFeatureIndex];
+      const container = containerRef.current;
+
+      if (activeRef && container) {
+        const featureRect = activeRef.getBoundingClientRect();
+        const containerRect = container.getBoundingClientRect();
+
+        const top = featureRect.top - containerRect.top + featureRect.height / 2;
+        const left = featureRect.left - containerRect.left + featureRect.width / 2;
+
+        setCursorPosition({
+          top: (top / containerRect.height) * 100,
+          left: (left / containerRect.width) * 100,
+        });
+      }
+    };
+
+    const rafId = requestAnimationFrame(() => {
+      updateCursorPosition();
+    });
+
+    window.addEventListener('resize', updateCursorPosition);
+
+    return () => {
+      cancelAnimationFrame(rafId);
+      window.removeEventListener('resize', updateCursorPosition);
+    };
+  }, [activeFeatureIndex]);
 
   return (
     <Section
@@ -169,7 +203,7 @@ export default function InnovativeSolutions() {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 z-0 border-y border-gray-dark-4">
-          <div className="flex flex-col gap-6 sm:gap-8 py-12 pr-12 hover:icon-hover border-t-diamond-gradient">
+          <div className="flex flex-col gap-6 sm:gap-8 py-12 md:pr-12 hover:icon-hover border-t-diamond-gradient">
             <div className="flex flex-col gap-4 sm:gap-6">
               <Heading
                 variant="h4"
@@ -184,8 +218,8 @@ export default function InnovativeSolutions() {
               </Heading>
             </div>
 
-            <div className="relative grid grid-cols-2 grid-rows-3 gap-x-17 gap-y-13 p-10 rounded-3xl h-76 overflow-hidden gap-4">
-              <div className="absolute inset-0 -z-10">
+            <div className="relative rounded-3xl overflow-visible sm:overflow-hidden p-4 sm:p-6 md:p-8 lg:p-10 flex-1 min-h-0">
+              <div className="absolute inset-0 -z-10 rounded-3xl overflow-hidden">
                 <Image
                   src="/innovative-solutions/bg-style-left.png"
                   alt="background style left"
@@ -195,35 +229,48 @@ export default function InnovativeSolutions() {
                   className="object-cover w-full h-full opacity-25"
                 />
               </div>
-              {noCodeFeatures.map((feature, index) => {
-                const isActive = index === activeFeatureIndex;
+              <div ref={containerRef} className="relative z-10 h-fit lg:h-full flex items-center justify-center">
+                <div className="grid grid-cols-1 items-center sm:grid-cols-2 auto-rows-auto sm:grid-rows-3 gap-3 sm:gap-5 w-full">
+                  {noCodeFeatures.map((feature, index) => {
+                    const isActive = index === activeFeatureIndex;
 
-                return (
-                  <div
-                    key={feature.text}
-                    className={`absolute z-10 h-10 whitespace-nowrap w-fit text-xs font-medium text-gray-light-1 backdrop-blur-sm corner-border ${feature.top} ${feature.left} py-3 px-4 rounded-lg bg-[#D1D1D1]/10 hover:shadow-[0_0_14px_0_rgba(249,249,249,0.25)] transition-shadow duration-300 ${isActive ? 'shadow-[0_0_14px_0_rgba(249,249,249,0.25)]' : ''}`}
-                  >
-                    {feature.text}
-
-                    {isActive && (
-                      <motion.div
-                        layoutId="no-code-cursor"
-                        className="pointer-events-none absolute top-5 -right-8 z-50"
-                        transition={{ type: 'spring', stiffness: 120, damping: 18 }}
+                    return (
+                      <div
+                        key={feature.text}
+                        ref={(el) => {
+                          featureRefs.current[index] = el;
+                        }}
+                        className={`relative flex items-center justify-center h-7.5 sm:h-9 text-2.5 sm:text-xs md:text-xs font-medium text-gray-light-1 backdrop-blur-sm corner-border px-2 md:px-3 lg:px-4 rounded-lg bg-[#D1D1D1]/10 hover:shadow-[0_0_14px_0_rgba(249,249,249,0.25)] transition-shadow duration-300 overflow-hidden ${isActive ? 'shadow-[0_0_14px_0_rgba(249,249,249,0.25)]' : ''}`}
                       >
-                        <Image
-                          src="/innovative-solutions/cursor-icon.svg"
-                          alt="cursor icon"
-                          height={34}
-                          width={34}
-                          priority
-                          className="object-cover"
-                        />
-                      </motion.div>
-                    )}
-                  </div>
-                );
-              })}
+                        <p className="text-center max-w-full line-clamp-2 sm:line-clamp-3 break-words">
+                          {feature.text}
+                        </p>
+                      </div>
+                    );
+                  })}
+                </div>
+
+                {activeFeatureIndex !== null && cursorPosition.top > 0 && (
+                  <motion.div
+                    layoutId="no-code-cursor"
+                    className="pointer-events-none absolute z-9999 -translate-x-1/2 -translate-y-1/2"
+                    style={{
+                      top: `${cursorPosition.top}%`,
+                      left: `${cursorPosition.left}%`,
+                    }}
+                    transition={{ type: 'spring', stiffness: 120, damping: 18 }}
+                  >
+                    <Image
+                      src="/innovative-solutions/cursor-icon.svg"
+                      alt="cursor icon"
+                      height={34}
+                      width={34}
+                      priority
+                      className="object-contain w-[clamp(20px,3vw,34px)] h-[clamp(20px,3vw,34px)]"
+                    />
+                  </motion.div>
+                )}
+              </div>
             </div>
 
             <Button
@@ -236,7 +283,7 @@ export default function InnovativeSolutions() {
             </Button>
           </div>
 
-          <div className="flex flex-col border-l-diamond-gradient gap-6 sm:gap-8 py-12 pl-12 border-b-diamond-gradient">
+          <div className="flex flex-col border-l-diamond-gradient gap-6 sm:gap-8 py-12 md:pl-12 border-b-diamond-gradient">
             <div className="flex flex-col gap-4 sm:gap-6 pr-20">
               <Heading
                 variant="h4"
@@ -251,7 +298,7 @@ export default function InnovativeSolutions() {
               </Heading>
             </div>
 
-            <div className="relative h-76 rounded-3xl overflow-hidden lg:mx-0">
+            <div className="relative rounded-3xl overflow-hidden lg:mx-0 flex-1">
               <div className="absolute inset-0 -z-10">
                 <Image
                   src="/innovative-solutions/bg-style-left.png"
@@ -265,7 +312,7 @@ export default function InnovativeSolutions() {
               </div>
 
               <div className="relative flex items-center justify-center h-full">
-                <div className="w-132 h-full">
+                <div className="max-w-132">
                   <Image
                     src="/innovative-solutions/bg-mobile.png"
                     alt="mobile app screenshot"

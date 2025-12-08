@@ -12,34 +12,28 @@ export const sidebarItems = [
 export const noCodeFeatures = [
   {
     text: 'Rapid Prototyping & MVPs',
-    top: 'top-12.5',
-    left: 'left-9',
   },
   {
     text: 'Scalable No-Code App Solutions',
-    top: 'top-12.5',
-    left: 'left-92',
   },
   {
     text: 'AI-Driven Automation & Workflows',
-    top: 'top-34',
-    left: 'left-9',
   },
   {
     text: 'Low-Code Deployment for Speed',
-    top: 'top-34',
-    left: 'left-92',
   },
   {
-    text: 'Seamless Database & Backend Integrations',
-    top: 'top-55',
-    left: 'left-9',
+    text: 'Seamless Database Connections',
   },
   {
-    text: 'Custom AI Chatbots & Automations',
-    top: 'top-55',
-    left: 'left-92',
+    text: 'Custom AI Chatbots',
   },
+  {
+    text: 'Backend Integrations',
+  },
+  {
+    text: 'AI-Powered Automations',
+  }
 ];
 
 export const animationSequence = [2, 1, 5, 2];
@@ -141,4 +135,3 @@ export const imagePositionVariants4 = {
     },
   },
 };
-
