@@ -36,9 +36,9 @@ export default function Loader() {
                     <Image
                         src="/logos/Brillarix-Dark-Mode.png"
                         alt="Brillarix Logo"
-                        width={200}
-                        height={50}
-                        className="w-auto h-24 md:h-32"
+                        width={160}
+                        height={40}
+                        className="w-auto h-16 lg:h-20"
                         priority
                     />
                 </motion.div>
