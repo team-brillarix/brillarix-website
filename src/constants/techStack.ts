@@ -16,7 +16,7 @@ export const techStackData: TechCategory[] = [
         title: "No-Code Development",
         items: [
             { name: "Bubble.io", image: "/tech-icons/Bubble.svg" },
-            { name: "Webflow", image: "/tech-icons/webflow.svg" },
+            { name: "Webflow", image: "/tech-icons/Webflow.svg" },
             { name: "WordPress", image: "/tech-icons/WordPress.svg" },
             { name: "Xano", image: "/tech-icons/Xano.svg" },
             { name: "Wix", image: "/tech-icons/Wix.svg" },
