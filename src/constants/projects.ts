@@ -13,17 +13,6 @@ export interface ImpactProject {
 
 export const impactProjects: ImpactProject[] = [
   {
-    id: '1',
-    title: 'Cleeri',
-    description:
-      'Cleeri partnered with Brillarix to automate participant recruitment, screening, and data workflows for complex clinical studies.',
-    videoUrl: `https://res.cloudinary.com/${cloudName}/video/upload/v1764406774/Cleeri_fryh7y.mp4`,
-    metrics: {
-      label: 'Reduction in manual operations workload',
-      value: '45%',
-    },
-  },
-  {
     id: '2',
     title: 'Trialynx',
     description:
