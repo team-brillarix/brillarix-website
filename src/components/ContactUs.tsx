@@ -8,6 +8,7 @@ import { Input } from '@/components/ui/Input';
 import { Textarea } from '@/components/ui/Textarea';
 import { Dropdown } from '@/components/ui/Dropdown';
 import { Button } from '@/components/ui/Button';
+import { Toast, ToastType } from '@/components/ui/Toast';
 import { FiPhone, FiMail } from 'react-icons/fi';
 import { CONTACT_AREA_OF_INTEREST_OPTIONS } from '@/constants/dropdownOptions';
 import { MovingBorderContainer } from '@/components/ui/MovingBorder';
@@ -20,12 +21,17 @@ export default function ContactUs() {
         areaOfInterest: '',
         message: '',
     });
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [toast, setToast] = useState<{
+        type: ToastType;
+        message: string;
+    } | null>(null);
 
     const handleInputChange = (field: string, value: string) => {
         setFormData(prev => ({ ...prev, [field]: value }));
     };
 
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         const form = e.currentTarget;
         if (!form.checkValidity()) {
             e.preventDefault();
@@ -33,7 +39,45 @@ export default function ContactUs() {
             return;
         }
         e.preventDefault();
-        console.log('Form submitted:', formData);
+
+        setIsSubmitting(true);
+
+        try {
+            const response = await fetch('/api/contact', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData),
+            });
+
+            const data = await response.json();
+
+            if (!response.ok) {
+                throw new Error(data.error || 'Failed to send message');
+            }
+
+            setToast({
+                type: 'success',
+                message: 'Thank you! Your message has been sent successfully. We\'ll get back to you soon.',
+            });
+
+            setFormData({
+                name: '',
+                email: '',
+                areaOfInterest: '',
+                message: '',
+            });
+
+            form.reset();
+        } catch (error) {
+            setToast({
+                type: 'error',
+                message: error instanceof Error ? error.message : 'An error occurred. Please try again later.',
+            });
+        } finally {
+            setIsSubmitting(false);
+        }
     };
 
     return (
@@ -86,8 +130,9 @@ export default function ContactUs() {
                                     type="submit"
                                     variant="primary"
                                     fullWidth
+                                    disabled={isSubmitting}
                                 >
-                                    Send Message
+                                    {isSubmitting ? 'Sending...' : 'Send Message'}
                                 </Button>
                             </form>
                         </MovingBorderContainer>
@@ -180,6 +225,12 @@ export default function ContactUs() {
                     </div>
                 </div>
             </div>
+            <Toast
+                message={toast?.message || ''}
+                type={toast?.type || 'success'}
+                isVisible={!!toast}
+                onClose={() => setToast(null)}
+            />
         </Section>
     );
 }
