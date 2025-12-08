@@ -20,7 +20,7 @@ export const techStackData: TechCategory[] = [
             { name: "WordPress", image: "/tech-icons/WordPress.svg" },
             { name: "Xano", image: "/tech-icons/Xano.svg" },
             { name: "Wix", image: "/tech-icons/Wix.svg" },
-            { name: "Zapier", image: "/tech-icons/Zapier.svg" },
+            { name: "Airtable", image: "/tech-icons/Airtable.svg" },
         ],
     },
     {
@@ -32,6 +32,17 @@ export const techStackData: TechCategory[] = [
             { name: "Framer", image: "/tech-icons/Framer.svg" },
             { name: "Figma", image: "/tech-icons/Figma.svg" },
             { name: "Twilio", image: "/tech-icons/Twilio.svg" },
+        ],
+    },
+    {
+        title: "Automation Tools",
+        items: [
+            { name: "Zapier", image: "/tech-icons/Zapier.svg" },
+            { name: "Make", image: "/tech-icons/Make.svg" },
+            { name: "Pabbly", image: "/tech-icons/Pabbly.svg" },
+            { name: "n8n", image: "/tech-icons/N8N.svg" },
+            { name: "Jasper", image: "/tech-icons/Jasper.svg" },
+            { name: "Mabl", image: "/tech-icons/Mabl.svg" },
         ],
     },
 ];

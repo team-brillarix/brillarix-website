@@ -25,7 +25,7 @@ export const processSteps: ProcessStep[] = [
     title: "Full-Stack Development",
     subtitle: "Building at Startup Speed",
     descriptionTitle: "Seamless Integration with Full-Stack Development.",
-    description: "With a solid strategy and prototype in hand, our development team jumps into action. Full-stack development ensures your product is scalable, secure, and high-performance. From the front-end user experience to the back-end architecture, every part of your product is built with speed, efficiency, and scalability in mind.",
+    description: "With a solid strategy and prototype in hand, our development team jumps into action. We follow a standard, AI-enhanced SOP for full-stack development to ensure your product is scalable, secure, and high-performance. From the front-end user experience to the back-end architecture, every part of your product is built with speed, efficiency, intelligence, and scalability in mind.",
     icon: "FiCode"
   },
   {
@@ -43,7 +43,7 @@ export const processSteps: ProcessStep[] = [
     title: "Launch & Deployment",
     subtitle: "Go Live",
     descriptionTitle: "Launch Your Product with Confidence.",
-    description: "After thorough testing, we're ready to launch. Whether it's web or mobile, we ensure smooth deployment across all platforms. With continuous integration and delivery (CI/CD), your product is ready for users – fast and flawless.",
+    description: "After thorough testing, we are ready to launch. Whether it is web or mobile, we ensure smooth deployment across all platforms. With continuous integration and delivery (CI/CD), your product is ready for users, fast and flawless.",
     icon: "FiRadio"
   }
 ];

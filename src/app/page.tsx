@@ -22,7 +22,7 @@ export default function Home() {
       <TrustedByInnovators />
       <IndustryExpertise />
       <FAQ />
-      <Blogs />
+      {/* <Blogs /> */}
       <ContactUs />
     </div>
   );
