@@ -1,12 +1,51 @@
+'use client';
+
 import { Heading } from '@/components/ui/Heading';
+import { Button } from '@/components/ui/Button';
+import Script from 'next/script';
+
+declare global {
+  interface Window {
+    Calendly: {
+      initPopupWidget: (options: { url: string }) => void;
+    };
+  }
+}
 
 export default function GetAQuotePage() {
+  const handleCalendlyClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    if (window.Calendly) {
+      window.Calendly.initPopupWidget({
+        url: 'https://calendly.com/team-brillarix/30min?hide_gdpr_banner=1&background_color=1a1a1a&text_color=ffffff&primary_color=ffffff'
+      });
+    }
+    return false;
+  };
+
   return (
-    <div className="h-[calc(100vh-120px)] bg-background flex items-center justify-center">
-      <Heading variant="h1" align="center" className='leading-none!'>
-        Coming Soon
-      </Heading>
-    </div>
+    <>
+      <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet" />
+      <Script
+        src="https://assets.calendly.com/assets/external/widget.js"
+        strategy="lazyOnload"
+      />
+      <div className="h-[calc(100vh-120px)] bg-background flex items-center justify-center">
+        <div className="flex flex-col items-center gap-6">
+          <Heading variant="h1" align="center">
+            Get a Quote
+          </Heading>
+          <Button
+            variant="primary"
+            size="lg"
+            onClick={handleCalendlyClick}
+            href="#"
+          >
+            Book Discovery Call with Brillarix
+          </Button>
+        </div>
+      </div>
+    </>
   );
 }
 

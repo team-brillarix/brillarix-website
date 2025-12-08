@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Image from 'next/image';
+import Script from 'next/script';
 import { Section } from '@/components/ui/Section';
 import { Heading } from '@/components/ui/Heading';
 import { Input } from '@/components/ui/Input';
@@ -13,6 +14,14 @@ import { FiPhone, FiMail } from 'react-icons/fi';
 import { CONTACT_AREA_OF_INTEREST_OPTIONS } from '@/constants/dropdownOptions';
 import { MovingBorderContainer } from '@/components/ui/MovingBorder';
 import { CONTACT_INFO } from '@/constants/contact';
+
+declare global {
+  interface Window {
+    Calendly: {
+      initPopupWidget: (options: { url: string }) => void;
+    };
+  }
+}
 
 export default function ContactUs() {
     const [formData, setFormData] = useState({
@@ -80,9 +89,25 @@ export default function ContactUs() {
         }
     };
 
+    const handleCalendlyClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+        e.preventDefault();
+        if (window.Calendly) {
+            window.Calendly.initPopupWidget({
+                url: 'https://calendly.com/team-brillarix/30min?hide_gdpr_banner=1&background_color=1a1a1a&text_color=ffffff&primary_color=ffffff'
+            });
+        }
+        return false;
+    };
+
     return (
-        <Section title="Contact us" subtitle="Have questions or need assistance? Our team is ready to support you with anything you need." headingAlign="left" headingFullWidth>
-            <div className="w-full">
+        <>
+            <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet" />
+            <Script
+                src="https://assets.calendly.com/assets/external/widget.js"
+                strategy="lazyOnload"
+            />
+            <Section title="Contact us" subtitle="Have questions or need assistance? Our team is ready to support you with anything you need." headingAlign="left" headingFullWidth>
+                <div className="w-full">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 lg:gap-16">
                     <div className="flex flex-col gap-6">
                         <MovingBorderContainer
@@ -174,7 +199,11 @@ export default function ContactUs() {
                                     <span className="text-gray-light-1 font-medium">{CONTACT_INFO.calendly.label}</span>
                                 </div>
 
-                                <a href={CONTACT_INFO.calendly.url} target="_blank" className="bg-gray-light-2 py-3 px-4 flex items-center justify-center rounded-xl">
+                                <a 
+                                    href="#" 
+                                    onClick={handleCalendlyClick}
+                                    className="bg-gray-light-2 py-3 px-4 flex items-center justify-center rounded-xl"
+                                >
                                     <Image
                                         src="/tech-icons/Calendly.png"
                                         alt="Calendly"
@@ -232,6 +261,7 @@ export default function ContactUs() {
                 onClose={() => setToast(null)}
             />
         </Section>
+        </>
     );
 }
 
