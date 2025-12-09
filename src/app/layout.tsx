@@ -124,7 +124,7 @@ export const metadata: Metadata = {
     "mobile-web-app-capable": "yes",
     "msapplication-TileColor": "#000000",
     "theme-color": "#000000",
-    "color-scheme": "dark light",
+    "color-scheme": "dark",
   },
   verification: {
     // google: "your-google-verification-code",
@@ -185,7 +185,7 @@ export default function RootLayout({
   };
 
   return (
-    <html lang="en">
+    <html lang="en" data-theme="dark">
       <head>
         <script
           type="application/ld+json"

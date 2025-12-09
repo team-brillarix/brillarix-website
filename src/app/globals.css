@@ -47,8 +47,8 @@
   --red-light-02: #F29E9C;
   --red-light-01: #FFEBEB;
 
-  --background: var(--gray-light-1);
-  --foreground: var(--gray-dark-10);
+  --background: #08090A;
+  --foreground: var(--gray-light-1);
 }
 
 @theme inline {
@@ -115,13 +115,6 @@
   color: var(--gray-light-3);
   box-shadow: 0 0 17px 0 var(--foreground);
   filter: blur(0.5px);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #08090A;
-    --foreground: var(--gray-light-1);
-  }
 }
 
 html {
@@ -434,6 +427,7 @@ h6 {
 
   /* Responsive helpers for diamond borders */
   @media (min-width: 768px) {
+
     /* Remove bottom diamond border at md and above while keeping it on smaller screens */
     .no-md-bottom-diamond-gradient.border-b-diamond-gradient::before {
       content: none;
@@ -458,6 +452,7 @@ h6 {
   }
 
   @media (min-width: 1024px) {
+
     /* Add left diamond border only at lg and above */
     .lg-border-l-diamond-gradient {
       position: relative;
