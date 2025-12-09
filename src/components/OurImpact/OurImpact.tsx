@@ -28,10 +28,10 @@ export default function OurImpact() {
                 <Swiper
                     modules={[Autoplay, Pagination]}
                     spaceBetween={32}
-                    slidesPerView={2}
+                    slidesPerView={1.05}
                     centeredSlides={true}
                     breakpoints={{
-                        768: { slidesPerView: 1.5, spaceBetween: 28 },
+                        768: { slidesPerView: 1.2, spaceBetween: 28 },
                         1024: { slidesPerView: 2, spaceBetween: 32 },
                         1280: { slidesPerView: 2, spaceBetween: 36 },
                     }}

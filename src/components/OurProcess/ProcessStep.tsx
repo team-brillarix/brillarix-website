@@ -10,8 +10,8 @@ export function ProcessStep({ step }: ProcessStepProps) {
     const iconPath = `/process/${step.id}.svg`;
 
     return (
-        <div className="flex flex-col md:flex-row items-center gap-4 md:gap-6 lg:gap-8 w-full min-h-56">
-            <div className="shrink-0 bg-gray-dark-1 self-stretch flex flex-col items-center justify-center gap-1 py-2 px-6 -m-px">
+        <div className="flex flex-col md:flex-row items-center gap-4 md:gap-6 lg:gap-8 w-full min-h-56 py-4 md:py-0">
+            <div className="shrink-0 bg-gray-dark-1 w-full md:w-auto md:self-stretch flex flex-col items-center justify-center gap-1 py-3 md:py-2 px-4 md:px-6 -m-px rounded-lg md:rounded-none">
                 <p className="text-gray-light-3 text-xs">Time Saved</p>
                 <p className="text-base md:text-lg lg:text-xl font-semibold text-gray-light-1">
                     {step.timeSaved}
@@ -27,7 +27,7 @@ export function ProcessStep({ step }: ProcessStepProps) {
                 />
             </div>
 
-            <div className="shrink-0 md:w-48 lg:w-64 flex flex-col gap-1">
+            <div className="shrink-0 w-full md:w-48 lg:w-64 flex flex-col gap-1 px-2 md:px-0">
                 <Heading
                     variant="h5"
                     as="h3"
@@ -35,12 +35,12 @@ export function ProcessStep({ step }: ProcessStepProps) {
                 >
                     {step.title}
                 </Heading>
-                <p className="text-sm md:text-base text-gray-light-3">
+                <p className="text-xs sm:text-sm md:text-base text-gray-light-3">
                     ({step.subtitle})
                 </p>
             </div>
 
-            <div className="flex-1 flex flex-col gap-2 md:gap-3 min-w-0">
+            <div className="flex-1 flex flex-col gap-2 md:gap-3 min-w-0 w-full md:w-auto px-2 md:px-0">
                 <Heading
                     variant="h6"
                     as="h4"
@@ -48,7 +48,7 @@ export function ProcessStep({ step }: ProcessStepProps) {
                 >
                     {step.descriptionTitle}
                 </Heading>
-                <p className="text-sm md:text-base text-gray-light-5 leading-relaxed">
+                <p className="text-xs sm:text-sm md:text-base text-gray-light-5 leading-relaxed">
                     {step.description}
                 </p>
             </div>
