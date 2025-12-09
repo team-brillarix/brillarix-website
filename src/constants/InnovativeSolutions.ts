@@ -1,12 +1,12 @@
 export const sidebarItems = [
   'Full Stack Application Development',
+  'No-Code App Development',
+  'Enterprise Grade Solution',
   'Cross-Platform Mobile App Engineering',
-  'Optimized User Experience & Conversion Flow',
   'Database Architecture & Performance Tuning',
   'Secure Backend Workflows & Automation',
-  'No-Code App Development',
   'End-to-End API Design & Integration',
-  'Enterprise Grade Solution',
+  'Optimized User Experience & Conversion Flow',
 ];
 
 export const noCodeFeatures = [

@@ -108,7 +108,7 @@ export default function InnovativeSolutions() {
               transition={{ duration: 0.8 }}
             />
             <motion.div
-              className="flex flex-col gap-1.5 md:gap-4 space-between absolute z-12 w-fit max-w-70 top-[2%] sm:top-[5%] md:top-54 left-[2%] sm:left-[3%] md:left-10 h-auto max-h-[96%] md:h-120 overflow-y-auto"
+              className="hidden sm:flex flex-col gap-1.5 md:gap-4 space-between absolute z-12 max-w-70 top-[2%] sm:top-[5%] md:top-54 left-[2%] sm:left-[3%] md:left-10 h-auto max-h-[96%] md:h-120 overflow-y-auto"
               variants={sidebarVariants}
               initial="hidden"
               animate={isParentInView ? "visible" : "hidden"}
@@ -192,6 +192,17 @@ export default function InnovativeSolutions() {
               </motion.div>
             </div>
           </motion.div>
+          {/* Mobile sidebar - shown below sm breakpoint */}
+          <div className="flex justify-center sm:hidden flex-col gap-3 w-full">
+            {sidebarItems.map((item) => (
+              <div
+                key={item}
+                className="flex h-auto items-center justify-center min-h-10 rounded-lg py-1.5 px-2 bg-[#D1D1D1]/10 backdrop-blur-sm corner-border shrink-0"
+              >
+                <p className="text-xs text-gray-light-1 font-normal whitespace-nowrap">{item}</p>
+              </div>
+            ))}
+          </div>
           </div>
           <Button
             variant="secondary"
@@ -264,10 +275,10 @@ export default function InnovativeSolutions() {
                     <Image
                       src="/innovative-solutions/cursor-icon.svg"
                       alt="cursor icon"
-                      height={34}
-                      width={34}
+                      height={28}
+                      width={28}
                       priority
-                      className="object-contain w-[clamp(20px,3vw,34px)] h-[clamp(20px,3vw,34px)]"
+                      className="object-contain w-[clamp(20px,3vw,28px)] h-[clamp(20px,3vw,28px)]"
                     />
                   </motion.div>
                 )}
