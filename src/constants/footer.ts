@@ -2,7 +2,7 @@ import { FaXTwitter, FaLinkedinIn, FaInstagram } from "react-icons/fa6";
 
 export const footerNavigationLinks = [
     { href: "#our-services", label: "Services" },
-    { href: "#our-impact", label: "Our Work" },
+    { href: "#our-impact", label: "Our Impact" },
     { href: "#contact-us", label: "Contact Us" },
     { href: "/get-quote", label: "Get a Quote" },
 ] as const;
