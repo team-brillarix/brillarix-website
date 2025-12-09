@@ -214,42 +214,22 @@ export default function ContactUs() {
 
                                 </MovingBorderContainer>
 
-                                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 w-full">
-                                    <MovingBorderContainer
-                                        borderRadius="1rem"
-                                        duration={28000}
-                                        containerClassName="w-full"
-                                        innerClassName="bg-gray-dark-2 p-6 flex gap-4 items-center"
-                                    >
-                                        <div className="w-12 h-12 rounded-full flex items-center justify-center shrink-0 border border-gray-dark-4">
-                                            <FiPhone className="w-5 h-5 text-gray-light-1" />
-                                        </div>
-                                        <div className="flex flex-col gap-2">
-                                            <span className="text-gray-light-1 font-medium">{CONTACT_INFO.phone.label}</span>
-                                            <p className="text-gray-light-5">
-                                                Office : {CONTACT_INFO.phone.office}
-                                            </p>
-                                        </div>
-
-                                    </MovingBorderContainer>
-
-                                    <MovingBorderContainer
-                                        borderRadius="1rem"
-                                        duration={32000}
-                                        containerClassName="w-full"
-                                        innerClassName="bg-gray-dark-2 p-6 flex gap-3 items-center"
-                                    >
-                                        <div className="w-12 h-12 rounded-full flex items-center justify-center shrink-0 border border-gray-dark-4">
-                                            <FiMail className="w-5 h-5 text-gray-light-1" />
-                                        </div>
-                                        <div className="flex flex-col gap-2">
-                                            <span className="text-gray-light-1 font-medium">{CONTACT_INFO.email.label}</span>
-                                            <p className="text-gray-light-5">
-                                                {CONTACT_INFO.email.address}
-                                            </p>
-                                        </div>
-                                    </MovingBorderContainer>
-                                </div>
+                                <MovingBorderContainer
+                                    borderRadius="1rem"
+                                    duration={32000}
+                                    containerClassName="w-full"
+                                    innerClassName="bg-gray-dark-2 p-6 flex gap-3 items-center"
+                                >
+                                    <div className="w-12 h-12 rounded-full flex items-center justify-center shrink-0 border border-gray-dark-4">
+                                        <FiMail className="w-5 h-5 text-gray-light-1" />
+                                    </div>
+                                    <div className="flex flex-col gap-2">
+                                        <span className="text-gray-light-1 font-medium">{CONTACT_INFO.email.label}</span>
+                                        <p className="text-gray-light-5">
+                                            {CONTACT_INFO.email.address}
+                                        </p>
+                                    </div>
+                                </MovingBorderContainer>
                             </div>
                         </div>
                     </div>
