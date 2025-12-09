@@ -2,7 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
-import { cn } from "@/lib/utils";
+import { cn, scrollToSection } from "@/lib/utils";
 
 export type ButtonVariant = "primary" | "secondary" | "tertiary";
 export type ButtonSize = "sm" | "md" | "lg";
@@ -236,6 +236,20 @@ export const Button = React.forwardRef<HTMLButtonElement | HTMLAnchorElement, Bu
       ? styles.wrapper.replace('w-fit', 'w-full').replace('inline-block', 'block')
       : styles.wrapper;
 
+    const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+      if (onClick) {
+        onClick(e);
+      }
+
+      if (href && href.startsWith('#')) {
+        const elementId = href.substring(1);
+        if (elementId) {
+          e.preventDefault();
+          scrollToSection(elementId);
+        }
+      }
+    };
+
     const content = (
       <>
         {loading && (
@@ -264,7 +278,7 @@ export const Button = React.forwardRef<HTMLButtonElement | HTMLAnchorElement, Bu
               target={target}
               rel={rel}
               {...(finalId && { id: finalId })}
-              onClick={onClick}
+              onClick={handleLinkClick}
               aria-describedby={cn(
                 error ? errorId : undefined,
                 helperText && !error ? helperId : undefined,
