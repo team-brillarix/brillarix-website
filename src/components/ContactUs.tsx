@@ -16,11 +16,11 @@ import { MovingBorderContainer } from '@/components/ui/MovingBorder';
 import { CONTACT_INFO } from '@/constants/contact';
 
 declare global {
-  interface Window {
-    Calendly: {
-      initPopupWidget: (options: { url: string }) => void;
-    };
-  }
+    interface Window {
+        Calendly: {
+            initPopupWidget: (options: { url: string }) => void;
+        };
+    }
 }
 
 export default function ContactUs() {
@@ -93,7 +93,7 @@ export default function ContactUs() {
         e.preventDefault();
         if (window.Calendly) {
             window.Calendly.initPopupWidget({
-                url: 'https://calendly.com/team-brillarix/30min?hide_gdpr_banner=1&background_color=1a1a1a&text_color=ffffff&primary_color=ffffff'
+                url: CONTACT_INFO.calendly.url
             });
         }
         return false;
@@ -108,159 +108,159 @@ export default function ContactUs() {
             />
             <Section title="Contact us" subtitle="Have questions or need assistance? Our team is ready to support you with anything you need." headingAlign="left" headingFullWidth id="contact-us">
                 <div className="w-full">
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 lg:gap-16">
-                    <div className="flex flex-col gap-6">
-                        <MovingBorderContainer
-                            borderRadius="1.5rem"
-                            duration={20000}
-                            innerClassName="bg-gray-dark-1 p-6 md:p-8 flex flex-col gap-6"
-                        >
-                            <form onSubmit={handleSubmit} className="flex flex-col gap-6">
-                                <Input
-                                    label="NAME"
-                                    value={formData.name}
-                                    onChange={(e) => handleInputChange('name', e.target.value)}
-                                    placeholder="Enter your name"
-                                    required
-                                />
-
-                                <Input
-                                    label="EMAIL"
-                                    type="email"
-                                    value={formData.email}
-                                    onChange={(e) => handleInputChange('email', e.target.value)}
-                                    placeholder="Enter your email"
-                                    required
-                                />
-
-                                <Dropdown
-                                    label="AREA OF INTEREST"
-                                    options={CONTACT_AREA_OF_INTEREST_OPTIONS}
-                                    value={formData.areaOfInterest}
-                                    onChange={(value) => handleInputChange('areaOfInterest', value)}
-                                    placeholder="Select an area of interest"
-                                    required
-                                />
-
-                                <Textarea
-                                    label="MESSAGE"
-                                    value={formData.message}
-                                    onChange={(e) => handleInputChange('message', e.target.value)}
-                                    minHeight="120px"
-                                    placeholder="Enter your message"
-                                    required
-                                />
-
-                                <Button
-                                    type="submit"
-                                    variant="primary"
-                                    fullWidth
-                                    disabled={isSubmitting}
-                                >
-                                    {isSubmitting ? 'Sending...' : 'Send Message'}
-                                </Button>
-                            </form>
-                        </MovingBorderContainer>
-                    </div>
-
-                    <div className="flex flex-col gap-6 justify-between">
-                        <div className="flex flex-col gap-4">
-                            <Heading
-                                variant="h5"
-                                as="h3"
-                                align="left"
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 lg:gap-16">
+                        <div className="flex flex-col gap-6">
+                            <MovingBorderContainer
+                                borderRadius="1.5rem"
+                                duration={20000}
+                                innerClassName="bg-gray-dark-1 p-6 md:p-8 flex flex-col gap-6"
                             >
-                                What Can We Assist You With Today?
-                            </Heading>
+                                <form onSubmit={handleSubmit} className="flex flex-col gap-6">
+                                    <Input
+                                        label="NAME"
+                                        value={formData.name}
+                                        onChange={(e) => handleInputChange('name', e.target.value)}
+                                        placeholder="Enter your name"
+                                        required
+                                    />
 
-                            <ol className="flex flex-col gap-3 text-gray-light-5 leading-relaxed list-decimal list-inside">
-                                <li>Need help exploring our offerings?</li>
-                                <li>Experiencing a technical problem or issue?</li>
-                                <li>Want to learn more about a specific service or feature?</li>
-                                <li>We value your feedback and suggestions to improve!</li>
-                            </ol>
+                                    <Input
+                                        label="EMAIL"
+                                        type="email"
+                                        value={formData.email}
+                                        onChange={(e) => handleInputChange('email', e.target.value)}
+                                        placeholder="Enter your email"
+                                        required
+                                    />
+
+                                    <Dropdown
+                                        label="AREA OF INTEREST"
+                                        options={CONTACT_AREA_OF_INTEREST_OPTIONS}
+                                        value={formData.areaOfInterest}
+                                        onChange={(value) => handleInputChange('areaOfInterest', value)}
+                                        placeholder="Select an area of interest"
+                                        required
+                                    />
+
+                                    <Textarea
+                                        label="MESSAGE"
+                                        value={formData.message}
+                                        onChange={(e) => handleInputChange('message', e.target.value)}
+                                        minHeight="120px"
+                                        placeholder="Enter your message"
+                                        required
+                                    />
+
+                                    <Button
+                                        type="submit"
+                                        variant="primary"
+                                        fullWidth
+                                        disabled={isSubmitting}
+                                    >
+                                        {isSubmitting ? 'Sending...' : 'Send Message'}
+                                    </Button>
+                                </form>
+                            </MovingBorderContainer>
                         </div>
 
-                        <div className="flex flex-col gap-6 lg:gap-8">
-                            <MovingBorderContainer
-                                borderRadius="1rem"
-                                duration={24000}
-                                innerClassName="bg-gray-dark-2 p-6 flex items-center justify-between gap-4"
-                            >
-                                <div className="flex items-center gap-4">
-                                    <div className="w-12 h-12 rounded-full flex items-center justify-center shrink-0 border border-gray-dark-4">
+                        <div className="flex flex-col gap-6 justify-between">
+                            <div className="flex flex-col gap-4">
+                                <Heading
+                                    variant="h5"
+                                    as="h3"
+                                    align="left"
+                                >
+                                    What Can We Assist You With Today?
+                                </Heading>
+
+                                <ol className="flex flex-col gap-3 text-gray-light-5 leading-relaxed list-decimal list-inside">
+                                    <li>Need help exploring our offerings?</li>
+                                    <li>Experiencing a technical problem or issue?</li>
+                                    <li>Want to learn more about a specific service or feature?</li>
+                                    <li>We value your feedback and suggestions to improve!</li>
+                                </ol>
+                            </div>
+
+                            <div className="flex flex-col gap-6 lg:gap-8">
+                                <MovingBorderContainer
+                                    borderRadius="1rem"
+                                    duration={24000}
+                                    innerClassName="bg-gray-dark-2 p-6 flex items-center justify-between gap-4"
+                                >
+                                    <div className="flex items-center gap-4">
+                                        <div className="w-12 h-12 rounded-full flex items-center justify-center shrink-0 border border-gray-dark-4">
+                                            <Image
+                                                src="/BookMeeting.svg"
+                                                alt="Book a Meeting"
+                                                width={20}
+                                                height={20}
+                                            />
+                                        </div>
+                                        <span className="text-gray-light-1 font-medium">{CONTACT_INFO.calendly.label}</span>
+                                    </div>
+
+                                    <a
+                                        href="#"
+                                        onClick={handleCalendlyClick}
+                                        className="bg-gray-light-2 py-3 px-4 flex items-center justify-center rounded-xl"
+                                    >
                                         <Image
-                                            src="/BookMeeting.svg"
-                                            alt="Book a Meeting"
-                                            width={20}
-                                            height={20}
+                                            src="/tech-icons/Calendly.png"
+                                            alt="Calendly"
+                                            width={135}
+                                            height={32}
                                         />
-                                    </div>
-                                    <span className="text-gray-light-1 font-medium">{CONTACT_INFO.calendly.label}</span>
+                                    </a>
+
+                                </MovingBorderContainer>
+
+                                <div className="flex flex-row gap-6 lg:gap-8 w-full">
+                                    <MovingBorderContainer
+                                        borderRadius="1rem"
+                                        duration={28000}
+                                        containerClassName="w-full"
+                                        innerClassName="bg-gray-dark-2 p-6 flex gap-4 items-center"
+                                    >
+                                        <div className="w-12 h-12 rounded-full flex items-center justify-center shrink-0 border border-gray-dark-4">
+                                            <FiPhone className="w-5 h-5 text-gray-light-1" />
+                                        </div>
+                                        <div className="flex flex-col gap-2">
+                                            <span className="text-gray-light-1 font-medium">{CONTACT_INFO.phone.label}</span>
+                                            <p className="text-gray-light-5">
+                                                Office : {CONTACT_INFO.phone.office}
+                                            </p>
+                                        </div>
+
+                                    </MovingBorderContainer>
+
+                                    <MovingBorderContainer
+                                        borderRadius="1rem"
+                                        duration={32000}
+                                        containerClassName="w-full"
+                                        innerClassName="bg-gray-dark-2 p-6 flex gap-3 items-center"
+                                    >
+                                        <div className="w-12 h-12 rounded-full flex items-center justify-center shrink-0 border border-gray-dark-4">
+                                            <FiMail className="w-5 h-5 text-gray-light-1" />
+                                        </div>
+                                        <div className="flex flex-col gap-2">
+                                            <span className="text-gray-light-1 font-medium">{CONTACT_INFO.email.label}</span>
+                                            <p className="text-gray-light-5">
+                                                {CONTACT_INFO.email.address}
+                                            </p>
+                                        </div>
+                                    </MovingBorderContainer>
                                 </div>
-
-                                <a 
-                                    href="#" 
-                                    onClick={handleCalendlyClick}
-                                    className="bg-gray-light-2 py-3 px-4 flex items-center justify-center rounded-xl"
-                                >
-                                    <Image
-                                        src="/tech-icons/Calendly.png"
-                                        alt="Calendly"
-                                        width={135}
-                                        height={32}
-                                    />
-                                </a>
-
-                            </MovingBorderContainer>
-
-                            <div className="flex flex-row gap-6 lg:gap-8 w-full">
-                                <MovingBorderContainer
-                                    borderRadius="1rem"
-                                    duration={28000}
-                                    containerClassName="w-full"
-                                    innerClassName="bg-gray-dark-2 p-6 flex gap-4 items-center"
-                                >
-                                    <div className="w-12 h-12 rounded-full flex items-center justify-center shrink-0 border border-gray-dark-4">
-                                        <FiPhone className="w-5 h-5 text-gray-light-1" />
-                                    </div>
-                                    <div className="flex flex-col gap-2">
-                                        <span className="text-gray-light-1 font-medium">{CONTACT_INFO.phone.label}</span>
-                                        <p className="text-gray-light-5">
-                                            Office : {CONTACT_INFO.phone.office}
-                                        </p>
-                                    </div>
-
-                                </MovingBorderContainer>
-
-                                <MovingBorderContainer
-                                    borderRadius="1rem"
-                                    duration={32000}
-                                    containerClassName="w-full"
-                                    innerClassName="bg-gray-dark-2 p-6 flex gap-3 items-center"
-                                >
-                                    <div className="w-12 h-12 rounded-full flex items-center justify-center shrink-0 border border-gray-dark-4">
-                                        <FiMail className="w-5 h-5 text-gray-light-1" />
-                                    </div>
-                                    <div className="flex flex-col gap-2">
-                                        <span className="text-gray-light-1 font-medium">{CONTACT_INFO.email.label}</span>
-                                        <p className="text-gray-light-5">
-                                            {CONTACT_INFO.email.address}
-                                        </p>
-                                    </div>
-                                </MovingBorderContainer>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <Toast
-                message={toast?.message || ''}
-                type={toast?.type || 'success'}
-                isVisible={!!toast}
-                onClose={() => setToast(null)}
-            />
-        </Section>
+                <Toast
+                    message={toast?.message || ''}
+                    type={toast?.type || 'success'}
+                    isVisible={!!toast}
+                    onClose={() => setToast(null)}
+                />
+            </Section>
         </>
     );
 }

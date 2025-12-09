@@ -3,6 +3,7 @@
 import { Heading } from '@/components/ui/Heading';
 import { Button } from '@/components/ui/Button';
 import Script from 'next/script';
+import { CONTACT_INFO } from '@/constants/contact';
 
 declare global {
   interface Window {
@@ -17,7 +18,7 @@ export default function GetAQuotePage() {
     e.preventDefault();
     if (window.Calendly) {
       window.Calendly.initPopupWidget({
-        url: 'https://calendly.com/team-brillarix/30min?hide_gdpr_banner=1&background_color=1a1a1a&text_color=ffffff&primary_color=ffffff'
+        url: CONTACT_INFO.calendly.url
       });
     }
     return false;
