@@ -16,6 +16,7 @@ export default function OurImpact() {
 
     return (
         <Section
+            id="our-impact"
             title="Our Impact"
             subtitle="Brillarix turns ideas into results, delivering fast, scalable, and innovative solutions that drive growth and efficiency."
         >

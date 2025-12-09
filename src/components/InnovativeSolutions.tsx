@@ -76,6 +76,7 @@ export default function InnovativeSolutions() {
       headingVariant="h2"
       headingAlign="center"
       className="bg-background"
+      id="our-services"
     >
       <div className="w-full flex flex-col">
         <div className="w-full flex flex-col py-12 gap-6 sm:gap-8">

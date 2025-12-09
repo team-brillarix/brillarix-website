@@ -2,7 +2,7 @@ import { FaXTwitter, FaLinkedinIn, FaInstagram } from "react-icons/fa6";
 
 export const footerNavigationLinks = [
     { href: "#our-services", label: "Services" },
-    { href: "#our-work", label: "Our Work" },
+    { href: "#our-impact", label: "Our Work" },
     { href: "#contact-us", label: "Contact Us" },
     { href: "/get-quote", label: "Get a Quote" },
 ] as const;
@@ -19,7 +19,7 @@ export const footerSocialLinks = [
         icon: FaInstagram,
     },
     {
-        href: "https://linkedin.com/company/brillarix",
+        href: "https://www.linkedin.com/company/brillarixtech",
         label: "LinkedIn",
         icon: FaLinkedinIn,
     },

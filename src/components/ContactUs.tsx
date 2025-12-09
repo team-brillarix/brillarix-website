@@ -106,7 +106,7 @@ export default function ContactUs() {
                 src="https://assets.calendly.com/assets/external/widget.js"
                 strategy="lazyOnload"
             />
-            <Section title="Contact us" subtitle="Have questions or need assistance? Our team is ready to support you with anything you need." headingAlign="left" headingFullWidth>
+            <Section title="Contact us" subtitle="Have questions or need assistance? Our team is ready to support you with anything you need." headingAlign="left" headingFullWidth id="contact-us">
                 <div className="w-full">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 lg:gap-16">
                     <div className="flex flex-col gap-6">

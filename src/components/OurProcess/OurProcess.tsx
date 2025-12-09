@@ -9,6 +9,7 @@ export default function OurProcess() {
 From Concept to Launch, Faster Than Ever"
       subtitle="A streamlined, AI-powered process that accelerates every step of your product development, ensuring faster, smarter, and more reliable results."
       className="py-16 md:py-20 px-4 sm:px-6 md:px-8"
+      id="process"
     >
       <div className="w-full flex flex-col">
         {processSteps.map((step, index) => (

@@ -11,6 +11,7 @@ interface SectionProps {
   headingFullWidth?: boolean;
   className?: string;
   contentClassName?: string;
+  id?: string;
 }
 
 export function Section({
@@ -23,9 +24,10 @@ export function Section({
   headingFullWidth = false,
   className = '',
   contentClassName = '',
+  id,
 }: SectionProps) {
   return (
-    <section className={`w-full py-12 sm:py-16 md:py-20 px-4 sm:px-6 md:px-8 flex flex-col items-center justify-center gap-6 sm:gap-10 md:gap-12 ${className}`}>
+    <section id={id} className={`w-full py-12 sm:py-16 md:py-20 px-4 sm:px-6 md:px-8 flex flex-col items-center justify-center gap-6 sm:gap-10 md:gap-12 ${className}`}>
       {title && (
         <Heading
           variant={headingVariant}
