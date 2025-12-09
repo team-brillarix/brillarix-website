@@ -39,7 +39,7 @@ export const noCodeFeatures = [
 export const animationSequence = [2, 1, 5, 2];
 
 export const overlayVariants = {
-  hidden: { 
+  hidden: {
     opacity: 0.7,
     transition: { duration: 0.8 },
   },
@@ -50,7 +50,7 @@ export const overlayVariants = {
 };
 
 export const sidebarVariants = {
-  hidden: { 
+  hidden: {
     opacity: 0,
     transition: { duration: 0.8 },
   },
@@ -64,7 +64,7 @@ export const imagePositionVariants = {
   hidden: {
     top: '41.8%',
     left: '80.9%',
-    transition: { 
+    transition: {
       duration: 0.8,
       ease: 'easeOut' as const,
     },
@@ -72,7 +72,7 @@ export const imagePositionVariants = {
   visible: {
     top: '48.4%',
     left: '83.1%',
-    transition: { 
+    transition: {
       duration: 0.8,
       ease: 'easeOut' as const,
     },
@@ -83,7 +83,7 @@ export const imagePositionVariants2 = {
   hidden: {
     top: '9.9%',
     left: '83.4%',
-    transition: { 
+    transition: {
       duration: 0.8,
       ease: 'easeOut' as const,
     },
@@ -91,7 +91,7 @@ export const imagePositionVariants2 = {
   visible: {
     top: '3.8%',
     left: '85.6%',
-    transition: { 
+    transition: {
       duration: 0.8,
       ease: 'easeOut' as const,
     },
@@ -102,7 +102,7 @@ export const imagePositionVariants3 = {
   hidden: {
     top: '3.3%',
     left: '-1.6%',
-    transition: { 
+    transition: {
       duration: 0.8,
       ease: 'easeOut' as const,
     },
@@ -110,7 +110,7 @@ export const imagePositionVariants3 = {
   visible: {
     top: '-6.9%',
     left: '7.8%',
-    transition: { 
+    transition: {
       duration: 0.8,
       ease: 'easeOut' as const,
     },
@@ -121,7 +121,7 @@ export const imagePositionVariants4 = {
   hidden: {
     top: '20.3%',
     left: '29.4%',
-    transition: { 
+    transition: {
       duration: 0.8,
       ease: 'easeOut' as const,
     },
@@ -129,7 +129,83 @@ export const imagePositionVariants4 = {
   visible: {
     top: '29.1%',
     left: '35.6%',
-    transition: { 
+    transition: {
+      duration: 0.8,
+      ease: 'easeOut' as const,
+    },
+  },
+};
+
+export const imagePositionVariantsMobile = {
+  hidden: {
+    top: '41.8%',
+    left: '60%',
+    transition: {
+      duration: 0.8,
+      ease: 'easeOut' as const,
+    },
+  },
+  visible: {
+    top: '48.4%',
+    left: '62%',
+    transition: {
+      duration: 0.8,
+      ease: 'easeOut' as const,
+    },
+  },
+};
+
+export const imagePositionVariants2Mobile = {
+  hidden: {
+    top: '9.9%',
+    left: '62%',
+    transition: {
+      duration: 0.8,
+      ease: 'easeOut' as const,
+    },
+  },
+  visible: {
+    top: '3.8%',
+    left: '75%',
+    transition: {
+      duration: 0.8,
+      ease: 'easeOut' as const,
+    },
+  },
+};
+
+export const imagePositionVariants3Mobile = {
+  hidden: {
+    top: '3.3%',
+    left: '-15%',
+    transition: {
+      duration: 0.8,
+      ease: 'easeOut' as const,
+    },
+  },
+  visible: {
+    top: '-6.9%',
+    left: '-10%',
+    transition: {
+      duration: 0.8,
+      ease: 'easeOut' as const,
+    },
+  },
+};
+
+export const imagePositionVariants4Mobile = {
+  hidden: {
+    top: '20.3%',
+    left: '15%',
+    transition: {
+      duration: 0.8,
+      ease: 'easeOut' as const,
+    },
+  },
+  visible: {
+    top: '29.1%',
+    left: '20%',
+    transition: {
       duration: 0.8,
       ease: 'easeOut' as const,
     },
