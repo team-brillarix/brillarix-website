@@ -1,6 +1,9 @@
+'use client';
+
 import { ProcessStep as ProcessStepType } from '@/types/process';
 import Image from 'next/image';
 import { Heading } from '@/components/ui/Heading';
+import { motion } from 'motion/react';
 
 interface ProcessStepProps {
     step: ProcessStepType;
@@ -18,13 +21,19 @@ export function ProcessStep({ step }: ProcessStepProps) {
                 </p>
             </div>
 
-            <div className="shrink-0 w-16 h-16 md:w-28 md:h-28 lg:w-34 lg:h-34 rounded-3xl border border-gray-dark-8 bg-[linear-gradient(180deg,#1D1D1D_0%,#0D0D0D_100%)] flex items-center justify-center self-center relative overflow-hidden">
-                <Image
-                    src={iconPath}
-                    alt={step.title}
-                    fill
-                    className='object-contain'
-                />
+            <div className="shrink-0 border-gradient rounded-3xl w-16 h-16 md:w-28 md:h-28 lg:w-34 lg:h-34 self-center">
+                <motion.div
+                    className="flex items-center justify-center rounded-3xl bg-[linear-gradient(180deg,#1D1D1D_0%,#0D0D0D_100%)] relative overflow-hidden cursor-pointer h-full w-full"
+                    whileHover={{ margin: '4px' }}
+                    transition={{ duration: 0.2, ease: 'easeOut' }}
+                >
+                    <Image
+                        src={iconPath}
+                        alt={step.title}
+                        fill
+                        className='object-contain'
+                    />
+                </motion.div>
             </div>
 
             <div className="shrink-0 w-full md:w-48 lg:w-64 flex flex-col gap-1 px-2 md:px-0">
