@@ -36,7 +36,7 @@ export function ImpactCard({ project, isActive }: { project: ImpactProject; isAc
             </div>
 
             {/* Project Details */}
-            <div className="flex justify-between items-center gap-6 lg:gap-8 py-4 px-6 bg-gray-dark-1 h-full">
+            <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 sm:gap-6 lg:gap-8 py-4 px-4 sm:px-6 bg-gray-dark-1 h-full">
                 {/* Title and Description */}
                 <div className="flex-1 min-w-0">
                     <Heading
@@ -50,13 +50,13 @@ export function ImpactCard({ project, isActive }: { project: ImpactProject; isAc
                 </div>
 
                 {/* Metrics */}
-                <div className="flex items-center gap-4 max-w-[40%]">
-                    <p className="text-sm text-gray-light-2">
+                <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4 w-full sm:w-auto sm:max-w-[40%]">
+                    <p className="text-xs sm:text-sm text-gray-light-2">
                         {project.metrics.label}
                     </p>
-                    <div className="px-4 py-2 rounded-lg bg-gray-dark-3 shrink-0 text-gray-light-1 flex flex-col items-center">
+                    <div className="px-3 sm:px-4 py-2 rounded-lg bg-gray-dark-3 shrink-0 text-gray-light-1 flex flex-row sm:flex-col items-center justify-center sm:justify-start gap-1 sm:gap-0 w-fit sm:w-auto">
                         <p className="text-xs">Up to</p>
-                        <p className="font-bold text-lg">
+                        <p className="font-bold text-base sm:text-lg">
                             {project.metrics.value}
                         </p>
                     </div>
