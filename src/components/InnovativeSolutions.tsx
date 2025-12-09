@@ -108,7 +108,7 @@ export default function InnovativeSolutions() {
               transition={{ duration: 0.8 }}
             />
             <motion.div
-              className="flex flex-col gap-1.5 md:gap-4 space-between absolute z-12 w-[35%] sm:w-[30%] md:w-55 max-w-55 top-[2%] sm:top-[5%] md:top-54 left-[2%] sm:left-[3%] md:left-10 h-auto max-h-[96%] md:h-120 overflow-y-auto"
+              className="flex flex-col gap-1.5 md:gap-4 space-between absolute z-12 w-fit max-w-70 top-[2%] sm:top-[5%] md:top-54 left-[2%] sm:left-[3%] md:left-10 h-auto max-h-[96%] md:h-120 overflow-y-auto"
               variants={sidebarVariants}
               initial="hidden"
               animate={isParentInView ? "visible" : "hidden"}
@@ -211,7 +211,7 @@ export default function InnovativeSolutions() {
                 as="h3"
                 align="left"
                 className="text-gray-light-1"
-                subtitle="Bring your ideas to life with rapid prototyping and MVP development powered by AI and no-code tools. Save time and costs with automation, seamless database integrations, and scalable solutions – all with zero code required."
+                subtitle="Bring your ideas to life with rapid prototyping and MVP development powered by AI and no-code tools. Save time and costs with automation, seamless database integrations, and scalable solutions — all with zero code required."
                 subtitleAs="p"
                 subtitleClassName="text-sm sm:text-base text-gray-light-3 leading-relaxed"
               >
@@ -241,9 +241,9 @@ export default function InnovativeSolutions() {
                         ref={(el) => {
                           featureRefs.current[index] = el;
                         }}
-                        className={`relative flex items-center justify-center h-7.5 sm:h-9 text-2.5 sm:text-xs md:text-xs font-medium text-gray-light-1 backdrop-blur-sm corner-border px-2 md:px-3 lg:px-4 rounded-lg bg-[#D1D1D1]/10 hover:shadow-[0_0_14px_0_rgba(249,249,249,0.25)] transition-shadow duration-300 overflow-hidden ${isActive ? 'shadow-[0_0_14px_0_rgba(249,249,249,0.25)]' : ''}`}
+                        className={`relative flex items-center justify-center h-10 text-xs text-gray-light-1 backdrop-blur-sm corner-border px-2 md:px-3 lg:px-4 rounded-lg bg-[#D1D1D1]/10 hover:shadow-[0_0_14px_0_rgba(249,249,249,0.25)] transition-shadow duration-300 overflow-hidden ${isActive ? 'shadow-[0_0_14px_0_rgba(249,249,249,0.25)]' : ''}`}
                       >
-                        <p className="text-center max-w-full line-clamp-2 sm:line-clamp-3 break-words">
+                        <p className="text-center max-w-full line-clamp-2 sm:line-clamp-3 wrap-break-words">
                           {feature.text}
                         </p>
                       </div>
@@ -284,7 +284,7 @@ export default function InnovativeSolutions() {
             </Button>
           </div>
 
-          <div className="flex flex-col border-l-diamond-gradient gap-6 sm:gap-8 py-12 md:pl-12 border-b-diamond-gradient">
+          <div className="flex flex-col lg-border-l-diamond-gradient gap-6 sm:gap-8 py-12 lg:pl-12 border-b-diamond-gradient">
             <div className="flex flex-col gap-4 sm:gap-6 pr-20">
               <Heading
                 variant="h4"

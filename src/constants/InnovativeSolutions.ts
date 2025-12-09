@@ -1,12 +1,12 @@
 export const sidebarItems = [
-  'Activity',
-  'Notepad',
-  'Lead Scoring',
-  'Recent Deals',
-  'Activity Updates',
-  'Deal Management',
-  'Task Management',
-  'Customer Contact Info',
+  'Full Stack Application Development',
+  'Cross-Platform Mobile App Engineering',
+  'Optimized User Experience & Conversion Flow',
+  'Database Architecture & Performance Tuning',
+  'Secure Backend Workflows & Automation',
+  'No-Code App Development',
+  'End-to-End API Design & Integration',
+  'Enterprise Grade Solution',
 ];
 
 export const noCodeFeatures = [

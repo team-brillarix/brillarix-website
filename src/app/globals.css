@@ -456,6 +456,25 @@ h6 {
       pointer-events: none;
     }
   }
+
+  @media (min-width: 1024px) {
+    /* Add left diamond border only at lg and above */
+    .lg-border-l-diamond-gradient {
+      position: relative;
+    }
+
+    .lg-border-l-diamond-gradient::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -1px;
+      bottom: 0;
+      width: 1px;
+      background: var(--background-image-diamond-gradient-vertical);
+      z-index: 30;
+      pointer-events: none;
+    }
+  }
 }
 
 /* Swiper */
