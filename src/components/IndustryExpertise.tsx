@@ -15,6 +15,7 @@ export default function IndustryExpertise() {
         <Section
             title="Industry Expertise Tailored Solutions for Every Sector"
             subtitle="Brillarix powers businesses across industries with AI-driven, no-code solutions that deliver results faster, smarter, and more efficiently."
+            id="industry"
         >
             {/* Industry Cards Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

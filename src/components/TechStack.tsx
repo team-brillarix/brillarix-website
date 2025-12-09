@@ -12,6 +12,7 @@ export default function TechStack() {
     <Section
       title="Cutting-Edge Technologies for Scalable Solutions"
       subtitle="We use the latest AI, no-code, and full-stack tools to deliver efficient, scalable results."
+      id="tools"
     >
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 md:gap-10 lg:gap-12">
         {techStackData.map((category, categoryIndex) => (
