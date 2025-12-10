@@ -39,8 +39,7 @@ export function InnovatorCard({ innovator }: InnovatorCardProps) {
       <hr className="border-gray-light-9" />
 
       <div className="flex flex-row items-center justify-between">
-        <Image src="/logos/Logo-Dark-Mode.png" alt="Penguin" width={48} height={48} className="object-contain" />
-        <p className="text-base font-medium text-white">{innovator.date}</p>
+        <Image src={innovator.companyLogo} alt={innovator.company} width={48} height={48} className="object-contain" />
       </div>
     </div>
   );
