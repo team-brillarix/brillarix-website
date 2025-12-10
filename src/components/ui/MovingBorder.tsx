@@ -167,7 +167,26 @@ export const MovingBorder = ({
     [key: string]: any;
 }) => {
     const pathRef = useRef<SVGRectElement | null>(null);
+    const svgRef = useRef<SVGSVGElement | null>(null);
     const progress = useMotionValue<number>(0);
+    const [svgWidth, setSvgWidth] = useState<number>(0);
+
+    useEffect(() => {
+        const updateWidth = () => {
+            if (svgRef.current) {
+                const rect = svgRef.current.getBoundingClientRect();
+                setSvgWidth(rect.width);
+            }
+        };
+
+        updateWidth();
+        const resizeObserver = new ResizeObserver(updateWidth);
+        if (svgRef.current) {
+            resizeObserver.observe(svgRef.current);
+        }
+
+        return () => resizeObserver.disconnect();
+    }, []);
 
     useAnimationFrame((time) => {
         const length = pathRef.current?.getTotalLength();
@@ -184,11 +203,37 @@ export const MovingBorder = ({
         pathRef.current?.getPointAtLength(val).y ?? 0,
     );
 
-    const transform = useMotionTemplate`translateX(${x}px) translateY(${y}px) translateX(-50%) translateY(-50%)`;
+    const rotation = useTransform(x, (val) => {
+        if (!svgWidth) return 0;
+        const transitionZone = 120;
+
+        const easeInOutCubic = (t: number) => {
+            return t < 0.5
+                ? 4 * t * t * t
+                : 1 - Math.pow(-2 * t + 2, 3) / 2;
+        };
+
+        const leftDistance = val;
+        const leftProgress = leftDistance < transitionZone
+            ? 1 - (leftDistance / transitionZone)
+            : 0;
+        const leftRotation = leftProgress > 0 ? easeInOutCubic(leftProgress) * 90 : 0;
+
+        const rightDistance = svgWidth - val;
+        const rightProgress = rightDistance < transitionZone
+            ? 1 - (rightDistance / transitionZone)
+            : 0;
+        const rightRotation = rightProgress > 0 ? easeInOutCubic(rightProgress) * 90 : 0;
+
+        return Math.max(leftRotation, rightRotation);
+    });
+
+    const transform = useMotionTemplate`translateX(${x}px) translateY(${y}px) translateX(-50%) translateY(-50%) rotate(${rotation}deg)`;
 
     return (
         <>
             <svg
+                ref={svgRef}
                 xmlns="http://www.w3.org/2000/svg"
                 preserveAspectRatio="none"
                 className="absolute h-full w-full"
