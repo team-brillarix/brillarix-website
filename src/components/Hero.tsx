@@ -41,7 +41,6 @@ export default function Hero() {
       gridStartPoint: { x: 1, y: 1 },
       gridEndPoint: { x: 6.01, y: 5.01 },
       gridWaypoints: [
-        // From bulb to arcticons
         { x: 1, y: 2.7, type: 'vertical' },
         {
           x: 1,
@@ -51,9 +50,7 @@ export default function Hero() {
           curveEndPoint: { x: 1.35, y: 3 },
         },
         { x: 3.22, y: 3, type: 'horizontal' },
-        // Pass through arcticons at (3.5, 3)
         { x: 3.5, y: 3, type: 'horizontal' },
-        // From arcticons to developer
         { x: 3.5, y: 4.68, type: 'vertical' },
         {
           x: 3.5,
@@ -167,7 +164,6 @@ export default function Hero() {
                             transform: 'translate(-50%, -50%)',
                           }}
                         >
-                          {/* Ripple wave animations */}
                           <motion.div 
                             className="absolute border border-gray-dark-4 rounded-full h-[85%] w-[85%]"
                             initial={{ scale: 0.6, opacity: 1 }}

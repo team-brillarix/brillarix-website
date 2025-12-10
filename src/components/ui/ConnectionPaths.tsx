@@ -63,78 +63,42 @@ export function ConnectionPaths({
   const [viewBox, setViewBox] = useState('0 0 100 100');
   const [activeSegmentIndex, setActiveSegmentIndex] = useState(0);
   const [activePathLength, setActivePathLength] = useState<number | null>(null);
-  const [animationKey, setAnimationKey] = useState(0); // Force animation restart
-  const [shouldAnimate, setShouldAnimate] = useState(false); // Control when to start animation
+  const [animationKey, setAnimationKey] = useState(0);
+  const [shouldAnimate, setShouldAnimate] = useState(false);
   const pathRef = useRef<SVGPathElement | null>(null);
   const activeIconsRef = useRef<Set<string>>(new Set());
   const pendingIconsUpdateRef = useRef<Set<string> | null>(null);
   const rafIdRef = useRef<number | null>(null);
-  const dashOffset = useMotionValue(-10000); // Start hidden
+  const dashOffset = useMotionValue(-10000);
 
   useEffect(() => {
     setViewBox('0 0 100 100');
   }, []);
 
-  // Helper function to check if two paths are connected at an icon
-  const arePathsConnectedAtIcon = useCallback((path1: ConnectionPath, path2: ConnectionPath): string | null => {
-    if (!path1.gridEndPoint || !path2.gridStartPoint) return null;
-    
-    // Check if path1 ends where path2 starts (within a small tolerance)
-    const tolerance = 0.1;
-    const endX = path1.gridEndPoint.x;
-    const endY = path1.gridEndPoint.y;
-    const startX = path2.gridStartPoint.x;
-    const startY = path2.gridStartPoint.y;
-    
-    if (Math.abs(endX - startX) < tolerance && Math.abs(endY - startY) < tolerance) {
-      // Find which icon is at this position
-      for (const icon of iconPositions) {
-        const iconX = icon.gridX;
-        const iconY = icon.gridY;
-        if (Math.abs(endX - iconX) < tolerance && Math.abs(endY - iconY) < tolerance) {
-          return icon.id;
-        }
-      }
-    }
-    return null;
-  }, [iconPositions]);
-
   const handleAnimationComplete = () => {
-    const currentPath = paths[activeSegmentIndex];
     const nextIndex = (activeSegmentIndex + 1) % paths.length;
-    const nextPath = paths[nextIndex];
     
-    // Check if paths are connected at an icon
-    const connectedIconId = arePathsConnectedAtIcon(currentPath, nextPath);
-    
-    // Clear all icons when animation completes
-    // They will be reactivated as the segment passes through them
     activeIconsRef.current.clear();
     if (onIconActiveChange) {
       onIconActiveChange(new Set());
     }
     
-    // Move to next path (or loop back to first if single path)
     setActiveSegmentIndex(nextIndex);
-    // Force animation restart by incrementing key
     setAnimationKey(prev => prev + 1);
   };
 
   useEffect(() => {
     setActivePathLength(null);
     setShouldAnimate(false);
-    dashOffset.set(-10000); // Hide segment until path is measured
-    // Clear all icons when switching paths to prevent stale activations
+    dashOffset.set(-10000);
     activeIconsRef.current.clear();
     if (onIconActiveChange) {
       onIconActiveChange(new Set());
     }
   }, [activeSegmentIndex, animationKey, onIconActiveChange, dashOffset]);
 
-  // Reset animation to start when path length is measured
   useEffect(() => {
     if (activePathLength !== null && !shouldAnimate) {
-      // Small delay to ensure DOM is ready, then start animation from beginning
       const timer = setTimeout(() => {
         dashOffset.set(0);
         setShouldAnimate(true);
@@ -212,7 +176,6 @@ export function ConnectionPaths({
     });
   }, [paths, gridCols, gridRows]);
 
-  // Convert icon positions to percentage coordinates
   const iconPositionsPercent = useMemo(() => {
     return iconPositions.map((icon) => {
       const pos = convertGridToPercent(icon.gridX, icon.gridY);
@@ -226,13 +189,11 @@ export function ConnectionPaths({
     });
   }, [iconPositions, gridCols, gridRows]);
 
-  // Check if a point is within an icon's area
   const isPointInIcon = (point: { x: number; y: number }, icon: { x: number; y: number; radius: number }) => {
     const distance = Math.sqrt(Math.pow(point.x - icon.x, 2) + Math.pow(point.y - icon.y, 2));
     return distance <= icon.radius;
   };
 
-  // Function to check and update active icons based on animation offset
   const checkActiveIcons = useCallback((offset: number) => {
     if (!pathRef.current || activePathLength === null || iconPositionsPercent.length === 0 || !onIconActiveChange) {
       return;
@@ -242,18 +203,11 @@ export function ConnectionPaths({
     const totalLength = activePathLength;
     const dashLength = 5;
     
-    // Calculate the progress (0 to 1)
-    // offset goes from 0 to -(totalLength + dashLength)
     const progress = Math.max(0, Math.min(1, -offset / (totalLength + dashLength)));
-    
-    // Calculate the start and end distances of the visible segment along the path
-    // The segment starts at progress * totalLength and extends dashLength units forward
     const segmentStartDistance = progress * totalLength;
     const segmentEndDistance = Math.min(totalLength, segmentStartDistance + dashLength);
     
-    // Sample multiple points along the visible segment to ensure accurate detection
-    // This prevents missing icons when the segment passes through quickly
-    const sampleCount = 8; // Check 8 points along the segment
+    const sampleCount = 8;
     const segmentPoints: { x: number; y: number }[] = [];
     
     try {
@@ -265,27 +219,15 @@ export function ConnectionPaths({
         segmentPoints.push({ x: point.x, y: point.y });
       }
     } catch (e) {
-      // Path might not be ready yet
       return;
     }
 
     if (segmentPoints.length === 0) return;
 
-    // Use multiple points along the segment for accurate detection
-    // This ensures we catch icons at the start, middle, and end of the segment
     const segmentLeadingEdge = segmentPoints[segmentPoints.length - 1];
-    const segmentStart = segmentPoints[0];
-    const centerIndex = Math.floor(segmentPoints.length / 2);
-    const segmentCenter = segmentPoints[centerIndex];
-
-    // Check which icons the segment intersects with
-    // Check all points along the segment to ensure we catch icons at any position
     const newActiveIcons = new Set<string>();
     
-    // Check all icons to see if any point along the segment is within their radius
     iconPositionsPercent.forEach((icon) => {
-      // Check all points along the segment to ensure we catch icons at any position
-      // This is especially important for icons at the start of the path (like bulb)
       for (let i = 0; i < segmentPoints.length; i++) {
         if (isPointInIcon(segmentPoints[i], icon)) {
           newActiveIcons.add(icon.id);
@@ -294,20 +236,12 @@ export function ConnectionPaths({
       }
     });
     
-    // Icons that are not in newActiveIcons will be automatically cleared
-    // because we only update with the icons that are currently intersected
-
-    // Ensure only a single icon is active at any time.
-    // If multiple icons are detected (for example when the animated segment
-    // is close to two icons), keep only the one whose center is closest
-    // to the animated segment's center point.
     if (newActiveIcons.size > 1) {
       let closestIconId: string | null = null;
       let closestDistance = Infinity;
 
       iconPositionsPercent.forEach((icon) => {
         if (!newActiveIcons.has(icon.id)) return;
-        // Use leading edge distance for more accurate closest icon selection
         const distance = Math.sqrt(
           Math.pow(segmentLeadingEdge.x - icon.x, 2) + Math.pow(segmentLeadingEdge.y - icon.y, 2)
         );
@@ -323,16 +257,13 @@ export function ConnectionPaths({
       }
     }
 
-    // Only update if the set has changed
     const currentIds = Array.from(activeIconsRef.current).sort().join(',');
     const newIds = Array.from(newActiveIcons).sort().join(',');
     
     if (currentIds !== newIds) {
       activeIconsRef.current = newActiveIcons;
-      // Store pending update
       pendingIconsUpdateRef.current = newActiveIcons;
       
-      // Schedule update using requestAnimationFrame if not already scheduled
       if (rafIdRef.current === null && onIconActiveChange) {
         rafIdRef.current = requestAnimationFrame(() => {
           if (pendingIconsUpdateRef.current !== null) {
@@ -347,7 +278,6 @@ export function ConnectionPaths({
     }
   }, [activePathLength, iconPositionsPercent, onIconActiveChange]);
 
-  // Listen to dashOffset changes and update active icons
   useEffect(() => {
     if (!onIconActiveChange || iconPositionsPercent.length === 0) {
       return;
@@ -358,7 +288,6 @@ export function ConnectionPaths({
     });
     return () => {
       unsubscribe();
-      // Clean up any pending requestAnimationFrame
       if (rafIdRef.current !== null) {
         cancelAnimationFrame(rafIdRef.current);
         rafIdRef.current = null;
