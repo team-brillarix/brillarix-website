@@ -6,6 +6,6 @@ export interface Innovator {
   position: string;
   testimonialTitle: string;
   testimonialText: string;
-  date: string;
+  companyLogo: string;
 }
 

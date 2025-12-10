@@ -1,7 +1,7 @@
 'use client';
 
-import { useState, useEffect, useMemo } from 'react';
-import { motion } from 'motion/react';
+import { useState, useEffect, useMemo, useRef, useCallback, startTransition } from 'react';
+import { motion, useMotionValue } from 'motion/react';
 
 export interface ConnectionPath {
   id: string;
@@ -21,6 +21,13 @@ export interface ConnectionPath {
   }>;
 }
 
+export interface IconPosition {
+  id: string;
+  gridX: number;
+  gridY: number;
+  radius?: number; // Icon radius in percentage (default: 3)
+}
+
 export interface ConnectionPathsProps {
   paths: ConnectionPath[];
   className?: string;
@@ -35,6 +42,8 @@ export interface ConnectionPathsProps {
   };
   gridCols?: number;
   gridRows?: number;
+  iconPositions?: IconPosition[];
+  onIconActiveChange?: (activeIcons: Set<string>) => void;
 }
 
 export function ConnectionPaths({
@@ -42,28 +51,61 @@ export function ConnectionPaths({
   className = '',
   connectionLineClassName = '',
   animatedSegmentClassName = '',
-  animationDuration = 2.5,
+  animationDuration = 12,
   connectionLineColor = 'rgba(255, 255, 255, 0.3)',
   animatedSegmentColor = 'rgba(255, 255, 255, 0.9)',
   strokeWidth = { connection: 0.2, animated: 0.5 },
   gridCols = 7,
   gridRows = 6,
+  iconPositions = [],
+  onIconActiveChange,
 }: ConnectionPathsProps) {
   const [viewBox, setViewBox] = useState('0 0 100 100');
   const [activeSegmentIndex, setActiveSegmentIndex] = useState(0);
   const [activePathLength, setActivePathLength] = useState<number | null>(null);
+  const [animationKey, setAnimationKey] = useState(0);
+  const [shouldAnimate, setShouldAnimate] = useState(false);
+  const pathRef = useRef<SVGPathElement | null>(null);
+  const activeIconsRef = useRef<Set<string>>(new Set());
+  const pendingIconsUpdateRef = useRef<Set<string> | null>(null);
+  const rafIdRef = useRef<number | null>(null);
+  const dashOffset = useMotionValue(-10000);
 
   useEffect(() => {
     setViewBox('0 0 100 100');
   }, []);
 
   const handleAnimationComplete = () => {
-    setActiveSegmentIndex((prev) => (prev + 1) % paths.length);
+    const nextIndex = (activeSegmentIndex + 1) % paths.length;
+    
+    activeIconsRef.current.clear();
+    if (onIconActiveChange) {
+      onIconActiveChange(new Set());
+    }
+    
+    setActiveSegmentIndex(nextIndex);
+    setAnimationKey(prev => prev + 1);
   };
 
   useEffect(() => {
     setActivePathLength(null);
-  }, [activeSegmentIndex]);
+    setShouldAnimate(false);
+    dashOffset.set(-10000);
+    activeIconsRef.current.clear();
+    if (onIconActiveChange) {
+      onIconActiveChange(new Set());
+    }
+  }, [activeSegmentIndex, animationKey, onIconActiveChange, dashOffset]);
+
+  useEffect(() => {
+    if (activePathLength !== null && !shouldAnimate) {
+      const timer = setTimeout(() => {
+        dashOffset.set(0);
+        setShouldAnimate(true);
+      }, 10);
+      return () => clearTimeout(timer);
+    }
+  }, [activePathLength, dashOffset, shouldAnimate]);
 
   const convertGridToPercent = (gridX: number, gridY: number) => {
     const percentX = (gridX / gridCols) * 100;
@@ -134,12 +176,131 @@ export function ConnectionPaths({
     });
   }, [paths, gridCols, gridRows]);
 
+  const iconPositionsPercent = useMemo(() => {
+    return iconPositions.map((icon) => {
+      const pos = convertGridToPercent(icon.gridX, icon.gridY);
+      const radius = icon.radius ?? 3;
+      return {
+        id: icon.id,
+        x: pos.x,
+        y: pos.y,
+        radius,
+      };
+    });
+  }, [iconPositions, gridCols, gridRows]);
+
+  const isPointInIcon = (point: { x: number; y: number }, icon: { x: number; y: number; radius: number }) => {
+    const distance = Math.sqrt(Math.pow(point.x - icon.x, 2) + Math.pow(point.y - icon.y, 2));
+    return distance <= icon.radius;
+  };
+
+  const checkActiveIcons = useCallback((offset: number) => {
+    if (!pathRef.current || activePathLength === null || iconPositionsPercent.length === 0 || !onIconActiveChange) {
+      return;
+    }
+
+    const path = pathRef.current;
+    const totalLength = activePathLength;
+    const dashLength = 5;
+    
+    const progress = Math.max(0, Math.min(1, -offset / (totalLength + dashLength)));
+    const segmentStartDistance = progress * totalLength;
+    const segmentEndDistance = Math.min(totalLength, segmentStartDistance + dashLength);
+    
+    const sampleCount = 8;
+    const segmentPoints: { x: number; y: number }[] = [];
+    
+    try {
+      for (let i = 0; i <= sampleCount; i++) {
+        const t = i / sampleCount;
+        const distance = segmentStartDistance + (segmentEndDistance - segmentStartDistance) * t;
+        const clampedDistance = Math.max(0, Math.min(totalLength, distance));
+        const point = path.getPointAtLength(clampedDistance);
+        segmentPoints.push({ x: point.x, y: point.y });
+      }
+    } catch (e) {
+      return;
+    }
+
+    if (segmentPoints.length === 0) return;
+
+    const segmentLeadingEdge = segmentPoints[segmentPoints.length - 1];
+    const newActiveIcons = new Set<string>();
+    
+    iconPositionsPercent.forEach((icon) => {
+      for (let i = 0; i < segmentPoints.length; i++) {
+        if (isPointInIcon(segmentPoints[i], icon)) {
+          newActiveIcons.add(icon.id);
+          break; // Found a match, no need to check other points for this icon
+        }
+      }
+    });
+    
+    if (newActiveIcons.size > 1) {
+      let closestIconId: string | null = null;
+      let closestDistance = Infinity;
+
+      iconPositionsPercent.forEach((icon) => {
+        if (!newActiveIcons.has(icon.id)) return;
+        const distance = Math.sqrt(
+          Math.pow(segmentLeadingEdge.x - icon.x, 2) + Math.pow(segmentLeadingEdge.y - icon.y, 2)
+        );
+        if (distance < closestDistance) {
+          closestDistance = distance;
+          closestIconId = icon.id;
+        }
+      });
+
+      if (closestIconId) {
+        newActiveIcons.clear();
+        newActiveIcons.add(closestIconId);
+      }
+    }
+
+    const currentIds = Array.from(activeIconsRef.current).sort().join(',');
+    const newIds = Array.from(newActiveIcons).sort().join(',');
+    
+    if (currentIds !== newIds) {
+      activeIconsRef.current = newActiveIcons;
+      pendingIconsUpdateRef.current = newActiveIcons;
+      
+      if (rafIdRef.current === null && onIconActiveChange) {
+        rafIdRef.current = requestAnimationFrame(() => {
+          if (pendingIconsUpdateRef.current !== null) {
+            startTransition(() => {
+              onIconActiveChange(pendingIconsUpdateRef.current!);
+            });
+            pendingIconsUpdateRef.current = null;
+          }
+          rafIdRef.current = null;
+        });
+      }
+    }
+  }, [activePathLength, iconPositionsPercent, onIconActiveChange]);
+
+  useEffect(() => {
+    if (!onIconActiveChange || iconPositionsPercent.length === 0) {
+      return;
+    }
+
+    const unsubscribe = dashOffset.on('change', (latest) => {
+      checkActiveIcons(latest);
+    });
+    return () => {
+      unsubscribe();
+      if (rafIdRef.current !== null) {
+        cancelAnimationFrame(rafIdRef.current);
+        rafIdRef.current = null;
+      }
+    };
+  }, [dashOffset, checkActiveIcons]);
+
   if (paths.length === 0) return null;
 
   const activePath = convertedPaths[activeSegmentIndex];
   
   const dashLength = 5;
-  const targetOffset = activePathLength !== null ? -(activePathLength + dashLength) : -50;
+  const targetOffset = activePathLength !== null ? -(activePathLength + dashLength) : -10000;
 
   return (
     <div className={`absolute inset-0 pointer-events-none ${className}`}>
@@ -174,18 +335,20 @@ export function ConnectionPaths({
         ))}
         {activePath && (
           <motion.path
-            key={`animated-${activePath.id}-${activeSegmentIndex}-${activePathLength !== null ? 'ready' : 'measuring'}`}
+            key={`animated-${activePath.id}-${activeSegmentIndex}-${animationKey}-${shouldAnimate ? 'animating' : 'waiting'}`}
             ref={(el: SVGPathElement | null) => {
               if (el && activePathLength === null) {
                 const length = el.getTotalLength();
                 setActivePathLength(length);
               }
+              pathRef.current = el;
             }}
             className={`animated-segment ${animatedSegmentClassName}`}
             d={activePath.d}
             strokeDasharray="5 10000"
-            initial={{ strokeDashoffset: 0 }}
-            animate={{ strokeDashoffset: targetOffset }}
+            strokeDashoffset={dashOffset}
+            initial={{ strokeDashoffset: shouldAnimate ? 0 : -10000 }}
+            animate={shouldAnimate && activePathLength !== null ? { strokeDashoffset: targetOffset } : { strokeDashoffset: -10000 }}
             transition={{
               duration: animationDuration,
               ease: 'linear',

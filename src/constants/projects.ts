@@ -16,11 +16,11 @@ export const impactProjects: ImpactProject[] = [
     id: '2',
     title: 'Trialynx',
     description:
-      'We helped a B2B startup launch a production-ready MVP using a fully no-code stack, enabling rapid iteration and real user feedback.',
+      'Over 12 months, we drove 90% growth in medical writing, retained most clients, and scaled operations to 4 countries.',
     videoUrl: `https://res.cloudinary.com/${cloudName}/video/upload/v1764406780/Trialynx_zrcmyt.mp4`,
     metrics: {
-      label: 'Time from idea to first paying customer',
-      value: '6 weeks',
+      label: '50+ clinical trials launched',
+      value: '12 months',
     },
   },
   {

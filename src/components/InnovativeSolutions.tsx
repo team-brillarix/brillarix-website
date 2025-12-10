@@ -231,7 +231,7 @@ export default function InnovativeSolutions() {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 z-0 border-y border-gray-dark-4">
-        <div className="flex flex-col gap-6 sm:gap-8 py-12 md:pr-12 hover:icon-hover border-t-diamond-gradient">
+        <div className="flex flex-col gap-8 py-12 md:pr-12 hover:icon-hover border-t-diamond-gradient">
           <div className="flex flex-col gap-4 sm:gap-6">
             <Heading
               variant="h4"
@@ -311,7 +311,7 @@ export default function InnovativeSolutions() {
           </Button>
         </div>
 
-        <div className="flex flex-col lg-border-l-diamond-gradient gap-6 sm:gap-8 py-12 lg:pl-12 border-b-diamond-gradient">
+        <div className="flex flex-col lg-border-l-diamond-gradient gap-12 sm:gap-8 py-12 lg:pl-12 border-b-diamond-gradient">
           <div className="flex flex-col gap-4 sm:gap-6 pr-20">
             <Heading
               variant="h4"
