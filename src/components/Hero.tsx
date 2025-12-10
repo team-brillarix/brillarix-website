@@ -1,11 +1,13 @@
 'use client';
 
+import { useState } from 'react';
 import Image from 'next/image';
 import { Section } from '@/components/ui/Section';
 import { Heading } from '@/components/ui/Heading';
 import { Button } from '@/components/ui/Button';
 import { ConnectionPaths, ConnectionPath } from '@/components/ui/ConnectionPaths';
 import { FiLayers, FiZap } from 'react-icons/fi';
+import { motion } from 'motion/react';
 
 const DotIcon = () => (
   <svg
@@ -22,15 +24,24 @@ const DotIcon = () => (
 );
 
 export default function Hero() {
+  const [activeIcons, setActiveIcons] = useState<Set<string>>(new Set());
+
+  const iconPositions = [
+    { id: 'bulb', gridX: 1, gridY: 1, radius: 2.5 },
+    { id: 'arcticons', gridX: 3.5, gridY: 3, radius: 2.5 },
+    { id: 'developer', gridX: 6.01, gridY: 5.01, radius: 2.5 },
+  ];
+
   const connectionPaths: ConnectionPath[] = [
     {
-      id: 'bulb-to-arcticons',
-      d: 'M 14.29 18.67 V 45 Q 14.29 50 19.29 50 H 46',
+      id: 'bulb-to-arcticons-to-developer',
+      d: 'M 14.29 18.67 V 45 Q 14.29 50 19.29 50 H 46 V 78 Q 50 83 55 83 H 87',
       startPoint: { x: 14.29, y: 18.67 },
-      endPoint: { x: 46, y: 50 },
+      endPoint: { x: 87, y: 83 },
       gridStartPoint: { x: 1, y: 1 },
-      gridEndPoint: { x: 3.5, y: 3 },
+      gridEndPoint: { x: 6.01, y: 5.01 },
       gridWaypoints: [
+        // From bulb to arcticons
         { x: 1, y: 2.7, type: 'vertical' },
         {
           x: 1,
@@ -40,16 +51,9 @@ export default function Hero() {
           curveEndPoint: { x: 1.35, y: 3 },
         },
         { x: 3.22, y: 3, type: 'horizontal' },
-      ],
-    },
-    {
-      id: 'arcticons-to-developer',
-      d: 'M 50 50 V 78 Q 50 83 55 83 H 87',
-      startPoint: { x: 50, y: 50 },
-      endPoint: { x: 87, y: 83 },
-      gridStartPoint: { x: 3.5, y: 3 },
-      gridEndPoint: { x: 6.01, y: 5.01 },
-      gridWaypoints: [
+        // Pass through arcticons at (3.5, 3)
+        { x: 3.5, y: 3, type: 'horizontal' },
+        // From arcticons to developer
         { x: 3.5, y: 4.68, type: 'vertical' },
         {
           x: 3.5,
@@ -123,7 +127,13 @@ export default function Hero() {
                         '--grid-col-width': 'calc(100% / 7)',
                         '--grid-row-height': 'calc(100% / 6)',
                       } as React.CSSProperties}>
-                        <ConnectionPaths paths={connectionPaths} gridCols={7} gridRows={6} />
+                        <ConnectionPaths 
+                          paths={connectionPaths} 
+                          gridCols={7} 
+                          gridRows={6}
+                          iconPositions={iconPositions}
+                          onIconActiveChange={setActiveIcons}
+                        />
 
                         <div
                           className="absolute z-20 pointer-events-auto"
@@ -138,7 +148,14 @@ export default function Hero() {
                             alt="Bulb"
                             width={48}
                             height={48}
-                            className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 object-contain transition-all duration-300 hover:scale-125 icon-hover"
+                            className={`w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 object-contain transition-all duration-300 hover:scale-125 icon-hover ${
+                              activeIcons.has('bulb') ? 'scale-125' : ''
+                            }`}
+                            style={{
+                              filter: activeIcons.has('bulb') 
+                                ? 'brightness(0) saturate(100%) invert(84%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(100%) contrast(100%)'
+                                : 'none',
+                            }}
                           />
                         </div>
 
@@ -150,23 +167,54 @@ export default function Hero() {
                             transform: 'translate(-50%, -50%)',
                           }}
                         >
-                          <div className="absolute border border-gray-dark-4 flex items-center justify-center rounded-full h-[85%] w-[85%]">
-                            <div className="absolute border border-gray-dark-4 flex items-center justify-center rounded-full h-[75%] w-[75%]">
-                              <div className="absolute border bg-gray-dark-3 h-[60%] w-[60%] flex items-center justify-center rounded-full">
-                                <Image
-                                  src="/hero-icons/Speedtest.svg"
-                                  alt="Speedtest"
-                                  width={22}
-                                  height={19}
-                                  className="w-4 h-3.5 sm:w-5 sm:h-4.5 md:w-5.5 md:h-5 object-contain"
-                                />
-                              </div>
-                            </div>
-                          </div>
+                          {/* Ripple wave animations */}
+                          <motion.div 
+                            className="absolute border border-gray-dark-4 rounded-full h-[85%] w-[85%]"
+                            initial={{ scale: 0.6, opacity: 1 }}
+                            animate={{ scale: 1.2, opacity: 0 }}
+                            transition={{ 
+                              duration: 2, 
+                              repeat: Infinity, 
+                              ease: 'easeOut',
+                              delay: 0
+                            }}
+                          />
+                          <motion.div 
+                            className="absolute border border-gray-dark-4 rounded-full h-[75%] w-[75%]"
+                            initial={{ scale: 0.6, opacity: 1 }}
+                            animate={{ scale: 1.3, opacity: 0 }}
+                            transition={{ 
+                              duration: 2, 
+                              repeat: Infinity, 
+                              ease: 'easeOut',
+                              delay: 0.4
+                            }}
+                          />
+                          <motion.div 
+                            className="absolute border border-gray-dark-4 rounded-full h-[60%] w-[60%]"
+                            initial={{ scale: 0.6, opacity: 1 }}
+                            animate={{ scale: 1.2, opacity: 0 }}
+                            transition={{ 
+                              duration: 2, 
+                              repeat: Infinity, 
+                              ease: 'easeOut',
+                              delay: 0.8
+                            }}
+                          />
+                            <Image
+                              src="/hero-icons/Speedtest.svg"
+                              alt="Speedtest"
+                              width={22}
+                              height={19}
+                              className="w-4 h-3.5 sm:w-5 sm:h-4.5 md:w-5.5 md:h-5 object-contain"
+                            />
                         </div>
 
+
                         <div
-                          className="group absolute flex items-center justify-center bg-gray-dark-2 rounded-lg h-10 w-10 sm:h-11 sm:w-11 md:h-12 md:w-12 z-20 pointer-events-auto hover:bg-gray-dark-5"
+                          className={`group absolute flex items-center justify-center bg-gray-dark-2 rounded-lg h-10 w-10 sm:h-11 sm:w-11 md:h-12 md:w-12 z-20 pointer-events-auto hover:bg-gray-dark-5 transition-all duration-300 ${
+                            activeIcons.has('arcticons') ? 'bg-gray-dark-5' : ''
+                          }`}
                           style={{
                             left: 'calc(var(--grid-col-width) * 3.5)',
                             top: 'calc(var(--grid-row-height) * 3)',
@@ -178,7 +226,14 @@ export default function Hero() {
                             alt="Arcticons"
                             width={30}
                             height={16}
-                            className="w-6 h-3 sm:w-7 sm:h-4 md:w-7.5 md:h-4 object-contain transition-all duration-300 group-hover:scale-125 hover:scale-125 icon-hover"
+                            className={`w-6 h-3 sm:w-7 sm:h-4 md:w-7.5 md:h-4 object-contain transition-all duration-300 group-hover:scale-125 hover:scale-125 icon-hover ${
+                              activeIcons.has('arcticons') ? 'scale-125' : ''
+                            }`}
+                            style={{
+                              filter: activeIcons.has('arcticons') 
+                                ? 'brightness(0) saturate(100%) invert(84%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(100%) contrast(100%)'
+                                : 'none',
+                            }}
                           />
                         </div>
 
@@ -195,7 +250,14 @@ export default function Hero() {
                             alt="Developer"
                             width={56}
                             height={56}
-                            className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 object-contain transition-all duration-300 hover:scale-125 icon-hover"
+                            className={`w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 object-contain transition-all duration-300 hover:scale-125 icon-hover ${
+                              activeIcons.has('developer') ? 'scale-125' : ''
+                            }`}
+                            style={{
+                              filter: activeIcons.has('developer') 
+                                ? 'brightness(0) saturate(100%) invert(84%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(100%) contrast(100%)'
+                                : 'none',
+                            }}
                           />
                         </div>
                       </div>
