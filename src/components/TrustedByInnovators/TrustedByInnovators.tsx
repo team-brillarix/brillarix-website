@@ -3,11 +3,11 @@
 import { useEffect, useRef } from 'react';
 import { Section } from '@/components/ui/Section';
 import { InnovatorCard } from './InnovatorCard';
+import SchemaScript from '@/components/SchemaScript';
 import { innovatorsData } from '@/constants/innovators';
 import { Swiper, SwiperSlide, Autoplay, type SwiperType } from '@/lib/swiper';
+import { generateReviewSchema } from '@/lib/schema';
 import Image from 'next/image';
-
-const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://brillarix.com';
 
 export default function TrustedByInnovators() {
   const swiperRef = useRef<SwiperType | null>(null);
@@ -16,41 +16,12 @@ export default function TrustedByInnovators() {
 
   const duplicatedData = Array(4).fill(innovatorsData).flat();
 
-  const reviewSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'Organization',
-    name: 'Brillarix',
-    aggregateRating: {
-      '@type': 'AggregateRating',
-      ratingValue: '5',
-      reviewCount: innovatorsData.length.toString(),
-      bestRating: '5',
-      worstRating: '5',
-    },
-    review: innovatorsData.map((innovator) => ({
-      '@type': 'Review',
-      author: {
-        '@type': 'Person',
-        name: innovator.name,
-        jobTitle: innovator.position,
-      },
-      reviewBody: innovator.testimonialText,
-      reviewRating: {
-        '@type': 'Rating',
-        ratingValue: '5',
-        bestRating: '5',
-        worstRating: '5',
-      },
-      itemReviewed: {
-        '@type': 'Service',
-        name: 'Web Development & Low-Code Solutions',
-        provider: {
-          '@type': 'Organization',
-          name: 'Brillarix',
-        },
-      },
-    })),
-  };
+  const reviewSchema = generateReviewSchema(
+    'Brillarix',
+    innovatorsData,
+    'Web Development & Low-Code Solutions',
+    'Brillarix'
+  );
 
   useEffect(() => {
     return () => {
@@ -62,12 +33,7 @@ export default function TrustedByInnovators() {
 
   return (
     <div ref={sectionRef}>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(reviewSchema),
-        }}
-      />
+      <SchemaScript schema={reviewSchema} id="review-schema" />
       <Section
         className="bg-background py-16 md:py-20 px-4 sm:px-6 md:px-8 relative overflow-hidden"
         title="Trusted by Innovators to Deliver Exceptional Results"

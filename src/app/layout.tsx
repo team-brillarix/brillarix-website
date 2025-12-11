@@ -5,7 +5,13 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Loader from "@/components/Loader";
 import Analytics from "@/components/Analytics";
+import SchemaScript from "@/components/SchemaScript";
 import { CONTACT_INFO } from "@/constants/contact";
+import {
+  generateOrganizationSchema,
+  generateWebSiteSchema,
+  generateServiceSchema,
+} from "@/lib/schema";
 
 const spaceGrotesk = Space_Grotesk({
   variable: "--font-space-grotesk",
@@ -134,11 +140,7 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const organizationSchema = {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    name: siteName,
-    url: baseUrl,
+  const organizationSchema = generateOrganizationSchema(siteName, baseUrl, {
     logo: `${baseUrl}/logos/Brillarix-White-Mode.png`,
     description: defaultDescription,
     sameAs: [
@@ -152,61 +154,29 @@ export default function RootLayout({
       email: CONTACT_INFO.email.address,
       availableLanguage: "English",
     },
-  };
+  });
 
-  const websiteSchema = {
-    "@context": "https://schema.org",
-    "@type": "WebSite",
-    name: siteName,
-    url: baseUrl,
+  const websiteSchema = generateWebSiteSchema(siteName, baseUrl, {
     description: defaultDescription,
-    publisher: {
-      "@type": "Organization",
-      name: siteName,
-      logo: {
-        "@type": "ImageObject",
-        url: `${baseUrl}/logos/Brillarix-White-Mode.png`,
-      },
-    },
-  };
+    publisher: organizationSchema,
+  });
 
-  const serviceSchema = {
-    "@context": "https://schema.org",
-    "@type": "Service",
-    serviceType: "Web Development & Low-Code Solutions",
-    provider: {
-      "@type": "Organization",
-      name: siteName,
-    },
-    areaServed: "Worldwide",
-    description: defaultDescription,
-    offers: {
-      "@type": "Offer",
-      description: "Custom web application development and low-code solutions",
-    },
-  };
+  const serviceSchema = generateServiceSchema(
+    "Web Development & Low-Code Solutions",
+    siteName,
+    {
+      areaServed: "Worldwide",
+      description: defaultDescription,
+      offerDescription: "Custom web application development and low-code solutions",
+    }
+  );
 
   return (
     <html lang="en" data-theme="dark">
       <head>
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(organizationSchema),
-          }}
-        />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(websiteSchema),
-          }}
-        />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(serviceSchema),
-          }}
-        />
+        <SchemaScript schema={organizationSchema} id="organization-schema" />
+        <SchemaScript schema={websiteSchema} id="website-schema" />
+        <SchemaScript schema={serviceSchema} id="service-schema" />
         <meta name="geo.region" content="US" />
         <meta name="geo.placename" content="United States" />
         <meta name="language" content="English" />

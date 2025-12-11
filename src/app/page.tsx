@@ -8,32 +8,16 @@ import InnovativeSolutions from '@/components/InnovativeSolutions';
 import IndustryExpertise from '@/components/IndustryExpertise';
 import ContactUs from '@/components/ContactUs';
 import TrustedByInnovators from '@/components/TrustedByInnovators/TrustedByInnovators';
+import SchemaScript from '@/components/SchemaScript';
 import { faqs } from '@/constants/faqs';
-
-const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://brillarix.com';
+import { generateFAQPageSchema } from '@/lib/schema';
 
 export default function Home() {
-  const faqSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'FAQPage',
-    mainEntity: faqs.map((faq) => ({
-      '@type': 'Question',
-      name: faq.question,
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: faq.answer,
-      },
-    })),
-  };
+  const faqSchema = generateFAQPageSchema(faqs);
 
   return (
     <div className="min-h-screen bg-background">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(faqSchema),
-        }}
-      />
+      <SchemaScript schema={faqSchema} id="faq-schema" />
       <Hero />
       <OurClients />
       <OurImpact />

@@ -2,6 +2,8 @@ import { notFound } from 'next/navigation';
 import { blogPosts, BlogPost } from '@/constants/blogs';
 import { Heading } from '@/components/ui/Heading';
 import { Section } from '@/components/ui/Section';
+import SchemaScript from '@/components/SchemaScript';
+import { generateArticleSchema } from '@/lib/schema';
 import Link from 'next/link';
 import { MdArrowBack } from 'react-icons/md';
 import Image from 'next/image';
@@ -73,40 +75,24 @@ export default async function BlogPage({ params }: BlogPageProps) {
         notFound();
     }
 
-    const articleSchema = {
-        '@context': 'https://schema.org',
-        '@type': 'Article',
-        headline: blog.title,
-        description: blog.description,
-        image: `${baseUrl}${blog.imageUrl}`,
-        datePublished: blog.date,
-        author: {
-            '@type': 'Organization',
-            name: 'Brillarix',
-            url: baseUrl,
-        },
-        publisher: {
-            '@type': 'Organization',
-            name: 'Brillarix',
-            logo: {
-                '@type': 'ImageObject',
-                url: `${baseUrl}/logos/Brillarix-White-Mode.png`,
-            },
-        },
-        mainEntityOfPage: {
-            '@type': 'WebPage',
-            '@id': blogUrl,
-        },
-    };
+    const articleSchema = generateArticleSchema(
+        blog.title,
+        blog.description,
+        `${baseUrl}${blog.imageUrl}`,
+        blog.date,
+        'Brillarix',
+        'Brillarix',
+        `${baseUrl}/logos/Brillarix-White-Mode.png`,
+        blogUrl,
+        {
+            authorUrl: baseUrl,
+            authorType: 'Organization',
+        }
+    );
 
     return (
         <div className="min-h-screen bg-background">
-            <script
-                type="application/ld+json"
-                dangerouslySetInnerHTML={{
-                    __html: JSON.stringify(articleSchema),
-                }}
-            />
+            <SchemaScript schema={articleSchema} id="article-schema" />
             <Section className="py-8 md:py-12 px-4 md:px-6">
                 <Link
                     href="/"
