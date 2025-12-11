@@ -19,7 +19,7 @@ export function InnovatorCard({ innovator }: InnovatorCardProps) {
               className="w-full h-full object-cover"
             />
           </div>
-          <div className="flex flex-col gap-2 min-w-0 flex-1">
+          <div className="flex flex-col gap-1 min-w-0 flex-1">
             <p className="font-medium text-white truncate">{innovator.name}</p>
             <p className="text-sm sm:text-base font-regular text-gray-light-5 truncate">{innovator.company}</p>
           </div>
@@ -44,7 +44,7 @@ export function InnovatorCard({ innovator }: InnovatorCardProps) {
           alt={innovator.company}
           width={180}
           height={64}
-          className="object-contain brightness-0 invert max-w-full h-16"
+          className="object-contain brightness-0 invert max-w-fit h-16"
         />
       </div>
     </div>
