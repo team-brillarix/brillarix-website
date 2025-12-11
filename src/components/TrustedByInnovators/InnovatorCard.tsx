@@ -38,8 +38,14 @@ export function InnovatorCard({ innovator }: InnovatorCardProps) {
 
       <hr className="border-gray-light-9" />
 
-      <div className="flex items-center justify-start w-full h-10 relative">
-        <Image src={innovator.companyLogo} alt={innovator.company} fill className="object-contain brightness-0 invert" />
+      <div className="flex items-center justify-start w-full h-16">
+        <Image
+          src={innovator.companyLogo}
+          alt={innovator.company}
+          width={180}
+          height={64}
+          className="object-contain brightness-0 invert max-w-full h-16"
+        />
       </div>
     </div>
   );
