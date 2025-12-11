@@ -2,36 +2,67 @@
 
 import { GoogleAnalytics } from '@next/third-parties/google';
 import { useEffect } from 'react';
-import { onCLS, onFID, onFCP, onLCP, onTTFB, onINP } from 'web-vitals';
+import { onCLS, onFCP, onLCP, onTTFB, onINP } from 'web-vitals';
+import type { Metric } from 'web-vitals';
+
+declare global {
+  interface Window {
+    gtag?: (
+      command: string,
+      targetId: string,
+      config?: {
+        event_category?: string;
+        event_label?: string;
+        value?: number;
+        non_interaction?: boolean;
+      }
+    ) => void;
+  }
+}
 
 export default function Analytics() {
-  useEffect(() => {
-    const gaId = process.env.NEXT_PUBLIC_GA_ID;
+  const gaId = process.env.NEXT_PUBLIC_GA_ID;
 
-    if (!gaId) {
+  useEffect(() => {
+    if (!gaId || typeof window === 'undefined') {
       return;
     }
 
-    function sendToAnalytics(metric: any) {
-      if (typeof window !== 'undefined' && (window as any).gtag) {
-        (window as any).gtag('event', metric.name, {
+    const sendToAnalytics = (metric: Metric) => {
+      if (!window.gtag) {
+        return;
+      }
+
+      try {
+        const value = Math.round(
+          metric.name === 'CLS' ? metric.value * 1000 : metric.value
+        );
+
+        window.gtag('event', metric.name, {
           event_category: 'Web Vitals',
           event_label: metric.id,
-          value: Math.round(metric.name === 'CLS' ? metric.value * 1000 : metric.value),
+          value,
           non_interaction: true,
         });
+      } catch (error) {
+        if (process.env.NODE_ENV === 'development') {
+          console.warn('Failed to send Web Vitals to Analytics:', error);
+        }
       }
-    }
+    };
 
-    onCLS(sendToAnalytics);
-    onFID(sendToAnalytics);
-    onFCP(sendToAnalytics);
-    onLCP(sendToAnalytics);
-    onTTFB(sendToAnalytics);
-    onINP(sendToAnalytics);
-  }, []);
+    const timeoutId = setTimeout(() => {
+      onCLS(sendToAnalytics);
+      onFCP(sendToAnalytics);
+      onLCP(sendToAnalytics);
+      onTTFB(sendToAnalytics);
+      onINP(sendToAnalytics);
+    }, 1000);
 
-  const gaId = process.env.NEXT_PUBLIC_GA_ID;
+    return () => {
+      clearTimeout(timeoutId);
+    };
+  }, [gaId]);
 
   if (!gaId) {
     return null;
