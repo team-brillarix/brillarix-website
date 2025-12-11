@@ -7,7 +7,6 @@ import { Heading } from '@/components/ui/Heading';
 import { Button } from '@/components/ui/Button';
 import { ConnectionPaths, ConnectionPath } from '@/components/ui/ConnectionPaths';
 import { FiLayers, FiZap } from 'react-icons/fi';
-import { motion } from 'motion/react';
 
 const DotIcon = () => (
   <svg
@@ -157,53 +156,20 @@ export default function Hero() {
                         </div>
 
                         <div
-                          className="absolute border border-gray-dark-2 flex items-center justify-center rounded-full h-16 w-16 sm:h-18 sm:w-18 md:h-22 md:w-22 z-20"
+                          className="absolute z-20 pointer-events-auto"
                           style={{
                             left: 'calc(var(--grid-col-width) * 6 - var(--grid-col-width)*.5)',
                             top: 'calc(var(--grid-row-height) * 0 + var(--grid-row-height))',
                             transform: 'translate(-50%, -50%)',
                           }}
                         >
-                          <motion.div 
-                            className="absolute border border-gray-dark-4 rounded-full h-[85%] w-[85%]"
-                            initial={{ scale: 0.6, opacity: 1 }}
-                            animate={{ scale: 1.2, opacity: 0 }}
-                            transition={{ 
-                              duration: 2, 
-                              repeat: Infinity, 
-                              ease: 'easeOut',
-                              delay: 0
-                            }}
+                          <Image
+                            src="/hero-icons/Speedtest.svg"
+                            alt="Speedtest"
+                            width={80}
+                            height={80}
+                            className="w-16 h-16 sm:w-18 sm:h-18 md:w-20 md:h-20 object-contain"
                           />
-                          <motion.div 
-                            className="absolute border border-gray-dark-4 rounded-full h-[75%] w-[75%]"
-                            initial={{ scale: 0.6, opacity: 1 }}
-                            animate={{ scale: 1.3, opacity: 0 }}
-                            transition={{ 
-                              duration: 2, 
-                              repeat: Infinity, 
-                              ease: 'easeOut',
-                              delay: 0.4
-                            }}
-                          />
-                          <motion.div 
-                            className="absolute border border-gray-dark-4 rounded-full h-[60%] w-[60%]"
-                            initial={{ scale: 0.6, opacity: 1 }}
-                            animate={{ scale: 1.2, opacity: 0 }}
-                            transition={{ 
-                              duration: 2, 
-                              repeat: Infinity, 
-                              ease: 'easeOut',
-                              delay: 0.8
-                            }}
-                          />
-                            <Image
-                              src="/hero-icons/Speedtest.svg"
-                              alt="Speedtest"
-                              width={22}
-                              height={19}
-                              className="w-4 h-3.5 sm:w-5 sm:h-4.5 md:w-5.5 md:h-5 object-contain"
-                            />
                         </div>
 
 

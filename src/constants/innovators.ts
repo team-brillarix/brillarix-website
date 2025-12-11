@@ -3,13 +3,13 @@ import { Innovator } from '@/types/innovator';
 export const innovatorsData: Innovator[] = [
   {
     id: '1',
-    name: 'John Walker',
+    name: 'Kevin Webb',
     image: '/trusted-by-innovators/user-1.png',
-    company: 'Trialynx',
+    company: 'KW',
     position: 'UX Designer',
     testimonialTitle: "Ideas to Reality",
-    testimonialText: 'Brillarix was able to transform my rough ideas into a fully functional app that customers love! The team was able to understand our requirements, hopes, and dreams and easily proposed ways to build the app. My entire team loves working with them.',
-    companyLogo: '/client-logos/Trialynx.png',
+    testimonialText: 'Working with Brillarix on PT Metrics was exceptional. They transformed my vision into a clean, powerful platform with flawless execution and communication. Their partnership and creative problem-solving helped build a product that will truly elevate our business.',
+    companyLogo: '/client-logos/KW.png',
   },
   {
     id: '2',
@@ -23,23 +23,23 @@ export const innovatorsData: Innovator[] = [
   },
   {
     id: '3',
-    name: 'David Smith',
+    name: 'Daniel Smith',
     image: '/trusted-by-innovators/user-3.png',
     company: 'Signm',
-    position: 'Product Manager',
+    position: 'CEO',
     testimonialTitle: 'Exceptional Service',
-    testimonialText: 'Brillarix grasped our requirements instantly and maintained excellent communication. They transformed a basic concept into a refined, customer-ready product. Their insights accelerated development and delivered significant cost savings.',
+    testimonialText: 'I’ve worked with Brillarix for several years on the build and ongoing development of my company, SIGNM. They delivered full-stack development, custom APIs, and a stable GCP + MongoDB infrastructure supporting millions of daily events. Over 4,000 users have since engaged with the platform — a testament to the system’s robustness.',
     companyLogo: '/client-logos/Signm.png',
   },
   {
     id: '4',
     name: 'David Smith',
     image: '/trusted-by-innovators/user-3.png',
-    company: 'Streamlined Media',
+    company: 'Trialynx',
     position: 'Product Manager',
     testimonialTitle: 'Empowered Efficiency',
-    testimonialText: 'Our experience with Brillarix was exceptional. They adeptly facilitated the development of several intricate internal processes for our company, all while leveraging no-code technology to ensure accessibility and usability across our entire team.',
-    companyLogo: '/client-logos/Streamlined.png',
+    testimonialText: 'Brillarix turned our concept into a fully operational business with repeat customers in under a year. We expanded to four countries and boosted medical writing speed by 90%. Their platform has enabled us to launch more than 50 clinical trials.',
+    companyLogo: '/client-logos/Trialynx.png',
   },
 ];
 
