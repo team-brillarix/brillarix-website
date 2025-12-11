@@ -5,6 +5,7 @@ import { Section } from '@/components/ui/Section';
 import Link from 'next/link';
 import { MdArrowBack } from 'react-icons/md';
 import Image from 'next/image';
+import type { Metadata } from 'next';
 
 interface BlogPageProps {
     params: Promise<{ id: string }>;
@@ -20,9 +21,11 @@ export async function generateStaticParams() {
     }));
 }
 
-export async function generateMetadata({ params }: BlogPageProps) {
+export async function generateMetadata({ params }: BlogPageProps): Promise<Metadata> {
     const { id } = await params;
     const blog = await getBlog(id);
+    const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://brillarix.com';
+    const blogUrl = `${baseUrl}/blog/${id}`;
 
     if (!blog) {
         return {
@@ -33,21 +36,78 @@ export async function generateMetadata({ params }: BlogPageProps) {
     return {
         title: blog.title,
         description: blog.description,
+        alternates: {
+            canonical: blogUrl,
+        },
+        openGraph: {
+            type: 'article',
+            title: blog.title,
+            description: blog.description,
+            url: blogUrl,
+            images: [
+                {
+                    url: `${baseUrl}${blog.imageUrl}`,
+                    width: 1200,
+                    height: 630,
+                    alt: blog.title,
+                },
+            ],
+            publishedTime: blog.date,
+        },
+        twitter: {
+            card: 'summary_large_image',
+            title: blog.title,
+            description: blog.description,
+            images: [`${baseUrl}${blog.imageUrl}`],
+        },
     };
 }
 
 export default async function BlogPage({ params }: BlogPageProps) {
     const { id } = await params;
     const blog = await getBlog(id);
+    const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://brillarix.com';
+    const blogUrl = `${baseUrl}/blog/${id}`;
 
     if (!blog) {
         notFound();
     }
 
+    const articleSchema = {
+        '@context': 'https://schema.org',
+        '@type': 'Article',
+        headline: blog.title,
+        description: blog.description,
+        image: `${baseUrl}${blog.imageUrl}`,
+        datePublished: blog.date,
+        author: {
+            '@type': 'Organization',
+            name: 'Brillarix',
+            url: baseUrl,
+        },
+        publisher: {
+            '@type': 'Organization',
+            name: 'Brillarix',
+            logo: {
+                '@type': 'ImageObject',
+                url: `${baseUrl}/logos/Brillarix-White-Mode.png`,
+            },
+        },
+        mainEntityOfPage: {
+            '@type': 'WebPage',
+            '@id': blogUrl,
+        },
+    };
+
     return (
         <div className="min-h-screen bg-background">
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{
+                    __html: JSON.stringify(articleSchema),
+                }}
+            />
             <Section className="py-8 md:py-12 px-4 md:px-6">
-                {/* Back Button */}
                 <Link
                     href="/"
                     className="inline-flex items-center gap-2 text-gray-light-2 hover:text-gray-light-1 transition-colors mb-8 group"
@@ -56,7 +116,6 @@ export default async function BlogPage({ params }: BlogPageProps) {
                     <span className="text-sm font-medium">Back to Home</span>
                 </Link>
 
-                {/* Blog Image */}
                 <div className="relative w-full aspect-video rounded-2xl overflow-hidden mb-8 bg-gray-dark-2">
                     <Image
                         src={blog.imageUrl}
@@ -67,7 +126,6 @@ export default async function BlogPage({ params }: BlogPageProps) {
                     />
                 </div>
 
-                {/* Blog Title */}
                 <Heading
                     variant="h1"
                     align="left"
@@ -76,12 +134,10 @@ export default async function BlogPage({ params }: BlogPageProps) {
                     {blog.title}
                 </Heading>
 
-                {/* Blog Date */}
                 <p className="text-sm text-gray-light-3 mb-6">
                     {blog.date}
                 </p>
 
-                {/* Blog Description */}
                 <p className="text-lg text-gray-light-2 leading-relaxed mb-8 max-w-3xl">
                     {blog.description}
                 </p>

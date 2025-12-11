@@ -10,7 +10,7 @@ import { Textarea } from '@/components/ui/Textarea';
 import { Dropdown } from '@/components/ui/Dropdown';
 import { Button } from '@/components/ui/Button';
 import { Toast, ToastType } from '@/components/ui/Toast';
-import { FiPhone, FiMail } from 'react-icons/fi';
+import { FiMail } from 'react-icons/fi';
 import { CONTACT_AREA_OF_INTEREST_OPTIONS } from '@/constants/dropdownOptions';
 import { MovingBorderContainer } from '@/components/ui/MovingBorder';
 import { CONTACT_INFO } from '@/constants/contact';
