@@ -13,10 +13,10 @@ export const innovatorsData: Innovator[] = [
   },
   {
     id: '2',
-    name: 'Ashley cook',
-    image: '/trusted-by-innovators/user-2.png',
+    name: 'Kapil Meena',
+    image: '/trusted-by-innovators/VisionaryCloud.jpg',
     company: 'Visionary Clouds',
-    position: 'Head HR',
+    position: 'Founder',
     testimonialTitle: 'Website Transformation',
     testimonialText: "I'm absolutely loving the new website BRILLARIX built for my business! Their team was a pleasure to work with - they really understood what I was looking for and delivered a site that exceeded my expectations. The design is gorgeous, the functionality is top-notch, and the customer service is unbeatable. I've already seen a significant increase in engagement and conversions since launching the new site. If you're looking for a website that will help take your business to the next level, I highly recommend BRILLARIX!",
     companyLogo: '/client-logos/VisionaryClouds.png',
