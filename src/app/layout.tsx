@@ -4,6 +4,7 @@ import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Loader from "@/components/Loader";
+import { CONTACT_INFO } from "@/constants/contact";
 
 const spaceGrotesk = Space_Grotesk({
   variable: "--font-space-grotesk",
@@ -57,7 +58,6 @@ export const metadata: Metadata = {
   formatDetection: {
     email: false,
     address: false,
-    telephone: false,
   },
   alternates: {
     canonical: "/",
@@ -71,7 +71,7 @@ export const metadata: Metadata = {
     description: defaultDescription,
     images: [
       {
-        url: `${baseUrl}/logos/Twitter-Image.png`,
+        url: `${baseUrl}/logos/Twitter_Image.png`,
         width: 1200,
         height: 630,
         alt: "Brillarix - Powering Digital Innovation",
@@ -82,7 +82,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: defaultTitle,
     description: defaultDescription,
-    images: [`${baseUrl}/logos/Twitter-Image.png`],
+    images: [`${baseUrl}/logos/Twitter_Image.png`],
     creator: "@brillarixtech",
     site: "@brillarixtech",
   },
@@ -110,7 +110,7 @@ export const metadata: Metadata = {
       {
         rel: "mask-icon",
         url: "/logos/Logo-Dark-Mode.png",
-        color: "#000000",
+        color: "#08090A",
       },
     ],
   },
@@ -122,8 +122,8 @@ export const metadata: Metadata = {
     "apple-mobile-web-app-status-bar-style": "black-translucent",
     "apple-mobile-web-app-title": siteName,
     "mobile-web-app-capable": "yes",
-    "msapplication-TileColor": "#000000",
-    "theme-color": "#000000",
+    "msapplication-TileColor": "#08090A",
+    "theme-color": "#08090A",
     "color-scheme": "dark",
   },
   verification: {
@@ -141,14 +141,18 @@ export default function RootLayout({
     "@type": "Organization",
     name: siteName,
     url: baseUrl,
-    logo: `${baseUrl}/logos/Brillarix-White-Mode.svg`,
+    logo: `${baseUrl}/logos/Brillarix-White-Mode.png`,
     description: defaultDescription,
     sameAs: [
-      // Add your social media profiles here
+      "https://twitter.com/brillarixtech",
+      "https://instagram.com/brillarixtech",
+      "https://www.linkedin.com/company/brillarixtech",
     ],
     contactPoint: {
       "@type": "ContactPoint",
       contactType: "Customer Service",
+      email: CONTACT_INFO.email.address,
+      availableLanguage: "English",
     },
   };
 
@@ -158,13 +162,13 @@ export default function RootLayout({
     name: siteName,
     url: baseUrl,
     description: defaultDescription,
-    potentialAction: {
-      "@type": "SearchAction",
-      target: {
-        "@type": "EntryPoint",
-        urlTemplate: `${baseUrl}/search?q={search_term_string}`,
+    publisher: {
+      "@type": "Organization",
+      name: siteName,
+      logo: {
+        "@type": "ImageObject",
+        url: `${baseUrl}/logos/Brillarix-White-Mode.png`,
       },
-      "query-input": "required name=search_term_string",
     },
   };
 
