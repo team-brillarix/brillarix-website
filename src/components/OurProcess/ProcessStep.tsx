@@ -21,9 +21,9 @@ export function ProcessStep({ step }: ProcessStepProps) {
                 </p>
             </div>
 
-            <div className="shrink-0 border-gradient rounded-3xl w-16 h-16 md:w-28 md:h-28 lg:w-34 lg:h-34 self-center">
+            <div className="shrink-0 border-gradient rounded-lg md:rounded-3xl w-16 h-16 md:w-28 md:h-28 lg:w-34 lg:h-34 self-center">
                 <motion.div
-                    className="flex items-center justify-center rounded-3xl bg-[linear-gradient(180deg,#1D1D1D_0%,#0D0D0D_100%)] relative overflow-hidden cursor-pointer h-full w-full"
+                    className="flex items-center justify-center rounded-lg md:rounded-3xl bg-[linear-gradient(180deg,#1D1D1D_0%,#0D0D0D_100%)] relative overflow-hidden cursor-pointer h-full w-full"
                     whileHover={{ margin: '4px' }}
                     transition={{ duration: 0.2, ease: 'easeOut' }}
                 >
