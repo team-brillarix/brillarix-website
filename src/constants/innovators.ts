@@ -18,7 +18,7 @@ export const innovatorsData: Innovator[] = [
     company: 'Visionary Clouds',
     position: 'Founder',
     testimonialTitle: 'Website Transformation',
-    testimonialText: "I'm absolutely loving the new website BRILLARIX built for my business! Their team was a pleasure to work with - they really understood what I was looking for and delivered a site that exceeded my expectations. The design is gorgeous, the functionality is top-notch, and the customer service is unbeatable. I've already seen a significant increase in engagement and conversions since launching the new site. If you're looking for a website that will help take your business to the next level, I highly recommend BRILLARIX!",
+    testimonialText: "BRILLARIX built a stunning, high-performing website that exceeded my expectations. The team understood exactly what I needed and delivered flawless design and functionality. I’ve already seen a strong boost in engagement and conversions.",
     companyLogo: '/client-logos/VisionaryClouds.png',
   },
   {
@@ -28,11 +28,11 @@ export const innovatorsData: Innovator[] = [
     company: 'Signm',
     position: 'Product Manager',
     testimonialTitle: 'Exceptional Service',
-    testimonialText: 'Collaborating with Brillarix was a remarkable experience. Their team quickly grasped our requirements, maintained excellent communication, and consistently met deadlines. What started as a simple concept evolved into a polished, customer-ready product promptly. Their expertise and valuable insights not only expedited the process but also resulted in substantial cost savings.',
+    testimonialText: 'Brillarix grasped our requirements instantly and maintained excellent communication. They transformed a basic concept into a refined, customer-ready product. Their insights accelerated development and delivered significant cost savings.',
     companyLogo: '/client-logos/Signm.png',
   },
   {
-    id: '3',
+    id: '4',
     name: 'David Smith',
     image: '/trusted-by-innovators/user-3.png',
     company: 'Streamlined Media',

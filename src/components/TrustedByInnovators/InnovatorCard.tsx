@@ -31,15 +31,15 @@ export function InnovatorCard({ innovator }: InnovatorCardProps) {
 
       <hr className="border-gray-light-9" />
 
-      <div className="flex flex-col justify-start gap-4 min-h-28">
+      <div className="flex flex-col justify-start gap-4 min-h-30">
         <p className="text-base font-medium text-white">{innovator.testimonialTitle}</p>
         <p className="text-base font-regular text-gray-light-5">{innovator.testimonialText}</p>
       </div>
 
       <hr className="border-gray-light-9" />
 
-      <div className="flex flex-row items-center w-full h-24 justify-between">
-        <Image src={innovator.companyLogo} alt={innovator.company} width={200} height={96} className="object-contain" />
+      <div className="flex items-center justify-start w-full h-10 relative">
+        <Image src={innovator.companyLogo} alt={innovator.company} fill className="object-contain brightness-0 invert" />
       </div>
     </div>
   );
