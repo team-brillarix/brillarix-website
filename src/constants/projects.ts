@@ -13,7 +13,7 @@ export interface ImpactProject {
 
 export const impactProjects: ImpactProject[] = [
   {
-    id: '2',
+    id: '1',
     title: 'Trialynx',
     description:
       'Transform clinical trial development with AI. Generate 90%+ complete protocols, consents, and study documents in hours, not months. Save 70%+ time and costs with 500+ AI agents.',
@@ -24,29 +24,7 @@ export const impactProjects: ImpactProject[] = [
     },
   },
   {
-    id: '3',
-    title: 'Visionary Clouds',
-    description:
-      'Visionary Clouds offers premium commercial film and photography services, creating captivating visual stories to elevate your brand.',
-    videoUrl: `https://res.cloudinary.com/${cloudName}/video/upload/v1764406783/VisionaryClouds_m70imh.mp4`,
-    metrics: {
-      label: 'Extended market reach',
-      value: '1.35x',
-    },
-  },
-  {
-    id: '4',
-    title: 'Signm',
-    description:
-      'Get an investing edge with AI powered stock analysis. Easily monitor millions of conversations about the stock market.',
-    videoUrl: `https://res.cloudinary.com/${cloudName}/video/upload/v1764406755/Signm_duk534.mp4`,
-    metrics: {
-      label: 'User engagements growth',
-      value: '4000+ users',
-    },
-  },
-  {
-    id: '5',
+    id: '2',
     title: 'KW Fitness',
     description:
       'A personal training studio with locations in Vestal, Fayetteville & Cicero, NY -- serving Greater Binghamton & Syracuse with personalized workout & nutrition plans.',
@@ -57,10 +35,32 @@ export const impactProjects: ImpactProject[] = [
     },
   },
   {
-    id: '6',
+    id: '3',
+    title: 'Visionary Clouds',
+    description:
+      'Visionary Clouds offers premium commercial film and photography services, creating captivating visual stories to elevate your brand.',
+    videoUrl: `https://res.cloudinary.com/${cloudName}/video/upload/v1764406783/VisionaryClouds_m70imh.mp4`,
+    metrics: {
+      label: 'Client Acquisition Growth',
+      value: '40%',
+    },
+  },
+  {
+    id: '4',
+    title: 'Signm',
+    description:
+      'Get an investing edge with AI powered stock analysis. Easily monitor millions of conversations about the stock market.',
+    videoUrl: `https://res.cloudinary.com/${cloudName}/video/upload/v1764406755/Signm_duk534.mp4`,
+    metrics: {
+      label: 'User engagement growth',
+      value: '4000+',
+    },
+  },
+  {
+    id: '5',
     title: 'Gym Builder',
     description:
-      'Signm is a platform that allows you to sign documents with your team.',
+      'GymBuilder Network gives gym owners real-time dashboards, leaderboards, and AI monthly summaries to track metrics, manage targets, and grow their gyms effortlessly.',
     videoUrl: `https://res.cloudinary.com/dv860labz/video/upload/v1765450067/GymBuilder_si7yi6.mp4`,
     metrics: {
       label: 'Over 4000 user engagements',
