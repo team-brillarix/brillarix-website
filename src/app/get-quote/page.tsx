@@ -31,7 +31,7 @@ export default function GetAQuotePage() {
         src="https://assets.calendly.com/assets/external/widget.js"
         strategy="lazyOnload"
       />
-      <div className="h-[calc(100vh-120px)] bg-background flex items-center justify-center">
+      <div className="min-h-[calc(100vh-120px)] bg-background flex items-center justify-center">
         <div className="flex flex-col items-center gap-6">
           <Heading variant="h1" align="center">
             Get a Quote
