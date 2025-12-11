@@ -31,7 +31,7 @@ export function InnovatorCard({ innovator }: InnovatorCardProps) {
 
       <hr className="border-gray-light-9" />
 
-      <div className="flex flex-col justify-start gap-4 min-h-30">
+      <div className="flex flex-col justify-start gap-4 min-h-40">
         <p className="text-base font-medium text-white">{innovator.testimonialTitle}</p>
         <p className="text-base font-regular text-gray-light-5">{innovator.testimonialText}</p>
       </div>
