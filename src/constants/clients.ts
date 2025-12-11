@@ -4,10 +4,6 @@ export const clientsData = [
     image: "/client-logos/ChiefAIOfficer.png",
   },
   {
-    name: "Cleeri",
-    image: "/client-logos/Cleeri.png",
-  },
-  {
     name: "Different Digital",
     image: "/client-logos/DifferentDigital.png",
   },

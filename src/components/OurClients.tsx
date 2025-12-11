@@ -66,8 +66,8 @@ export default function OurClients() {
                                     src={client.image}
                                     alt={`${client.name} logo`}
                                     width={120}
-                                    height={40}
-                                    className="object-contain brightness-0 invert max-w-full max-h-16"
+                                    height={64}
+                                    className="object-contain brightness-0 invert max-w-full h-16"
                                 />
                             </div>
                         </div>
@@ -87,8 +87,8 @@ export default function OurClients() {
                                     src={client.image}
                                     alt={`${client.name} logo`}
                                     width={120}
-                                    height={40}
-                                    className="object-contain brightness-0 invert max-w-full max-h-16"
+                                    height={64}
+                                    className="object-contain brightness-0 invert max-w-full h-16"
                                 />
                             </div>
                         </div>
