@@ -4,6 +4,7 @@ import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Loader from "@/components/Loader";
+import Analytics from "@/components/Analytics";
 import { CONTACT_INFO } from "@/constants/contact";
 
 const spaceGrotesk = Space_Grotesk({
@@ -126,9 +127,6 @@ export const metadata: Metadata = {
     "theme-color": "#08090A",
     "color-scheme": "dark",
   },
-  verification: {
-    // google: "your-google-verification-code",
-  },
 };
 
 export default function RootLayout({
@@ -215,7 +213,6 @@ export default function RootLayout({
         <meta name="revisit-after" content="7 days" />
         <meta name="distribution" content="global" />
         <meta name="rating" content="general" />
-        <link rel="canonical" href={baseUrl} />
         <link rel="preload" href="/logos/Brillarix-Dark-Mode.png" as="image" />
       </head>
       <body
@@ -229,6 +226,7 @@ export default function RootLayout({
           </main>
           <Footer />
         </div>
+        <Analytics />
       </body>
     </html>
   );

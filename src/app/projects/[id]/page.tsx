@@ -4,6 +4,7 @@ import { Heading } from '@/components/ui/Heading';
 import { Section } from '@/components/ui/Section';
 import Link from 'next/link';
 import { MdArrowBack } from 'react-icons/md';
+import type { Metadata } from 'next';
 
 interface ProjectPageProps {
     params: Promise<{ id: string }>;
@@ -19,9 +20,11 @@ export async function generateStaticParams() {
     }));
 }
 
-export async function generateMetadata({ params }: ProjectPageProps) {
+export async function generateMetadata({ params }: ProjectPageProps): Promise<Metadata> {
     const { id } = await params;
     const project = await getProject(id);
+    const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://brillarix.com';
+    const projectUrl = `${baseUrl}/projects/${id}`;
 
     if (!project) {
         return {
@@ -32,21 +35,72 @@ export async function generateMetadata({ params }: ProjectPageProps) {
     return {
         title: project.title,
         description: project.description,
+        alternates: {
+            canonical: projectUrl,
+        },
+        openGraph: {
+            type: 'website',
+            title: project.title,
+            description: project.description,
+            url: projectUrl,
+            images: [
+                {
+                    url: `${baseUrl}/logos/Twitter_Image.png`,
+                    width: 1200,
+                    height: 630,
+                    alt: `${project.title} - Brillarix Project`,
+                },
+            ],
+        },
+        twitter: {
+            card: 'summary_large_image',
+            title: project.title,
+            description: project.description,
+            images: [`${baseUrl}/logos/Twitter_Image.png`],
+        },
     };
 }
 
 export default async function ProjectPage({ params }: ProjectPageProps) {
     const { id } = await params;
     const project = await getProject(id);
+    const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://brillarix.com';
+    const projectUrl = `${baseUrl}/projects/${id}`;
 
     if (!project) {
         notFound();
     }
 
+    const projectSchema = {
+        '@context': 'https://schema.org',
+        '@type': 'CreativeWork',
+        name: project.title,
+        description: project.description,
+        url: projectUrl,
+        creator: {
+            '@type': 'Organization',
+            name: 'Brillarix',
+            url: baseUrl,
+        },
+        publisher: {
+            '@type': 'Organization',
+            name: 'Brillarix',
+            logo: {
+                '@type': 'ImageObject',
+                url: `${baseUrl}/logos/Brillarix-White-Mode.png`,
+            },
+        },
+    };
+
     return (
         <div className="min-h-screen bg-background">
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{
+                    __html: JSON.stringify(projectSchema),
+                }}
+            />
             <Section className="py-8 md:py-12 px-4 md:px-6">
-                {/* Back Button */}
                 <Link
                     href="/"
                     className="inline-flex items-center gap-2 text-gray-light-2 hover:text-gray-light-1 transition-colors mb-8 group"
@@ -55,7 +109,6 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                     <span className="text-sm font-medium">Back to Home</span>
                 </Link>
 
-                {/* Project Video */}
                 <div className="relative w-full aspect-video rounded-2xl overflow-hidden mb-8 bg-gray-dark-2">
                     <video
                         src={project.videoUrl}
@@ -68,7 +121,6 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                     />
                 </div>
 
-                {/* Project Title */}
                 <Heading
                     variant="h1"
                     align="left"
@@ -77,12 +129,10 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                     {project.title}
                 </Heading>
 
-                {/* Project Description */}
                 <p className="text-lg text-gray-light-2 leading-relaxed mb-8 max-w-3xl">
                     {project.description}
                 </p>
 
-                {/* Metrics Card */}
                 <div className="bg-gray-dark-1 rounded-2xl p-6 md:p-8 border border-gray-dark-3 max-w-2xl">
                     <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
                         <div>

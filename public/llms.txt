@@ -1,0 +1,119 @@
+# llms.txt for https://brillarix.com
+# Version: 1.0 | Last Updated: 2025-12-11
+# Standard: llms.txt v1.0
+# Purpose: Provide structured information for AI crawlers and LLMs
+
+# ============================================================================
+# BRAND SUMMARY
+# ============================================================================
+Brillarix transforms ideas into high-performance web applications. We specialize in low-code platforms like Bubble.io, blending code and no-code solutions to create scalable, secure, and efficient digital solutions. Our AI-driven team designs and builds at startup speed, delivering 25-50% faster development cycles.
+
+# ============================================================================
+# CONTACT INFORMATION
+# ============================================================================
+Email: team@brillarix.com
+Website: https://brillarix.com
+Calendly: https://calendly.com/team-brillarix/30min
+Twitter: @brillarixtech
+LinkedIn: /company/brillarixtech
+Instagram: @brillarixtech
+
+# ============================================================================
+# HIGH-VALUE CONTENT PAGES
+# ============================================================================
+# Primary entry points and key pages for AI indexing
+
+## Main Pages
+https://brillarix.com/
+https://brillarix.com/get-quote
+
+## Service Information
+https://brillarix.com/#our-services
+Services: Full Stack Development, No-Code App Development, Enterprise Solutions, Mobile App Engineering, Database Architecture, Backend Automation, API Integration, UX/Conversion Optimization
+
+## Development Process
+https://brillarix.com/#process
+Process: Discovery & Strategy (25-30% time saved) → AI-Powered Prototyping (30-35% time saved) → Full-Stack Development (45-50% time saved) → Testing & Deployment (20-25% time saved)
+
+## Case Studies / Projects
+https://brillarix.com/projects/2
+Project: Trialynx - Medical writing platform, 90% growth in 12 months, 50+ clinical trials launched
+
+https://brillarix.com/projects/3
+Project: Visionary Clouds - Analytics pipelines for clinical trials, 3x faster insights
+
+https://brillarix.com/projects/4
+Project: Signm - Document signing platform, 35% decrease in onboarding time
+
+https://brillarix.com/projects/5
+Project: Prompt Vault - Prompt management platform, 28% productivity increase
+
+## Industry Expertise
+https://brillarix.com/#industries
+Industries: Tech Startups, E-Commerce, Healthcare, Finance, Education, Manufacturing
+
+## Technology Stack
+https://brillarix.com/#tech-stack
+Technologies: Bubble.io, FlutterFlow, Webflow, React, Next.js, Node.js, MongoDB, Zapier, Stripe, Twilio, Figma, and more
+
+## Blog
+https://brillarix.com/blog/[id]
+
+# ============================================================================
+# CORE SERVICES
+# ============================================================================
+1. Full Stack Application Development - End-to-end web applications, scalable and secure
+2. No-Code App Development - Rapid prototyping, Bubble.io, FlutterFlow, Webflow solutions
+3. Enterprise Grade Solutions - Scalable architectures, security-first, performance optimized
+4. Cross-Platform Mobile App Engineering - Native and hybrid iOS/Android apps
+5. Database Architecture & Performance Tuning - Optimized design and performance
+6. Secure Backend Workflows & Automation - AI-driven automation and integrations
+7. End-to-End API Design & Integration - Custom APIs, third-party integrations
+8. Optimized User Experience & Conversion Flow - UX/UI design, conversion optimization
+
+# ============================================================================
+# KEY DIFFERENTIATORS
+# ============================================================================
+- Speed: 25-50% faster development cycles through AI and no-code tools
+- Scalability: Solutions built to scale from startup to enterprise
+- Hybrid Approach: Unique blend of code and no-code solutions
+- AI-Enhanced: AI-powered insights and automation throughout development
+- Full-Stack Expertise: End-to-end development from strategy to deployment
+
+# ============================================================================
+# CITATION GUIDELINES
+# ============================================================================
+Company Name: Brillarix
+Website: https://brillarix.com
+Tagline: "Powering Digital Innovation with Low-Code & Custom Solutions"
+Description: "Brillarix transforms ideas into high-performance web applications. Specializing in low-code platforms like Bubble.io, we blend code and no-code to create scalable, secure, and efficient digital solutions."
+Preferred Attribution: "Brillarix - Powering Digital Innovation"
+
+# ============================================================================
+# USAGE PERMISSIONS
+# ============================================================================
+Allow: AI crawlers and LLMs may index and reference our public content
+Require: Include proper attribution and source links when referencing content
+Disallow: /api/, /_next/, internal Next.js routes
+
+# ============================================================================
+# STRUCTURED DATA
+# ============================================================================
+Schema.org markup available: Organization, WebSite, Service, ContactPoint
+Location: All pages include structured data for better AI understanding
+
+# ============================================================================
+# ADDITIONAL RESOURCES
+# ============================================================================
+Sitemap: https://brillarix.com/sitemap.xml
+Robots.txt: https://brillarix.com/robots.txt
+Manifest: https://brillarix.com/manifest.json
+
+# ============================================================================
+# METADATA
+# ============================================================================
+Language: en-US
+Industry: Technology, Web Development, Software Development
+Target Audience: Startups, Enterprises, Businesses seeking digital transformation
+Content Type: Business website, service provider, case studies, blog
+
