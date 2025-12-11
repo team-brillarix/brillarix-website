@@ -1,21 +1,26 @@
 'use client';
 
-import { useState, useEffect, useMemo, useRef, useCallback, startTransition } from 'react';
-import { motion, useMotionValue } from 'motion/react';
+import { useState, useMemo, useRef, useEffect, useCallback } from 'react';
+
+const DEFAULT_ICON_RADIUS = 3;
+const DEFAULT_DASH_LENGTH = 5;
+const DEFAULT_SAMPLE_COUNT = 12;
+const COORDINATE_PRECISION = 2;
+const COORDINATE_TOLERANCE = 0.1;
+const ICON_EDGE_OFFSET = 14;
+const ICON_BOTTOM_OFFSET = 2;
 
 export interface ConnectionPath {
   id: string;
   d: string;
   startPoint: { x: number; y: number };
   endPoint: { x: number; y: number };
-  // Optional: if provided, path will be recalculated from grid coordinates
   gridStartPoint?: { x: number; y: number };
   gridEndPoint?: { x: number; y: number };
   gridWaypoints?: Array<{ 
     x: number; 
     y: number; 
     type: 'vertical' | 'horizontal' | 'quadratic';
-    // For quadratic curves: control point and end point
     controlPoint?: { x: number; y: number };
     curveEndPoint?: { x: number; y: number };
   }>;
@@ -25,7 +30,9 @@ export interface IconPosition {
   id: string;
   gridX: number;
   gridY: number;
-  radius?: number; // Icon radius in percentage (default: 3)
+  radius?: number;
+  width?: number;
+  height?: number;
 }
 
 export interface ConnectionPathsProps {
@@ -60,60 +67,19 @@ export function ConnectionPaths({
   iconPositions = [],
   onIconActiveChange,
 }: ConnectionPathsProps) {
-  const [viewBox, setViewBox] = useState('0 0 100 100');
-  const [activeSegmentIndex, setActiveSegmentIndex] = useState(0);
-  const [activePathLength, setActivePathLength] = useState<number | null>(null);
-  const [animationKey, setAnimationKey] = useState(0);
-  const [shouldAnimate, setShouldAnimate] = useState(false);
-  const pathRef = useRef<SVGPathElement | null>(null);
+  const [pathLength, setPathLength] = useState<number>(0);
   const activeIconsRef = useRef<Set<string>>(new Set());
-  const pendingIconsUpdateRef = useRef<Set<string> | null>(null);
-  const rafIdRef = useRef<number | null>(null);
-  const dashOffset = useMotionValue(-10000);
+  const pathRef = useRef<SVGPathElement | null>(null);
+  const animationRef = useRef<number | null>(null);
+  const animationIdRef = useRef<string>(`path-animation-${Math.random().toString(36).substring(2, 11)}`);
 
-  useEffect(() => {
-    setViewBox('0 0 100 100');
-  }, []);
-
-  const handleAnimationComplete = () => {
-    const nextIndex = (activeSegmentIndex + 1) % paths.length;
-    
-    activeIconsRef.current.clear();
-    if (onIconActiveChange) {
-      onIconActiveChange(new Set());
-    }
-    
-    setActiveSegmentIndex(nextIndex);
-    setAnimationKey(prev => prev + 1);
-  };
-
-  useEffect(() => {
-    setActivePathLength(null);
-    setShouldAnimate(false);
-    dashOffset.set(-10000);
-    activeIconsRef.current.clear();
-    if (onIconActiveChange) {
-      onIconActiveChange(new Set());
-    }
-  }, [activeSegmentIndex, animationKey, onIconActiveChange, dashOffset]);
-
-  useEffect(() => {
-    if (activePathLength !== null && !shouldAnimate) {
-      const timer = setTimeout(() => {
-        dashOffset.set(0);
-        setShouldAnimate(true);
-      }, 10);
-      return () => clearTimeout(timer);
-    }
-  }, [activePathLength, dashOffset, shouldAnimate]);
-
-  const convertGridToPercent = (gridX: number, gridY: number) => {
+  const convertGridToPercent = useCallback((gridX: number, gridY: number) => {
     const percentX = (gridX / gridCols) * 100;
     const percentY = (gridY / gridRows) * 100;
     return { x: percentX, y: percentY };
-  };
+  }, [gridCols, gridRows]);
 
-  const generatePathFromGrid = (path: ConnectionPath): string => {
+  const generatePathFromGrid = useCallback((path: ConnectionPath): string => {
     if (!path.gridStartPoint || !path.gridEndPoint) {
       return path.d;
     }
@@ -122,193 +88,214 @@ export function ConnectionPaths({
     const end = convertGridToPercent(path.gridEndPoint.x, path.gridEndPoint.y);
 
     if (path.gridWaypoints && path.gridWaypoints.length > 0) {
-      let pathString = `M ${start.x.toFixed(2)} ${start.y.toFixed(2)}`;
+      let pathString = `M ${start.x.toFixed(COORDINATE_PRECISION)} ${start.y.toFixed(COORDINATE_PRECISION)}`;
       
       path.gridWaypoints.forEach((waypoint) => {
         const wp = convertGridToPercent(waypoint.x, waypoint.y);
         
         if (waypoint.type === 'vertical') {
-          pathString += ` V ${wp.y.toFixed(2)}`;
+          pathString += ` V ${wp.y.toFixed(COORDINATE_PRECISION)}`;
         } else if (waypoint.type === 'horizontal') {
-          pathString += ` H ${wp.x.toFixed(2)}`;
+          pathString += ` H ${wp.x.toFixed(COORDINATE_PRECISION)}`;
         } else if (waypoint.type === 'quadratic' && waypoint.controlPoint && waypoint.curveEndPoint) {
           const control = convertGridToPercent(waypoint.controlPoint.x, waypoint.controlPoint.y);
           const curveEnd = convertGridToPercent(waypoint.curveEndPoint.x, waypoint.curveEndPoint.y);
-          pathString += ` Q ${control.x.toFixed(2)} ${control.y.toFixed(2)} ${curveEnd.x.toFixed(2)} ${curveEnd.y.toFixed(2)}`;
+          pathString += ` Q ${control.x.toFixed(COORDINATE_PRECISION)} ${control.y.toFixed(COORDINATE_PRECISION)} ${curveEnd.x.toFixed(COORDINATE_PRECISION)} ${curveEnd.y.toFixed(COORDINATE_PRECISION)}`;
         }
       });
       
       const lastWp = path.gridWaypoints[path.gridWaypoints.length - 1];
       if (lastWp.type === 'quadratic' && lastWp.curveEndPoint) {
         const lastCurveEnd = convertGridToPercent(lastWp.curveEndPoint.x, lastWp.curveEndPoint.y);
-        if (Math.abs(lastCurveEnd.x - end.x) > 0.1 || Math.abs(lastCurveEnd.y - end.y) > 0.1) {
-          pathString += ` H ${end.x.toFixed(2)}`;
+        if (Math.abs(lastCurveEnd.x - end.x) > COORDINATE_TOLERANCE || Math.abs(lastCurveEnd.y - end.y) > COORDINATE_TOLERANCE) {
+          pathString += ` H ${end.x.toFixed(COORDINATE_PRECISION)}`;
         }
       } else {
         const lastWpPercent = convertGridToPercent(lastWp.x, lastWp.y);
-        if (Math.abs(lastWpPercent.x - end.x) > 0.1 || Math.abs(lastWpPercent.y - end.y) > 0.1) {
-          pathString += ` L ${end.x.toFixed(2)} ${end.y.toFixed(2)}`;
+        if (Math.abs(lastWpPercent.x - end.x) > COORDINATE_TOLERANCE || Math.abs(lastWpPercent.y - end.y) > COORDINATE_TOLERANCE) {
+          pathString += ` L ${end.x.toFixed(COORDINATE_PRECISION)} ${end.y.toFixed(COORDINATE_PRECISION)}`;
         }
       }
       
       return pathString;
     }
 
-    return `M ${start.x.toFixed(2)} ${start.y.toFixed(2)} L ${end.x.toFixed(2)} ${end.y.toFixed(2)}`;
-  };
+    return `M ${start.x.toFixed(COORDINATE_PRECISION)} ${start.y.toFixed(COORDINATE_PRECISION)} L ${end.x.toFixed(COORDINATE_PRECISION)} ${end.y.toFixed(COORDINATE_PRECISION)}`;
+  }, [convertGridToPercent]);
 
   const convertedPaths = useMemo(() => {
     return paths.map((path) => {
       const convertedD = generatePathFromGrid(path);
-      const startPercent = path.gridStartPoint 
-        ? convertGridToPercent(path.gridStartPoint.x, path.gridStartPoint.y)
-        : path.startPoint;
-      const endPercent = path.gridEndPoint
-        ? convertGridToPercent(path.gridEndPoint.x, path.gridEndPoint.y)
-        : path.endPoint;
-
       return {
         ...path,
         d: convertedD,
-        startPoint: startPercent,
-        endPoint: endPercent,
       };
     });
-  }, [paths, gridCols, gridRows]);
+  }, [paths, generatePathFromGrid]);
 
-  const iconPositionsPercent = useMemo(() => {
+  const iconBounds = useMemo(() => {
     return iconPositions.map((icon) => {
-      const pos = convertGridToPercent(icon.gridX, icon.gridY);
-      const radius = icon.radius ?? 3;
+      const iconPos = convertGridToPercent(icon.gridX, icon.gridY);
+      const radius = icon.radius ?? DEFAULT_ICON_RADIUS;
+      const iconWidth = icon.width ?? radius * 2;
+      const iconHeight = icon.height ?? radius * 2;
+      
       return {
         id: icon.id,
-        x: pos.x,
-        y: pos.y,
-        radius,
+        center: iconPos,
+        left: iconPos.x - iconWidth / 2 - ICON_EDGE_OFFSET,
+        right: iconPos.x + iconWidth / 2,
+        top: iconPos.y - iconHeight / 2,
+        bottom: iconPos.y + iconHeight / 2 - ICON_BOTTOM_OFFSET,
+        width: iconWidth,
+        height: iconHeight,
       };
     });
-  }, [iconPositions, gridCols, gridRows]);
+  }, [iconPositions, convertGridToPercent]);
 
-  const isPointInIcon = (point: { x: number; y: number }, icon: { x: number; y: number; radius: number }) => {
-    const distance = Math.sqrt(Math.pow(point.x - icon.x, 2) + Math.pow(point.y - icon.y, 2));
-    return distance <= icon.radius;
-  };
-
-  const checkActiveIcons = useCallback((offset: number) => {
-    if (!pathRef.current || activePathLength === null || iconPositionsPercent.length === 0 || !onIconActiveChange) {
+  useEffect(() => {
+    if (!pathRef.current || !onIconActiveChange || iconBounds.length === 0 || pathLength === 0) {
       return;
     }
 
     const path = pathRef.current;
-    const totalLength = activePathLength;
-    const dashLength = 5;
-    
-    const progress = Math.max(0, Math.min(1, -offset / (totalLength + dashLength)));
-    const segmentStartDistance = progress * totalLength;
-    const segmentEndDistance = Math.min(totalLength, segmentStartDistance + dashLength);
-    
-    const sampleCount = 8;
-    const segmentPoints: { x: number; y: number }[] = [];
-    
-    try {
-      for (let i = 0; i <= sampleCount; i++) {
-        const t = i / sampleCount;
-        const distance = segmentStartDistance + (segmentEndDistance - segmentStartDistance) * t;
-        const clampedDistance = Math.max(0, Math.min(totalLength, distance));
-        const point = path.getPointAtLength(clampedDistance);
-        segmentPoints.push({ x: point.x, y: point.y });
-      }
-    } catch (e) {
-      return;
-    }
+    const totalLength = pathLength;
+    const maxOffset = totalLength + DEFAULT_DASH_LENGTH;
+    const dashLengthInPathUnits = (DEFAULT_DASH_LENGTH / 100) * totalLength;
 
-    if (segmentPoints.length === 0) return;
+    const checkAnimationProgress = () => {
+      if (!pathRef.current) return;
 
-    const segmentLeadingEdge = segmentPoints[segmentPoints.length - 1];
-    const newActiveIcons = new Set<string>();
-    
-    iconPositionsPercent.forEach((icon) => {
-      for (let i = 0; i < segmentPoints.length; i++) {
-        if (isPointInIcon(segmentPoints[i], icon)) {
-          newActiveIcons.add(icon.id);
-          break; // Found a match, no need to check other points for this icon
+      try {
+        const computedStyle = window.getComputedStyle(path);
+        const currentOffset = parseFloat(computedStyle.strokeDashoffset) || 0;
+        const progress = Math.max(0, Math.min(1, -currentOffset / maxOffset));
+        const leadingEdgeDistance = progress * totalLength;
+        const trailingEdgeDistance = Math.max(0, leadingEdgeDistance - dashLengthInPathUnits);
+        const newActiveIcons = new Set<string>();
+        
+        let leadingEdgePoint: DOMPoint;
+        try {
+          leadingEdgePoint = path.getPointAtLength(leadingEdgeDistance);
+        } catch {
+          return;
         }
-      }
-    });
-    
-    if (newActiveIcons.size > 1) {
-      let closestIconId: string | null = null;
-      let closestDistance = Infinity;
-
-      iconPositionsPercent.forEach((icon) => {
-        if (!newActiveIcons.has(icon.id)) return;
-        const distance = Math.sqrt(
-          Math.pow(segmentLeadingEdge.x - icon.x, 2) + Math.pow(segmentLeadingEdge.y - icon.y, 2)
-        );
-        if (distance < closestDistance) {
-          closestDistance = distance;
-          closestIconId = icon.id;
-        }
-      });
-
-      if (closestIconId) {
-        newActiveIcons.clear();
-        newActiveIcons.add(closestIconId);
-      }
-    }
-
-    const currentIds = Array.from(activeIconsRef.current).sort().join(',');
-    const newIds = Array.from(newActiveIcons).sort().join(',');
-    
-    if (currentIds !== newIds) {
-      activeIconsRef.current = newActiveIcons;
-      pendingIconsUpdateRef.current = newActiveIcons;
-      
-      if (rafIdRef.current === null && onIconActiveChange) {
-        rafIdRef.current = requestAnimationFrame(() => {
-          if (pendingIconsUpdateRef.current !== null) {
-            startTransition(() => {
-              onIconActiveChange(pendingIconsUpdateRef.current!);
-            });
-            pendingIconsUpdateRef.current = null;
+        
+        let trailingEdgePoint = leadingEdgePoint;
+        if (trailingEdgeDistance > 0) {
+          try {
+            trailingEdgePoint = path.getPointAtLength(trailingEdgeDistance);
+          } catch {
+            trailingEdgePoint = leadingEdgePoint;
           }
-          rafIdRef.current = null;
+        }
+        
+        iconBounds.forEach((bounds) => {
+          const leadingEdgeInBounds = 
+            leadingEdgePoint.x >= bounds.left &&
+            leadingEdgePoint.x <= bounds.right &&
+            leadingEdgePoint.y >= bounds.top &&
+            leadingEdgePoint.y <= bounds.bottom;
+          
+          const trailingEdgeInBounds = 
+            trailingEdgePoint.x >= bounds.left &&
+            trailingEdgePoint.x <= bounds.right &&
+            trailingEdgePoint.y >= bounds.top &&
+            trailingEdgePoint.y <= bounds.bottom;
+          
+          const leadingEdgeReachedLeft = leadingEdgePoint.x >= bounds.left;
+          const leadingEdgeInVerticalRange = 
+            leadingEdgePoint.y >= bounds.top && leadingEdgePoint.y <= bounds.bottom;
+          const trailingEdgePassedRight = trailingEdgePoint.x > bounds.right;
+          
+          let shouldActivate = false;
+          
+          if (leadingEdgeReachedLeft && leadingEdgeInVerticalRange && !trailingEdgePassedRight) {
+            shouldActivate = true;
+          }
+          
+          if (leadingEdgeInBounds || trailingEdgeInBounds) {
+            shouldActivate = true;
+          }
+          
+          if (!shouldActivate) {
+            for (let i = 0; i <= DEFAULT_SAMPLE_COUNT; i++) {
+              const t = i / DEFAULT_SAMPLE_COUNT;
+              const sampleDistance = trailingEdgeDistance + (leadingEdgeDistance - trailingEdgeDistance) * t;
+              if (sampleDistance >= 0 && sampleDistance <= totalLength) {
+                try {
+                  const samplePoint = path.getPointAtLength(sampleDistance);
+                  if (
+                    samplePoint.x >= bounds.left &&
+                    samplePoint.x <= bounds.right &&
+                    samplePoint.y >= bounds.top &&
+                    samplePoint.y <= bounds.bottom
+                  ) {
+                    shouldActivate = true;
+                    break;
+                  }
+                } catch {
+                  continue;
+                }
+              }
+            }
+          }
+          
+          if (shouldActivate) {
+            newActiveIcons.add(bounds.id);
+          }
         });
+        
+        const currentIds = Array.from(activeIconsRef.current).sort().join(',');
+        const newIds = Array.from(newActiveIcons).sort().join(',');
+        
+        if (currentIds !== newIds) {
+          activeIconsRef.current = newActiveIcons;
+          onIconActiveChange(newActiveIcons);
+        }
+      } catch {
+        return;
       }
-    }
-  }, [activePathLength, iconPositionsPercent, onIconActiveChange]);
 
-  useEffect(() => {
-    if (!onIconActiveChange || iconPositionsPercent.length === 0) {
-      return;
-    }
+      animationRef.current = requestAnimationFrame(checkAnimationProgress);
+    };
 
-    const unsubscribe = dashOffset.on('change', (latest) => {
-      checkActiveIcons(latest);
-    });
+    animationRef.current = requestAnimationFrame(checkAnimationProgress);
+
     return () => {
-      unsubscribe();
-      if (rafIdRef.current !== null) {
-        cancelAnimationFrame(rafIdRef.current);
-        rafIdRef.current = null;
+      if (animationRef.current !== null) {
+        cancelAnimationFrame(animationRef.current);
+        animationRef.current = null;
       }
     };
-  }, [dashOffset, checkActiveIcons]);
+  }, [iconBounds, onIconActiveChange, pathLength]);
+
+  useEffect(() => {
+    if (pathRef.current && pathLength === 0) {
+      try {
+        const length = pathRef.current.getTotalLength();
+        if (length > 0) {
+          setPathLength(length);
+        }
+      } catch {
+        return;
+      }
+    }
+  }, [convertedPaths, pathLength]);
 
   if (paths.length === 0) return null;
 
-  const activePath = convertedPaths[activeSegmentIndex];
-  
-  const dashLength = 5;
-  const targetOffset = activePathLength !== null ? -(activePathLength + dashLength) : -10000;
+  const activePath = convertedPaths[0];
+  const maxOffset = pathLength > 0 ? pathLength + DEFAULT_DASH_LENGTH : 0;
 
   return (
-    <div className={`absolute inset-0 pointer-events-none ${className}`}>
+    <div className={`absolute inset-0 pointer-events-none ${className}`} aria-hidden="true">
       <svg
         className="absolute inset-0 w-full h-full z-10 pointer-events-none"
-        viewBox={viewBox}
+        viewBox="0 0 100 100"
         preserveAspectRatio="none"
         style={{ overflow: 'visible' }}
+        aria-hidden="true"
       >
         <defs>
           <style>{`
@@ -323,7 +310,21 @@ export function ConnectionPaths({
               stroke-width: ${strokeWidth.animated};
               fill: none;
               filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.8));
+              stroke-dashoffset: 0;
             }
+            ${maxOffset > 0 ? `
+            .animated-segment-${animationIdRef.current} {
+              animation: pathAnimation-${animationIdRef.current} ${animationDuration}s linear infinite;
+            }
+            @keyframes pathAnimation-${animationIdRef.current} {
+              0% {
+                stroke-dashoffset: 0;
+              }
+              100% {
+                stroke-dashoffset: -${maxOffset};
+              }
+            }
+            ` : ''}
           `}</style>
         </defs>
         {convertedPaths.map((path) => (
@@ -334,26 +335,27 @@ export function ConnectionPaths({
           />
         ))}
         {activePath && (
-          <motion.path
-            key={`animated-${activePath.id}-${activeSegmentIndex}-${animationKey}-${shouldAnimate ? 'animating' : 'waiting'}`}
+          <path
             ref={(el: SVGPathElement | null) => {
-              if (el && activePathLength === null) {
-                const length = el.getTotalLength();
-                setActivePathLength(length);
+              if (el) {
+                pathRef.current = el;
+                if (pathLength === 0) {
+                  try {
+                    const length = el.getTotalLength();
+                    if (length > 0) {
+                      setPathLength(length);
+                    }
+                  } catch {
+                    return;
+                  }
+                }
               }
-              pathRef.current = el;
             }}
-            className={`animated-segment ${animatedSegmentClassName}`}
+            className={`animated-segment ${maxOffset > 0 ? `animated-segment-${animationIdRef.current}` : ''} ${animatedSegmentClassName}`}
             d={activePath.d}
-            strokeDasharray="5 10000"
-            strokeDashoffset={dashOffset}
-            initial={{ strokeDashoffset: shouldAnimate ? 0 : -10000 }}
-            animate={shouldAnimate && activePathLength !== null ? { strokeDashoffset: targetOffset } : { strokeDashoffset: -10000 }}
-            transition={{
-              duration: animationDuration,
-              ease: 'linear',
-            }}
-            onAnimationComplete={handleAnimationComplete}
+            style={maxOffset > 0 ? {
+              strokeDasharray: `${DEFAULT_DASH_LENGTH} ${maxOffset}`,
+            } : undefined}
           />
         )}
       </svg>

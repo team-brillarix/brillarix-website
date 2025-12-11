@@ -30,8 +30,8 @@ export const impactProjects: ImpactProject[] = [
       'Advanced analytics pipelines transformed raw study data into real-time dashboards for sponsors and CRO teams.',
     videoUrl: `https://res.cloudinary.com/${cloudName}/video/upload/v1764406783/VisionaryClouds_m70imh.mp4`,
     metrics: {
-      label: 'Faster access to decision-ready insights',
-      value: '3x',
+      label: 'Extended market reach',
+      value: '1.35x',
     },
   },
   {
@@ -45,16 +45,5 @@ export const impactProjects: ImpactProject[] = [
       value: '35%',
     },
   },
-  {
-    id: '5',
-    title: 'Prompt Vault',
-    description:
-      'Prompt Vault is a platform that allows you to store and share your prompts with your team.',
-    videoUrl: `https://res.cloudinary.com/${cloudName}/video/upload/v1764406753/PromptVault_frbwbu.mp4`,
-    metrics: {
-      label: 'Increase in team productivity',
-      value: '28%',
-    },
-  }
 ];
 
