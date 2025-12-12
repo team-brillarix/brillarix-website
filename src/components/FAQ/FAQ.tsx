@@ -6,9 +6,12 @@ import { Heading } from '@/components/ui/Heading';
 import { FAQItem } from './FAQItem';
 import { faqs } from '@/constants/faqs';
 import Image from 'next/image';
+import SchemaScript from '@/components/SchemaScript';
+import { generateFAQPageSchema } from '@/lib/schema';
 
 export default function FAQ() {
     const [openId, setOpenId] = useState<string | null>(faqs[0]?.id || null);
+    const faqSchema = generateFAQPageSchema(faqs);
 
     const handleToggle = (id: string) => {
         setOpenId(prevId => prevId === id ? null : id);
@@ -17,6 +20,7 @@ export default function FAQ() {
     return (
         <Section
         >
+            <SchemaScript schema={faqSchema} id="faq-schema" />
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 lg:gap-16">
                 {/* Left */}
                 <div className="flex flex-col gap-6">
