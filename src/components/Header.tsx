@@ -46,7 +46,7 @@ export default function Header() {
                 {/* Right Side: Get a Quote Button + Hamburger */}
                 <div className="flex items-center gap-3 sm:gap-4 shrink-0">
                     {/* Get a Quote Button */}
-                    <Button
+                    {/*<Button
                         href="/get-quote"
                         variant="primary"
                         rightImage={
@@ -54,7 +54,7 @@ export default function Header() {
                         }
                     >
                         Get a Quote
-                    </Button>
+                    </Button>*/}
 
                     {/* Hamburger Icon */}
                     <div className="relative lg:hidden flex items-center justify-center" ref={menuRef}>
