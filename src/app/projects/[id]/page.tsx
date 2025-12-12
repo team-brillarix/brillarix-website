@@ -25,7 +25,7 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: ProjectPageProps): Promise<Metadata> {
     const { id } = await params;
     const project = await getProject(id);
-    const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://brillarix.com';
+    const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.brillarix.com';
     const projectUrl = `${baseUrl}/projects/${id}`;
 
     if (!project) {
@@ -66,7 +66,7 @@ export async function generateMetadata({ params }: ProjectPageProps): Promise<Me
 export default async function ProjectPage({ params }: ProjectPageProps) {
     const { id } = await params;
     const project = await getProject(id);
-    const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://brillarix.com';
+    const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.brillarix.com';
     const projectUrl = `${baseUrl}/projects/${id}`;
 
     if (!project) {

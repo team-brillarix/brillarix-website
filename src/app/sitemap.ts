@@ -2,7 +2,7 @@ import { MetadataRoute } from 'next'
 import { impactProjects } from '@/constants/projects'
 import { blogPosts } from '@/constants/blogs'
 
-const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://brillarix.com'
+const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.brillarix.com'
 
 function parseDate(dateString: string): Date {
     try {
@@ -18,7 +18,7 @@ function parseDate(dateString: string): Date {
 
 export default function sitemap(): MetadataRoute.Sitemap {
     const now = new Date();
-    
+
     const projectRoutes = impactProjects.map((project) => ({
         url: `${baseUrl}/projects/${project.id}`,
         lastModified: now,

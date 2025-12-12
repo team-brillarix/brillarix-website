@@ -26,7 +26,7 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: BlogPageProps): Promise<Metadata> {
     const { id } = await params;
     const blog = await getBlog(id);
-    const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://brillarix.com';
+    const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.brillarix.com';
     const blogUrl = `${baseUrl}/blog/${id}`;
 
     if (!blog) {
@@ -68,7 +68,7 @@ export async function generateMetadata({ params }: BlogPageProps): Promise<Metad
 export default async function BlogPage({ params }: BlogPageProps) {
     const { id } = await params;
     const blog = await getBlog(id);
-    const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://brillarix.com';
+    const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.brillarix.com';
     const blogUrl = `${baseUrl}/blog/${id}`;
 
     if (!blog) {

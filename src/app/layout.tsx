@@ -25,7 +25,7 @@ const rubik = Rubik({
   display: "swap",
 });
 
-const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://brillarix.com";
+const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.brillarix.com";
 const siteName = "Brillarix";
 const defaultTitle = "Brillarix: Powering Digital Innovation with Low-Code & Custom Solutions";
 const defaultDescription = "Brillarix transforms ideas into high-performance web applications. Specializing in low-code platforms like Bubble.io, we blend code and no-code to create scalable, secure, and efficient digital solutions.";

@@ -1,4 +1,4 @@
-# llms.txt for https://brillarix.com
+# llms.txt for https://www.brillarix.com
 # Version: 1.0 | Last Updated: 2025-12-11
 # Standard: llms.txt v1.0
 # Purpose: Provide structured information for AI crawlers and LLMs
@@ -12,7 +12,7 @@ Brillarix transforms ideas into high-performance web applications. We specialize
 # CONTACT INFORMATION
 # ============================================================================
 Email: team@brillarix.com
-Website: https://brillarix.com
+Website: https://www.brillarix.com
 Calendly: https://calendly.com/team-brillarix/30min
 Twitter: @brillarixtech
 LinkedIn: /company/brillarixtech
@@ -24,40 +24,40 @@ Instagram: @brillarixtech
 # Primary entry points and key pages for AI indexing
 
 ## Main Pages
-https://brillarix.com/
-https://brillarix.com/get-quote
+https://www.brillarix.com/
+https://www.brillarix.com/get-quote
 
 ## Service Information
-https://brillarix.com/#our-services
+https://www.brillarix.com/#our-services
 Services: Full Stack Development, No-Code App Development, Enterprise Solutions, Mobile App Engineering, Database Architecture, Backend Automation, API Integration, UX/Conversion Optimization
 
 ## Development Process
-https://brillarix.com/#process
+https://www.brillarix.com/#process
 Process: Discovery & Strategy (25-30% time saved) → AI-Powered Prototyping (30-35% time saved) → Full-Stack Development (45-50% time saved) → Testing & Deployment (20-25% time saved)
 
 ## Case Studies / Projects
-https://brillarix.com/projects/2
+https://www.brillarix.com/projects/2
 Project: Trialynx - Medical writing platform, 90% growth in 12 months, 50+ clinical trials launched
 
-https://brillarix.com/projects/3
+https://www.brillarix.com/projects/3
 Project: Visionary Clouds - Analytics pipelines for clinical trials, 3x faster insights
 
-https://brillarix.com/projects/4
+https://www.brillarix.com/projects/4
 Project: Signm - Document signing platform, 35% decrease in onboarding time
 
-https://brillarix.com/projects/5
+https://www.brillarix.com/projects/5
 Project: Prompt Vault - Prompt management platform, 28% productivity increase
 
 ## Industry Expertise
-https://brillarix.com/#industries
+https://www.brillarix.com/#industries
 Industries: Tech Startups, E-Commerce, Healthcare, Finance, Education, Manufacturing
 
 ## Technology Stack
-https://brillarix.com/#tech-stack
+https://www.brillarix.com/#tech-stack
 Technologies: Bubble.io, FlutterFlow, Webflow, React, Next.js, Node.js, MongoDB, Zapier, Stripe, Twilio, Figma, and more
 
 ## Blog
-https://brillarix.com/blog/[id]
+https://www.brillarix.com/blog/[id]
 
 # ============================================================================
 # CORE SERVICES
@@ -84,7 +84,7 @@ https://brillarix.com/blog/[id]
 # CITATION GUIDELINES
 # ============================================================================
 Company Name: Brillarix
-Website: https://brillarix.com
+Website: https://www.brillarix.com
 Tagline: "Powering Digital Innovation with Low-Code & Custom Solutions"
 Description: "Brillarix transforms ideas into high-performance web applications. Specializing in low-code platforms like Bubble.io, we blend code and no-code to create scalable, secure, and efficient digital solutions."
 Preferred Attribution: "Brillarix - Powering Digital Innovation"
@@ -105,9 +105,9 @@ Location: All pages include structured data for better AI understanding
 # ============================================================================
 # ADDITIONAL RESOURCES
 # ============================================================================
-Sitemap: https://brillarix.com/sitemap.xml
-Robots.txt: https://brillarix.com/robots.txt
-Manifest: https://brillarix.com/manifest.json
+Sitemap: https://www.brillarix.com/sitemap.xml
+Robots.txt: https://www.brillarix.com/robots.txt
+Manifest: https://www.brillarix.com/manifest.json
 
 # ============================================================================
 # METADATA
