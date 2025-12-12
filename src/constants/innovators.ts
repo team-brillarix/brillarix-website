@@ -14,7 +14,7 @@ export const innovatorsData: Innovator[] = [
   {
     id: '2',
     name: 'Kapil Meena',
-    image: '/trusted-by-innovators/VisionaryCloud.jpg',
+    image: '/trusted-by-innovators/Kapil-Meena.png',
     company: 'Visionary Clouds',
     position: 'Founder',
     testimonialTitle: 'Website Transformation',
@@ -23,8 +23,8 @@ export const innovatorsData: Innovator[] = [
   },
   {
     id: '3',
-    name: 'Daniel Smith',
-    image: '/trusted-by-innovators/user-3.png',
+    name: 'Daniel S.',
+    image: '',
     company: 'Signm',
     position: 'CEO',
     testimonialTitle: 'Exceptional Service',
@@ -40,6 +40,16 @@ export const innovatorsData: Innovator[] = [
     testimonialTitle: 'Empowered Efficiency',
     testimonialText: 'Brillarix turned our concept into a fully operational business with repeat customers in under a year. We expanded to four countries and boosted medical writing speed by 90%. Their platform has enabled us to launch more than 50 clinical trials.',
     companyLogo: '/client-logos/Trialynx.png',
+  },
+  {
+    id: '5',
+    name: 'Evan Lindsay',
+    image: '/trusted-by-innovators/Evan-Lindsay.png',
+    company: 'Gym Builder',
+    position: 'Founder',
+    testimonialTitle: 'Visibility Boost',
+    testimonialText: 'The platform built by Brillarix has been a game-changer for our visibility. We can isolate issues in minutes, and gyms using it consistently see 8–10%+ jumps in conversions. It’s strengthened our operations, boosted retention, and helped us deliver better client results.',
+    companyLogo: '/client-logos/GymBuilder.png',
   },
 ];
 
