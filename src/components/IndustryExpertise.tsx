@@ -65,7 +65,7 @@ export default function IndustryExpertise() {
                             <div className="pt-2">
                                 <Button
                                     variant="secondary"
-                                    href="/get-quote"
+                                    href="#contact-us"
                                     className="w-fit"
                                     rightImage={<FaAngleRight size={16} />}
                                 >

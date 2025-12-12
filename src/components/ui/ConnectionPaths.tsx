@@ -72,7 +72,7 @@ export function ConnectionPaths({
   const pathRef = useRef<SVGPathElement | null>(null);
   const animationRef = useRef<number | null>(null);
   const animationIdRef = useRef<string>(`path-animation-${Math.random().toString(36).substring(2, 11)}`);
-  const pauseDuration = 1;
+  const pauseDuration = 2;
   const totalAnimationDuration = animationDuration + pauseDuration;
 
   const convertGridToPercent = useCallback((gridX: number, gridY: number) => {

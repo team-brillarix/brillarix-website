@@ -8,6 +8,7 @@ export interface ImpactProject {
   metrics: {
     label: string;
     value: string;
+    valueLabel: string;
   };
   submetrics?: {
     label: string;
@@ -24,7 +25,8 @@ export const impactProjects: ImpactProject[] = [
     videoUrl: `https://res.cloudinary.com/dv860labz/video/upload/v1765449078/Trialynx_wlyptp.mp4`,
     metrics: {
       label: 'Total Clinical Trials Launched',
-      value: '50+',
+      value: '50',
+      valueLabel: 'Over',
     },
     submetrics: [
       {
@@ -46,6 +48,7 @@ export const impactProjects: ImpactProject[] = [
     metrics: {
       label: 'Idea to MVP',
       value: '2 Weeks',
+      valueLabel: 'In',
     },
   },
   {
@@ -57,6 +60,7 @@ export const impactProjects: ImpactProject[] = [
     metrics: {
       label: 'Client Acquisition Growth',
       value: '80%',
+      valueLabel: 'By',
     },
   },
   {
@@ -68,6 +72,7 @@ export const impactProjects: ImpactProject[] = [
     metrics: {
       label: 'User Engagement Growth',
       value: '4000+',
+      valueLabel: 'Up to',
     },
   },
   {
@@ -77,8 +82,9 @@ export const impactProjects: ImpactProject[] = [
       'GymBuilder Network gives gym owners real-time dashboards, leaderboards, and AI monthly summaries to track metrics, manage targets, and grow their gyms effortlessly.',
     videoUrl: `https://res.cloudinary.com/dv860labz/video/upload/v1765450067/GymBuilder_si7yi6.mp4`,
     metrics: {
-      label: 'Conversion Rate Increase',
+      label: 'Conversion Rate Increased',
       value: '8 - 10%',
+      valueLabel: 'By',
     },
   },
 ];

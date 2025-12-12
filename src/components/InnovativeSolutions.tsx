@@ -222,7 +222,7 @@ export default function InnovativeSolutions() {
         </div>
         <Button
           variant="secondary"
-          href="/get-quote"
+          href="#contact-us"
           className="w-fit"
           rightImage={<FaAngleRight size={16} />}
         >
@@ -303,7 +303,7 @@ export default function InnovativeSolutions() {
 
           <Button
             variant="secondary"
-            href="/get-quote"
+            href="#contact-us"
             className="w-fit"
             rightImage={<FaAngleRight size={16} />}
           >
@@ -356,7 +356,7 @@ export default function InnovativeSolutions() {
 
           <Button
             variant="secondary"
-            href="/get-quote"
+            href="#contact-us"
             className="w-fit"
             rightImage={<FaAngleRight size={16} />}
           >

@@ -32,7 +32,7 @@ export function InnovatorCard({ innovator }: InnovatorCardProps) {
                 onError={() => setImageError(true)}
               />
             ) : (
-              <div className="w-full h-full flex items-center justify-center bg-gray-dark-3 text-white font-semibold text-lg sm:text-xl">
+              <div className="w-full h-full flex items-center justify-center bg-gray-dark-3 text-white font-semibold text-lg sm:text-xl leading-none">
                 {getInitials(innovator.name)}
               </div>
             )}
