@@ -2,7 +2,12 @@
 
 import React from "react";
 
-export default function Copyright({ children }: { children: React.ReactNode }) {
+interface CopyrightProps {
+    children: React.ReactNode;
+    className?: string;
+}
+
+export default function Copyright({ children, className = "" }: CopyrightProps) {
     const scrollToTop = () => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     };
@@ -10,7 +15,7 @@ export default function Copyright({ children }: { children: React.ReactNode }) {
     return (
         <button
             onClick={scrollToTop}
-            className="block w-full text-center text-background text-sm sm:text-base font-medium hover:opacity-80 transition-opacity cursor-pointer"
+            className={`block w-full text-center text-sm sm:text-base font-medium hover:opacity-80 transition-opacity cursor-pointer ${className}`}
             aria-label="Scroll to top"
         >
             {children}

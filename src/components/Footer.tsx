@@ -92,8 +92,8 @@ export default function Footer() {
             </div>
 
             {/* Bottom */}
-            <div className="bg-foreground rounded-b-3xl p-3 border border-gray-dark-3">
-                <Copyright>
+            <div className="rounded-b-3xl p-3 border border-gray-dark-3">
+                <Copyright className="text-white">
                     © 2025 Brillarix
                 </Copyright>
             </div>
