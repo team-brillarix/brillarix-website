@@ -72,6 +72,8 @@ export function ConnectionPaths({
   const pathRef = useRef<SVGPathElement | null>(null);
   const animationRef = useRef<number | null>(null);
   const animationIdRef = useRef<string>(`path-animation-${Math.random().toString(36).substring(2, 11)}`);
+  const pauseDuration = 1;
+  const totalAnimationDuration = animationDuration + pauseDuration;
 
   const convertGridToPercent = useCallback((gridX: number, gridY: number) => {
     const percentX = (gridX / gridCols) * 100;
@@ -162,6 +164,11 @@ export function ConnectionPaths({
     const totalLength = pathLength;
     const maxOffset = totalLength + DEFAULT_DASH_LENGTH;
     const dashLengthInPathUnits = (DEFAULT_DASH_LENGTH / 100) * totalLength;
+    
+    const bulbIcon = iconBounds.find((bounds) => {
+      const startIcon = iconPositions.find(ip => ip.id === 'bulb');
+      return startIcon && bounds.id === startIcon.id;
+    });
 
     const checkAnimationProgress = () => {
       if (!pathRef.current) return;
@@ -170,81 +177,88 @@ export function ConnectionPaths({
         const computedStyle = window.getComputedStyle(path);
         const currentOffset = parseFloat(computedStyle.strokeDashoffset) || 0;
         const progress = Math.max(0, Math.min(1, -currentOffset / maxOffset));
+        
+        const isInPausePhase = progress >= 0.995;
+        
         const leadingEdgeDistance = progress * totalLength;
         const trailingEdgeDistance = Math.max(0, leadingEdgeDistance - dashLengthInPathUnits);
         const newActiveIcons = new Set<string>();
         
-        let leadingEdgePoint: DOMPoint;
-        try {
-          leadingEdgePoint = path.getPointAtLength(leadingEdgeDistance);
-        } catch {
-          return;
-        }
-        
-        let trailingEdgePoint = leadingEdgePoint;
-        if (trailingEdgeDistance > 0) {
+        if (isInPausePhase && bulbIcon) {
+          newActiveIcons.add(bulbIcon.id);
+        } else {
+          let leadingEdgePoint: DOMPoint;
           try {
-            trailingEdgePoint = path.getPointAtLength(trailingEdgeDistance);
+            leadingEdgePoint = path.getPointAtLength(leadingEdgeDistance);
           } catch {
-            trailingEdgePoint = leadingEdgePoint;
-          }
-        }
-        
-        iconBounds.forEach((bounds) => {
-          const leadingEdgeInBounds = 
-            leadingEdgePoint.x >= bounds.left &&
-            leadingEdgePoint.x <= bounds.right &&
-            leadingEdgePoint.y >= bounds.top &&
-            leadingEdgePoint.y <= bounds.bottom;
-          
-          const trailingEdgeInBounds = 
-            trailingEdgePoint.x >= bounds.left &&
-            trailingEdgePoint.x <= bounds.right &&
-            trailingEdgePoint.y >= bounds.top &&
-            trailingEdgePoint.y <= bounds.bottom;
-          
-          const leadingEdgeReachedLeft = leadingEdgePoint.x >= bounds.left;
-          const leadingEdgeInVerticalRange = 
-            leadingEdgePoint.y >= bounds.top && leadingEdgePoint.y <= bounds.bottom;
-          const trailingEdgePassedRight = trailingEdgePoint.x > bounds.right;
-          
-          let shouldActivate = false;
-          
-          if (leadingEdgeReachedLeft && leadingEdgeInVerticalRange && !trailingEdgePassedRight) {
-            shouldActivate = true;
+            return;
           }
           
-          if (leadingEdgeInBounds || trailingEdgeInBounds) {
-            shouldActivate = true;
-          }
-          
-          if (!shouldActivate) {
-            for (let i = 0; i <= DEFAULT_SAMPLE_COUNT; i++) {
-              const t = i / DEFAULT_SAMPLE_COUNT;
-              const sampleDistance = trailingEdgeDistance + (leadingEdgeDistance - trailingEdgeDistance) * t;
-              if (sampleDistance >= 0 && sampleDistance <= totalLength) {
-                try {
-                  const samplePoint = path.getPointAtLength(sampleDistance);
-                  if (
-                    samplePoint.x >= bounds.left &&
-                    samplePoint.x <= bounds.right &&
-                    samplePoint.y >= bounds.top &&
-                    samplePoint.y <= bounds.bottom
-                  ) {
-                    shouldActivate = true;
-                    break;
-                  }
-                } catch {
-                  continue;
-                }
-              }
+          let trailingEdgePoint = leadingEdgePoint;
+          if (trailingEdgeDistance > 0) {
+            try {
+              trailingEdgePoint = path.getPointAtLength(trailingEdgeDistance);
+            } catch {
+              trailingEdgePoint = leadingEdgePoint;
             }
           }
           
-          if (shouldActivate) {
-            newActiveIcons.add(bounds.id);
-          }
-        });
+          iconBounds.forEach((bounds) => {
+            const leadingEdgeInBounds = 
+              leadingEdgePoint.x >= bounds.left &&
+              leadingEdgePoint.x <= bounds.right &&
+              leadingEdgePoint.y >= bounds.top &&
+              leadingEdgePoint.y <= bounds.bottom;
+            
+            const trailingEdgeInBounds = 
+              trailingEdgePoint.x >= bounds.left &&
+              trailingEdgePoint.x <= bounds.right &&
+              trailingEdgePoint.y >= bounds.top &&
+              trailingEdgePoint.y <= bounds.bottom;
+            
+            const leadingEdgeReachedLeft = leadingEdgePoint.x >= bounds.left;
+            const leadingEdgeInVerticalRange = 
+              leadingEdgePoint.y >= bounds.top && leadingEdgePoint.y <= bounds.bottom;
+            const trailingEdgePassedRight = trailingEdgePoint.x > bounds.right;
+            
+            let shouldActivate = false;
+            
+            if (leadingEdgeReachedLeft && leadingEdgeInVerticalRange && !trailingEdgePassedRight) {
+              shouldActivate = true;
+            }
+            
+            if (leadingEdgeInBounds || trailingEdgeInBounds) {
+              shouldActivate = true;
+            }
+            
+            if (!shouldActivate) {
+              for (let i = 0; i <= DEFAULT_SAMPLE_COUNT; i++) {
+                const t = i / DEFAULT_SAMPLE_COUNT;
+                const sampleDistance = trailingEdgeDistance + (leadingEdgeDistance - trailingEdgeDistance) * t;
+                if (sampleDistance >= 0 && sampleDistance <= totalLength) {
+                  try {
+                    const samplePoint = path.getPointAtLength(sampleDistance);
+                    if (
+                      samplePoint.x >= bounds.left &&
+                      samplePoint.x <= bounds.right &&
+                      samplePoint.y >= bounds.top &&
+                      samplePoint.y <= bounds.bottom
+                    ) {
+                      shouldActivate = true;
+                      break;
+                    }
+                  } catch {
+                    continue;
+                  }
+                }
+              }
+            }
+            
+            if (shouldActivate) {
+              newActiveIcons.add(bounds.id);
+            }
+          });
+        }
         
         const currentIds = Array.from(activeIconsRef.current).sort().join(',');
         const newIds = Array.from(newActiveIcons).sort().join(',');
@@ -268,7 +282,7 @@ export function ConnectionPaths({
         animationRef.current = null;
       }
     };
-  }, [iconBounds, onIconActiveChange, pathLength]);
+  }, [iconBounds, onIconActiveChange, pathLength, iconPositions]);
 
   useEffect(() => {
     if (pathRef.current && pathLength === 0) {
@@ -287,6 +301,8 @@ export function ConnectionPaths({
 
   const activePath = convertedPaths[0];
   const maxOffset = pathLength > 0 ? pathLength + DEFAULT_DASH_LENGTH : 0;
+  
+  const animationCompletePercent = (animationDuration / totalAnimationDuration) * 100;
 
   return (
     <div className={`absolute inset-0 pointer-events-none ${className}`} aria-hidden="true">
@@ -314,11 +330,14 @@ export function ConnectionPaths({
             }
             ${maxOffset > 0 ? `
             .animated-segment-${animationIdRef.current} {
-              animation: pathAnimation-${animationIdRef.current} ${animationDuration}s linear infinite;
+              animation: pathAnimation-${animationIdRef.current} ${totalAnimationDuration}s linear infinite;
             }
             @keyframes pathAnimation-${animationIdRef.current} {
               0% {
                 stroke-dashoffset: 0;
+              }
+              ${animationCompletePercent}% {
+                stroke-dashoffset: -${maxOffset};
               }
               100% {
                 stroke-dashoffset: -${maxOffset};
