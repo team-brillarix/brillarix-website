@@ -34,6 +34,10 @@ export const clientsData = [
   {
     name: "Gym Builder",
     image: "/client-logos/GymBuilder.png",
+  },
+  {
+    name: "Cleeri",
+    image: "/client-logos/Cleeri.png",
   }
 ];
 
