@@ -20,22 +20,12 @@ export default function Header() {
                     className="flex items-center gap-2 shrink-0"
                     aria-label="Brillarix Home"
                 >
-                    {/* Logo for smaller screens */}
-                    <Image
-                        src="/logos/Logo-Dark-Mode.png"
-                        alt="Brillarix Logo"
-                        width={160}
-                        height={40}
-                        className="h-8 sm:h-9 md:h-10 w-auto md:hidden"
-                        priority
-                    />
-                    {/* Logo for larger screens */}
                     <Image
                         src="/logos/Brillarix-Dark-Mode.png"
                         alt="Brillarix Logo"
                         width={160}
                         height={40}
-                        className="h-8 sm:h-9 md:h-10 w-auto hidden md:block"
+                        className="h-8 sm:h-9 md:h-10 w-auto"
                         priority
                     />
                 </Link>

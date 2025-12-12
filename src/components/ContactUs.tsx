@@ -202,13 +202,21 @@ export default function ContactUs() {
                                     <a
                                         href="#"
                                         onClick={handleCalendlyClick}
-                                        className="bg-gray-light-2 py-3 px-4 flex items-center justify-center rounded-xl"
+                                        className="bg-gray-light-2 py-3 px-3 sm:px-4 flex items-center justify-center rounded-xl"
                                     >
                                         <Image
-                                            src="/tech-icons/Calendly.png"
+                                            src="/Calendly-Logo-Small.svg"
+                                            alt="Calendly"
+                                            width={30}
+                                            height={30}
+                                            className="block sm:hidden"
+                                        />
+                                        <Image
+                                            src="/Calendly.png"
                                             alt="Calendly"
                                             width={135}
                                             height={32}
+                                            className="hidden sm:block"
                                         />
                                     </a>
 
