@@ -34,7 +34,7 @@ export const impactProjects: ImpactProject[] = [
         value: '4 Countries',
       },
       {
-        label: 'Improved Efficiency By',
+        label: 'Increased Medical Writing Speed By',
         value: '90%',
       },
     ],
@@ -70,10 +70,16 @@ export const impactProjects: ImpactProject[] = [
       'Get an investing edge with AI powered stock analysis. Easily monitor millions of conversations about the stock market.',
     videoUrl: `https://res.cloudinary.com/${cloudName}/video/upload/v1764406755/Signm_duk534.mp4`,
     metrics: {
-      label: 'User Engagement Growth',
-      value: '4000+',
+      label: 'Total Paid Customers',
+      value: '1000+',
       valueLabel: 'Up to',
     },
+    submetrics: [
+      {
+        label: 'User Engagements',
+        value: '4000+',
+      },
+    ],
   },
   {
     id: '5',
