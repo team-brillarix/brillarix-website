@@ -94,7 +94,7 @@ export default function InnovativeSolutions() {
       className="bg-background"
       id="our-services"
     >
-      <div className="w-full flex flex-col">
+      {/* <div className="w-full flex flex-col">
         <div className="w-full flex flex-col py-12 gap-6 sm:gap-8">
           <Heading
             variant="h4"
@@ -208,7 +208,6 @@ export default function InnovativeSolutions() {
               </motion.div>
             </div>
           </motion.div>
-          {/* Mobile sidebar - shown below sm breakpoint */}
           <div className="flex justify-center sm:hidden flex-col gap-3 w-full">
             {sidebarItems.map((item) => (
               <div
@@ -228,7 +227,7 @@ export default function InnovativeSolutions() {
         >
           Build Your Digital Presence
         </Button>
-      </div>
+      </div> */}
 
       <div className="grid grid-cols-1 lg:grid-cols-2 z-0 border-y border-gray-dark-4">
         <div className="flex flex-col gap-8 py-12 md:pr-12 hover:icon-hover border-t-diamond-gradient">
