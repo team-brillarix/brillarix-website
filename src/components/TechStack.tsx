@@ -8,13 +8,15 @@ import { MovingBorderContainer } from '@/components/ui/MovingBorder';
 import { techStackData } from '@/constants/techStack';
 
 export default function TechStack() {
+  const borderDurations = [12000, 16000, 20000, 14000, 18000, 24000];
+
   return (
     <Section
       title="Cutting-Edge Technologies for Scalable Solutions"
       subtitle="We use the latest AI, no-code, and full-stack tools to deliver efficient, scalable results."
       id="tools"
     >
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 md:gap-10 lg:gap-12">
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 md:gap-8 xl:gap-12">
         {techStackData.map((category, categoryIndex) => (
           <div key={categoryIndex} className="flex flex-col gap-4 sm:gap-5 md:gap-6">
             <Heading
@@ -27,16 +29,16 @@ export default function TechStack() {
 
             <MovingBorderContainer
               borderRadius="1.5rem"
-              duration={categoryIndex === 0 ? 6000 : categoryIndex === 1 ? 8000 : categoryIndex === 3 ? 7000 : 10000}
+              duration={borderDurations[categoryIndex] || 10000}
               innerClassName="grid grid-cols-3 gap-6 bg-gray-dark-1 p-5 sm:p-6 md:p-8"
             >
               {category.items.map((item, itemIndex) => (
                 <div
                   key={itemIndex}
-                  className="border-gradient rounded-lg w-20 h-20"
+                  className="border-gradient rounded-lg w-22.5 h-22.5"
                 >
                   <motion.div
-                    className="flex flex-col items-center justify-center gap-1 rounded-lg bg-gray-dark-2 p-2 cursor-pointer"
+                    className="flex flex-col items-center justify-center gap-2 rounded-lg bg-gray-dark-2 p-2 cursor-pointer h-full"
                     whileHover={{ margin: '4px' }}
                     transition={{ duration: 0.2, ease: 'easeOut' }}
                   >
