@@ -12,11 +12,11 @@ export default function Loader() {
             setIsLoading(false);
         };
 
-        if (document.readyState === "complete") {
+        if (document.readyState === "complete" || document.readyState === "interactive") {
             handleLoad();
         } else {
-            window.addEventListener("load", handleLoad);
-            return () => window.removeEventListener("load", handleLoad);
+            document.addEventListener("DOMContentLoaded", handleLoad);
+            return () => document.removeEventListener("DOMContentLoaded", handleLoad);
         }
     }, []);
 
@@ -28,7 +28,7 @@ export default function Loader() {
                     animate={{ y: 0 }}
                     exit={{ y: "-100%" }}
                     transition={{
-                        duration: 0.8,
+                        duration: 0.5,
                         ease: [0.4, 0, 0.2, 1],
                     }}
                     className="fixed inset-0 z-9999 bg-background flex items-center justify-center"
