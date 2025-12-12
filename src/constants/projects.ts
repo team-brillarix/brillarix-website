@@ -9,6 +9,10 @@ export interface ImpactProject {
     label: string;
     value: string;
   };
+  submetrics?: {
+    label: string;
+    value: string;
+  }[];
 }
 
 export const impactProjects: ImpactProject[] = [
@@ -19,9 +23,19 @@ export const impactProjects: ImpactProject[] = [
       'Transform clinical trial development with AI. Generate 90%+ complete protocols, consents, and study documents in hours, not months. Save 70%+ time and costs with 500+ AI agents.',
     videoUrl: `https://res.cloudinary.com/dv860labz/video/upload/v1765449078/Trialynx_wlyptp.mp4`,
     metrics: {
-      label: 'Increased medical writing speed',
-      value: '90%',
+      label: 'Total Clinical Trials Launched',
+      value: '50+',
     },
+    submetrics: [
+      {
+        label: 'Operations Across',
+        value: '4 Countries',
+      },
+      {
+        label: 'Improved Efficiency By',
+        value: '90%',
+      },
+    ],
   },
   {
     id: '2',
@@ -30,8 +44,8 @@ export const impactProjects: ImpactProject[] = [
       'A personal training studio with locations in Vestal, Fayetteville & Cicero, NY -- serving Greater Binghamton & Syracuse with personalized workout & nutrition plans.',
     videoUrl: `https://res.cloudinary.com/dv860labz/video/upload/v1765449162/KW_zxfnsn.mp4`,
     metrics: {
-      label: 'Over 4000 user engagements',
-      value: '1000 paying customers',
+      label: 'Idea to MVP',
+      value: '2 Weeks',
     },
   },
   {
@@ -42,7 +56,7 @@ export const impactProjects: ImpactProject[] = [
     videoUrl: `https://res.cloudinary.com/${cloudName}/video/upload/v1764406783/VisionaryClouds_m70imh.mp4`,
     metrics: {
       label: 'Client Acquisition Growth',
-      value: '40%',
+      value: '80%',
     },
   },
   {
@@ -52,7 +66,7 @@ export const impactProjects: ImpactProject[] = [
       'Get an investing edge with AI powered stock analysis. Easily monitor millions of conversations about the stock market.',
     videoUrl: `https://res.cloudinary.com/${cloudName}/video/upload/v1764406755/Signm_duk534.mp4`,
     metrics: {
-      label: 'User engagement growth',
+      label: 'User Engagement Growth',
       value: '4000+',
     },
   },
@@ -63,8 +77,8 @@ export const impactProjects: ImpactProject[] = [
       'GymBuilder Network gives gym owners real-time dashboards, leaderboards, and AI monthly summaries to track metrics, manage targets, and grow their gyms effortlessly.',
     videoUrl: `https://res.cloudinary.com/dv860labz/video/upload/v1765450067/GymBuilder_si7yi6.mp4`,
     metrics: {
-      label: 'Over 4000 user engagements',
-      value: '1000 paying customers',
+      label: 'Conversion Rate Increase',
+      value: '8 - 10%',
     },
   },
 ];
