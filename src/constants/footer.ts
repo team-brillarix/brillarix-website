@@ -4,7 +4,7 @@ export const footerNavigationLinks = [
     { href: "#our-services", label: "Services" },
     { href: "#our-impact", label: "Our Impact" },
     { href: "#contact-us", label: "Contact Us" },
-    { href: "/get-quote", label: "Get a Quote" },
+    //{ href: "/get-quote", label: "Get a Quote" },
 ] as const;
 
 export const footerSocialLinks = [
