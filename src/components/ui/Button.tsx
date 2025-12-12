@@ -2,6 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { cn, scrollToSection } from "@/lib/utils";
 
 export type ButtonVariant = "primary" | "secondary" | "tertiary";
@@ -25,6 +26,7 @@ export interface ButtonProps
   target?: string;
   rel?: string;
   fullWidth?: boolean;
+  prefetch?: boolean;
 }
 
 const sizeClasses: Record<ButtonSize, { height: string; padding: string; text: string }> = {
@@ -218,12 +220,14 @@ export const Button = React.forwardRef<HTMLButtonElement | HTMLAnchorElement, Bu
       target,
       rel,
       fullWidth = false,
+      prefetch,
       "aria-label": ariaLabel,
       "aria-describedby": ariaDescribedBy,
       ...props
     },
     ref
   ) => {
+    const pathname = usePathname();
     const buttonId = React.useId();
     const needsId = !!(error || helperText || id);
     const finalId = id || (needsId ? buttonId : undefined);
@@ -245,8 +249,10 @@ export const Button = React.forwardRef<HTMLButtonElement | HTMLAnchorElement, Bu
       if (href && href.startsWith('#')) {
         const elementId = href.substring(1);
         if (elementId) {
-          e.preventDefault();
-          scrollToSection(elementId);
+          if (pathname === '/') {
+            e.preventDefault();
+            scrollToSection(elementId);
+          }
         }
       }
     };
@@ -269,15 +275,26 @@ export const Button = React.forwardRef<HTMLButtonElement | HTMLAnchorElement, Bu
       </>
     );
 
+    const finalHref = href && href.startsWith('#') && pathname !== '/'
+      ? `/${href}`
+      : href;
+
+    const shouldPrefetch = prefetch !== undefined
+      ? prefetch
+      : href && href.startsWith('#')
+        ? pathname !== '/'
+        : undefined;
+
     return (
       <div className="flex flex-col gap-1.5">
         <span className={wrapperClassName}>
-          {href ? (
+          {finalHref ? (
             <Link
               ref={ref as React.ForwardedRef<HTMLAnchorElement>}
-              href={href}
+              href={finalHref}
               target={target}
               rel={rel}
+              prefetch={shouldPrefetch}
               {...(finalId && { id: finalId })}
               onClick={handleLinkClick}
               aria-describedby={cn(

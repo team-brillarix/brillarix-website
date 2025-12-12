@@ -8,10 +8,12 @@ import InnovativeSolutions from '@/components/InnovativeSolutions';
 import IndustryExpertise from '@/components/IndustryExpertise';
 import ContactUs from '@/components/ContactUs';
 import TrustedByInnovators from '@/components/TrustedByInnovators/TrustedByInnovators';
+import HashScrollHandler from '@/components/HashScrollHandler';
 
 export default function Home() {
   return (
     <div className="min-h-screen bg-background">
+      <HashScrollHandler />
       <Hero />
       <OurClients />
       <OurImpact />
