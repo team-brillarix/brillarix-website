@@ -325,7 +325,7 @@ export default function Hero() {
           <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6">
             <Button
               variant="primary"
-              href="/get-quote"
+              href="#contact-us"
               children="Start Your Project"
             />
             <Button

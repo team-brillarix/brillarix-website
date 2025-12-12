@@ -64,7 +64,7 @@ export function ImpactCard({ project, isActive }: { project: ImpactProject; isAc
                     ))}
                     </div>
                     <div className="px-3 sm:px-4 py-2 rounded-lg bg-gray-dark-3 shrink-0 text-gray-light-1 flex flex-row sm:flex-col items-center justify-center sm:justify-start gap-1 sm:gap-0 w-fit sm:w-auto">
-                        <p className="text-sm">Up to</p>
+                        <p className="text-sm">{project.metrics.valueLabel}</p>
                         <p className="font-bold text-base sm:text-lg">
                             {project.metrics.value}
                         </p>
