@@ -51,12 +51,12 @@ export const overlayVariants = {
 
 export const sidebarVariants = {
   hidden: {
-    opacity: 0,
-    transition: { duration: 0.8 },
+    x: -300,
+    transition: { duration: 0.8, ease: 'easeOut' as const },
   },
   visible: {
-    opacity: 1,
-    transition: { duration: 0.8 },
+    x: 0,
+    transition: { duration: 0.8, ease: 'easeOut' as const },
   },
 };
 

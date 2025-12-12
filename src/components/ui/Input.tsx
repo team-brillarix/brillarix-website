@@ -62,12 +62,20 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
     ref
   ) => {
     const inputId = React.useId();
-    const finalId = id || inputId;
-    const errorId = `${finalId}-error`;
-    const helperId = `${finalId}-helper`;
+    const finalId = React.useMemo(() => id || inputId, [id, inputId]);
+    const errorId = React.useMemo(() => `${finalId}-error`, [finalId]);
+    const helperId = React.useMemo(() => `${finalId}-helper`, [finalId]);
     const isDisabled = disabled || loading;
 
     const sizeClass = sizeClasses[size];
+
+    const ariaDescribedByValue = React.useMemo(() => {
+      const ids: string[] = [];
+      if (error) ids.push(errorId);
+      else if (helperText) ids.push(helperId);
+      if (ariaDescribedBy) ids.push(ariaDescribedBy);
+      return ids.length > 0 ? ids.join(" ") : undefined;
+    }, [error, errorId, helperText, helperId, ariaDescribedBy]);
 
     return (
       <div className="flex w-full flex-col gap-2">
@@ -104,11 +112,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
             onChange={onChange}
             required={required}
             aria-invalid={error ? "true" : "false"}
-            aria-describedby={cn(
-              error ? errorId : undefined,
-              helperText && !error ? helperId : undefined,
-              ariaDescribedBy
-            )}
+            aria-describedby={ariaDescribedByValue}
             aria-label={ariaLabel || (label ? undefined : "Input")}
             aria-required={required}
             className={cn(
