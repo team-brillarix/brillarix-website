@@ -53,16 +53,16 @@ export const techStackData: TechCategory[] = [
             { name: "LangChain", image: "/tech-icons/LangChain.svg" },
             { name: "Eleven Labs", image: "/tech-icons/ElevenLabs.svg" },
             { name: "Gemini", image: "/tech-icons/Gemini.svg" },
-            { name: "Vapi", image: "/tech-icons/Vapi.svg" },
+            { name: "Groq", image: "/tech-icons/Groq.svg" },
         ],
     },
     {
         title: "Specialized Tools",
         items: [
             { name: "Cursor", image: "/tech-icons/Cursor.svg" },
-            { name: "AWS", image: "/tech-icons/AWS.svg" },
             { name: "Bolt", image: "/tech-icons/Bolt.svg" },
             { name: "Replit", image: "/tech-icons/Replit.svg" },
+            { name: "Vapi", image: "/tech-icons/Vapi.svg" },
             { name: "Figma", image: "/tech-icons/Figma.svg" },
             { name: "Twilio", image: "/tech-icons/Twilio.svg" },
         ],

@@ -67,7 +67,7 @@ export default function OurClients() {
                                     alt={`${client.name} logo`}
                                     width={120}
                                     height={64}
-                                    className="object-contain brightness-0 invert max-w-full h-16"
+                                    className={`object-contain max-w-full h-16 ${client.filter ? 'brightness-0 invert' : ''}`}
                                 />
                             </div>
                         </div>
@@ -88,7 +88,7 @@ export default function OurClients() {
                                     alt={`${client.name} logo`}
                                     width={120}
                                     height={64}
-                                    className="object-contain brightness-0 invert max-w-full h-16"
+                                    className={`object-contain max-w-full h-16 ${client.filter ? 'brightness-0 invert' : ''}`}
                                 />
                             </div>
                         </div>
