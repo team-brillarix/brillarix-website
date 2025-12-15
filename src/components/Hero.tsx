@@ -123,9 +123,9 @@ export default function Hero() {
                         '--grid-col-width': 'calc(100% / 7)',
                         '--grid-row-height': 'calc(100% / 6)',
                       } as React.CSSProperties}>
-                        <ConnectionPaths 
-                          paths={connectionPaths} 
-                          gridCols={7} 
+                        <ConnectionPaths
+                          paths={connectionPaths}
+                          gridCols={7}
                           gridRows={6}
                           iconPositions={iconPositions}
                           onIconActiveChange={setActiveIcons}
@@ -144,11 +144,10 @@ export default function Hero() {
                             alt="Bulb"
                             width={48}
                             height={48}
-                            className={`w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 object-contain transition-all duration-300 hover:scale-125 icon-hover ${
-                              activeIcons.has('bulb') ? 'scale-125' : ''
-                            }`}
+                            className={`w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 object-contain transition-all duration-300 hover:scale-125 icon-hover ${activeIcons.has('bulb') ? 'scale-125' : ''
+                              }`}
                             style={{
-                              filter: activeIcons.has('bulb') 
+                              filter: activeIcons.has('bulb')
                                 ? 'brightness(0) saturate(100%) invert(84%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(100%) contrast(100%)'
                                 : 'none',
                             }}
@@ -174,9 +173,8 @@ export default function Hero() {
 
 
                         <div
-                          className={`group absolute flex items-center justify-center bg-gray-dark-2 rounded-lg h-10 w-10 sm:h-11 sm:w-11 md:h-12 md:w-12 z-20 pointer-events-auto hover:bg-gray-dark-5 transition-all duration-300 ${
-                            activeIcons.has('arcticons') ? 'bg-gray-dark-5' : ''
-                          }`}
+                          className={`group absolute flex items-center justify-center bg-gray-dark-2 rounded-lg h-10 w-10 sm:h-11 sm:w-11 md:h-12 md:w-12 z-20 pointer-events-auto hover:bg-gray-dark-5 transition-all duration-300 ${activeIcons.has('arcticons') ? 'bg-gray-dark-5' : ''
+                            }`}
                           style={{
                             left: 'calc(var(--grid-col-width) * 3.5)',
                             top: 'calc(var(--grid-row-height) * 3)',
@@ -188,11 +186,10 @@ export default function Hero() {
                             alt="Arcticons"
                             width={30}
                             height={16}
-                            className={`w-6 h-3 sm:w-7 sm:h-4 md:w-7.5 md:h-4 object-contain transition-all duration-300 group-hover:scale-125 hover:scale-125 icon-hover ${
-                              activeIcons.has('arcticons') ? 'scale-125' : ''
-                            }`}
+                            className={`w-6 h-3 sm:w-7 sm:h-4 md:w-7.5 md:h-4 object-contain transition-all duration-300 group-hover:scale-125 hover:scale-125 icon-hover ${activeIcons.has('arcticons') ? 'scale-125' : ''
+                              }`}
                             style={{
-                              filter: activeIcons.has('arcticons') 
+                              filter: activeIcons.has('arcticons')
                                 ? 'brightness(0) saturate(100%) invert(84%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(100%) contrast(100%)'
                                 : 'none',
                             }}
@@ -212,11 +209,10 @@ export default function Hero() {
                             alt="Developer"
                             width={56}
                             height={56}
-                            className={`w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 object-contain transition-all duration-300 hover:scale-125 icon-hover ${
-                              activeIcons.has('developer') ? 'scale-125' : ''
-                            }`}
+                            className={`w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 object-contain transition-all duration-300 hover:scale-125 icon-hover ${activeIcons.has('developer') ? 'scale-125' : ''
+                              }`}
                             style={{
-                              filter: activeIcons.has('developer') 
+                              filter: activeIcons.has('developer')
                                 ? 'brightness(0) saturate(100%) invert(84%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(100%) contrast(100%)'
                                 : 'none',
                             }}
@@ -264,6 +260,7 @@ export default function Hero() {
                         className="w-full h-auto max-w-full object-contain rounded-2xl"
                         style={{ aspectRatio: '1 / 1' }}
                         priority
+                        unoptimized
                       />
                     </div>
                     <div className="flex flex-row text-xs items-center justify-start font-normal text-gray-light-1 gap-3 sm:gap-4 rounded-3xl bg-gray-dark-2 p-4 sm:p-5 md:p-6 relative shadow-[0_4px_4px_0_rgba(0,0,0,0.05)] shrink-0">
@@ -312,6 +309,7 @@ export default function Hero() {
                         className="w-full h-auto max-w-full object-contain rounded-2xl"
                         style={{ aspectRatio: '1 / 1' }}
                         priority
+                        unoptimized
                       />
                     </div>
                   </div>
