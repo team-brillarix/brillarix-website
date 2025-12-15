@@ -38,7 +38,7 @@ export const innovatorsData: Innovator[] = [
     company: 'Trialynx',
     position: 'CEO',
     testimonialTitle: 'Empowered Efficiency',
-    testimonialText: 'Brillarix turned our concept into a fully operational business with repeat customers in under a year. We expanded to four countries and boosted medical writing speed by 90%. Their platform has enabled us to launch more than 50 clinical trials.',
+    testimonialText: 'In under a year, Brillarix helped us transform our initial concept into a fully operational business with a recurring client base. Their platform was the catalyst for our expansion into four countries, accelerating our medical writing speed by 90% and enabling the launch of over 50 clinical trials.',
     companyLogo: '/client-logos/Trialynx.png',
   },
   {
@@ -50,6 +50,16 @@ export const innovatorsData: Innovator[] = [
     testimonialTitle: 'Visibility Boost',
     testimonialText: 'The platform built by Brillarix has been a game-changer for our visibility. We can isolate issues in minutes, and gyms using it consistently see 8–10%+ jumps in conversions. It’s strengthened our operations, boosted retention, and helped us deliver better client results.',
     companyLogo: '/client-logos/GymBuilder.png',
+  },
+  {
+    id: '6',
+    name: 'Kevin Mills',
+    image: '',
+    company: 'Streamlined Media',
+    position: 'Founder',
+    testimonialTitle: 'Efficiency at Scale',
+    testimonialText: 'Our experience with Brillarix was exceptional. They adeptly facilitated the development of several intricate internal processes for our company, all while leveraging no-code technology to ensure accessibility and usability across our entire team.',
+    companyLogo: '/client-logos/Streamlined.png',
   },
 ];
 

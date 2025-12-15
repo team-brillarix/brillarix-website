@@ -74,12 +74,6 @@ export const impactProjects: ImpactProject[] = [
       value: '1000+',
       valueLabel: 'Up to',
     },
-    submetrics: [
-      {
-        label: 'User Engagements',
-        value: '4000+',
-      },
-    ],
   },
   {
     id: '5',
