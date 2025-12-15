@@ -41,10 +41,10 @@ export const impactProjects: ImpactProject[] = [
   },
   {
     id: '2',
-    title: 'KW Fitness',
+    title: 'PT Metrics',
     description:
       'A personal training studio with locations in Vestal, Fayetteville & Cicero, NY -- serving Greater Binghamton & Syracuse with personalized workout & nutrition plans.',
-    videoUrl: `https://res.cloudinary.com/${cloudName}/video/upload/v1765789359/KW_rsecnr.mp4`,
+    videoUrl: `https://res.cloudinary.com/${cloudName}/video/upload/v1765794768/PTMetric_qqefqk.mp4`,
     metrics: {
       label: 'Idea to MVP',
       value: '2 Weeks',
