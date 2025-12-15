@@ -71,8 +71,8 @@ export const impactProjects: ImpactProject[] = [
     videoUrl: `https://res.cloudinary.com/${cloudName}/video/upload/v1764406755/Signm_duk534.mp4`,
     metrics: {
       label: 'Total Paid Customers',
-      value: '1000+',
-      valueLabel: 'Up to',
+      value: '1000',
+      valueLabel: 'More Than',
     },
   },
   {
