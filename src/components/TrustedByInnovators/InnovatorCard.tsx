@@ -62,7 +62,7 @@ export function InnovatorCard({ innovator }: InnovatorCardProps) {
           alt={innovator.company}
           width={180}
           height={64}
-          className="object-contain brightness-0 invert max-w-fit h-16"
+          className={`object-contain max-w-fit h-16 ${innovator.filter ? 'brightness-0 invert' : ''}`}
         />
       </div>
     </div>

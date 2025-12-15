@@ -7,5 +7,6 @@ export interface Innovator {
   testimonialTitle: string;
   testimonialText: string;
   companyLogo: string;
+  filter: boolean;
 }
 
