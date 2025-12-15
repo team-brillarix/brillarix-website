@@ -13,6 +13,9 @@ export default function IndustryExpertise() {
         <Section
             title="Industry Expertise Tailored Solutions for Every Sector"
             subtitle="Brillarix powers businesses across industries with AI-driven, no-code solutions that deliver results faster, smarter, and more efficiently."
+            headingVariant="h2"
+            headingWeight="bold"
+            headingAlign="center"
             id="industry"
         >
             {/* Industry Cards Grid */}

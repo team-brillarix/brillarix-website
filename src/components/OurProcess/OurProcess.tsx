@@ -8,6 +8,9 @@ export default function OurProcess() {
       title="Our Process
 From Concept to Launch, Faster Than Ever"
       subtitle="A streamlined, AI-powered process that accelerates every step of your product development, ensuring faster, smarter, and more reliable results."
+      headingVariant="h2"
+      headingWeight="bold"
+      headingAlign="center"
       className="py-16 md:py-20 px-4 sm:px-6 md:px-8"
       id="process"
     >

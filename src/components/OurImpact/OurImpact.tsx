@@ -19,6 +19,9 @@ export default function OurImpact() {
             id="our-impact"
             title="Our Impact"
             subtitle="Brillarix turns ideas into results, delivering fast, scalable, and innovative solutions that drive growth and efficiency."
+            headingVariant="h2"
+            headingWeight="bold"
+            headingAlign="center"
         >
             <div
                 className="w-screen overflow-hidden relative"

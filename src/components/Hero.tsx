@@ -79,9 +79,8 @@ export default function Hero() {
             variant="h1"
             weight="medium"
             align="center"
-            children="Skip the delays. Our AI-driven team designs
-            &amp; builds at startup speed."
-            subtitle="Brillarix blends cutting-edge AI, no-code platforms, and full-stack development to bring your product vision to life faster than traditional teams."
+            children="The AI-Native Product Studio for Modern Founders."
+            subtitle="We don't just write code; we build businesses. From day-one strategy to scalable full-stack products, Brillarix bridges the gap between concept and market dominance."
             subtitleAs="p"
             subtitleClassName="font-normal text-gray-light-3"
           />
@@ -102,8 +101,8 @@ export default function Hero() {
                           weight="semibold"
                           scale="compact"
                           className="text-gray-light-1 font-medium text-sm sm:text-base"
-                          children="AI + No-Code Prototyping"
-                          subtitle="Build, test, and iterate at lightning speed with AI-powered no-code solutions."
+                          children="Rapid MVP & Validation"
+                          subtitle="Test ideas in weeks, not months. We use AI and low-code to get your product into users' hands quickly, gathering the data needed to iterate."
                           subtitleAs="p"
                           subtitleClassName="text-xs font-normal text-gray-light-5"
                         />
@@ -245,7 +244,7 @@ export default function Hero() {
                           scale="compact"
                           className="text-gray-light-1 font-medium text-sm sm:text-base"
                           children="Full-Stack Development"
-                          subtitle="Seamless integration across front-end and back-end, built to scale."
+                          subtitle="Enterprise-grade engineering. We build resilient, scalable architectures designed to handle growth from your first user to your millionth."
                           subtitleAs="p"
                           subtitleClassName="text-xs font-normal text-gray-light-5"
                         />
@@ -266,7 +265,7 @@ export default function Hero() {
                     <div className="flex flex-row text-xs items-center justify-start font-normal text-gray-light-1 gap-3 sm:gap-4 rounded-3xl bg-gray-dark-2 p-4 sm:p-5 md:p-6 relative shadow-[0_4px_4px_0_rgba(0,0,0,0.05)] shrink-0">
                       <DotIcon />
                       <p className="flex-1">
-                        Custom solutions that grow with your business.
+                        Enterprise-grade engineering. We build resilient, scalable architectures designed to handle growth from your first user to your millionth.
                       </p>
                     </div>
                   </div>
@@ -276,7 +275,7 @@ export default function Hero() {
                 <div className="flex flex-row text-xs items-center justify-start font-normal text-gray-light-1 gap-3 sm:gap-4 rounded-3xl bg-gray-dark-2 p-4 sm:p-5 md:p-6 surface-gradient-with-noise relative">
                   <DotIcon />
                   <p className="flex-1">
-                    Brand and product consulting that aligns with your business goals.
+                    Validate your core hypothesis before we build. We align market insights with technical feasibility to ensure your product has a clear path to Product-Market Fit.
                   </p>
                 </div>
                 <div className="flex flex-col bg-gray-dark-1/70 rounded-3xl flex-1 min-h-[320px] sm:min-h-[380px] md:min-h-[420px] lg:min-h-[480px] xl:min-h-[500px] p-1 border border-gray-dark-3 gap-2">
@@ -293,8 +292,8 @@ export default function Hero() {
                           weight="semibold"
                           scale="compact"
                           className="text-gray-light-1 font-medium text-sm sm:text-base"
-                          children="Strategy-Driven Consulting"
-                          subtitle="Position your product for long-term success with a strategy that works."
+                          children="Product Strategy & Roadmapping"
+                          subtitle="Validate your core hypothesis before we build. We align market insights with technical feasibility to ensure your product has a clear path to Product-Market Fit."
                           subtitleAs="p"
                           subtitleClassName="text-xs font-normal text-gray-light-5"
                         />
@@ -324,7 +323,7 @@ export default function Hero() {
             <Button
               variant="primary"
               href="#contact-us"
-              children="Start Your Project"
+              children="Partner With Us"
             />
             <Button
               variant="secondary"

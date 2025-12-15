@@ -90,6 +90,7 @@ export default function InnovativeSolutions() {
       title="Innovative Solutions Tailored to Your Needs"
       subtitle="Empowering Your Business with AI, No-Code, and Full-Stack Development."
       headingVariant="h2"
+      headingWeight="bold"
       headingAlign="center"
       className="bg-background"
       id="our-services"
@@ -237,7 +238,7 @@ export default function InnovativeSolutions() {
               as="h3"
               align="left"
               className="text-gray-light-1"
-              subtitle="Bring your ideas to life with rapid prototyping and MVP development powered by AI and no-code tools. Save time and costs with automation, seamless database integrations, and scalable solutions — all with zero code required."
+              subtitle="Bring your ideas to life with rapid prototyping and MVP development powered by AI and no-code tools. Save time and costs with automation, seamless database integrations, and scalable solutions, all with zero code required."
               subtitleAs="p"
               subtitleClassName="text-sm sm:text-base text-gray-light-3 leading-relaxed"
             >

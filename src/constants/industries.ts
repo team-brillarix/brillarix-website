@@ -12,7 +12,7 @@ export const industries: Industry[] = [
     id: 'tech-startups',
     title: 'Tech Startups',
     headline: 'Launch Your Startup at Lightning Speed',
-    description: 'From idea to market in record time — with AI and no-code tools, your product is ready faster, scaling as you grow.',
+    description: 'From idea to market in record time, with AI and no-code tools, your product is ready faster, scaling as you grow.',
     buttonText: 'Start Your Journey',
     icon: '/industry/TechStartups.svg',
   },
@@ -36,7 +36,7 @@ export const industries: Industry[] = [
     id: 'finance',
     title: 'Finance',
     headline: 'Revolutionize Finance with AI & No-Code',
-    description: 'From real-time data analytics to fraud prevention build scalable, secure financial solutions with speed and accuracy',
+    description: 'From real-time data analytics to fraud prevention, we build scalable, secure financial solutions with speed and accuracy',
     buttonText: 'Future-Proof Finance',
     icon: '/industry/Finance.svg',
   },
@@ -54,7 +54,7 @@ export const industries: Industry[] = [
     headline: 'Optimize Operations with AI-Powered Automation',
     description: 'Automate processes, predict maintenance, and improve supply chain efficiency with AI-driven solutions tailored for manufacturing.',
     buttonText: 'Streamline Your Process',
-    icon: '/industry/Manufactturing.svg',
+    icon: '/industry/Manufacturing.svg',
   },
 ];
 

@@ -21,7 +21,7 @@ export const impactProjects: ImpactProject[] = [
     id: '1',
     title: 'Trialynx',
     description:
-      'Transform clinical trial development with AI. Generate 90%+ complete protocols, consents, and study documents in hours, not months. Save 70%+ time and costs with 500+ AI agents.',
+      'Revolutionizing clinical trials. Our AI agents generate 90% of protocols autonomously, cutting months of work down to hours.',
     videoUrl: `https://res.cloudinary.com/${cloudName}/video/upload/v1765449078/Trialynx_wlyptp.mp4`,
     metrics: {
       label: 'Total Clinical Trials Launched',
@@ -30,11 +30,11 @@ export const impactProjects: ImpactProject[] = [
     },
     submetrics: [
       {
-        label: 'Operations Across',
+        label: 'Operations Across:',
         value: '4 Countries',
       },
       {
-        label: 'Increased Medical Writing Speed By',
+        label: 'Increased Medical Writing Speed By:',
         value: '90%',
       },
     ],
@@ -60,7 +60,7 @@ export const impactProjects: ImpactProject[] = [
     metrics: {
       label: 'Client Acquisition Growth',
       value: '80%',
-      valueLabel: 'By',
+      valueLabel: 'of',
     },
   },
   {
@@ -79,7 +79,7 @@ export const impactProjects: ImpactProject[] = [
     id: '5',
     title: 'Gym Builder',
     description:
-      'GymBuilder Network gives gym owners real-time dashboards, leaderboards, and AI monthly summaries to track metrics, manage targets, and grow their gyms effortlessly.',
+      'Empowering gym owners with real-time intelligence. Custom dashboards and AI analytics that drive retention and effortless growth.',
     videoUrl: `https://res.cloudinary.com/${cloudName}/video/upload/v1765791163/GymBuilder_p02rkn_pydnql.mp4`,
     metrics: {
       label: 'Conversion Rate Increased',
