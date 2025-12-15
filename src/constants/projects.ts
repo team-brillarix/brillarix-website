@@ -22,7 +22,7 @@ export const impactProjects: ImpactProject[] = [
     title: 'Trialynx',
     description:
       'Transform clinical trial development with AI. Generate 90%+ complete protocols, consents, and study documents in hours, not months. Save 70%+ time and costs with 500+ AI agents.',
-    videoUrl: `https://res.cloudinary.com/dv860labz/video/upload/v1765449078/Trialynx_wlyptp.mp4`,
+    videoUrl: `https://res.cloudinary.com/${cloudName}/video/upload/v1765449078/Trialynx_wlyptp.mp4`,
     metrics: {
       label: 'Total Clinical Trials Launched',
       value: '50',
@@ -44,7 +44,7 @@ export const impactProjects: ImpactProject[] = [
     title: 'KW Fitness',
     description:
       'A personal training studio with locations in Vestal, Fayetteville & Cicero, NY -- serving Greater Binghamton & Syracuse with personalized workout & nutrition plans.',
-    videoUrl: `https://res.cloudinary.com/dv860labz/video/upload/v1765449162/KW_zxfnsn.mp4`,
+    videoUrl: `https://res.cloudinary.com/${cloudName}/video/upload/v1765789359/KW_rsecnr.mp4`,
     metrics: {
       label: 'Idea to MVP',
       value: '2 Weeks',
@@ -74,19 +74,13 @@ export const impactProjects: ImpactProject[] = [
       value: '1000+',
       valueLabel: 'Up to',
     },
-    submetrics: [
-      {
-        label: 'User Engagements',
-        value: '4000+',
-      },
-    ],
   },
   {
     id: '5',
     title: 'Gym Builder',
     description:
       'GymBuilder Network gives gym owners real-time dashboards, leaderboards, and AI monthly summaries to track metrics, manage targets, and grow their gyms effortlessly.',
-    videoUrl: `https://res.cloudinary.com/dv860labz/video/upload/v1765450067/GymBuilder_si7yi6.mp4`,
+    videoUrl: `https://res.cloudinary.com/${cloudName}/video/upload/v1765789403/GymBuilder_p02rkn.mp4`,
     metrics: {
       label: 'Conversion Rate Increased',
       value: '8 - 10%',

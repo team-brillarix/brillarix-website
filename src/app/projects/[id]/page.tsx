@@ -125,9 +125,6 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                             <p className="text-sm text-gray-light-3 mb-2">
                                 {project.metrics.label}
                             </p>
-                            <p className="text-3xl md:text-4xl font-bold text-gray-light-1">
-                                {project.metrics.value}
-                            </p>
                         </div>
                         <div className="px-6 py-4 rounded-lg bg-gray-dark-3 text-center shrink-0">
                             <p className="text-xs text-gray-light-3 mb-1">Impact</p>
