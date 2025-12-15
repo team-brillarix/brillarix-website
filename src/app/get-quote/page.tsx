@@ -34,7 +34,7 @@ export default function GetAQuotePage() {
       <div className="min-h-[calc(100vh-120px)] bg-background flex items-center justify-center">
         <div className="flex flex-col items-center gap-6">
           <Heading variant="h1" align="center">
-            Get a Quote
+            Partner With Us
           </Heading>
           <Button
             variant="primary"

@@ -38,7 +38,7 @@ export default function TrustedByInnovators() {
         className="bg-background py-16 md:py-20 px-4 sm:px-6 md:px-8 relative overflow-hidden"
         title="Trusted by Innovators to Deliver Exceptional Results"
         subtitle="Don't just take our word for it. Hear from the businesses we've empowered with smarter, faster solutions."
-        headingVariant="h3"
+        headingVariant="h2"
         headingWeight="bold"
         headingAlign="center"
       >

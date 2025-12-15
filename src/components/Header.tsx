@@ -53,7 +53,7 @@ export default function Header() {
                             <FiChevronRight className="w-3 h-3 shrink-0" />
                         }
                     >
-                        Get a Quote
+                        Partner With Us
                     </Button>
 
                     {/* Hamburger Icon */}

@@ -25,7 +25,7 @@ export const clientsData = [
     filter: false,
   },
   {
-    name: "Visionary CLouds",
+    name: "Visionary Clouds",
     image: "/client-logos/VisionaryClouds.png",
     filter: true,
   },

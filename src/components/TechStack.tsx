@@ -14,6 +14,9 @@ export default function TechStack() {
     <Section
       title="Cutting-Edge Technologies for Scalable Solutions"
       subtitle="We use the latest AI, no-code, and full-stack tools to deliver efficient, scalable results."
+      headingVariant="h2"
+      headingWeight="bold"
+      headingAlign="center"
       id="tools"
     >
       <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 md:gap-8 xl:gap-12">

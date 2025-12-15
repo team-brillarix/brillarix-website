@@ -30,7 +30,7 @@ export const innovatorsData: Innovator[] = [
     company: 'Signm',
     position: 'CEO',
     testimonialTitle: 'Exceptional Service',
-    testimonialText: 'I’ve worked with Brillarix for several years on the build and ongoing development of my company, SIGNM. They delivered full-stack development, custom APIs, and a stable GCP + MongoDB infrastructure supporting millions of daily events. Over 4,000 users have since engaged with the platform — a testament to the system’s robustness.',
+    testimonialText: 'I’ve worked with Brillarix for several years on the build and ongoing development of my company, SIGNM. They delivered full-stack development, custom APIs, and a stable GCP + MongoDB infrastructure supporting millions of daily events. Over 4,000 users have since engaged with the platform, a testament to the system’s robustness.',
     companyLogo: '/client-logos/Signm.png',
     filter: true,
   },

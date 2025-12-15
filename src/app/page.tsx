@@ -8,6 +8,7 @@ import InnovativeSolutions from '@/components/InnovativeSolutions';
 import IndustryExpertise from '@/components/IndustryExpertise';
 import ContactUs from '@/components/ContactUs';
 import TrustedByInnovators from '@/components/TrustedByInnovators/TrustedByInnovators';
+import WhyUs from '@/components/WhyUs';
 import HashScrollHandler from '@/components/HashScrollHandler';
 
 export default function Home() {
@@ -20,6 +21,7 @@ export default function Home() {
       <InnovativeSolutions />
       <TechStack />
       <OurProcess />
+      <WhyUs />
       <TrustedByInnovators />
       <IndustryExpertise />
       <FAQ />
