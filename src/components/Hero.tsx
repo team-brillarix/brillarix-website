@@ -351,7 +351,7 @@ export default function Hero() {
                     className="object-contain"
                   />
                 </div>
-                <div className="flex flex-row py-1 px-2 items-center gap-2.5">
+                <div className="flex flex-row py-1 px-2 items-center gap-2">
                   <p className="whitespace-nowrap">Silver Agency</p>
                   <Image src="/hero-icons/Verified.svg" alt="Verified Tick" width={24} height={24} className="object-contain" />
                 </div>
@@ -379,7 +379,7 @@ export default function Hero() {
                     className="object-contain"
                   />
                 </div>
-                <div className="flex justify-center flex-row py-1 px-2 items-center gap-2.5">
+                <div className="flex justify-center flex-row py-1 px-2 items-center gap-2">
                   <p className="whitespace-nowrap">Upwork</p>
                   <Image src="/hero-icons/Verified.svg" alt="Verified Tick" width={24} height={24} className="object-contain" />
                 </div>
@@ -394,8 +394,8 @@ export default function Hero() {
                     className="object-contain"
                   />
                 </div>
-                <div className="flex justify-center flex-row py-1 px-2 items-center gap-2.5">
-                  <p className="whitespace-nowrap">Features on</p>
+                <div className="flex justify-center flex-row py-1 px-2 items-center gap-2">
+                  <p className="whitespace-nowrap">Featured on</p>
                   <Image src="/hero-icons/Verified.svg" alt="Verified Tick" width={24} height={24} className="object-contain" />
                 </div>
               </div>
