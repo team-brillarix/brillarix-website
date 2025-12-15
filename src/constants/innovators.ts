@@ -54,10 +54,10 @@ export const innovatorsData: Innovator[] = [
   {
     id: '6',
     name: 'Kevin Mills',
-    image: '',
+    image: '/trusted-by-innovators/Kevin-Mills.png',
     company: 'Streamlined Media',
     position: 'Founder',
-    testimonialTitle: 'Efficiency at Scale',
+    testimonialTitle: 'Simplifying Complex Processes',
     testimonialText: 'Our experience with Brillarix was exceptional. They adeptly facilitated the development of several intricate internal processes for our company, all while leveraging no-code technology to ensure accessibility and usability across our entire team.',
     companyLogo: '/client-logos/Streamlined.png',
   },
