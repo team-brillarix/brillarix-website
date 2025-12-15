@@ -80,7 +80,7 @@ export const impactProjects: ImpactProject[] = [
     title: 'Gym Builder',
     description:
       'GymBuilder Network gives gym owners real-time dashboards, leaderboards, and AI monthly summaries to track metrics, manage targets, and grow their gyms effortlessly.',
-    videoUrl: `https://res.cloudinary.com/${cloudName}/video/upload/v1765789403/GymBuilder_p02rkn.mp4`,
+    videoUrl: `https://res.cloudinary.com/${cloudName}/video/upload/v1765791163/GymBuilder_p02rkn_pydnql.mp4`,
     metrics: {
       label: 'Conversion Rate Increased',
       value: '8 - 10%',
