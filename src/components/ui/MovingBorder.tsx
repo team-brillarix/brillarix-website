@@ -47,7 +47,7 @@ export function Button({
                 <MovingBorder duration={duration} rx="30%" ry="30%">
                     <div
                         className={cn(
-                            "h-20 w-20 bg-[radial-gradient(#0ea5e9_40%,transparent_60%)] opacity-[0.8]",
+                            "h-20 w-20 rounded-full bg-[radial-gradient(circle_at_center,#0ea5e9_40%,transparent_60%)] opacity-[0.8]",
                             borderClassName,
                         )}
                     />
@@ -81,7 +81,7 @@ type MovingBorderContainerProps = {
 export function MovingBorderContainer({
     borderRadius = "1rem",
     duration = 4000,
-    blobClassName = "h-20 w-20 bg-[radial-gradient(50%_19350%_at_50%_50%,_#B8B8B8_0%,_#292929_100%)] opacity-90",
+    blobClassName = "h-20 w-20 rounded-full bg-[radial-gradient(circle_at_center,#B8B8B8_0%,#292929_100%)] opacity-90",
     containerClassName,
     innerClassName,
     children,
