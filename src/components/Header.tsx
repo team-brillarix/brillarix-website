@@ -21,11 +21,19 @@ export default function Header() {
                     aria-label="Brillarix Home"
                 >
                     <Image
+                        src="/logos/Logo-Dark-Mode.png"
+                        alt="Brillarix Logo"
+                        width={40}
+                        height={40}
+                        className="h-8 sm:h-9 md:h-10 w-auto xs:block hidden"
+                        priority
+                    />
+                    <Image
                         src="/logos/Brillarix-Dark-Mode.png"
                         alt="Brillarix Logo"
                         width={160}
                         height={40}
-                        className="h-8 sm:h-9 md:h-10 w-auto"
+                        className="h-8 sm:h-9 md:h-10 w-auto xs:hidden block"
                         priority
                     />
                 </Link>

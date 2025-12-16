@@ -36,7 +36,7 @@ export const industries: Industry[] = [
     id: 'finance',
     title: 'Finance',
     headline: 'Revolutionize Finance with AI & No-Code',
-    description: 'From real-time data analytics to fraud prevention, we build scalable, secure financial solutions with speed and accuracy',
+    description: 'From real-time data analytics to fraud prevention, we build scalable, secure financial solutions with speed and accuracy.',
     buttonText: 'Future-Proof Finance',
     icon: '/industry/Finance.svg',
   },
