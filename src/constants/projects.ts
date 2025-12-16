@@ -1,20 +1,6 @@
-const cloudName = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME || '';
+import { ImpactProject } from '@/types/project';
 
-export interface ImpactProject {
-  id: string;
-  title: string;
-  description: string;
-  videoUrl: string;
-  metrics: {
-    label: string;
-    value: string;
-    valueLabel: string;
-  };
-  submetrics?: {
-    label: string;
-    value: string;
-  }[];
-}
+const cloudName = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME || '';
 
 export const impactProjects: ImpactProject[] = [
   {
@@ -30,11 +16,11 @@ export const impactProjects: ImpactProject[] = [
     },
     submetrics: [
       {
-        label: 'Operations Across:',
+        label: 'Operations Across',
         value: '4 Countries',
       },
       {
-        label: 'Increased Medical Writing Speed By:',
+        label: 'Increased Medical Writing Speed By',
         value: '90%',
       },
     ],
@@ -60,7 +46,7 @@ export const impactProjects: ImpactProject[] = [
     metrics: {
       label: 'Client Acquisition Growth',
       value: '80%',
-      valueLabel: 'of',
+      valueLabel: 'By',
     },
   },
   {
