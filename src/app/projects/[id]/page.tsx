@@ -1,5 +1,6 @@
 import { notFound } from 'next/navigation';
-import { impactProjects, ImpactProject } from '@/constants/projects';
+import { impactProjects } from '@/constants/projects';
+import { ImpactProject } from '@/types/project';
 import { Heading } from '@/components/ui/Heading';
 import { Section } from '@/components/ui/Section';
 import SchemaScript from '@/components/SchemaScript';

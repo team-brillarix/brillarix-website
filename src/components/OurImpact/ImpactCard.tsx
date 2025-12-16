@@ -1,4 +1,4 @@
-import { ImpactProject } from '@/constants/projects';
+import { ImpactProject } from '@/types/project';
 import { Heading } from '@/components/ui/Heading';
 import { useEffect, useRef } from 'react';
 import Link from 'next/link';
@@ -50,7 +50,7 @@ export function ImpactCard({ project, isActive }: { project: ImpactProject; isAc
                 </div>
 
                 {/* Metrics */}
-                <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4 w-full sm:w-auto sm:max-w-[40%]">
+                <div className="flex justify-between items-center gap-3 sm:gap-4 w-full sm:w-auto sm:max-w-[40%]">
                     <div className="flex flex-col gap-1">
                     <p className="text-xs sm:text-sm text-gray-light-2">
                         {project.metrics.label}
@@ -58,7 +58,7 @@ export function ImpactCard({ project, isActive }: { project: ImpactProject; isAc
                     {project.submetrics?.map((submetric) => (
                         <div key={submetric.label}>
                             <p className="text-[8px] sm:text-[10px] text-gray-light-1">
-                                {submetric.label} : <strong>{submetric.value}</strong>
+                                {submetric.label}: <strong>{submetric.value}</strong>
                             </p>
                         </div>
                     ))}
