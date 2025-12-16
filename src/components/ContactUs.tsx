@@ -106,7 +106,7 @@ export default function ContactUs() {
                 src="https://assets.calendly.com/assets/external/widget.js"
                 strategy="lazyOnload"
             />
-            <Section title="Contact us" subtitle="Have questions or need assistance? Our team is ready to support you with anything you need." headingAlign="left" headingFullWidth id="contact-us">
+            <Section title="Contact us" subtitle="Have a product idea in mind? Let’s explore how we can help you build, validate, and scale it." headingAlign="left" headingFullWidth id="contact-us">
                 <div className="w-full">
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 lg:gap-16">
                         <div className="flex flex-col gap-6">
@@ -170,14 +170,14 @@ export default function ContactUs() {
                                     as="h3"
                                     align="left"
                                 >
-                                    What Can We Assist You With Today?
+                                    Let’s Talk About Your Product
                                 </Heading>
 
                                 <ol className="flex flex-col gap-3 text-gray-light-5 leading-relaxed list-decimal list-inside">
-                                    <li>Need help exploring our offerings?</li>
-                                    <li>Experiencing a technical problem or issue?</li>
-                                    <li>Want to learn more about a specific service or feature?</li>
-                                    <li>We value your feedback and suggestions to improve!</li>
+                                    <li>Validating an idea, MVP, or next phase of your product</li>
+                                    <li>Scaling performance, features, or architecture</li>
+                                    <li>Understanding how our product studio model works</li>
+                                    <li>Sharing insights, feedback, or partnership ideas</li>
                                 </ol>
                             </div>
 

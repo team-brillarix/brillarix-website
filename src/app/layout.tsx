@@ -28,7 +28,7 @@ const rubik = Rubik({
 const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.brillarix.com";
 const siteName = "Brillarix";
 const defaultTitle = "Brillarix: Powering Digital Innovation with Low-Code & Custom Solutions";
-const defaultDescription = "Brillarix transforms ideas into high-performance web applications. Specializing in low-code platforms like Bubble.io, we blend code and no-code to create scalable, secure, and efficient digital solutions.";
+const defaultDescription = "Brillarix is an AI-native product studio building scalable, secure web products. We blend Bubble.io, low-code, and custom code for modern startup teams.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),

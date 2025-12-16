@@ -80,7 +80,7 @@ export default function Hero() {
             weight="medium"
             align="center"
             children="The AI-Native Product Studio for Modern Founders."
-            subtitle="We don't just write code; we build businesses. From day-one strategy to scalable full-stack products, Brillarix bridges the gap between concept and market dominance."
+            subtitle="We build scalable web products, from MVP to full-stack platforms, using AI-driven workflows to help modern founders launch and scale faster."
             subtitleAs="p"
             subtitleClassName="font-normal text-gray-light-3"
           />
@@ -265,7 +265,7 @@ export default function Hero() {
                     <div className="flex flex-row text-xs items-center justify-start font-normal text-gray-light-1 gap-3 sm:gap-4 rounded-3xl bg-gray-dark-2 p-4 sm:p-5 md:p-6 relative shadow-[0_4px_4px_0_rgba(0,0,0,0.05)] shrink-0">
                       <DotIcon />
                       <p className="flex-1">
-                        Enterprise-grade engineering. We build resilient, scalable architectures designed to handle growth from your first user to your millionth.
+                        Custom solutions that grow with your business.
                       </p>
                     </div>
                   </div>
@@ -275,7 +275,7 @@ export default function Hero() {
                 <div className="flex flex-row text-xs items-center justify-start font-normal text-gray-light-1 gap-3 sm:gap-4 rounded-3xl bg-gray-dark-2 p-4 sm:p-5 md:p-6 surface-gradient-with-noise relative">
                   <DotIcon />
                   <p className="flex-1">
-                    Validate your core hypothesis before we build. We align market insights with technical feasibility to ensure your product has a clear path to Product-Market Fit.
+                    Position your product for long-term success with a strategy that works.
                   </p>
                 </div>
                 <div className="flex flex-col bg-gray-dark-1/70 rounded-3xl flex-1 min-h-[320px] sm:min-h-[380px] md:min-h-[420px] lg:min-h-[480px] xl:min-h-[500px] p-1 border border-gray-dark-3 gap-2">

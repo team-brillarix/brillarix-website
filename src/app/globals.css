@@ -195,6 +195,25 @@ h6 {
   z-index: 1;
 }
 
+.why-us-grid-bg::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url("/backgrounds/why-us-grid.svg");
+  background-repeat: repeat;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Ensure content appears above the background mask */
+.why-us-grid-bg>* {
+  position: relative;
+  z-index: 1;
+}
+
 .sr-only {
   position: absolute;
   width: 1px;
@@ -222,6 +241,26 @@ h6 {
   background-color: var(--foreground);
   border-radius: 30px;
   opacity: 0.6;
+}
+
+@media (max-width: 420px) {
+  .xs\:block {
+    display: block !important;
+  }
+  
+  .xs\:hidden {
+    display: none !important;
+  }
+}
+
+@media (min-width: 421px) {
+  .xs\:block {
+    display: none !important;
+  }
+  
+  .xs\:hidden {
+    display: block !important;
+  }
 }
 
 @layer utilities {
@@ -469,6 +508,65 @@ h6 {
       z-index: 30;
       pointer-events: none;
     }
+  }
+
+  /* Spotlight effect - radial gradient background */
+  .spotlight-bg {
+    position: relative;
+    background: radial-gradient(circle at center, #2a2a2a 0%, #08090A 100%);
+  }
+
+  /* Shining border - gradient border with lighter top */
+  .shining-border {
+    position: relative;
+    padding: 1px;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.05) 50%, rgba(0, 0, 0, 0.3) 100%);
+    border-radius: 0.75rem;
+  }
+
+  .shining-border > * {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border-radius: inherit;
+  }
+
+  /* Glassmorphism card with noise */
+  .glass-card {
+    position: relative;
+    background: rgba(30, 30, 30, 0.6);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+
+  .glass-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    opacity: 0.08;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.3' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' fill='%23ffffff'/%3E%3C/svg%3E");
+    background-size: 300px 300px;
+    background-repeat: repeat;
+    pointer-events: none;
+    mix-blend-mode: overlay;
+    border-radius: inherit;
+    z-index: 0;
+  }
+
+  .glass-card > * {
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Text gradient utility */
+  .text-gradient {
+    background: linear-gradient(180deg, #FFFFFF 0%, #999999 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
   }
 }
 
