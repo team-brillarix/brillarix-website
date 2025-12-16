@@ -199,13 +199,15 @@ h6 {
   content: '';
   position: absolute;
   top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100vw;
+  height: 100%;
   background-image: url("/backgrounds/why-us-grid.svg");
   background-repeat: repeat;
+  background-size: 50px 50px;
   pointer-events: none;
-  z-index: 0;
+  z-index: 1;
 }
 
 /* Ensure content appears above the background mask */
@@ -513,7 +515,19 @@ h6 {
   /* Spotlight effect - radial gradient background */
   .spotlight-bg {
     position: relative;
+  }
+
+  .spotlight-bg::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100vw;
+    height: 100%;
     background: radial-gradient(circle at center, #2a2a2a 0%, #08090A 100%);
+    pointer-events: none;
+    z-index: 0;
   }
 
   /* Shining border - gradient border with lighter top */

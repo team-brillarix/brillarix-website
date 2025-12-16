@@ -11,17 +11,21 @@ export default function WhyUs() {
 
   return (
     <Section
-      title="More Than Code"
-      subtitle="We don't just build what you ask for. We own the outcome and act as your technical co-founder."
-      headingVariant="h2"
-      headingWeight="bold"
-      headingAlign="center"
-      className="spotlight-bg relative overflow-hidden why-us-grid-bg"
+      className="relative"
       id="why-us"
-      contentClassName="relative z-10"
     >
-
-      <div className="w-full max-w-6xl mx-auto flex flex-col gap-8 sm:gap-12 relative z-10">
+      <div className="flex flex-col why-us-grid-bg spotlight-bg gap-6 sm:gap-10 md:gap-12 -mx-[calc((100vw-100%)/2)] px-[calc((100vw-100%)/2)] -mt-12 sm:-mt-16 md:-mt-20 pt-12 sm:pt-16 md:pt-20 pb-12 sm:pb-16 md:pb-20">
+        <div className="w-full flex flex-col items-center gap-6 sm:gap-10 md:gap-12">
+          <Heading
+            variant="h2"
+            weight="bold"
+            align="center"
+            subtitle="We don't just build what you ask for. We own the outcome and act as your technical co-founder."
+          >
+            More Than Code
+          </Heading>
+        </div>
+        <div className="w-full max-w-6xl mx-auto flex flex-col gap-8 sm:gap-12 relative z-10">
         {/* Main Premium Card */}
         <MovingBorderContainer
           borderRadius="1.5rem"
@@ -85,6 +89,7 @@ export default function WhyUs() {
             </div>
           </motion.div>
         </MovingBorderContainer>
+        </div>
       </div>
     </Section>
   );
