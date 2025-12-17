@@ -1,4 +1,5 @@
 import { Heading } from '@/components/ui/Heading';
+import { CONTACT_INFO } from '@/constants/contact';
 
 export const metadata = {
   title: 'Terms of Service',
@@ -161,7 +162,7 @@ export default function TermsOfServicePage() {
             children="7. Contact Us"
           />
           <p className="text-sm sm:text-base text-gray-light-1 leading-relaxed">
-            If you have any questions about these Terms or the Service, please contact us at <a href="mailto:contact@brillarix.com" className="underline">contact@brillarix.com</a> or write to us at Brillarix, India.
+            If you have any questions about these Terms or the Service, please contact us at <a href={`mailto:${CONTACT_INFO.email.address}`} className="underline">{CONTACT_INFO.email.address}</a> or write to us at Brillarix, India.
           </p>
         </div>
       </div>
