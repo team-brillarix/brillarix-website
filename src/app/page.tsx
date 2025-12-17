@@ -21,7 +21,7 @@ export default function Home() {
       <InnovativeSolutions />
       <TechStack />
       <OurProcess />
-      <WhyUs />
+      {/* <WhyUs /> */}
       <TrustedByInnovators />
       <IndustryExpertise />
       <FAQ />
