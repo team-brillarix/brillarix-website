@@ -28,28 +28,23 @@ export default function TechStack() {
           const selectedItemData = isSelected && selectedItem ? category.items[selectedItem.itemIndex] : null;
 
           return (
-            <MovingBorderContainer
-              key={categoryIndex}
-              borderRadius="1.5rem"
-              duration={borderDurations[categoryIndex] || 10000}
-              innerClassName="flex flex-col gap-4 sm:gap-5 md:gap-6 bg-gray-dark-1 p-5 sm:p-6 md:p-8 relative overflow-hidden"
-            >
-              <div className='flex flex-row gap-6 min-h-24 items-center justify-start'>
-                <div className='w-15 h-15 flex items-center justify-center bg-gray-dark-1 rounded-full border border-gray-dark-9 shrink-0'>
-                  {category.icon}
-                </div>
-                <Heading
-                  variant="h6"
-                  as="h3"
-                  align="left"
-                  className='whitespace-nowrap overflow-hidden text-ellipsis flex-1 min-w-0 text-base'
-                  subtitle={category.description}
-                  subtitleClassName='text-gray-light-3 text-xs'
-                >
-                  {category.title}
-                </Heading>
-              </div>
-              <div className="grid grid-cols-3 gap-6">
+            <div key={categoryIndex} className="flex flex-col gap-4 sm:gap-5 md:gap-6">
+              <Heading
+                variant="h6"
+                as="h3"
+                align="center"
+                className='whitespace-nowrap overflow-hidden text-ellipsis flex-1 min-w-0 text-base'
+                subtitle={category.description}
+                subtitleClassName='text-gray-light-3 text-xs text-center'
+              >
+                {category.title}
+              </Heading>
+              <MovingBorderContainer
+                borderRadius="1.5rem"
+                duration={borderDurations[categoryIndex] || 10000}
+                innerClassName="flex flex-col gap-4 sm:gap-5 md:gap-6 bg-gray-dark-1 p-5 sm:p-6 md:p-8 relative overflow-hidden"
+              >
+                <div className="grid grid-cols-3 gap-6 self-center">
                 {category.items.map((item, itemIndex) => (
                   <div
                     key={itemIndex}
@@ -93,7 +88,7 @@ export default function TechStack() {
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
                     transition={{ 
-                      opacity: { duration: 0.3, ease: 'easeInOut' }
+                      opacity: { duration: 0.1, ease: 'easeInOut' }
                     }}
                     className="absolute inset-0 rounded-3xl bg-gray-dark-1/50 backdrop-blur-lg z-10 flex flex-col items-center justify-center gap-4 sm:gap-5 md:gap-6 p-5 sm:p-6 md:p-8 pointer-events-auto"
                   >
@@ -102,30 +97,28 @@ export default function TechStack() {
                         e.stopPropagation();
                         setSelectedItem(null);
                       }}
-                      className="absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-full bg-gray-dark-2 hover:bg-gray-dark-3 text-gray-light-3 hover:text-gray-light-1 transition-colors duration-200 z-20"
+                      className="absolute top-4 right-4 w-5 h-5 flex items-center justify-center rounded-full bg-gray-dark-2 hover:bg-gray-dark-3 text-gray-light-3 hover:text-gray-light-1 transition-colors duration-200 z-20"
                       aria-label="Close overlay"
                     >
-                      <FaTimes className="w-4 h-4 cursor-pointer" />
+                      <FaTimes className="w-3 h-3 cursor-pointer" />
                     </button>
-                    <div className="flex flex-col items-center justify-center gap-4 sm:gap-5 md:gap-6">
+                    <div className="flex flex-col items-center justify-center gap-5 md:gap-6">
                       <Image
                         src={selectedItemData.image}
                         alt={`${selectedItemData.name} logo`}
-                        width={80}
-                        height={80}
-                        className="w-20 h-20 object-contain rounded-md"
+                        width={48}
+                        height={48}
+                        className="w-12 h-12 object-contain rounded-md"
                       />
-                      <h4 className="text-lg sm:text-xl md:text-2xl font-semibold text-gray-light-1 text-center">
+                      <Heading variant="h5" as="h4" align="center" className='text-gray-light-1' subtitle={selectedItemData.description} subtitleClassName='text-gray-light-3 text-xs md:text-sm text-center'>
                         {selectedItemData.name}
-                      </h4>
-                      <p className="text-sm sm:text-base text-gray-light-3 text-center max-w-md leading-relaxed">
-                        {selectedItemData.description}
-                      </p>
+                      </Heading>
                     </div>
                   </motion.div>
                 )}
               </AnimatePresence>
-            </MovingBorderContainer>
+              </MovingBorderContainer>
+            </div>
           );
         })}
       </div>
