@@ -15,7 +15,7 @@ const DotIcon = () => (
     viewBox="0 0 8 8"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
-    className="w-2 h-2 dot-shadow"
+    className="w-2 h-2 dot-shadow rounded-full"
     aria-hidden="true"
   >
     <circle cx="4" cy="4" r="4" fill="currentColor" />
@@ -102,7 +102,7 @@ export default function Hero() {
                           scale="compact"
                           className="text-gray-light-1 font-medium text-sm sm:text-base"
                           children="Rapid MVP & Validation"
-                          subtitle="Test ideas in weeks, not months. We use AI and low-code to get your product into users' hands quickly, gathering the data needed to iterate."
+                          subtitle="Test ideas in weeks, not months. We use AI and low-code to get your product into users' hands quickly, gathering the feedback needed to iterate."
                           subtitleAs="p"
                           subtitleClassName="text-xs font-normal text-gray-light-5"
                         />
@@ -351,7 +351,7 @@ export default function Hero() {
                   />
                 </div>
                 <div className="flex flex-row py-1 px-2 items-center gap-2">
-                  <p className="whitespace-nowrap">Silver Agency</p>
+                  <p className="whitespace-nowrap">Silver Agency Partner</p>
                   <Image src="/hero-icons/Verified.svg" alt="Verified Tick" width={24} height={24} className="object-contain" />
                 </div>
               </div>
@@ -379,7 +379,7 @@ export default function Hero() {
                   />
                 </div>
                 <div className="flex justify-center flex-row py-1 px-2 items-center gap-2">
-                  <p className="whitespace-nowrap">Upwork</p>
+                  <p className="whitespace-nowrap">Top Rated Plus on Upwork</p>
                   <Image src="/hero-icons/Verified.svg" alt="Verified Tick" width={24} height={24} className="object-contain" />
                 </div>
               </div>

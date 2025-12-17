@@ -134,7 +134,7 @@ export const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
               "bg-transparent",
               "border-white/8",
               "text-white leading-relaxed placeholder:text-gray-dark-7",
-              "focus:border-gray-light-2",
+              "focus:outline-none focus:border-gray-light-2",
               "disabled:opacity-50 disabled:cursor-not-allowed",
               "read-only:cursor-default read-only:bg-gray-light-1",
               error
