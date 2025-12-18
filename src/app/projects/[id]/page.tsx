@@ -110,25 +110,23 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
 
                 <Heading
                     variant="h1"
-                    align="left"
-                    className="mb-4"
+                    as="h1"
+                    align="center"
+                    subtitle={project.description}
+                    subtitleClassName='text-sm sm:text-base md:text-lg text-gray-light-2 leading-relaxed max-w-3xl'
                 >
                     {project.title}
                 </Heading>
 
-                <p className="text-lg text-gray-light-2 leading-relaxed mb-8 max-w-3xl">
-                    {project.description}
-                </p>
-
                 <div className="bg-gray-dark-1 rounded-2xl p-6 md:p-8 border border-gray-dark-3 max-w-2xl">
-                    <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                    <div className="flex flex-col items-center md:flex-row md:items-center md:justify-between gap-4">
                         <div>
-                            <p className="text-sm text-gray-light-3 mb-2">
+                            <p className="text-sm text-gray-light-3">
                                 {project.metrics.label}
                             </p>
                         </div>
-                        <div className="px-6 py-4 rounded-lg bg-gray-dark-3 text-center shrink-0">
-                            <p className="text-xs text-gray-light-3 mb-1">Impact</p>
+                        <div className="flex flex-col gap-1 px-6 py-4 rounded-lg bg-gray-dark-3 text-center shrink-0">
+                            <p className="text-xs text-gray-light-3">Impact</p>
                             <p className="text-2xl font-bold text-gray-light-1">
                                 {project.metrics.value}
                             </p>
