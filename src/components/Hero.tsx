@@ -332,7 +332,7 @@ export default function Hero() {
             />
           </div>
 
-          <div className="flex flex-col gap-12 w-full max-w-7xl px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 items-center justify-center">
+          <div className="flex flex-col gap-12 w-full max-w-7xl px-0 sm:px-6 md:px-8 lg:px-12 xl:px-16 items-center justify-center">
             <div className="flex border-t-diamond-gradient border-b-diamond-gradient w-full items-center justify-center py-2">
               <p className="text-xs sm:text-sm text-gray-light-4 text-center max-w-2xl">
                 Trusted by innovators, startups, and enterprises to deliver scalable,
