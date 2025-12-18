@@ -70,10 +70,10 @@ export const innovatorsData: Innovator[] = [
   {
     id: '7',
     name: 'Jeff Gottschalk',
-    image: '',
+    image: '/trusted-by-innovators/Jeff.jpg',
     company: 'Cleeri',
     position: 'Founder',
-    testimonialTitle: 'Simplifying Complex Processes',
+    testimonialTitle: 'Seamless Product Development Partnership',
     testimonialText: 'Brillarix has been an integral partner in our product development journey. Their clear communication and attention to detail set them apart. From low-code foundations to a full-stack transition, their versatility, consistency, and empathy made the process seamless. We highly recommend the Brillarix team.',
     companyLogo: '/client-logos/Cleeri.png',
     filter: true,

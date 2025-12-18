@@ -12,12 +12,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
             changeFrequency: 'weekly',
             priority: 1,
         },
-        {
-            url: `${baseUrl}/get-quote`,
-            lastModified: now,
-            changeFrequency: 'monthly',
-            priority: 0.9,
-        },
     ]
 }
 
