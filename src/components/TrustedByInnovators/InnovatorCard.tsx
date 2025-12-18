@@ -60,7 +60,7 @@ export function InnovatorCard({ innovator }: InnovatorCardProps) {
         <Image
           src={innovator.companyLogo}
           alt={innovator.company}
-          width={180}
+          width={120}
           height={64}
           className={`object-contain max-w-fit h-16 ${innovator.filter ? 'brightness-0 invert' : ''}`}
         />
