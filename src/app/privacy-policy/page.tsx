@@ -1,4 +1,5 @@
 import { Heading } from '@/components/ui/Heading';
+import { CONTACT_INFO } from '@/constants/contact';
 
 export const metadata = {
   title: 'Privacy Policy',
@@ -132,7 +133,7 @@ export default function PrivacyPolicyPage() {
             children="6. Your Rights and Choices"
           />
           <p className="text-sm sm:text-base text-gray-light-1 leading-relaxed">
-            You have the right to access, update, and correct your personal information. You may also request the deletion of your data, subject to legal and contractual restrictions. To exercise your rights, please contact us at <a href="mailto:contact@brillarix.com" className="underline">contact@brillarix.com</a>
+            You have the right to access, update, and correct your personal information. You may also request the deletion of your data, subject to legal and contractual restrictions. To exercise your rights, please contact us at <a href={`mailto:${CONTACT_INFO.email.address}`} className="underline">{CONTACT_INFO.email.address}</a>
           </p>
         </div>
 
@@ -174,7 +175,7 @@ export default function PrivacyPolicyPage() {
             children="9. Contact Us"
           />
           <p className="text-sm sm:text-base text-gray-light-1 leading-relaxed">
-            If you have any questions, concerns, or requests regarding this Privacy Policy or our privacy practices, please contact us at <a href="mailto:contact@brillarix.com" className="underline">contact@brillarix.com</a> or write to us at Brillarix, India.
+            If you have any questions, concerns, or requests regarding this Privacy Policy or our privacy practices, please contact us at <a href={`mailto:${CONTACT_INFO.email.address}`} className="underline">{CONTACT_INFO.email.address}</a> or write to us at Brillarix, India.
           </p>
         </div>
       </div>

@@ -14,7 +14,7 @@ Mission: Building scalable web products, from MVP to full-stack platforms, using
 # ============================================================================
 # CONTACT INFORMATION
 # ============================================================================
-Email: team@brillarix.com
+Email: contact@brillarix.com
 Website: https://www.brillarix.com
 Calendly: https://calendly.com/team-brillarix/30min
 Twitter: @brillarixtech
