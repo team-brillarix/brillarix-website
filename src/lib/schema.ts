@@ -87,6 +87,12 @@ export function generateOrganizationSchema(
     description?: string;
     sameAs?: string[];
     contactPoint?: ContactPoint;
+    founder?: {
+      name: string;
+      jobTitle?: string;
+      url?: string;
+      sameAs?: string[];
+    };
   }
 ): OrganizationSchema {
   return {
@@ -98,6 +104,15 @@ export function generateOrganizationSchema(
     ...(options?.description && { description: sanitizeText(options.description) }),
     ...(options?.sameAs && { sameAs: options.sameAs }),
     ...(options?.contactPoint && { contactPoint: options.contactPoint }),
+    ...(options?.founder && {
+      founder: {
+        '@type': 'Person',
+        name: sanitizeText(options.founder.name),
+        ...(options.founder.jobTitle && { jobTitle: sanitizeText(options.founder.jobTitle) }),
+        ...(options.founder.url && { url: options.founder.url }),
+        ...(options.founder.sameAs && { sameAs: options.founder.sameAs }),
+      },
+    }),
   };
 }
 

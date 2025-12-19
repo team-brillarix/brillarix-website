@@ -246,6 +246,15 @@ export default function RootLayout({
       email: CONTACT_INFO.email.address,
       availableLanguage: "English",
     },
+    founder: {
+      name: "Manish Khakhal",
+      jobTitle: "Founder",
+      url: baseUrl,
+      sameAs: [
+        "https://www.linkedin.com/in/manishkhakhal",
+        "https://www.upwork.com/freelancers/manishkhakhal",
+      ],
+    },
   });
 
   const websiteSchema = generateWebSiteSchema(siteName, baseUrl, {

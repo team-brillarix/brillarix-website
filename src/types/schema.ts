@@ -26,6 +26,13 @@ export interface OrganizationSchema extends SchemaContext {
     description?: string;
     sameAs?: string[];
     contactPoint?: ContactPoint;
+    founder?: {
+        '@type': 'Person';
+        name: string;
+        jobTitle?: string;
+        url?: string;
+        sameAs?: string[];
+    };
 }
 
 export interface ContactPoint {
