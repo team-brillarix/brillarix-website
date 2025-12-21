@@ -2,8 +2,6 @@ import { notFound } from 'next/navigation';
 import { blogPosts, BlogPost } from '@/constants/blogs';
 import { Heading } from '@/components/ui/Heading';
 import { Section } from '@/components/ui/Section';
-import SchemaScript from '@/components/SchemaScript';
-import { generateArticleSchema } from '@/lib/schema';
 import Link from 'next/link';
 import { MdArrowBack } from 'react-icons/md';
 import Image from 'next/image';
@@ -69,30 +67,13 @@ export default async function BlogPage({ params }: BlogPageProps) {
     const { id } = await params;
     const blog = await getBlog(id);
     const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.brillarix.com';
-    const blogUrl = `${baseUrl}/blog/${id}`;
 
     if (!blog) {
         notFound();
     }
 
-    const articleSchema = generateArticleSchema(
-        blog.title,
-        blog.description,
-        `${baseUrl}${blog.imageUrl}`,
-        blog.date,
-        'Brillarix',
-        'Brillarix',
-        `${baseUrl}/logos/Brillarix-White-Mode.png`,
-        blogUrl,
-        {
-            authorUrl: baseUrl,
-            authorType: 'Organization',
-        }
-    );
-
     return (
         <div className="min-h-screen bg-background">
-            <SchemaScript schema={articleSchema} id="article-schema" />
             <Section className="py-8 md:py-12 px-4 md:px-6">
                 <Link
                     href="/"

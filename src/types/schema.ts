@@ -2,6 +2,10 @@ export interface SchemaContext {
     '@context': 'https://schema.org';
 }
 
+export interface IdReference {
+    '@id': string;
+}
+
 export interface Question {
     '@type': 'Question';
     name: string;
@@ -20,6 +24,7 @@ export interface FAQPageSchema extends SchemaContext {
 
 export interface OrganizationSchema extends SchemaContext {
     '@type': 'Organization';
+    '@id'?: string;
     name: string;
     url: string;
     logo?: string;
@@ -43,21 +48,29 @@ export interface ContactPoint {
     availableLanguage?: string;
 }
 
+export interface PostalAddress {
+    '@type': 'PostalAddress';
+    streetAddress: string;
+    addressLocality: string;
+    addressRegion: string;
+    postalCode: string;
+    addressCountry: string;
+}
+
 export interface WebSiteSchema extends SchemaContext {
     '@type': 'WebSite';
+    '@id'?: string;
     name: string;
     url: string;
     description?: string;
-    publisher?: OrganizationSchema;
+    publisher?: OrganizationSchema | IdReference;
 }
 
 export interface ServiceSchema extends SchemaContext {
     '@type': 'Service';
+    '@id'?: string;
     serviceType: string;
-    provider: {
-        '@type': 'Organization';
-        name: string;
-    };
+    provider: OrganizationSchema | IdReference;
     areaServed?: string;
     description?: string;
     offers?: {
@@ -66,42 +79,27 @@ export interface ServiceSchema extends SchemaContext {
     };
 }
 
-export interface ArticleSchema extends SchemaContext {
-    '@type': 'Article';
-    headline: string;
-    description: string;
-    image: string;
-    datePublished: string;
-    author: {
-        '@type': 'Organization' | 'Person';
-        name: string;
-        url?: string;
-    };
-    publisher: {
-        '@type': 'Organization';
-        name: string;
-        logo: {
-            '@type': 'ImageObject';
-            url: string;
-        };
-    };
-    mainEntityOfPage: {
-        '@type': 'WebPage';
-        '@id': string;
-    };
-}
-
-export interface ReviewSchema extends SchemaContext {
-    '@type': 'Organization';
+export interface LocalBusinessSchema extends SchemaContext {
+    '@type': 'LocalBusiness';
+    '@id': string;
     name: string;
-    aggregateRating: {
+    url: string;
+    logo?: string;
+    description?: string;
+    sameAs?: string[];
+    email?: string;
+    address?: PostalAddress;
+    contactPoint?: ContactPoint;
+    parentOrganization?: IdReference;
+    areaServed?: string;
+    aggregateRating?: {
         '@type': 'AggregateRating';
         ratingValue: string;
         reviewCount: string;
         bestRating: string;
         worstRating: string;
     };
-    review: Array<{
+    review?: Array<{
         '@type': 'Review';
         author: {
             '@type': 'Person';
@@ -115,42 +113,13 @@ export interface ReviewSchema extends SchemaContext {
             bestRating: string;
             worstRating: string;
         };
-        itemReviewed: {
-            '@type': 'Service';
-            name: string;
-            provider: {
-                '@type': 'Organization';
-                name: string;
-            };
-        };
     }>;
-}
-
-export interface CreativeWorkSchema extends SchemaContext {
-    '@type': 'CreativeWork';
-    name: string;
-    description: string;
-    url: string;
-    creator: {
-        '@type': 'Organization';
-        name: string;
-        url: string;
-    };
-    publisher: {
-        '@type': 'Organization';
-        name: string;
-        logo: {
-            '@type': 'ImageObject';
-            url: string;
-        };
-    };
 }
 
 export type SchemaType =
     | FAQPageSchema
     | OrganizationSchema
+    | LocalBusinessSchema
     | WebSiteSchema
     | ServiceSchema
-    | ArticleSchema
-    | ReviewSchema
-    | CreativeWorkSchema;
+    ;

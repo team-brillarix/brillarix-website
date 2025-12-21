@@ -6,9 +6,11 @@ import Footer from "@/components/Footer";
 import Loader from "@/components/Loader";
 import Analytics from "@/components/Analytics";
 import SchemaScript from "@/components/SchemaScript";
+import ScrollRestoration from "@/components/ScrollRestoration";
 import { CONTACT_INFO } from "@/constants/contact";
 import {
   generateOrganizationSchema,
+  generateLocalBusinessSchema,
   generateWebSiteSchema,
   generateServiceSchema,
 } from "@/lib/schema";
@@ -28,7 +30,7 @@ const rubik = Rubik({
 const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.brillarix.com";
 const siteName = "Brillarix";
 const defaultTitle = "Brillarix: Powering Digital Innovation with Low-Code & Custom Solutions";
-const defaultDescription = "Brillarix is an AI-native product studio building scalable, secure web products. We blend Bubble.io, low-code, and custom code for modern startup teams.";
+const defaultDescription = "Brillarix is an AI native product studio building web, mobile, and SaaS products that scale. Product strategy, world class design, and production grade engineering from MVP to enterprise.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),
@@ -232,7 +234,12 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const organizationId = `${baseUrl}#organization`;
+  const websiteId = `${baseUrl}#website`;
+  const primaryServiceId = `${baseUrl}#primary-service`;
+
   const organizationSchema = generateOrganizationSchema(siteName, baseUrl, {
+    id: organizationId,
     logo: `${baseUrl}/logos/Brillarix-White-Mode.png`,
     description: defaultDescription,
     sameAs: [
@@ -257,15 +264,49 @@ export default function RootLayout({
     },
   });
 
-  const websiteSchema = generateWebSiteSchema(siteName, baseUrl, {
+  const localBusinessSchema = generateLocalBusinessSchema({
+    // Same @id as Organization so JSON-LD merges this into the same entity (adds LocalBusiness type + properties)
+    id: organizationId,
+    name: siteName,
+    url: baseUrl,
+    logo: `${baseUrl}/logos/Brillarix-White-Mode.png`,
     description: defaultDescription,
-    publisher: organizationSchema,
+    sameAs: [
+      "https://twitter.com/brillarixtech",
+      "https://instagram.com/brillarixtech",
+      "https://www.linkedin.com/company/brillarixtech",
+    ],
+    email: CONTACT_INFO.email.address,
+    address: {
+      "@type": "PostalAddress",
+      streetAddress:
+        "Vardhman Nagar-A, Gopalpura Bypass Rd, near 200 Feet Bypass Road, Patrakar Colony",
+      addressLocality: "Jaipur",
+      addressRegion: "Rajasthan",
+      postalCode: "302019",
+      addressCountry: "IN",
+    },
+    contactPoint: {
+      "@type": "ContactPoint",
+      contactType: "Customer Service",
+      email: CONTACT_INFO.email.address,
+      availableLanguage: "English",
+    },
+    parentOrganizationId: organizationId,
+    areaServed: "Worldwide",
+  });
+
+  const websiteSchema = generateWebSiteSchema(siteName, baseUrl, {
+    id: websiteId,
+    description: defaultDescription,
+    publisher: { "@id": organizationId },
   });
 
   const serviceSchema = generateServiceSchema(
     "Web Development & Low-Code Solutions",
-    siteName,
+    { "@id": organizationId },
     {
+      id: primaryServiceId,
       areaServed: "Worldwide",
       description: defaultDescription,
       offerDescription: "Custom web application development and low-code solutions",
@@ -276,6 +317,7 @@ export default function RootLayout({
     <html lang="en" data-theme="dark">
       <head>
         <SchemaScript schema={organizationSchema} id="organization-schema" />
+        <SchemaScript schema={localBusinessSchema} id="local-business-schema" />
         <SchemaScript schema={websiteSchema} id="website-schema" />
         <SchemaScript schema={serviceSchema} id="service-schema" />
         <meta name="geo.region" content="US" />
@@ -290,6 +332,7 @@ export default function RootLayout({
         className={`${spaceGrotesk.variable} ${rubik.variable} antialiased`}
       >
         <Loader />
+        <ScrollRestoration />
         <div className="w-full max-w-[1440px] mx-auto flex flex-col min-h-screen">
           <Header />
           <main className="flex-1">

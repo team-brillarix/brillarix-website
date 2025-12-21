@@ -1,11 +1,22 @@
+"use client";
+
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/Button";
 import { footerNavigationLinks, footerSocialLinks, footerLegalLinks } from "@/constants/footer";
 import Copyright from "@/components/Copyright";
 
 export default function Footer() {
+    const pathname = usePathname();
+
+    const handleLogoClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+        if (pathname === "/") {
+            e.preventDefault();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    };
 
     return (
         <footer className="w-full py-2 sm:py-3 md:py-4 px-2 sm:px-3 md:px-4 flex flex-col">
@@ -17,6 +28,7 @@ export default function Footer() {
                         {/* Logo */}
                         <Link
                             href="/"
+                            onClick={handleLogoClick}
                             className="flex items-center gap-2 shrink-0"
                             aria-label="Brillarix Home"
                         >

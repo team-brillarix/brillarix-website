@@ -3,8 +3,6 @@ import { impactProjects } from '@/constants/projects';
 import { ImpactProject } from '@/types/project';
 import { Heading } from '@/components/ui/Heading';
 import { Section } from '@/components/ui/Section';
-import SchemaScript from '@/components/SchemaScript';
-import { generateCreativeWorkSchema } from '@/lib/schema';
 import Link from 'next/link';
 import { MdArrowBack } from 'react-icons/md';
 import type { Metadata } from 'next';
@@ -74,19 +72,8 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
         notFound();
     }
 
-    const projectSchema = generateCreativeWorkSchema(
-        project.title,
-        project.description,
-        projectUrl,
-        'Brillarix',
-        baseUrl,
-        'Brillarix',
-        `${baseUrl}/logos/Brillarix-White-Mode.png`
-    );
-
     return (
         <div className="min-h-screen bg-background">
-            <SchemaScript schema={projectSchema} id="project-schema" />
             <Section className="py-8 md:py-12 px-4 md:px-6">
                 <Link
                     href="/"

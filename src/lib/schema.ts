@@ -5,32 +5,92 @@ import {
   Question,
   SchemaType,
   OrganizationSchema,
+  IdReference,
+  LocalBusinessSchema,
   WebSiteSchema,
   ServiceSchema,
-  ArticleSchema,
-  ReviewSchema,
-  CreativeWorkSchema,
   ContactPoint,
+  PostalAddress,
 } from '@/types/schema';
 
-function validateFAQ(faq: FAQ): boolean {
-  return !!(
-    faq.question?.trim() &&
-    faq.answer?.trim() &&
-    faq.question.length > 0 &&
-    faq.answer.length > 0
-  );
+const SCHEMA_CONTEXT = 'https://schema.org' as const;
+
+const TAG_RE = /<[^>]*>/g;
+const WS_RE = /\s+/g;
+
+function isNonEmptyString(value: unknown): value is string {
+  return typeof value === 'string' && value.trim().length > 0;
 }
 
-function sanitizeText(text: string): string {
-  if (typeof text !== 'string') return '';
-  return text.replace(/<[^>]*>/g, '').replace(/\s+/g, ' ').trim();
+function asIdRef(id: unknown): IdReference | undefined {
+  if (!isNonEmptyString(id)) return undefined;
+  return { '@id': id.trim() };
+}
+
+function sanitizeText(value: unknown): string {
+  if (!isNonEmptyString(value)) return '';
+  return value.replace(TAG_RE, '').replace(WS_RE, ' ').trim();
+}
+
+function sanitizeStringArray(value: unknown): string[] | undefined {
+  if (!Array.isArray(value)) return undefined;
+
+  const cleaned = value
+    .map(sanitizeText)
+    .filter((s) => s.length > 0);
+
+  const unique = Array.from(new Set(cleaned));
+  return unique.length > 0 ? unique : undefined;
+}
+
+function buildContactPoint(value?: ContactPoint): ContactPoint | undefined {
+  if (!value) return undefined;
+
+  const contactType = sanitizeText(value.contactType);
+  if (!contactType) return undefined;
+
+  return {
+    '@type': 'ContactPoint',
+    contactType,
+    ...(isNonEmptyString(value.email) && { email: value.email.trim() }),
+    ...(isNonEmptyString(value.telephone) && { telephone: value.telephone.trim() }),
+    ...(isNonEmptyString(value.availableLanguage) && {
+      availableLanguage: sanitizeText(value.availableLanguage),
+    }),
+  };
+}
+
+function sanitizeRatingValue(value: unknown, fallback: string): string {
+  return isNonEmptyString(value) ? value.trim() : fallback;
+}
+
+function buildPostalAddress(value?: PostalAddress): PostalAddress | undefined {
+  if (!value) return undefined;
+
+  const streetAddress = sanitizeText(value.streetAddress);
+  const addressLocality = sanitizeText(value.addressLocality);
+  const addressRegion = sanitizeText(value.addressRegion);
+  const postalCode = sanitizeText(value.postalCode);
+  const addressCountry = sanitizeText(value.addressCountry);
+
+  if (!streetAddress || !addressLocality || !addressRegion || !postalCode || !addressCountry) {
+    return undefined;
+  }
+
+  return {
+    '@type': 'PostalAddress',
+    streetAddress,
+    addressLocality,
+    addressRegion,
+    postalCode,
+    addressCountry,
+  };
 }
 
 function createQuestion(faq: FAQ): Question | null {
-  if (!validateFAQ(faq)) {
+  if (!isNonEmptyString(faq.question) || !isNonEmptyString(faq.answer)) {
     if (process.env.NODE_ENV === 'development') {
-      console.warn(`Invalid FAQ item skipped: ${faq.id}`, faq);
+      console.warn(`Invalid FAQ item skipped: ${faq.id ?? '(missing id)'}`);
     }
     return null;
   }
@@ -51,7 +111,7 @@ export function generateFAQPageSchema(faqs: FAQ[]): FAQPageSchema {
       console.warn('generateFAQPageSchema: Empty or invalid FAQs array');
     }
     return {
-      '@context': 'https://schema.org',
+      '@context': SCHEMA_CONTEXT,
       '@type': 'FAQPage',
       mainEntity: [],
     };
@@ -66,16 +126,19 @@ export function generateFAQPageSchema(faqs: FAQ[]): FAQPageSchema {
   }
 
   return {
-    '@context': 'https://schema.org',
+    '@context': SCHEMA_CONTEXT,
     '@type': 'FAQPage',
     mainEntity: questions,
   };
 }
 
-export function validateSchema(schema: SchemaType): boolean {
+export function validateSchema(schema: unknown): schema is SchemaType {
   if (!schema || typeof schema !== 'object') return false;
-  if (schema['@context'] !== 'https://schema.org') return false;
-  if (!schema['@type']) return false;
+  const s = schema as Record<string, unknown>;
+
+  if (s['@context'] !== SCHEMA_CONTEXT) return false;
+  if (!isNonEmptyString(s['@type'])) return false;
+
   return true;
 }
 
@@ -83,6 +146,7 @@ export function generateOrganizationSchema(
   name: string,
   url: string,
   options?: {
+    id?: string;
     logo?: string;
     description?: string;
     sameAs?: string[];
@@ -95,24 +159,69 @@ export function generateOrganizationSchema(
     };
   }
 ): OrganizationSchema {
+  const sameAs = sanitizeStringArray(options?.sameAs);
+  const contactPoint = buildContactPoint(options?.contactPoint);
+  const founderSameAs = sanitizeStringArray(options?.founder?.sameAs);
+  const description = sanitizeText(options?.description);
+  const idRef = asIdRef(options?.id);
+
   return {
-    '@context': 'https://schema.org',
+    '@context': SCHEMA_CONTEXT,
     '@type': 'Organization',
+    ...(idRef && { '@id': idRef['@id'] }),
     name: sanitizeText(name),
-    url,
-    ...(options?.logo && { logo: options.logo }),
-    ...(options?.description && { description: sanitizeText(options.description) }),
-    ...(options?.sameAs && { sameAs: options.sameAs }),
-    ...(options?.contactPoint && { contactPoint: options.contactPoint }),
+    url: url.trim(),
+    ...(isNonEmptyString(options?.logo) && { logo: options.logo.trim() }),
+    ...(description && { description }),
+    ...(sameAs && { sameAs }),
+    ...(contactPoint && { contactPoint }),
     ...(options?.founder && {
       founder: {
         '@type': 'Person',
         name: sanitizeText(options.founder.name),
         ...(options.founder.jobTitle && { jobTitle: sanitizeText(options.founder.jobTitle) }),
-        ...(options.founder.url && { url: options.founder.url }),
-        ...(options.founder.sameAs && { sameAs: options.founder.sameAs }),
+        ...(isNonEmptyString(options.founder.url) && { url: options.founder.url.trim() }),
+        ...(founderSameAs && { sameAs: founderSameAs }),
       },
     }),
+  };
+}
+
+export function generateLocalBusinessSchema(options: {
+  id: string; // should match the Organization @id so JSON-LD merges the entity
+  name: string;
+  url: string;
+  logo?: string;
+  description?: string;
+  sameAs?: string[];
+  email?: string;
+  address?: PostalAddress;
+  contactPoint?: ContactPoint;
+  parentOrganizationId?: string;
+  areaServed?: string;
+}): LocalBusinessSchema {
+  const sameAs = sanitizeStringArray(options.sameAs);
+  const description = sanitizeText(options.description);
+  const contactPoint = buildContactPoint(options.contactPoint);
+  const parentOrganization = asIdRef(options.parentOrganizationId);
+  const email = isNonEmptyString(options.email) ? options.email.trim() : undefined;
+  const areaServed = sanitizeText(options.areaServed);
+  const address = buildPostalAddress(options.address);
+
+  return {
+    '@context': SCHEMA_CONTEXT,
+    '@type': 'LocalBusiness',
+    '@id': options.id.trim(),
+    name: sanitizeText(options.name),
+    url: options.url.trim(),
+    ...(isNonEmptyString(options.logo) && { logo: options.logo.trim() }),
+    ...(description && { description }),
+    ...(sameAs && { sameAs }),
+    ...(email && { email }),
+    ...(address && { address }),
+    ...(contactPoint && { contactPoint }),
+    ...(parentOrganization && { parentOrganization }),
+    ...(areaServed && { areaServed }),
   };
 }
 
@@ -120,103 +229,72 @@ export function generateWebSiteSchema(
   name: string,
   url: string,
   options?: {
+    id?: string;
     description?: string;
-    publisher?: OrganizationSchema;
+    publisher?: OrganizationSchema | IdReference;
   }
 ): WebSiteSchema {
+  const description = sanitizeText(options?.description);
+  const idRef = asIdRef(options?.id);
+
   return {
-    '@context': 'https://schema.org',
+    '@context': SCHEMA_CONTEXT,
     '@type': 'WebSite',
+    ...(idRef && { '@id': idRef['@id'] }),
     name: sanitizeText(name),
-    url,
-    ...(options?.description && { description: sanitizeText(options.description) }),
+    url: url.trim(),
+    ...(description && { description }),
     ...(options?.publisher && { publisher: options.publisher }),
   };
 }
 
 export function generateServiceSchema(
   serviceType: string,
-  providerName: string,
+  provider: OrganizationSchema | IdReference,
   options?: {
+    id?: string;
     areaServed?: string;
     description?: string;
     offerDescription?: string;
   }
 ): ServiceSchema {
+  const areaServed = sanitizeText(options?.areaServed);
+  const description = sanitizeText(options?.description);
+  const offerDescription = sanitizeText(options?.offerDescription);
+  const idRef = asIdRef(options?.id);
+
   return {
-    '@context': 'https://schema.org',
+    '@context': SCHEMA_CONTEXT,
     '@type': 'Service',
+    ...(idRef && { '@id': idRef['@id'] }),
     serviceType: sanitizeText(serviceType),
-    provider: {
-      '@type': 'Organization',
-      name: sanitizeText(providerName),
-    },
-    ...(options?.areaServed && { areaServed: options.areaServed }),
-    ...(options?.description && { description: sanitizeText(options.description) }),
-    ...(options?.offerDescription && {
+    provider,
+    ...(areaServed && { areaServed }),
+    ...(description && { description }),
+    ...(offerDescription && {
       offers: {
         '@type': 'Offer',
-        description: sanitizeText(options.offerDescription),
+        description: offerDescription,
       },
     }),
   };
 }
 
-export function generateArticleSchema(
-  headline: string,
-  description: string,
-  image: string,
-  datePublished: string,
-  authorName: string,
-  publisherName: string,
-  publisherLogo: string,
-  pageUrl: string,
-  options?: {
-    authorUrl?: string;
-    authorType?: 'Organization' | 'Person';
-  }
-): ArticleSchema {
-  return {
-    '@context': 'https://schema.org',
-    '@type': 'Article',
-    headline: sanitizeText(headline),
-    description: sanitizeText(description),
-    image,
-    datePublished,
-    author: {
-      '@type': options?.authorType || 'Organization',
-      name: sanitizeText(authorName),
-      ...(options?.authorUrl && { url: options.authorUrl }),
-    },
-    publisher: {
-      '@type': 'Organization',
-      name: sanitizeText(publisherName),
-      logo: {
-        '@type': 'ImageObject',
-        url: publisherLogo,
-      },
-    },
-    mainEntityOfPage: {
-      '@type': 'WebPage',
-      '@id': pageUrl,
-    },
-  };
-}
-
 export function generateReviewSchema(
-  organizationName: string,
   innovators: Innovator[],
-  serviceName: string,
-  serviceProviderName: string,
-  options?: {
+  options: {
+    businessId: string;
+    businessName: string;
+    businessUrl: string;
     ratingValue?: string;
     bestRating?: string;
     worstRating?: string;
   }
-): ReviewSchema {
-  const ratingValue = options?.ratingValue || '5';
-  const bestRating = options?.bestRating || '5';
-  const worstRating = options?.worstRating || '5';
+): LocalBusinessSchema {
+  const ratingValue = sanitizeRatingValue(options.ratingValue, '5');
+  const bestRating = sanitizeRatingValue(options.bestRating, '5');
+  const worstRating = sanitizeRatingValue(options.worstRating, '5');
+  const businessId = options.businessId.trim();
 
   const reviews = innovators
     .filter((innovator) => innovator.testimonialText?.trim())
@@ -234,20 +312,20 @@ export function generateReviewSchema(
         bestRating,
         worstRating,
       },
-      itemReviewed: {
-        '@type': 'Service' as const,
-        name: sanitizeText(serviceName),
-        provider: {
-          '@type': 'Organization' as const,
-          name: sanitizeText(serviceProviderName),
-        },
-      },
     }));
 
+  const base: LocalBusinessSchema = {
+    '@context': SCHEMA_CONTEXT,
+    '@type': 'LocalBusiness',
+    '@id': businessId,
+    name: sanitizeText(options.businessName),
+    url: options.businessUrl.trim(),
+  };
+
+  if (reviews.length === 0) return base;
+
   return {
-    '@context': 'https://schema.org',
-    '@type': 'Organization',
-    name: sanitizeText(organizationName),
+    ...base,
     aggregateRating: {
       '@type': 'AggregateRating',
       ratingValue,
@@ -259,46 +337,14 @@ export function generateReviewSchema(
   };
 }
 
-export function generateCreativeWorkSchema(
-  name: string,
-  description: string,
-  url: string,
-  creatorName: string,
-  creatorUrl: string,
-  publisherName: string,
-  publisherLogo: string
-): CreativeWorkSchema {
-  return {
-    '@context': 'https://schema.org',
-    '@type': 'CreativeWork',
-    name: sanitizeText(name),
-    description: sanitizeText(description),
-    url,
-    creator: {
-      '@type': 'Organization',
-      name: sanitizeText(creatorName),
-      url: creatorUrl,
-    },
-    publisher: {
-      '@type': 'Organization',
-      name: sanitizeText(publisherName),
-      logo: {
-        '@type': 'ImageObject',
-        url: publisherLogo,
-      },
-    },
-  };
-}
-
 export function stringifySchema(schema: SchemaType): string {
+  if (!validateSchema(schema)) return '{}';
+
   try {
-    if (!validateSchema(schema)) {
-      throw new Error('Invalid schema structure');
-    }
-    return JSON.stringify(schema, null, 0);
+    return JSON.stringify(schema);
   } catch (error) {
     if (process.env.NODE_ENV === 'development') {
-      console.error('Error stringifying schema:', error, schema);
+      console.error('Error stringifying schema:', error);
     }
     return '{}';
   }
