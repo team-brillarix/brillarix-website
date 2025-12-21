@@ -29,7 +29,7 @@ const rubik = Rubik({
 
 const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.brillarix.com";
 const siteName = "Brillarix";
-const defaultTitle = "Brillarix: Powering Digital Innovation with Low-Code & Custom Solutions";
+const defaultTitle = "Brillarix: AI native product studio";
 const defaultDescription = "Brillarix is an AI native product studio building web, mobile, and SaaS products that scale. Product strategy, world class design, and production grade engineering from MVP to enterprise.";
 
 export const metadata: Metadata = {
@@ -265,7 +265,6 @@ export default function RootLayout({
   });
 
   const localBusinessSchema = generateLocalBusinessSchema({
-    // Same @id as Organization so JSON-LD merges this into the same entity (adds LocalBusiness type + properties)
     id: organizationId,
     name: siteName,
     url: baseUrl,
