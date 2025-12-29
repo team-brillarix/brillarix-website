@@ -1,14 +1,12 @@
 import { ImpactProject } from '@/types/project';
 
-const cloudName = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME || '';
-
 export const impactProjects: ImpactProject[] = [
   {
     id: '1',
     title: 'Trialynx',
     description:
       'Revolutionizing clinical trials. Our AI agents generate 90% of protocols autonomously, cutting months of work down to hours.',
-    videoUrl: `https://res.cloudinary.com/${cloudName}/video/upload/v1765449078/Trialynx_wlyptp.mp4`,
+    videoUrl: '/projects/Trialynx.mp4',
     metrics: {
       label: 'Total Clinical Trials Launched',
       value: '50',
@@ -30,7 +28,7 @@ export const impactProjects: ImpactProject[] = [
     title: 'PT Metrics',
     description:
       'A personal training studio with locations in Vestal, Fayetteville & Cicero, NY, serving Greater Binghamton & Syracuse with personalized workout & nutrition plans.',
-    videoUrl: `https://res.cloudinary.com/${cloudName}/video/upload/v1765794768/PTMetric_qqefqk.mp4`,
+    videoUrl: '/projects/PTMetric.mp4',
     metrics: {
       label: 'Idea to MVP',
       value: '2 Weeks',
@@ -42,7 +40,7 @@ export const impactProjects: ImpactProject[] = [
     title: 'Visionary Clouds',
     description:
       'Visionary Clouds offers premium commercial film and photography services, creating captivating visual stories to elevate your brand.',
-    videoUrl: `https://res.cloudinary.com/${cloudName}/video/upload/v1764406783/VisionaryClouds_m70imh.mp4`,
+    videoUrl: '/projects/VisionaryClouds.mp4',
     metrics: {
       label: 'Client Acquisition Growth',
       value: '80%',
@@ -54,7 +52,7 @@ export const impactProjects: ImpactProject[] = [
     title: 'Signm',
     description:
       'Get an investing edge with AI powered stock analysis. Easily monitor millions of conversations about the stock market.',
-    videoUrl: `https://res.cloudinary.com/${cloudName}/video/upload/v1764406755/Signm_duk534.mp4`,
+    videoUrl: '/projects/Signm.mp4',
     metrics: {
       label: 'Total Paid Customers',
       value: '1000',
@@ -66,7 +64,7 @@ export const impactProjects: ImpactProject[] = [
     title: 'Gym Builder',
     description:
       'Empowering gym owners with real-time intelligence. Custom dashboards and AI analytics that drive retention and effortless growth.',
-    videoUrl: `https://res.cloudinary.com/${cloudName}/video/upload/v1765791163/GymBuilder_p02rkn_pydnql.mp4`,
+    videoUrl: '/projects/GymBuilder.mp4',
     metrics: {
       label: 'Conversion Rate Increased',
       value: '8 - 10%',

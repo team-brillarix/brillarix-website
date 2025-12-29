@@ -6,6 +6,15 @@ const nextConfig: NextConfig = {
     async headers() {
         return [
             {
+                source: '/projects/:path*',
+                headers: [
+                    {
+                        key: 'Cache-Control',
+                        value: 'public, max-age=0, must-revalidate, s-maxage=3600, stale-while-revalidate=86400',
+                    },
+                ],
+            },
+            {
                 source: '/:path*',
                 headers: [
                     {

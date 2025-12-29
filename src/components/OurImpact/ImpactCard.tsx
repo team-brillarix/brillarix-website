@@ -28,9 +28,15 @@ export function ImpactCard({ project, isActive }: { project: ImpactProject; isAc
                 <video
                     ref={videoRef}
                     src={project.videoUrl}
+                    controls={false}
                     muted
                     loop
                     playsInline
+                    preload="metadata"
+                    controlsList="nodownload noplaybackrate noremoteplayback"
+                    disablePictureInPicture
+                    disableRemotePlayback
+                    onContextMenu={(e) => e.preventDefault()}
                     className="w-full h-full object-cover"
                 />
             </div>
@@ -52,16 +58,16 @@ export function ImpactCard({ project, isActive }: { project: ImpactProject; isAc
                 {/* Metrics */}
                 <div className="flex justify-between items-center gap-3 sm:gap-4 w-full sm:w-auto sm:max-w-[40%]">
                     <div className="flex flex-col gap-1">
-                    <p className="text-xs sm:text-sm text-gray-light-2">
-                        {project.metrics.label}
-                    </p>
-                    {project.submetrics?.map((submetric) => (
-                        <div key={submetric.label}>
-                            <p className="text-[8px] sm:text-[10px] text-gray-light-1">
-                                {submetric.label}: <strong>{submetric.value}</strong>
-                            </p>
-                        </div>
-                    ))}
+                        <p className="text-xs sm:text-sm text-gray-light-2">
+                            {project.metrics.label}
+                        </p>
+                        {project.submetrics?.map((submetric) => (
+                            <div key={submetric.label}>
+                                <p className="text-[8px] sm:text-[10px] text-gray-light-1">
+                                    {submetric.label}: <strong>{submetric.value}</strong>
+                                </p>
+                            </div>
+                        ))}
                     </div>
                     <div className="px-3 sm:px-4 py-2 rounded-lg bg-gray-dark-3 shrink-0 text-gray-light-1 flex flex-row sm:flex-col items-center justify-center sm:justify-start gap-1 sm:gap-0 w-fit sm:w-auto">
                         <p className="text-sm">{project.metrics.valueLabel}</p>
