@@ -145,7 +145,7 @@ export default function InnovativeSolutions() {
               initial="hidden"
               animate={isParentInView ? "visible" : "hidden"}
             />
-            <Image src="/innovative-solutions/bg-style-left.png" alt="Background Style" width={1000} height={1000} className="object-cover w-full h-full opacity-10" />
+            <Image src="/innovative-solutions/bg-style-left.png" alt="Background Style" width={1000} height={1000} className="object-cover w-full h-full opacity-10" loading="lazy" />
             <div className="w-full h-full overflow-hidden">
               <motion.div
                 className="absolute z-13 max-w-50 max-h-107"
@@ -160,6 +160,7 @@ export default function InnovativeSolutions() {
                   height={428}
                   className="w-full h-full object-cover rounded-xl shadow-[0_6px_28px_0_rgba(72,72,72,0.5)]"
                   style={{ transform: 'matrix(0.98, -0.17, 0.5, 0.87, 0, 0)' }}
+                  loading="lazy"
                 />
               </motion.div>
               <motion.div
@@ -175,6 +176,7 @@ export default function InnovativeSolutions() {
                   height={350}
                   className="w-full h-full object-cover rounded-xl shadow-[0_6px_28px_0_rgba(72,72,72,0.5)]"
                   style={{ transform: 'matrix(0.98, -0.17, 0.5, 0.87, 0, 0)' }}
+                  loading="lazy"
                 />
               </motion.div>
               <motion.div
@@ -190,6 +192,7 @@ export default function InnovativeSolutions() {
                   height={602}
                   className="w-full h-full object-cover rounded-3xl shadow-[0_6px_28px_0_rgba(72,72,72,0.5)]"
                   style={{ transform: 'matrix(0.98, -0.17, 0.5, 0.87, 0, 0)' }}
+                  loading="lazy"
                 />
               </motion.div>
               <motion.div
@@ -205,6 +208,7 @@ export default function InnovativeSolutions() {
                   height={553}
                   className="w-full h-full object-cover rounded-3xl shadow-[0_6px_28px_0_rgba(72,72,72,0.5)]"
                   style={{ transform: 'matrix(0.98, -0.17, 0.5, 0.87, 0, 0)' }}
+                  loading="lazy"
                 />
               </motion.div>
             </div>
@@ -253,8 +257,8 @@ export default function InnovativeSolutions() {
                 alt="background style left"
                 height={1000}
                 width={1000}
-                priority
                 className="object-cover w-full h-full opacity-25"
+                loading="lazy"
               />
             </div>
             <div ref={containerRef} className="relative z-10 h-fit lg:h-full flex items-center justify-center">
@@ -293,8 +297,8 @@ export default function InnovativeSolutions() {
                     alt="cursor icon"
                     height={28}
                     width={28}
-                    priority
                     className="object-contain w-[clamp(20px,3vw,28px)] h-[clamp(20px,3vw,28px)]"
+                    loading="lazy"
                   />
                 </motion.div>
               )}
@@ -333,9 +337,8 @@ export default function InnovativeSolutions() {
                 alt="background style right"
                 height={1000}
                 width={1000}
-                priority
-                unoptimized
                 className="w-full h-full object-cover opacity-25"
+                loading="lazy"
               />
             </div>
 
@@ -346,9 +349,8 @@ export default function InnovativeSolutions() {
                   alt="mobile app screenshot"
                   height={1000}
                   width={1000}
-                  priority
-                  unoptimized
                   className="w-full h-auto object-contain"
+                  loading="lazy"
                 />
               </div>
             </div>

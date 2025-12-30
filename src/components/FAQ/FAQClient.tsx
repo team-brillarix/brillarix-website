@@ -29,7 +29,7 @@ export default function FAQClient({ faqs }: { faqs: FAQType[] }) {
           </Heading>
 
           <div className="relative w-full h-72">
-            <Image src="/faq.svg" alt="FAQ" fill className="object-contain" />
+            <Image src="/faq.svg" alt="FAQ" fill className="object-contain" loading="lazy" />
           </div>
         </div>
 

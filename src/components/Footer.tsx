@@ -38,7 +38,7 @@ export default function Footer() {
                                 width={160}
                                 height={40}
                                 className="h-8 sm:h-9 md:h-10 w-auto"
-                                priority
+                                loading="lazy"
                             />
                         </Link>
 

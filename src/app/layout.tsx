@@ -19,12 +19,14 @@ const spaceGrotesk = Space_Grotesk({
   variable: "--font-space-grotesk",
   subsets: ["latin"],
   display: "swap",
+  adjustFontFallback: true,
 });
 
 const rubik = Rubik({
   variable: "--font-rubik",
   subsets: ["latin"],
   display: "swap",
+  adjustFontFallback: true,
 });
 
 const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.brillarix.com";
@@ -315,6 +317,10 @@ export default function RootLayout({
   return (
     <html lang="en" data-theme="dark">
       <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+        <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
         <SchemaScript schema={organizationSchema} id="organization-schema" />
         <SchemaScript schema={localBusinessSchema} id="local-business-schema" />
         <SchemaScript schema={websiteSchema} id="website-schema" />

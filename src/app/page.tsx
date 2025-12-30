@@ -1,15 +1,33 @@
+import dynamic from 'next/dynamic';
 import Hero from '@/components/Hero';
-import TechStack from '@/components/TechStack';
 import OurClients from '@/components/OurClients';
-import OurImpact from '@/components/OurImpact/OurImpact';
-import OurProcess from '@/components/OurProcess/OurProcess';
-import FAQ from '@/components/FAQ/FAQ';
-import InnovativeSolutions from '@/components/InnovativeSolutions';
-import IndustryExpertise from '@/components/IndustryExpertise';
-import ContactUs from '@/components/ContactUs';
-import TrustedByInnovators from '@/components/TrustedByInnovators/TrustedByInnovators';
-import WhyUs from '@/components/WhyUs';
 import HashScrollHandler from '@/components/HashScrollHandler';
+
+// Lazy load below-the-fold components
+const OurImpact = dynamic(() => import('@/components/OurImpact/OurImpact'), {
+  loading: () => null,
+});
+const InnovativeSolutions = dynamic(() => import('@/components/InnovativeSolutions'), {
+  loading: () => null,
+});
+const TechStack = dynamic(() => import('@/components/TechStack'), {
+  loading: () => null,
+});
+const OurProcess = dynamic(() => import('@/components/OurProcess/OurProcess'), {
+  loading: () => null,
+});
+const TrustedByInnovators = dynamic(() => import('@/components/TrustedByInnovators/TrustedByInnovators'), {
+  loading: () => null,
+});
+const IndustryExpertise = dynamic(() => import('@/components/IndustryExpertise'), {
+  loading: () => null,
+});
+const FAQ = dynamic(() => import('@/components/FAQ/FAQ'), {
+  loading: () => null,
+});
+const ContactUs = dynamic(() => import('@/components/ContactUs'), {
+  loading: () => null,
+});
 
 export default function Home() {
   return (
