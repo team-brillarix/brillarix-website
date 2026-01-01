@@ -6,7 +6,7 @@ import Link from 'next/link';
 export function ImpactCard({ project, isActive }: { project: ImpactProject; isActive: boolean }) {
     return (
         <Link
-            href={`/projects/${project.id}`}
+            href={`/project/${project.slug}`}
             className="rounded-3xl overflow-hidden h-full flex flex-col transition-colors cursor-pointer border-2 border-gray-dark-3 hover:border-gray-dark-5"
         >
             {/* Image */}

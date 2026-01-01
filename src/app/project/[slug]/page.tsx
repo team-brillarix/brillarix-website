@@ -8,24 +8,24 @@ import { MdArrowBack } from 'react-icons/md';
 import type { Metadata } from 'next';
 
 interface ProjectPageProps {
-    params: Promise<{ id: string }>;
+    params: Promise<{ slug: string }>;
 }
 
-async function getProject(id: string): Promise<ImpactProject | undefined> {
-    return impactProjects.find((project) => project.id === id);
+async function getProject(slug: string): Promise<ImpactProject | undefined> {
+    return impactProjects.find((project) => project.slug === slug);
 }
 
 export async function generateStaticParams() {
     return impactProjects.map((project) => ({
-        id: project.id,
+        slug: project.slug,
     }));
 }
 
 export async function generateMetadata({ params }: ProjectPageProps): Promise<Metadata> {
-    const { id } = await params;
-    const project = await getProject(id);
+    const { slug } = await params;
+    const project = await getProject(slug);
     const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.brillarix.com';
-    const projectUrl = `${baseUrl}/projects/${id}`;
+    const projectUrl = `${baseUrl}/project/${slug}`;
 
     if (!project) {
         return {
@@ -63,10 +63,10 @@ export async function generateMetadata({ params }: ProjectPageProps): Promise<Me
 }
 
 export default async function ProjectPage({ params }: ProjectPageProps) {
-    const { id } = await params;
-    const project = await getProject(id);
+    const { slug } = await params;
+    const project = await getProject(slug);
     const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.brillarix.com';
-    const projectUrl = `${baseUrl}/projects/${id}`;
+    const projectUrl = `${baseUrl}/project/${slug}`;
 
     if (!project) {
         notFound();

@@ -1,5 +1,6 @@
 export interface ImpactProject {
   id: string;
+  slug: string;
   title: string;
   description: string;
   imageUrl: string;

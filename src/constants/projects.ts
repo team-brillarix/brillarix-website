@@ -3,6 +3,7 @@ import { ImpactProject } from '@/types/project';
 export const impactProjects: ImpactProject[] = [
   {
     id: '1',
+    slug: 'trialynx',
     title: 'Trialynx',
     description:
       'Revolutionizing clinical trials. Our AI agents generate 90% of protocols autonomously, cutting months of work down to hours.',
@@ -26,6 +27,7 @@ export const impactProjects: ImpactProject[] = [
   },
   {
     id: '2',
+    slug: 'pt-metrics',
     title: 'PT Metrics',
     description:
       'A personal training studio with locations in Vestal, Fayetteville & Cicero, NY, serving Greater Binghamton & Syracuse with personalized workout & nutrition plans.',
@@ -39,6 +41,7 @@ export const impactProjects: ImpactProject[] = [
   },
   {
     id: '3',
+    slug: 'visionary-clouds',
     title: 'Visionary Clouds',
     description:
       'Visionary Clouds offers premium commercial film and photography services, creating captivating visual stories to elevate your brand.',
@@ -52,6 +55,7 @@ export const impactProjects: ImpactProject[] = [
   },
   {
     id: '4',
+    slug: 'signm',
     title: 'Signm',
     description:
       'Get an investing edge with AI powered stock analysis. Easily monitor millions of conversations about the stock market.',
@@ -65,6 +69,7 @@ export const impactProjects: ImpactProject[] = [
   },
   {
     id: '5',
+    slug: 'gym-builder',
     title: 'Gym Builder',
     description:
       'Empowering gym owners with real-time intelligence. Custom dashboards and AI analytics that drive retention and effortless growth.',
