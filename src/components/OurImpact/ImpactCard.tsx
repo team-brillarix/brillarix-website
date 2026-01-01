@@ -1,43 +1,23 @@
 import { ImpactProject } from '@/types/project';
 import { Heading } from '@/components/ui/Heading';
-import { useEffect, useRef } from 'react';
+import Image from 'next/image';
 import Link from 'next/link';
 
 export function ImpactCard({ project, isActive }: { project: ImpactProject; isActive: boolean }) {
-    const videoRef = useRef<HTMLVideoElement | null>(null);
-
-    useEffect(() => {
-        const video = videoRef.current;
-        if (!video) return;
-
-        if (isActive) {
-            video.play().catch(() => { });
-        } else {
-            video.pause();
-            video.currentTime = 0;
-        }
-    }, [isActive]);
-
     return (
         <Link
             href={`/projects/${project.id}`}
             className="rounded-3xl overflow-hidden h-full flex flex-col transition-colors cursor-pointer border-2 border-gray-dark-3 hover:border-gray-dark-5"
         >
-            {/* Video */}
+            {/* Image */}
             <div className="relative w-full aspect-video">
-                <video
-                    ref={videoRef}
-                    src={project.videoUrl}
-                    controls={false}
-                    muted
-                    loop
-                    playsInline
-                    preload="metadata"
-                    controlsList="nodownload noplaybackrate noremoteplayback"
-                    disablePictureInPicture
-                    disableRemotePlayback
-                    onContextMenu={(e) => e.preventDefault()}
+                <Image
+                    src={project.imageUrl}
+                    alt={project.title}
+                    fill
                     className="w-full h-full object-cover"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    loading="lazy"
                 />
             </div>
 

@@ -6,6 +6,7 @@ export const impactProjects: ImpactProject[] = [
     title: 'Trialynx',
     description:
       'Revolutionizing clinical trials. Our AI agents generate 90% of protocols autonomously, cutting months of work down to hours.',
+    imageUrl: '/projects/Trialynx.png',
     videoUrl: '/projects/Trialynx.mp4',
     metrics: {
       label: 'Total Clinical Trials Launched',
@@ -28,6 +29,7 @@ export const impactProjects: ImpactProject[] = [
     title: 'PT Metrics',
     description:
       'A personal training studio with locations in Vestal, Fayetteville & Cicero, NY, serving Greater Binghamton & Syracuse with personalized workout & nutrition plans.',
+    imageUrl: '/projects/PTMetric.png',
     videoUrl: '/projects/PTMetric.mp4',
     metrics: {
       label: 'Idea to MVP',
@@ -40,6 +42,7 @@ export const impactProjects: ImpactProject[] = [
     title: 'Visionary Clouds',
     description:
       'Visionary Clouds offers premium commercial film and photography services, creating captivating visual stories to elevate your brand.',
+    imageUrl: '/projects/VisionaryClouds.png',
     videoUrl: '/projects/VisionaryClouds.mp4',
     metrics: {
       label: 'Client Acquisition Growth',
@@ -52,6 +55,7 @@ export const impactProjects: ImpactProject[] = [
     title: 'Signm',
     description:
       'Get an investing edge with AI powered stock analysis. Easily monitor millions of conversations about the stock market.',
+    imageUrl: '/projects/Signm.png',
     videoUrl: '/projects/Signm.mp4',
     metrics: {
       label: 'Total Paid Customers',
@@ -64,6 +68,7 @@ export const impactProjects: ImpactProject[] = [
     title: 'Gym Builder',
     description:
       'Empowering gym owners with real-time intelligence. Custom dashboards and AI analytics that drive retention and effortless growth.',
+    imageUrl: '/projects/GymBuilder.png',
     videoUrl: '/projects/GymBuilder.mp4',
     metrics: {
       label: 'Conversion Rate Increased',

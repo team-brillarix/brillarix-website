@@ -317,10 +317,9 @@ export default function RootLayout({
   return (
     <html lang="en" data-theme="dark">
       <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
-        <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
+        <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+        <link rel="dns-prefetch" href="https://www.google-analytics.com" />
+        <link rel="preload" href="/logos/Brillarix-Dark-Mode.png" as="image" />
         <SchemaScript schema={organizationSchema} id="organization-schema" />
         <SchemaScript schema={localBusinessSchema} id="local-business-schema" />
         <SchemaScript schema={websiteSchema} id="website-schema" />
@@ -331,7 +330,6 @@ export default function RootLayout({
         <meta name="revisit-after" content="7 days" />
         <meta name="distribution" content="global" />
         <meta name="rating" content="general" />
-        <link rel="preload" href="/logos/Brillarix-Dark-Mode.png" as="image" />
       </head>
       <body
         className={`${spaceGrotesk.variable} ${rubik.variable} antialiased`}
