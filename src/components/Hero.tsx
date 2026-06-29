@@ -1,407 +1,250 @@
-'use client';
+import { useRef } from 'react'
+import { ArrowRight, Bot, Check, Rocket, Wrench, type LucideIcon } from 'lucide-react'
+import { EASE, MOTION_OK, gsap, useGSAP } from '../lib/gsap'
 
-import { useState } from 'react';
-import Image from 'next/image';
-import { Section } from '@/components/ui/Section';
-import { Heading } from '@/components/ui/Heading';
-import { Button } from '@/components/ui/Button';
-import { ConnectionPaths, ConnectionPath } from '@/components/ui/ConnectionPaths';
-import { FiLayers, FiZap } from 'react-icons/fi';
+const ACTIVE_TRAILS: { icon: LucideIcon; label: string; note: string }[] = [
+  { icon: Rocket, label: 'Launch an MVP', note: '2–6 week first release' },
+  { icon: Wrench, label: 'Re-engineer for scale', note: 'Legacy app → production platform' },
+  { icon: Bot, label: 'Automate with AI', note: 'Internal systems, copilots, workflow automation' },
+]
 
-const DotIcon = () => (
-  <svg
-    width="8"
-    height="8"
-    viewBox="0 0 8 8"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-    className="w-2 h-2 dot-shadow rounded-full"
-    aria-hidden="true"
-  >
-    <circle cx="4" cy="4" r="4" fill="currentColor" />
-  </svg>
-);
+const ADVANTAGES = ['Full-stack depth', 'AI-native by default', 'Rapid where it fits', 'Senior execution']
 
-export default function Hero() {
-  const [activeIcons, setActiveIcons] = useState<Set<string>>(new Set());
+const TRUST = [
+  { label: 'Top Rated Plus', dot: 'bg-lime' },
+  { label: '50+ reviews', dot: 'bg-banana' },
+  { label: 'Bubble Silver Agency Partner', dot: 'bg-blossom' },
+]
 
-  const iconPositions = [
-    { id: 'bulb', gridX: 1, gridY: 1, radius: 2.5 },
-    { id: 'arcticons', gridX: 3.5, gridY: 3, radius: 2.5 },
-    { id: 'developer', gridX: 6.01, gridY: 5.01, radius: 2.5 },
-  ];
+// The "Shipment Ledger" — what's moved through the troop lately. Real shipments, not categories.
+const LEDGER = [
+  'Medical staffing marketplace MVP',
+  'Lending CRM + AI follow-up',
+  'Clinical-trial doc automation',
+  'AI stock-analysis SaaS',
+  'Internal approvals + ops dashboard',
+  'AI sales copilot for outreach',
+  'Workflow automation for lead routing',
+  'Service booking platform rebuild',
+  'RAG knowledge assistant',
+  'Call routing + telephony system',
+  'Marketing automation pipeline',
+  'Cross-platform mobile app',
+]
 
-  const connectionPaths: ConnectionPath[] = [
-    {
-      id: 'bulb-to-arcticons-to-developer',
-      d: 'M 14.29 18.67 V 45 Q 14.29 50 19.29 50 H 46 V 78 Q 50 83 55 83 H 87',
-      startPoint: { x: 14.29, y: 18.67 },
-      endPoint: { x: 87, y: 83 },
-      gridStartPoint: { x: 1, y: 1 },
-      gridEndPoint: { x: 6.01, y: 5.01 },
-      gridWaypoints: [
-        { x: 1, y: 2.7, type: 'vertical' },
-        {
-          x: 1,
-          y: 3,
-          type: 'quadratic',
-          controlPoint: { x: 1, y: 3 },
-          curveEndPoint: { x: 1.35, y: 3 },
-        },
-        { x: 3.22, y: 3, type: 'horizontal' },
-        { x: 3.5, y: 3, type: 'horizontal' },
-        { x: 3.5, y: 4.68, type: 'vertical' },
-        {
-          x: 3.5,
-          y: 5,
-          type: 'quadratic',
-          controlPoint: { x: 3.5, y: 5 },
-          curveEndPoint: { x: 3.85, y: 5 },
-        },
-        { x: 6.01, y: 5.01, type: 'horizontal' },
-      ],
+export function Hero() {
+  const scope = useRef<HTMLElement>(null)
+  const bgRef = useRef<HTMLDivElement>(null)
+  const leftRef = useRef<HTMLDivElement>(null)
+  const boardRef = useRef<HTMLDivElement>(null)
+  const ledgerRef = useRef<HTMLDivElement>(null)
+
+  useGSAP(
+    () => {
+      const mm = gsap.matchMedia()
+      mm.add(MOTION_OK, () => {
+        // Entrance — manifesto cascades up, board slides in, ledger follows.
+        const tl = gsap.timeline({ defaults: { ease: EASE } })
+        const left = leftRef.current
+        if (left) {
+          tl.from(Array.from(left.children), {
+            y: 30,
+            opacity: 0,
+            duration: 0.8,
+            stagger: 0.12,
+          })
+        }
+        tl.from(boardRef.current, { y: 40, opacity: 0, duration: 0.9 }, '-=0.5').from(
+          ledgerRef.current,
+          { y: 26, opacity: 0, duration: 0.7 },
+          '-=0.45',
+        )
+
+        // Ambient glow drifts on scroll for a touch of depth.
+        gsap.to(bgRef.current, {
+          yPercent: 16,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: scope.current,
+            start: 'top top',
+            end: 'bottom top',
+            scrub: true,
+          },
+        })
+      })
     },
-  ];
+    { scope },
+  )
 
   return (
-    <Section
-      className="pt-5 sm:pt-10 md:pt-20 bg-background">
-      <div className="absolute left-0 right-0 top-0 pointer-events-none z-10 overflow-hidden w-screen">
-        <div className="relative w-full h-full overflow-hidden" style={{ minHeight: '500px' }}>
-          <div
-            className="absolute bg-gray-light-9 opacity-30 blur-[36.75px] w-366 h-33 left-144 top-7.5 -translate-x-1/2 rotate-[28.4742deg] origin-center rounded-full"
-          />
-        </div>
-      </div>
-      <div className="w-full flex flex-col items-center gap-6 sm:gap-10 md:gap-12">
-        <div className="flex flex-col hero-hex-bg gap-15 -mx-[calc((100vw-100%)/2)] px-[calc((100vw-100%)/2)] -mt-[40px] sm:-mt-[60px] md:-mt-[100px] lg:-mt-[120px] pt-[40px] sm:pt-[60px] md:pt-[100px] lg:pt-[120px]">
-          <Heading
-            variant="h1"
-            weight="medium"
-            align="center"
-            children="The AI-Native Product Studio for Modern Founders."
-            subtitle="We build scalable web products, from MVP to full-stack platforms, using AI-driven workflows to help modern founders launch and scale faster."
-            subtitleAs="p"
-            subtitleClassName="font-normal text-gray-light-3"
-          />
-          <div className="flex flex-col items-center justify-center w-full gap-12">
-            <div className="grid grid-cols-1 lg:grid-cols-3 px-4 sm:px-16 md:px-20 lg:px-6 xl:px-8 gap-4 sm:gap-5 w-full max-w-7xl items-stretch auto-rows-fr">
-              <div className="flex flex-col gap-4 sm:gap-5 h-full">
-                <div className="flex flex-col bg-gray-dark-1/70 rounded-3xl flex-1 min-h-[320px] sm:min-h-[380px] md:min-h-[420px] lg:min-h-[480px] xl:min-h-[500px] p-1 border border-gray-dark-3 gap-2">
-                  <div className="flex flex-col flex-1 p-4 sm:p-5 md:p-6 rounded-3xl gap-3 sm:gap-4 surface-gradient-with-noise relative min-h-0">
-                    <div className="flex flex-row gap-3 sm:gap-4 items-center justify-start relative z-10 shrink-0">
-                      <div className="flex w-14 h-14 sm:w-16 sm:h-16 md:w-17.5 md:h-17.5 items-center justify-center rounded-full border border-gray-light-6 bg-background shrink-0">
-                        <FiZap size={20} color="gray-light-1" className="w-4 h-4 sm:w-5 sm:h-5" />
-                      </div>
-                      <div className="flex flex-col gap-1 sm:gap-2 flex-1 min-w-0">
-                        <Heading
-                          variant="h6"
-                          as="h3"
-                          align="left"
-                          weight="semibold"
-                          scale="compact"
-                          className="text-gray-light-1 font-medium text-sm sm:text-base"
-                          children="Rapid MVP & Validation"
-                          subtitle="Test ideas in weeks, not months. We use AI and low-code to get your product into users' hands quickly, gathering the feedback needed to iterate."
-                          subtitleAs="p"
-                          subtitleClassName="text-xs font-normal text-gray-light-5"
-                        />
-                      </div>
-                    </div>
-                    <div className="relative w-full flex-1 min-h-[200px] sm:min-h-[220px] md:min-h-[240px] overflow-hidden rounded-2xl">
-                      <div className="grid grid-cols-7 grid-rows-6 gap-0 w-full h-full">
-                        {Array.from({ length: 42 }).map((_, index) => (
-                          <div
-                            key={index}
-                            className="border border-gray-dark-2"
-                          />
-                        ))}
-                      </div>
-
-                      <div className="absolute inset-0 pointer-events-none" style={{
-                        '--grid-col-width': 'calc(100% / 7)',
-                        '--grid-row-height': 'calc(100% / 6)',
-                      } as React.CSSProperties}>
-                        <ConnectionPaths
-                          paths={connectionPaths}
-                          gridCols={7}
-                          gridRows={6}
-                          iconPositions={iconPositions}
-                          onIconActiveChange={setActiveIcons}
-                        />
-
-                        <div
-                          className="absolute z-20 pointer-events-auto"
-                          style={{
-                            left: 'calc(var(--grid-col-width) * 0 + var(--grid-col-width))',
-                            top: 'calc(var(--grid-row-height) * 0 + var(--grid-row-height))',
-                            transform: 'translate(-50%, -50%)',
-                          }}
-                        >
-                          <Image
-                            src="/hero-icons/Bulb.svg"
-                            alt="Bulb"
-                            width={48}
-                            height={48}
-                            className={`w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 object-contain transition-all duration-300 hover:scale-125 icon-hover ${activeIcons.has('bulb') ? 'scale-125' : ''
-                              }`}
-                            style={{
-                              filter: activeIcons.has('bulb')
-                                ? 'brightness(0) saturate(100%) invert(84%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(100%) contrast(100%)'
-                                : 'none',
-                            }}
-                          />
-                        </div>
-
-                        <div
-                          className="absolute z-20 pointer-events-auto"
-                          style={{
-                            left: 'calc(var(--grid-col-width) * 6 - var(--grid-col-width)*.5)',
-                            top: 'calc(var(--grid-row-height) * 0 + var(--grid-row-height))',
-                            transform: 'translate(-50%, -50%)',
-                          }}
-                        >
-                          <Image
-                            src="/hero-icons/Speedtest.svg"
-                            alt="Speedtest"
-                            width={80}
-                            height={80}
-                            className="w-16 h-16 sm:w-18 sm:h-18 md:w-20 md:h-20 object-contain"
-                          />
-                        </div>
-
-
-                        <div
-                          className={`group absolute flex items-center justify-center bg-gray-dark-2 rounded-lg h-10 w-10 sm:h-11 sm:w-11 md:h-12 md:w-12 z-20 pointer-events-auto hover:bg-gray-dark-5 transition-all duration-300 ${activeIcons.has('arcticons') ? 'bg-gray-dark-5' : ''
-                            }`}
-                          style={{
-                            left: 'calc(var(--grid-col-width) * 3.5)',
-                            top: 'calc(var(--grid-row-height) * 3)',
-                            transform: 'translate(-50%, -50%)',
-                          }}
-                        >
-                          <Image
-                            src="/hero-icons/Arcticons.svg"
-                            alt="Arcticons"
-                            width={30}
-                            height={16}
-                            className={`w-6 h-3 sm:w-7 sm:h-4 md:w-7.5 md:h-4 object-contain transition-all duration-300 group-hover:scale-125 hover:scale-125 icon-hover ${activeIcons.has('arcticons') ? 'scale-125' : ''
-                              }`}
-                            style={{
-                              filter: activeIcons.has('arcticons')
-                                ? 'brightness(0) saturate(100%) invert(84%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(100%) contrast(100%)'
-                                : 'none',
-                            }}
-                          />
-                        </div>
-
-                        <div
-                          className="absolute z-20 pointer-events-auto"
-                          style={{
-                            left: 'calc(var(--grid-col-width) * 6 + var(--grid-col-width) * 0.01)',
-                            top: 'calc(var(--grid-row-height) * 5 + var(--grid-row-height) * 0.01)',
-                            transform: 'translate(-50%, -50%)',
-                          }}
-                        >
-                          <Image
-                            src="/hero-icons/Developer.svg"
-                            alt="Developer"
-                            width={56}
-                            height={56}
-                            className={`w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 object-contain transition-all duration-300 hover:scale-125 icon-hover ${activeIcons.has('developer') ? 'scale-125' : ''
-                              }`}
-                            style={{
-                              filter: activeIcons.has('developer')
-                                ? 'brightness(0) saturate(100%) invert(84%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(100%) contrast(100%)'
-                                : 'none',
-                            }}
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="flex flex-row text-xs items-center justify-start font-normal text-gray-light-1 gap-3 sm:gap-4 rounded-3xl bg-gray-dark-2 p-4 sm:p-5 md:p-6 surface-gradient-with-noise relative">
-                  <DotIcon />
-                  <p className="flex-1">
-                    Get your product to market faster, without the traditional delays.
-                  </p>
-                </div>
-              </div>
-              <div className="flex flex-col gap-4 sm:gap-5 h-full">
-                <div className="flex flex-col bg-gray-dark-1/70 rounded-3xl flex-1 min-h-[320px] sm:min-h-[380px] md:min-h-[420px] lg:min-h-[480px] xl:min-h-[500px] p-1 border border-gray-dark-3 gap-2">
-                  <div className="flex flex-col justify-between flex-1 p-4 sm:p-5 md:p-6 rounded-3xl gap-3 sm:gap-4 surface-gradient-with-noise relative min-h-0">
-                    <div className="flex flex-row gap-3 sm:gap-4 items-center justify-start relative z-10 shrink-0">
-                      <div className="flex w-14 h-14 sm:w-16 sm:h-16 md:w-17.5 md:h-17.5 items-center justify-center rounded-full border border-gray-light-6 bg-background shrink-0">
-                        <FiLayers size={20} color="gray-light-1" className="w-4 h-4 sm:w-5 sm:h-5" />
-                      </div>
-                      <div className="flex flex-col gap-1 sm:gap-2 flex-1 min-w-0">
-                        <Heading
-                          variant="h6"
-                          as="h3"
-                          align="left"
-                          weight="semibold"
-                          scale="compact"
-                          className="text-gray-light-1 font-medium text-sm sm:text-base"
-                          children="Full-Stack Development"
-                          subtitle="Enterprise-grade engineering. We build resilient, scalable architectures designed to handle growth from your first user to your millionth."
-                          subtitleAs="p"
-                          subtitleClassName="text-xs font-normal text-gray-light-5"
-                        />
-                      </div>
-                    </div>
-                    <div className="relative w-full flex-1 min-h-0 flex items-center justify-center">
-                      <Image
-                        src="/hero-icons/full-stack-development.webp"
-                        alt="Full Stack Development Animation"
-                        width={250}
-                        height={250}
-                        className="w-full h-auto max-w-full object-contain rounded-2xl"
-                        style={{ aspectRatio: '1 / 1' }}
-                        priority
-                        unoptimized
-                      />
-                    </div>
-                    <div className="flex flex-row text-xs items-center justify-start font-normal text-gray-light-1 gap-3 sm:gap-4 rounded-3xl bg-gray-dark-2 p-4 sm:p-5 md:p-6 relative shadow-[0_4px_4px_0_rgba(0,0,0,0.05)] shrink-0">
-                      <DotIcon />
-                      <p className="flex-1">
-                        Custom solutions that grow with your business.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="flex flex-col gap-4 sm:gap-5 h-full">
-                <div className="flex flex-row text-xs items-center justify-start font-normal text-gray-light-1 gap-3 sm:gap-4 rounded-3xl bg-gray-dark-2 p-4 sm:p-5 md:p-6 surface-gradient-with-noise relative">
-                  <DotIcon />
-                  <p className="flex-1">
-                    Position your product for long-term success with a strategy that works.
-                  </p>
-                </div>
-                <div className="flex flex-col bg-gray-dark-1/70 rounded-3xl flex-1 min-h-[320px] sm:min-h-[380px] md:min-h-[420px] lg:min-h-[480px] xl:min-h-[500px] p-1 border border-gray-dark-3 gap-2">
-                  <div className="flex flex-col flex-1 bg-[#020202] p-4 sm:p-5 md:p-6 rounded-3xl gap-3 sm:gap-4 min-h-0">
-                    <div className="flex flex-row gap-3 sm:gap-4 items-center justify-start shrink-0">
-                      <div className="flex w-14 h-14 sm:w-16 sm:h-16 md:w-17.5 md:h-17.5 items-center justify-center rounded-full border border-gray-light-6 bg-background shrink-0">
-                        <Image src="/hero-icons/Target.svg" alt="Target" width={20} height={20} className="w-4 h-4 sm:w-5 sm:h-5" />
-                      </div>
-                      <div className="flex flex-col gap-1 sm:gap-2 flex-1 min-w-0">
-                        <Heading
-                          variant="h6"
-                          as="h3"
-                          align="left"
-                          weight="semibold"
-                          scale="compact"
-                          className="text-gray-light-1 font-medium text-sm sm:text-base"
-                          children="Product Strategy & Roadmapping"
-                          subtitle="Validate your core hypothesis before we build. We align market insights with technical feasibility to ensure your product has a clear path to Product-Market Fit."
-                          subtitleAs="p"
-                          subtitleClassName="text-xs font-normal text-gray-light-5"
-                        />
-                      </div>
-                    </div>
-                    <div className="relative w-full flex-1 min-h-0 flex items-center justify-center">
-                      <Image
-                        src="/hero-icons/strategy-driven-consulting.webp"
-                        alt="Strategy Driven Consulting Animation"
-                        width={250}
-                        height={250}
-                        className="w-full h-auto max-w-full object-contain rounded-2xl"
-                        style={{ aspectRatio: '1 / 1' }}
-                        priority
-                        unoptimized
-                      />
-                    </div>
-                  </div>
-                </div>
-              </div>
+    <header ref={scope} id="top" className="relative overflow-hidden bg-canopy text-milk">
+      <div
+        ref={bgRef}
+        className="pointer-events-none absolute inset-0"
+        style={{
+          background:
+            'radial-gradient(900px 500px at 82% -8%, rgba(164,232,102,0.10), transparent 60%), radial-gradient(820px 460px at 8% 112%, rgba(43,179,163,0.09), transparent 60%)',
+        }}
+      />
+      <div className="relative z-10 mx-auto max-w-[1180px] px-6 pb-14 pt-28 sm:px-8 lg:pt-32">
+        <div className="grid items-start gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:gap-14">
+          {/* LEFT — manifesto */}
+          <div ref={leftRef} className="max-w-2xl">
+            <div className="font-mono text-[11px] uppercase tracking-[0.16em] sm:text-xs">
+              <span className="text-lime">Brillarix Troop HQ</span>
+              <span className="mx-2 text-milk-soft/40">//</span>
+              <span className="text-milk-soft">
+                AI-native product studio for founders who want to ship
+              </span>
             </div>
-          </div>
-        </div>
 
-        <div className="flex flex-col items-center gap-6 sm:gap-10 md:gap-12 bg-background z-10 w-full">
-          <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6">
-            <Button
-              variant="primary"
-              href="#contact-us"
-              children="Partner With Us"
-            />
-            <Button
-              variant="secondary"
-              href="#process"
-              children="See Our Process"
-            />
-          </div>
+            <h1 className="font-display mt-6 text-5xl leading-[0.96] sm:text-6xl">
+              Seven monkeys.
+              <br />
+              <span className="text-banana">Zero monkey</span>{' '}
+              <span className="text-lime">business.</span>
+            </h1>
 
-          <div className="flex flex-col gap-12 w-full max-w-7xl px-0 sm:px-6 md:px-8 lg:px-12 xl:px-16 items-center justify-center">
-            <div className="flex border-t-diamond-gradient border-b-diamond-gradient w-full items-center justify-center py-2">
-              <p className="text-xs sm:text-sm text-gray-light-4 text-center max-w-2xl">
-                Trusted by innovators, startups, and enterprises to deliver scalable,
-                AI-powered solutions.
+            <div className="mt-7 max-w-xl">
+              <p className="text-2xl font-semibold leading-snug text-milk sm:text-[1.7rem]">
+                We build the products companies actually run on.
+              </p>
+              <p className="mt-3 text-[15px] leading-relaxed text-milk-soft sm:text-base">
+                MVPs, SaaS platforms, internal tools, and AI systems — built fast where
+                speed matters, and deep where scale matters.
               </p>
             </div>
-            <div className="grid grid-cols-2 md:grid-cols-4 w-full border-t-diamond-gradient">
-              <div className="flex flex-col items-center gap-2 text-gray-light-4 border-b-diamond-gradient border-r-diamond-gradient no-md-bottom-diamond-gradient px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 py-6 sm:py-8 text-xs sm:text-sm">
-                <div className="h-25 w-25 rounded-full bg-gray-dark-1 border border-gray-dark-3 flex items-center justify-center overflow-hidden">
-                  <Image
-                    src="/hero-icons/Bubble.svg"
-                    alt="Bubble logo"
-                    width={68}
-                    height={18}
-                    className="object-contain"
-                  />
-                </div>
-                <div className="flex flex-col sm:flex-row py-1 px-2 items-center gap-2">
-                  <p className="whitespace-nowrap">Silver Agency Partner</p>
-                  <Image src="/hero-icons/Verified.svg" alt="Verified Tick" width={24} height={24} className="object-contain" />
-                </div>
+
+            <div className="mt-9 flex flex-col gap-4 sm:flex-row">
+              <a className="btn-j banana" href="#calendly">
+                Book a build call 🍌
+              </a>
+              <a className="btn-j ghost" href="#work">
+                See what we&rsquo;ve shipped
+              </a>
+            </div>
+          </div>
+
+          {/* RIGHT — the troop's build board (pinned, modular, hand-arranged) */}
+          <div
+            ref={boardRef}
+            className="relative rounded-[22px] border border-lime/12 bg-canopy-3/35 p-5 sm:p-6"
+            style={{
+              backgroundImage: 'radial-gradient(rgba(164,232,102,0.07) 1px, transparent 1px)',
+              backgroundSize: '20px 20px',
+            }}
+          >
+            <div className="mb-6 flex items-center justify-between">
+              <span className="font-mono text-[11px] uppercase tracking-[0.22em] text-lime/80">
+                Troop Ops Wall
+              </span>
+              <span className="inline-flex items-center gap-1.5 font-mono text-[10px] uppercase tracking-wider text-milk-soft/65">
+                <span className="h-2 w-2 rounded-full bg-lime shadow-[0_0_8px_var(--color-lime)]" />
+                updated this week
+              </span>
+            </div>
+
+            {/* Block A — Active Trails: the primary, pinned field card */}
+            <div className="relative -ml-1 -rotate-1 rounded-2xl border-2 border-lime/25 bg-canopy-2 p-4 shadow-[0_8px_0_rgba(0,0,0,0.28)]">
+              <span className="absolute -top-3.5 right-5 rotate-[14deg] text-xl" aria-hidden="true">
+                📌
+              </span>
+              <div className="mb-3 flex items-baseline justify-between">
+                <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-lime/70">
+                  Active Trails
+                </span>
+                <span className="font-mono text-[10px] text-milk-soft/45">3 open</span>
               </div>
-              <div className="flex flex-col items-center gap-2 text-gray-light-4 border-b-diamond-gradient no-md-bottom-diamond-gradient md-border-r-diamond-gradient px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 py-6 sm:py-8 text-xs sm:text-sm">
-                <div className="h-25 w-25 rounded-full bg-gray-dark-1 border border-gray-dark-3 flex items-center justify-center overflow-hidden">
-                  <div className="flex flex-col items-center justify-center font-bold gap-2">
-                    <h5 className="text-2xl leading-none">50+</h5>
-                    <span className="text-sm font-medium leading-none">Reviews</span>
-                  </div>
-                </div>
-                <div className="flex justify-center flex-row py-1 px-2 h-8 items-center gap-2.5">
-                  {Array.from({ length: 5 }).map((_, index) => (
-                    <Image key={index} src="/hero-icons/Star.svg" alt="Star" width={24} height={24} className="object-contain" />
+              <div className="space-y-0.5">
+                {ACTIVE_TRAILS.map((t) => (
+                  <a
+                    key={t.label}
+                    href="#services"
+                    className="group flex items-start gap-3 rounded-lg px-1.5 py-2 transition-colors hover:bg-white/[0.05]"
+                  >
+                    <t.icon className="mt-0.5 h-5 w-5 shrink-0 text-lime" strokeWidth={2} />
+                    <span className="min-w-0">
+                      <span className="block text-[15px] font-semibold leading-tight text-milk">
+                        {t.label}
+                      </span>
+                      <span className="mt-0.5 block font-mono text-[11px] leading-snug text-milk-soft/55">
+                        {t.note}
+                      </span>
+                    </span>
+                    <ArrowRight className="ml-auto mt-1 h-4 w-4 shrink-0 text-milk-soft/30 transition-transform group-hover:translate-x-0.5" />
+                  </a>
+                ))}
+              </div>
+            </div>
+
+            {/* Block B — Troop Advantages: a small supporting field note, pinned askew */}
+            <div className="relative ml-auto mt-5 w-[82%] rotate-[1.5deg] rounded-[5px] bg-[#e6d8a6] px-3.5 py-3 text-forest shadow-[0_10px_22px_rgba(0,0,0,0.32)]">
+              <span
+                className="absolute -top-2.5 left-6 h-5 w-16 -rotate-6 rounded-[2px] bg-banana/75 shadow-[0_2px_4px_rgba(0,0,0,0.2)]"
+                aria-hidden="true"
+              />
+              <span className="font-mono text-[9px] uppercase tracking-[0.18em] text-forest-soft">
+                Troop advantages
+              </span>
+              <div className="mt-2 grid grid-cols-2 gap-x-3 gap-y-1.5">
+                {ADVANTAGES.map((a) => (
+                  <span
+                    key={a}
+                    className="flex items-center gap-1.5 text-[12px] font-medium text-forest"
+                  >
+                    <Check className="h-3 w-3 shrink-0 text-leaf" strokeWidth={3} />
+                    {a}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            {/* Block C — Trust: pinned stamps */}
+            <div className="ml-1 mt-7 flex flex-wrap items-center gap-2.5">
+              {TRUST.map((t, i) => (
+                <span
+                  key={t.label}
+                  className={`inline-flex items-center gap-2 rounded-full border border-lime/20 bg-canopy-2/70 px-3 py-1.5 text-[12px] text-milk-soft ${
+                    i === 1 ? '-rotate-2' : i === 2 ? 'rotate-2' : ''
+                  }`}
+                >
+                  <span className={`h-1.5 w-1.5 rounded-full ${t.dot}`} />
+                  {t.label}
+                </span>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* SHIPMENT LEDGER */}
+        <div
+          ref={ledgerRef}
+          className="mt-12 overflow-hidden rounded-[20px] border border-lime/10 bg-canopy-2/60"
+        >
+          <div className="flex items-center gap-3 px-5 pt-3.5">
+            <span className="font-mono text-[11px] uppercase tracking-[0.2em] text-lime/80">
+              Shipment Ledger
+            </span>
+            <span className="font-mono text-[11px] text-milk-soft/45">what&rsquo;s shipped lately</span>
+          </div>
+          <div className="mt-2 overflow-hidden py-3.5">
+            <div className="flex w-max animate-[marquee_60s_linear_infinite] motion-reduce:animate-none">
+              {[0, 1].map((seq) => (
+                <div key={seq} className="flex shrink-0" aria-hidden={seq === 1}>
+                  {LEDGER.map((item) => (
+                    <span key={item} className="inline-flex items-center gap-3 pr-16">
+                      <span className="text-[9px] text-lime/60">◆</span>
+                      <span className="font-mono text-[13px] tracking-wide text-milk-soft">
+                        {item}
+                      </span>
+                    </span>
                   ))}
                 </div>
-              </div>
-              <div className="flex flex-col items-center gap-2 text-gray-light-4 border-r-diamond-gradient px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 py-6 sm:py-8 text-xs sm:text-sm">
-                <div className="h-25 w-25 rounded-full bg-gray-dark-1 border border-gray-dark-3 flex items-center justify-center overflow-hidden">
-                  <Image
-                    src="/hero-icons/Upwork.svg"
-                    alt="Upwork logo"
-                    width={68}
-                    height={18}
-                    className="object-contain"
-                  />
-                </div>
-                <div className="flex flex-col justify-center sm:flex-row py-1 px-2 items-center gap-2">
-                  <p className="whitespace-nowrap">Top Rated Plus on Upwork</p>
-                  <Image src="/hero-icons/Verified.svg" alt="Verified Tick" width={24} height={24} className="object-contain" />
-                </div>
-              </div>
-              <div className="flex flex-col items-center gap-2 text-gray-light-4 px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 py-6 sm:py-8 text-xs sm:text-sm">
-                <div className="h-25 w-25 rounded-full bg-gray-dark-1 border border-gray-dark-3 flex items-center justify-center overflow-hidden">
-                  <Image
-                    src="/hero-icons/Contra.svg"
-                    alt="Contra"
-                    width={68}
-                    height={18}
-                    className="object-contain"
-                  />
-                </div>
-                <div className="flex flex-col justify-center sm:flex-row py-1 px-2 items-center gap-2">
-                  <p className="whitespace-nowrap">Featured on</p>
-                  <Image src="/hero-icons/Verified.svg" alt="Verified Tick" width={24} height={24} className="object-contain" />
-                </div>
-              </div>
+              ))}
             </div>
           </div>
         </div>
       </div>
-    </Section>
-  );
+    </header>
+  )
 }

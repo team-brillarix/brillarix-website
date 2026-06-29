@@ -1,115 +1,91 @@
-"use client";
+import { Container, Reveal, RevealStagger } from './ui'
 
-import React from "react";
-import Link from "next/link";
-import Image from "next/image";
-import { usePathname } from "next/navigation";
-import { Button } from "@/components/ui/Button";
-import { footerNavigationLinks, footerSocialLinks, footerLegalLinks } from "@/constants/footer";
-import Copyright from "@/components/Copyright";
+const EXPLORE = [
+  { label: 'What We Build', href: '#services' },
+  { label: 'Capabilities', href: '#capabilities' },
+  { label: 'Shipped', href: '#work' },
+  { label: 'Build System', href: '#process' },
+  { label: 'The Troop', href: '#troop' },
+]
 
-export default function Footer() {
-    const pathname = usePathname();
+const SOCIAL = [
+  { label: 'X', href: '#', handle: '@brillarixtech' },
+  { label: 'LinkedIn', href: '#', handle: 'Brillarix' },
+  { label: 'Instagram', href: '#', handle: '@brillarixtech' },
+]
 
-    const handleLogoClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
-        if (pathname === "/") {
-            e.preventDefault();
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-    };
+export function Footer() {
+  return (
+    <footer className="bg-[#081a10] text-milk-soft">
+      <Container className="py-16">
+        <RevealStagger className="flex flex-wrap justify-between gap-10" stagger={0.1} y={22}>
+          <div className="max-w-xs">
+            <a className="logo-j" href="#top">
+              <span className="mark">🐒</span>Brilla<b>rix</b>
+            </a>
+            <p className="mt-3 text-sm leading-relaxed">
+              A troop of seven building the software companies actually run on — from
+              validated idea to production-grade platform.
+            </p>
+            <p className="mt-4 font-mono text-[11px] uppercase tracking-[0.14em] text-milk-soft/70">
+              Jaipur, India · Est. 2023
+            </p>
+          </div>
 
-    return (
-        <footer className="w-full py-2 sm:py-3 md:py-4 px-2 sm:px-3 md:px-4 flex flex-col">
-            {/* Top */}
-            <div className="rounded-t-3xl bg-linear-gradient-footer border border-gray-dark-3">
-                <div className="p-5 sm:p-6 md:p-10 lg:p-12">
-                    {/* Logo and Links */}
-                    <div className="flex flex-col sm:flex-row items-center sm:items-center sm:justify-between gap-6 lg:gap-8">
-                        {/* Logo */}
-                        <Link
-                            href="/"
-                            onClick={handleLogoClick}
-                            className="flex items-center gap-2 shrink-0"
-                            aria-label="Brillarix Home"
-                        >
-                            <Image
-                                src="/logos/Brillarix-Dark-Mode.png"
-                                alt="Brillarix Logo"
-                                width={160}
-                                height={40}
-                                className="h-8 sm:h-9 md:h-10 w-auto"
-                                loading="lazy"
-                            />
-                        </Link>
+          <div>
+            <h4 className="font-mono text-xs uppercase tracking-[0.08em] text-lime">Explore</h4>
+            <ul className="mt-4 space-y-2.5 text-sm">
+              {EXPLORE.map((l) => (
+                <li key={l.href}>
+                  <a href={l.href} className="transition-colors hover:text-banana">
+                    {l.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
 
-                        {/* Links */}
-                        <nav className="grid grid-cols-2 sm:flex sm:flex-wrap items-center gap-4 sm:gap-6 lg:gap-8 w-full sm:w-auto">
-                            {footerNavigationLinks.map((link) => (
-                                <Button
-                                    key={link.href}
-                                    href={link.href}
-                                    variant="tertiary"
-                                    aria-label={link.label}
-                                >
-                                    {link.label}
-                                </Button>
-                            ))}
-                        </nav>
-                    </div>
+          <div>
+            <h4 className="font-mono text-xs uppercase tracking-[0.08em] text-lime">Connect</h4>
+            <ul className="mt-4 space-y-2.5 text-sm">
+              <li>
+                <a
+                  href="mailto:contact@brillarix.com"
+                  className="transition-colors hover:text-banana"
+                >
+                  contact@brillarix.com
+                </a>
+              </li>
+              {SOCIAL.map((s) => (
+                <li key={s.label}>
+                  <a
+                    href={s.href}
+                    className="group inline-flex items-center gap-2 transition-colors hover:text-banana"
+                  >
+                    <span>{s.label}</span>
+                    <span className="text-milk-soft/55">{s.handle}</span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </RevealStagger>
 
-                    {/* Divider */}
-                    <div className="w-full h-px bg-gray-dark-3 mt-8 sm:mt-10"></div>
-
-                    {/* Social Media and Legal Links */}
-                    <div className="flex flex-col sm:flex-row items-center justify-between gap-6 sm:gap-4 pt-6 sm:pt-8">
-                        {/* Social Media Icons */}
-                        <div className="flex items-center gap-4">
-                            {footerSocialLinks.map((social) => {
-                                const Icon = social.icon;
-                                return (
-                                    <Button
-                                        key={social.href}
-                                        href={social.href}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        variant="tertiary"
-                                        aria-label={social.label}
-                                        className="border border-gray-dark-3 rounded-full! p-4!"
-                                    >
-                                        <Icon className="w-5 h-5 sm:w-6 sm:h-6" />
-                                    </Button>
-                                );
-                            })}
-                        </div>
-
-                        {/* Legal Links */}
-                        <div className="flex items-center gap-4 sm:gap-6">
-                            {footerLegalLinks.map((link, index) => (
-                                <React.Fragment key={link.href}>
-                                    <Button
-                                        href={link.href}
-                                        variant="tertiary"
-                                        aria-label={link.label}
-                                    >
-                                        {link.label}
-                                    </Button>
-                                    {index < footerLegalLinks.length - 1 && (
-                                        <span className="text-white text-sm sm:text-base">•</span>
-                                    )}
-                                </React.Fragment>
-                            ))}
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            {/* Bottom */}
-            <div className="rounded-b-3xl p-3 border border-gray-dark-3">
-                <Copyright className="text-white">
-                    © 2025 Brillarix
-                </Copyright>
-            </div>
-        </footer>
-    );
+        <Reveal
+          start="top bottom"
+          className="mt-12 flex flex-col gap-3 border-t border-lime/15 pt-6 font-mono text-xs sm:flex-row sm:items-center sm:justify-between"
+        >
+          <p>© 2026 Brillarix. Seven monkeys, zero monkey business.</p>
+          <div className="flex gap-6">
+            <a href="#" className="transition-colors hover:text-banana">
+              Privacy
+            </a>
+            <a href="#" className="transition-colors hover:text-banana">
+              Terms
+            </a>
+          </div>
+        </Reveal>
+      </Container>
+    </footer>
+  )
 }
-

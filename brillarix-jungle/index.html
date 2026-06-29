@@ -1,0 +1,1330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Brillarix — Seven Monkeys. Zero Monkey Business.</title>
+<meta name="description" content="Brillarix is an AI-native product studio. A troop of seven building software that works, matters, and makes an impact — from MVP to scale.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Outfit:wght@300;400;500;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   BRILLARIX — THE JUNGLE STUDIO
+   Design tokens
+   ============================================================ */
+:root{
+  --canopy:#0C2417;        /* deepest jungle green — hero/contact bg */
+  --canopy-2:#123420;      /* lifted panel green */
+  --canopy-3:#1A4A2E;      /* card green */
+  --leaf:#2E8B4F;          /* mid leaf */
+  --lime:#A4E866;          /* sunlit lime accent */
+  --banana:#FFC53D;        /* banana CTA */
+  --banana-deep:#E09F0F;
+  --cream:#FBF3DC;         /* clearing / light section */
+  --cream-2:#F4E9C9;       /* deeper cream */
+  --bark:#6B4226;          /* wood sign */
+  --bark-deep:#43291475;
+  --blossom:#FF6F61;       /* hibiscus coral (their shirts!) */
+  --teal:#2BB3A3;          /* shirt teal */
+  --ink:#22301F;           /* text on cream */
+  --ink-soft:#54624B;
+  --milk:#F2F7EE;          /* text on dark */
+  --milk-soft:#B9CCB4;
+
+  --font-display:'Lilita One', 'Arial Rounded MT Bold', 'Comic Sans MS', sans-serif;
+  --font-body:'Outfit', 'Segoe UI', system-ui, sans-serif;
+  --font-mono:'Space Mono', 'Courier New', monospace;
+
+  --radius-lg:28px;
+  --radius-md:18px;
+  --radius-sm:10px;
+  --shadow-pop:0 10px 0 rgba(0,0,0,.18);
+  --shadow-soft:0 18px 50px rgba(8,28,16,.22);
+  --maxw:1180px;
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+}
+body{
+  font-family:var(--font-body);
+  background:var(--canopy);
+  color:var(--milk);
+  line-height:1.6;
+  overflow-x:hidden;
+}
+img{max-width:100%;display:block}
+a{color:inherit}
+::selection{background:var(--banana);color:var(--ink)}
+
+h1,h2,h3,.display{font-family:var(--font-display);font-weight:400;line-height:1.06;letter-spacing:.5px}
+h1{font-size:clamp(2.7rem,6.4vw,5rem)}
+h2{font-size:clamp(2rem,4.4vw,3.3rem)}
+h3{font-size:clamp(1.2rem,2vw,1.55rem)}
+
+.eyebrow{
+  font-family:var(--font-mono);
+  font-size:.82rem;
+  letter-spacing:.06em;
+  display:inline-flex;
+  align-items:center;
+  gap:.5em;
+}
+.eyebrow::before{content:'//';opacity:.55}
+.on-dark .eyebrow{color:var(--lime)}
+.on-cream .eyebrow{color:var(--leaf)}
+
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
+section{position:relative}
+.section-pad{padding:96px 0}
+@media(max-width:720px){.section-pad{padding:64px 0}}
+
+.section-head{max-width:680px;margin-bottom:52px}
+.section-head p{margin-top:14px;font-size:1.08rem}
+.on-dark .section-head p{color:var(--milk-soft)}
+.on-cream .section-head p{color:var(--ink-soft)}
+.section-head h2{margin-top:10px}
+
+/* ============ Buttons ============ */
+.btn{
+  display:inline-flex;align-items:center;gap:.55em;
+  font-family:var(--font-display);
+  font-size:1.05rem;letter-spacing:.4px;
+  padding:.85em 1.6em;
+  border-radius:999px;
+  border:3px solid var(--ink);
+  cursor:pointer;text-decoration:none;
+  transition:transform .15s ease, box-shadow .15s ease;
+  box-shadow:0 6px 0 var(--ink);
+  position:relative;
+}
+.btn:hover{transform:translateY(-3px);box-shadow:0 9px 0 var(--ink)}
+.btn:active{transform:translateY(2px);box-shadow:0 3px 0 var(--ink)}
+.btn:focus-visible{outline:3px dashed var(--banana);outline-offset:4px}
+.btn-banana{background:var(--banana);color:var(--ink)}
+.btn-ghost{background:transparent;color:var(--milk);border-color:var(--lime);box-shadow:0 6px 0 rgba(164,232,102,.35)}
+.btn-ghost:hover{box-shadow:0 9px 0 rgba(164,232,102,.35)}
+.btn-ghost:active{box-shadow:0 3px 0 rgba(164,232,102,.35)}
+
+/* ============ Nav ============ */
+.nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  transition:background .3s ease, box-shadow .3s ease;
+}
+.nav.scrolled{background:rgba(12,36,23,.92);backdrop-filter:blur(10px);box-shadow:0 2px 24px rgba(0,0,0,.35)}
+.nav-inner{
+  max-width:var(--maxw);margin:0 auto;padding:14px 24px;
+  display:flex;align-items:center;justify-content:space-between;gap:18px;
+}
+.logo{
+  font-family:var(--font-display);font-size:1.45rem;color:var(--milk);
+  text-decoration:none;display:flex;align-items:center;gap:.4em;
+}
+.logo .mark{font-size:1.5em;transform:scaleX(-1);display:inline-block}
+.logo b{color:var(--banana);font-weight:400}
+.nav-links{display:flex;align-items:center;gap:26px;list-style:none}
+.nav-links a{
+  text-decoration:none;color:var(--milk-soft);font-weight:500;font-size:.95rem;
+  transition:color .2s;
+}
+.nav-links a:hover{color:var(--lime)}
+.nav-cta{
+  font-family:var(--font-display);
+  background:var(--banana);color:var(--ink)!important;
+  padding:.5em 1.1em;border-radius:999px;border:2.5px solid var(--ink);
+  box-shadow:0 4px 0 var(--ink);font-size:.95rem;
+  transition:transform .15s, box-shadow .15s;
+}
+.nav-cta:hover{transform:translateY(-2px);box-shadow:0 6px 0 var(--ink)}
+.nav-burger{
+  display:none;background:none;border:none;cursor:pointer;
+  flex-direction:column;gap:5px;padding:8px;
+}
+.nav-burger span{width:26px;height:3px;background:var(--milk);border-radius:2px;transition:.25s}
+.nav-burger[aria-expanded="true"] span:nth-child(1){transform:translateY(8px) rotate(45deg)}
+.nav-burger[aria-expanded="true"] span:nth-child(2){opacity:0}
+.nav-burger[aria-expanded="true"] span:nth-child(3){transform:translateY(-8px) rotate(-45deg)}
+@media(max-width:880px){
+  .nav-burger{display:flex}
+  .nav-links{
+    position:fixed;inset:62px 0 auto 0;
+    background:rgba(12,36,23,.97);backdrop-filter:blur(12px);
+    flex-direction:column;padding:28px 24px 36px;gap:20px;
+    transform:translateY(-130%);transition:transform .3s ease;
+    box-shadow:0 30px 40px rgba(0,0,0,.4);
+  }
+  .nav-links.open{transform:translateY(0)}
+}
+
+/* ============ Vine scroll progress (signature) ============ */
+.vine-track{
+  position:fixed;top:0;right:26px;bottom:0;width:10px;z-index:90;
+  pointer-events:none;
+}
+.vine-track::before{
+  content:'';position:absolute;inset:0;left:4px;width:3px;
+  background:repeating-linear-gradient(180deg, var(--leaf) 0 14px, var(--canopy-3) 14px 18px);
+  border-radius:3px;opacity:.8;
+}
+.vine-monkey{
+  position:absolute;left:50%;top:0;
+  transform:translate(-50%,-10%);
+  font-size:30px;line-height:1;
+  filter:drop-shadow(0 3px 4px rgba(0,0,0,.4));
+  transition:top .12s linear;
+}
+.vine-monkey::after{
+  content:'🍃';position:absolute;font-size:14px;top:-12px;left:-6px;opacity:.9;
+}
+@media(max-width:880px){.vine-track{display:none}}
+
+/* ============ Hero ============ */
+.hero{
+  min-height:100svh;
+  display:flex;flex-direction:column;justify-content:center;
+  padding:140px 0 140px;
+  background:
+    radial-gradient(1200px 600px at 80% -10%, rgba(164,232,102,.16), transparent 60%),
+    radial-gradient(900px 500px at 10% 110%, rgba(43,179,163,.12), transparent 60%),
+    var(--canopy);
+  overflow:hidden;
+}
+.hero-inner{position:relative;z-index:5;max-width:var(--maxw);margin:0 auto;padding:0 24px}
+.hero h1{margin:18px 0 20px;max-width:13ch}
+.hero h1 .hl{color:var(--banana);position:relative;white-space:nowrap}
+.hero h1 .hl-2{color:var(--lime)}
+.hero-sub{font-size:clamp(1.05rem,1.6vw,1.3rem);color:var(--milk-soft);max-width:54ch;font-weight:300}
+.hero-sub b{color:var(--milk);font-weight:600}
+.hero-ctas{display:flex;gap:16px;flex-wrap:wrap;margin-top:36px}
+.hero-badges{
+  display:flex;gap:14px;flex-wrap:wrap;margin-top:54px;
+}
+.badge{
+  display:flex;align-items:center;gap:.6em;
+  font-family:var(--font-mono);font-size:.78rem;
+  background:rgba(255,255,255,.05);
+  border:1px solid rgba(164,232,102,.25);
+  padding:.65em 1.1em;border-radius:999px;color:var(--milk-soft);
+}
+.badge .dot{width:8px;height:8px;border-radius:50%;background:var(--lime);box-shadow:0 0 10px var(--lime)}
+.badge .dot.b{background:var(--banana);box-shadow:0 0 10px var(--banana)}
+.badge .dot.c{background:var(--blossom);box-shadow:0 0 10px var(--blossom)}
+
+/* hanging leaves layers */
+.hero-leaves{position:absolute;inset:0;pointer-events:none;z-index:1}
+.leaf-cluster{position:absolute;font-size:clamp(40px,7vw,86px);line-height:1;opacity:.9;
+  filter:drop-shadow(0 8px 12px rgba(0,0,0,.35));
+  animation:sway 6s ease-in-out infinite;
+  transform-origin:top center;
+}
+@keyframes sway{0%,100%{transform:rotate(-4deg)}50%{transform:rotate(5deg)}}
+.swing-monkey{
+  position:absolute;top:-14px;right:9%;z-index:2;
+  font-size:clamp(54px,7vw,92px);
+  transform-origin:top center;
+  animation:bigswing 4.6s ease-in-out infinite;
+  filter:drop-shadow(0 10px 14px rgba(0,0,0,.4));
+}
+.swing-monkey::before{
+  content:'';position:absolute;left:50%;top:-110px;width:4px;height:112px;
+  background:repeating-linear-gradient(180deg, #4F7A3C 0 12px, #3A5C2C 12px 16px);
+  border-radius:3px;
+}
+@keyframes bigswing{0%,100%{transform:rotate(-9deg)}50%{transform:rotate(9deg)}}
+.firefly{
+  position:absolute;width:5px;height:5px;border-radius:50%;
+  background:var(--banana);box-shadow:0 0 12px 3px rgba(255,197,61,.6);
+  animation:drift 9s ease-in-out infinite alternate, blink 2.4s ease-in-out infinite;
+  z-index:1;
+}
+@keyframes drift{from{transform:translate(0,0)}to{transform:translate(46px,-60px)}}
+@keyframes blink{0%,100%{opacity:.15}50%{opacity:1}}
+.hero-marquee{
+  position:absolute;bottom:0;left:0;right:0;z-index:4;
+  border-top:1px solid rgba(164,232,102,.18);
+  background:rgba(10,28,18,.55);backdrop-filter:blur(4px);
+  overflow:hidden;padding:12px 0;
+}
+.marquee-track{
+  display:flex;gap:48px;width:max-content;
+  animation:marquee 30s linear infinite;
+  font-family:var(--font-mono);font-size:.8rem;color:var(--milk-soft);
+}
+.marquee-track span{display:flex;align-items:center;gap:48px;white-space:nowrap}
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ============ Leaf scallop dividers ============ */
+.divider{display:block;width:100%;height:70px;margin-bottom:-1px}
+@media(max-width:720px){.divider{height:42px}}
+
+/* ============ Sections backgrounds ============ */
+.on-cream{background:var(--cream);color:var(--ink)}
+.on-cream-2{background:var(--cream-2);color:var(--ink)}
+.on-dark{background:var(--canopy);color:var(--milk)}
+.on-dark-2{background:var(--canopy-2);color:var(--milk)}
+
+/* ============ Troop (team) ============ */
+.troop-photo{
+  position:relative;margin:0 auto 64px;max-width:920px;
+  transform:rotate(-1.2deg);
+}
+.troop-photo .frame{
+  background:#fff;padding:16px 16px 58px;
+  border-radius:8px;
+  box-shadow:0 24px 60px rgba(34,48,31,.25), 0 4px 0 rgba(34,48,31,.12);
+  border:1px solid rgba(34,48,31,.08);
+}
+.troop-photo img{border-radius:4px;width:100%;height:auto}
+.troop-photo .caption{
+  position:absolute;bottom:16px;left:0;right:0;text-align:center;
+  font-family:var(--font-mono);font-size:.85rem;color:var(--ink-soft);
+}
+.troop-photo .tape{
+  position:absolute;width:120px;height:34px;background:rgba(255,197,61,.85);
+  top:-14px;left:50%;transform:translateX(-50%) rotate(2deg);
+  border-radius:2px;box-shadow:0 2px 6px rgba(0,0,0,.15);
+}
+.troop-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(255px,1fr));gap:26px;
+}
+.monkey-card{
+  background:#fff;
+  border:3px solid var(--ink);
+  border-radius:var(--radius-md);
+  padding:26px 24px 24px;
+  box-shadow:0 8px 0 rgba(34,48,31,.9);
+  position:relative;
+  transition:transform .18s ease, box-shadow .18s ease;
+}
+.monkey-card:hover{transform:translateY(-6px) rotate(-.6deg);box-shadow:0 14px 0 rgba(34,48,31,.9)}
+.monkey-card .face{
+  width:74px;height:74px;border-radius:50%;
+  display:grid;place-items:center;font-size:40px;
+  border:3px solid var(--ink);
+  margin-bottom:16px;
+  background:var(--c, var(--banana));
+  overflow:hidden;
+}
+.monkey-card .face img{width:100%;height:100%;object-fit:cover}
+.monkey-card h3{font-size:1.25rem;margin-bottom:2px}
+.monkey-card .role{
+  font-family:var(--font-mono);font-size:.74rem;color:var(--leaf);
+  letter-spacing:.04em;margin-bottom:12px;display:block;
+}
+.monkey-card p{font-size:.95rem;color:var(--ink-soft);line-height:1.55}
+.monkey-card .pin{
+  position:absolute;top:-13px;right:18px;font-size:22px;
+  transform:rotate(12deg);
+}
+
+/* ============ Services ============ */
+.services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:26px}
+.service{
+  background:var(--canopy-3);
+  border:2px solid rgba(164,232,102,.22);
+  border-radius:var(--radius-lg);
+  padding:34px 30px;
+  position:relative;overflow:hidden;
+  transition:transform .2s ease, border-color .2s ease;
+}
+.service:hover{transform:translateY(-5px);border-color:var(--lime)}
+.service .icon{
+  font-size:42px;line-height:1;margin-bottom:18px;display:inline-block;
+  filter:drop-shadow(0 4px 6px rgba(0,0,0,.3));
+}
+.service h3{color:var(--banana);margin-bottom:10px}
+.service p{color:var(--milk-soft);font-size:.98rem;margin-bottom:18px}
+.service ul{list-style:none;display:flex;flex-direction:column;gap:8px}
+.service li{
+  font-size:.9rem;color:var(--milk);display:flex;gap:.6em;align-items:baseline;
+}
+.service li::before{content:'🍌';font-size:.8em;flex-shrink:0}
+.service .vine-deco{
+  position:absolute;top:-10px;right:18px;font-size:30px;opacity:.5;
+  transform:rotate(15deg);
+}
+
+/* ============ Shipped (work) ============ */
+.work-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:26px}
+.work-card{
+  background:#fff;border:3px solid var(--ink);border-radius:var(--radius-md);
+  padding:30px 28px;box-shadow:0 8px 0 rgba(34,48,31,.85);
+  display:flex;flex-direction:column;gap:14px;
+  grid-column:span 4;
+  transition:transform .18s ease, box-shadow .18s ease;
+  text-decoration:none;color:var(--ink);
+}
+.work-card:hover{transform:translateY(-6px);box-shadow:0 14px 0 rgba(34,48,31,.85)}
+.work-card.feature{grid-column:span 8;background:var(--canopy);color:var(--milk);border-color:var(--canopy)}
+.work-card.feature .work-tag{background:rgba(164,232,102,.15);color:var(--lime)}
+.work-card.feature p{color:var(--milk-soft)}
+.work-tag{
+  align-self:flex-start;
+  font-family:var(--font-mono);font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;
+  background:var(--cream-2);color:var(--ink-soft);
+  padding:.4em .9em;border-radius:999px;
+}
+.work-card h3{font-size:1.5rem}
+.work-card p{font-size:.95rem;color:var(--ink-soft);flex:1}
+.work-metrics{display:flex;gap:26px;flex-wrap:wrap;margin-top:6px}
+.metric .num{
+  font-family:var(--font-display);font-size:1.9rem;line-height:1;
+  color:var(--blossom);
+}
+.work-card.feature .metric .num{color:var(--banana)}
+.metric .lbl{font-family:var(--font-mono);font-size:.68rem;letter-spacing:.05em;text-transform:uppercase;opacity:.75}
+@media(max-width:980px){
+  .work-card, .work-card.feature{grid-column:span 12}
+}
+@media(min-width:981px){
+  .work-card.half{grid-column:span 6}
+}
+
+/* ============ Process ============ */
+.process-list{display:flex;flex-direction:column;gap:0;max-width:840px;margin:0 auto;position:relative}
+.process-list::before{
+  content:'';position:absolute;left:33px;top:30px;bottom:30px;width:4px;
+  background:repeating-linear-gradient(180deg, var(--leaf) 0 14px, transparent 14px 22px);
+  border-radius:2px;
+}
+.step{
+  display:flex;gap:28px;padding:26px 0;position:relative;align-items:flex-start;
+}
+.step .knot{
+  flex-shrink:0;width:70px;height:70px;border-radius:50%;
+  background:var(--canopy-3);border:3px solid var(--lime);
+  display:grid;place-items:center;font-size:30px;
+  z-index:2;box-shadow:0 0 0 6px var(--canopy);
+}
+.step-body h3{color:var(--banana);display:flex;align-items:baseline;gap:.6em;flex-wrap:wrap}
+.step-body h3 .save{
+  font-family:var(--font-mono);font-size:.72rem;color:var(--lime);
+  border:1px solid rgba(164,232,102,.4);padding:.3em .8em;border-radius:999px;
+  letter-spacing:.04em;font-weight:400;
+}
+.step-body p{color:var(--milk-soft);margin-top:8px;max-width:58ch}
+
+/* ============ Testimonials ============ */
+.testi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:26px}
+.testi{
+  background:#fff;border:3px solid var(--ink);border-radius:var(--radius-md);
+  padding:30px 28px;box-shadow:0 8px 0 rgba(34,48,31,.85);
+  display:flex;flex-direction:column;gap:16px;position:relative;
+}
+.testi .quote-mark{
+  font-family:var(--font-display);font-size:3.2rem;line-height:.6;
+  color:var(--banana);
+}
+.testi p{font-size:.97rem;color:var(--ink);flex:1}
+.testi .who{display:flex;align-items:center;gap:12px}
+.testi .who .av{
+  width:46px;height:46px;border-radius:50%;
+  background:var(--c, var(--teal));border:2.5px solid var(--ink);
+  display:grid;place-items:center;font-family:var(--font-display);
+  color:#fff;font-size:1rem;
+}
+.testi .who .nm{font-weight:700;font-size:.92rem;line-height:1.25}
+.testi .who .co{font-family:var(--font-mono);font-size:.72rem;color:var(--ink-soft)}
+
+/* ============ FAQ ============ */
+.faq-list{max-width:760px;margin:0 auto;display:flex;flex-direction:column;gap:14px}
+.faq{
+  background:#fff;border:3px solid var(--ink);border-radius:var(--radius-sm);
+  box-shadow:0 5px 0 rgba(34,48,31,.85);overflow:hidden;
+}
+.faq summary{
+  cursor:pointer;padding:20px 24px;font-weight:700;font-size:1.02rem;
+  list-style:none;display:flex;justify-content:space-between;align-items:center;gap:16px;
+}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:'🍌';transition:transform .25s;flex-shrink:0}
+.faq[open] summary::after{transform:rotate(135deg)}
+.faq summary:focus-visible{outline:3px dashed var(--leaf);outline-offset:-4px}
+.faq .a{padding:0 24px 22px;color:var(--ink-soft);font-size:.96rem}
+
+/* ============ Contact ============ */
+.contact-bg{
+  background:
+    radial-gradient(900px 500px at 15% 0%, rgba(43,179,163,.12), transparent 55%),
+    radial-gradient(800px 480px at 90% 100%, rgba(255,111,97,.1), transparent 55%),
+    var(--canopy);
+  position:relative;overflow:hidden;
+}
+.contact-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:56px;align-items:start}
+@media(max-width:920px){.contact-grid{grid-template-columns:1fr}}
+.form-card{
+  background:var(--cream);color:var(--ink);
+  border:3px solid var(--ink);border-radius:var(--radius-lg);
+  padding:38px 34px;box-shadow:0 12px 0 rgba(0,0,0,.35);
+  position:relative;
+}
+.form-card .sign{
+  position:absolute;top:-26px;left:30px;
+  background:var(--bark);color:var(--cream);
+  font-family:var(--font-display);font-size:1.05rem;letter-spacing:.5px;
+  padding:.45em 1.2em;border-radius:8px;
+  border:3px solid var(--ink);
+  box-shadow:0 4px 0 var(--ink);
+  transform:rotate(-2deg);
+}
+.field{margin-bottom:20px}
+.field label{
+  display:block;font-family:var(--font-mono);font-size:.74rem;
+  letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);
+  margin-bottom:7px;
+}
+.field input,.field select,.field textarea{
+  width:100%;font-family:var(--font-body);font-size:1rem;color:var(--ink);
+  background:#fff;border:2.5px solid var(--ink);border-radius:var(--radius-sm);
+  padding:.8em 1em;transition:box-shadow .15s, transform .15s;
+}
+.field textarea{resize:vertical;min-height:120px}
+.field input:focus,.field select:focus,.field textarea:focus{
+  outline:none;box-shadow:0 4px 0 var(--banana);transform:translateY(-2px);
+}
+.form-foot{display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+.form-note{font-family:var(--font-mono);font-size:.72rem;color:var(--ink-soft)}
+.contact-aside h2{color:var(--milk)}
+.contact-aside .reasons{list-style:none;margin:26px 0 34px;display:flex;flex-direction:column;gap:14px}
+.contact-aside .reasons li{
+  display:flex;gap:.8em;color:var(--milk-soft);align-items:baseline;font-size:1rem;
+}
+.contact-aside .reasons li::before{content:'🌿';flex-shrink:0}
+.contact-chips{display:flex;flex-direction:column;gap:14px}
+.chip-link{
+  display:flex;align-items:center;gap:14px;text-decoration:none;
+  background:rgba(255,255,255,.05);border:2px solid rgba(164,232,102,.25);
+  border-radius:var(--radius-md);padding:16px 20px;
+  transition:border-color .2s, transform .2s;
+}
+.chip-link:hover{border-color:var(--banana);transform:translateX(6px)}
+.chip-link .ic{font-size:26px}
+.chip-link .t b{display:block;font-family:var(--font-display);font-weight:400;letter-spacing:.3px}
+.chip-link .t span{font-family:var(--font-mono);font-size:.75rem;color:var(--milk-soft)}
+
+/* ============ Game (post-submit) ============ */
+.game-card{
+  display:none;
+  background:var(--canopy-2);color:var(--milk);
+  border:3px solid var(--ink);border-radius:var(--radius-lg);
+  padding:30px;box-shadow:0 12px 0 rgba(0,0,0,.35);
+  text-align:center;
+}
+.game-card.visible{display:block;animation:popIn .45s cubic-bezier(.2,1.4,.4,1)}
+@keyframes popIn{from{transform:scale(.92);opacity:0}to{transform:scale(1);opacity:1}}
+.game-card h3{color:var(--banana);font-size:1.7rem;margin-bottom:6px}
+.game-card .thanks{color:var(--milk-soft);margin-bottom:20px;font-size:.97rem}
+.game-hud{
+  display:flex;justify-content:center;gap:28px;margin-bottom:14px;
+  font-family:var(--font-mono);font-size:.85rem;
+}
+.game-hud b{color:var(--lime);font-size:1.05rem}
+#gameCanvas{
+  width:100%;max-width:560px;height:auto;
+  background:linear-gradient(180deg,#16442A 0%,#0E2D1C 100%);
+  border:3px solid var(--ink);border-radius:var(--radius-md);
+  margin:0 auto;display:block;cursor:none;
+  touch-action:none;
+}
+.game-controls{
+  margin-top:16px;font-family:var(--font-mono);font-size:.72rem;color:var(--milk-soft);
+}
+.game-over-panel{margin-top:18px;display:none}
+.game-over-panel.visible{display:block}
+.game-over-panel .final{
+  font-family:var(--font-display);font-size:2rem;color:var(--banana);
+}
+
+/* ============ Footer ============ */
+footer{background:#081A10;padding:64px 0 36px;color:var(--milk-soft)}
+.foot-grid{display:flex;justify-content:space-between;gap:40px;flex-wrap:wrap;margin-bottom:44px}
+.foot-brand p{max-width:32ch;font-size:.92rem;margin-top:12px}
+.foot-col h4{
+  font-family:var(--font-mono);font-size:.74rem;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--lime);margin-bottom:14px;
+}
+.foot-col ul{list-style:none;display:flex;flex-direction:column;gap:9px}
+.foot-col a{text-decoration:none;font-size:.92rem;transition:color .2s}
+.foot-col a:hover{color:var(--banana)}
+.foot-bottom{
+  border-top:1px solid rgba(164,232,102,.15);padding-top:24px;
+  display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap;
+  font-family:var(--font-mono);font-size:.74rem;
+}
+
+/* ============ Reveal on scroll ============ */
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .6s ease, transform .6s ease}
+.reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+
+<!-- ===================== NAV ===================== -->
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <a class="logo" href="#top"><span class="mark">🐒</span>Brilla<b>rix</b></a>
+    <button class="nav-burger" id="burger" aria-expanded="false" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#troop">The Troop</a></li>
+      <li><a href="#services">What We Build</a></li>
+      <li><a href="#work">Shipped</a></li>
+      <li><a href="#process">How We Swing</a></li>
+      <li><a href="#faq">FAQ</a></li>
+      <li><a class="nav-cta" href="#contact">Toss us a banana 🍌</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- Vine scroll progress -->
+<div class="vine-track" aria-hidden="true">
+  <div class="vine-monkey" id="vineMonkey">🐒</div>
+</div>
+
+<!-- ===================== HERO ===================== -->
+<header class="hero" id="top">
+  <div class="hero-leaves" aria-hidden="true">
+    <span class="leaf-cluster" style="top:6%;left:3%;animation-delay:.2s">🌿</span>
+    <span class="leaf-cluster" style="top:2%;left:18%;animation-delay:1.1s">🍃</span>
+    <span class="leaf-cluster" style="top:10%;right:24%;animation-delay:.6s">🌴</span>
+    <span class="leaf-cluster" style="bottom:18%;left:6%;animation-delay:1.6s;font-size:60px">🌺</span>
+    <span class="leaf-cluster" style="bottom:24%;right:5%;animation-delay:.9s">🌿</span>
+    <span class="firefly" style="top:30%;left:12%"></span>
+    <span class="firefly" style="top:55%;left:30%;animation-delay:1.2s"></span>
+    <span class="firefly" style="top:24%;right:30%;animation-delay:2.1s"></span>
+    <span class="firefly" style="top:64%;right:14%;animation-delay:.7s"></span>
+    <span class="firefly" style="top:80%;left:55%;animation-delay:1.7s"></span>
+  </div>
+  <span class="swing-monkey" aria-hidden="true">🐒</span>
+
+  <div class="hero-inner on-dark">
+    <span class="eyebrow">brillarix — ai-native product studio</span>
+    <h1>Seven monkeys.<br><span class="hl">Zero monkey</span> <span class="hl-2">business.</span></h1>
+    <p class="hero-sub">We're a troop of seven living deep in the software jungle, shipping products that <b>work</b>, <b>matter</b>, and <b>make an impact</b>. From wild idea to MVP to a platform that scales — we swing the whole way with you.</p>
+    <div class="hero-ctas">
+      <a class="btn btn-banana" href="#contact">Toss us a banana 🍌</a>
+      <a class="btn btn-ghost" href="#work">See what we've shipped 🌴</a>
+    </div>
+    <div class="hero-badges">
+      <span class="badge"><span class="dot"></span>Top Rated Plus on Upwork</span>
+      <span class="badge"><span class="dot b"></span>50+ five-star reviews</span>
+      <span class="badge"><span class="dot c"></span>Bubble Silver Agency Partner</span>
+    </div>
+  </div>
+
+  <div class="hero-marquee" aria-hidden="true">
+    <div class="marquee-track">
+      <span>Next.js 🍌 FastAPI 🍌 React Native 🍌 Claude 🍌 OpenAI 🍌 LangChain 🍌 Supabase 🍌 PostgreSQL 🍌 Bubble 🍌 Webflow 🍌 Flutter 🍌 AWS 🍌 GCP 🍌 Docker 🍌 n8n 🍌</span>
+      <span>Next.js 🍌 FastAPI 🍌 React Native 🍌 Claude 🍌 OpenAI 🍌 LangChain 🍌 Supabase 🍌 PostgreSQL 🍌 Bubble 🍌 Webflow 🍌 Flutter 🍌 AWS 🍌 GCP 🍌 Docker 🍌 n8n 🍌</span>
+    </div>
+  </div>
+</header>
+
+<!-- ===================== THE TROOP ===================== -->
+<section class="on-cream" id="troop">
+  <svg class="divider" viewBox="0 0 1440 70" preserveAspectRatio="none" aria-hidden="true" style="background:var(--canopy)"><path d="M0,70 C120,10 240,10 360,40 C480,70 600,5 720,30 C840,55 960,8 1080,35 C1200,62 1320,12 1440,45 L1440,70 Z" fill="#FBF3DC"/></svg>
+  <div class="wrap section-pad">
+    <div class="section-head reveal">
+      <span class="eyebrow">the troop</span>
+      <h2>Meet the seven who ship 🍌</h2>
+      <p>Every great jungle has a troop. Ours writes production code, argues about tabs vs. spaces, and occasionally falls out of a tree mid-standup. Hover a monkey to say hi.</p>
+    </div>
+
+    <!-- ASSET SLOT: team photo (assets/team-photo.png) -->
+    <figure class="troop-photo reveal">
+      <span class="tape" aria-hidden="true"></span>
+      <div class="frame">
+        <img src="assets/team-photo.png" alt="The Brillarix troop — seven monkeys in Hawaiian shirts working on laptops in the jungle" loading="lazy" onerror="this.closest('figure').style.display='none'">
+        <figcaption class="caption">// the_troop.jpg — annual offsite, somewhere in the canopy</figcaption>
+      </div>
+    </figure>
+
+    <div class="troop-grid">
+      <!-- EDIT ME: swap names, roles & bios for your real team.
+           Each .face div can hold an <img> portrait — see asset list. -->
+      <article class="monkey-card reveal" style="--c:#FFC53D">
+        <span class="pin">📌</span>
+        <div class="face">🙃</div>
+        <h3>The Upside-Down One</h3>
+        <span class="role">frontend &amp; ui — hangs by the tail</span>
+        <p>Writes CSS while hanging upside down. Somehow, everything still aligns perfectly. Believes every pixel deserves respect.</p>
+      </article>
+      <article class="monkey-card reveal" style="--c:#FF6F61">
+        <span class="pin">📌</span>
+        <div class="face">🍌</div>
+        <h3>The Banana Architect</h3>
+        <span class="role">backend &amp; databases — never skips snack time</span>
+        <p>Designs schemas the way he peels bananas: cleanly, from the right end. Queries run faster when he's had his potassium.</p>
+      </article>
+      <article class="monkey-card reveal" style="--c:#A4E866">
+        <span class="pin">📌</span>
+        <div class="face">🚀</div>
+        <h3>The Jumper</h3>
+        <span class="role">devops &amp; infra — ships fast, lands faster</span>
+        <p>Leaps between branches and environments without dropping a single request. CI/CD pipelines purr when he's around.</p>
+      </article>
+      <article class="monkey-card reveal" style="--c:#2BB3A3">
+        <span class="pin">📌</span>
+        <div class="face">🤔</div>
+        <h3>The Thinker</h3>
+        <span class="role">product strategy — asks "but why?" a lot</span>
+        <p>Scratches his head until the roadmap makes sense. Will not let a feature into the jungle without a reason to exist.</p>
+      </article>
+      <article class="monkey-card reveal" style="--c:#FFC53D">
+        <span class="pin">📌</span>
+        <div class="face">😂</div>
+        <h3>The Client Whisperer</h3>
+        <span class="role">founder &amp; partnerships — loudest laugh in the canopy</span>
+        <p>Takes your call from the tallest branch. Translates founder dreams into tickets the troop can actually swing at.</p>
+      </article>
+      <article class="monkey-card reveal" style="--c:#FF6F61">
+        <span class="pin">📌</span>
+        <div class="face">🙌</div>
+        <h3>The Celebrator</h3>
+        <span class="role">qa &amp; testing — cheers every green check</span>
+        <p>Throws both hands up for every passing test. Finds bugs the way other monkeys find fruit: relentlessly, joyfully.</p>
+      </article>
+      <article class="monkey-card reveal" style="--c:#A4E866">
+        <span class="pin">📌</span>
+        <div class="face">📱</div>
+        <h3>The Side-Swinger</h3>
+        <span class="role">mobile — comfortable on any platform (or branch)</span>
+        <p>iOS, Android, React Native, Flutter — he swings across all of them with one codebase and zero fear of heights.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== SERVICES ===================== -->
+<section class="on-dark-2" id="services">
+  <svg class="divider" viewBox="0 0 1440 70" preserveAspectRatio="none" aria-hidden="true" style="background:var(--cream)"><path d="M0,70 C140,15 260,8 380,38 C500,68 620,6 740,28 C860,50 980,10 1100,38 C1220,66 1330,14 1440,42 L1440,70 Z" fill="#123420"/></svg>
+  <div class="wrap section-pad">
+    <div class="section-head reveal">
+      <span class="eyebrow">what we build</span>
+      <h2 style="color:var(--milk)">What the troop does between banana breaks</h2>
+      <p>Three ways to put seven very capable monkeys to work on your product.</p>
+    </div>
+    <div class="services-grid">
+      <article class="service reveal">
+        <span class="vine-deco" aria-hidden="true">🌿</span>
+        <span class="icon">⚡</span>
+        <h3>Rapid MVPs &amp; AI-Powered No-Code</h3>
+        <p>Test your idea in weeks, not months. We use AI and low-code tools to get a real product into real users' hands — fast enough to learn, cheap enough to pivot.</p>
+        <ul>
+          <li>Rapid prototyping &amp; MVPs</li>
+          <li>AI-driven automations &amp; chatbots</li>
+          <li>Bubble, Webflow, Framer, Xano</li>
+          <li>Idea → live product in ~2 weeks</li>
+        </ul>
+      </article>
+      <article class="service reveal">
+        <span class="vine-deco" aria-hidden="true">🍃</span>
+        <span class="icon">🌳</span>
+        <h3>Full-Stack Development</h3>
+        <p>Enterprise-grade engineering with deep roots. Resilient, scalable architecture built to grow from your first user to your millionth without snapping a branch.</p>
+        <ul>
+          <li>Web apps, SaaS &amp; e-commerce</li>
+          <li>API design &amp; integrations</li>
+          <li>Database architecture &amp; tuning</li>
+          <li>Next.js, FastAPI, Node, Postgres</li>
+        </ul>
+      </article>
+      <article class="service reveal">
+        <span class="vine-deco" aria-hidden="true">🌺</span>
+        <span class="icon">📱</span>
+        <h3>Mobile &amp; Product Strategy</h3>
+        <p>Cross-platform apps that feel native on every branch — plus the strategy work to make sure you're climbing the right tree in the first place.</p>
+        <ul>
+          <li>iOS &amp; Android, one codebase</li>
+          <li>React Native, Flutter, Swift, Kotlin</li>
+          <li>Roadmapping &amp; validation</li>
+          <li>Clear path to product-market fit</li>
+        </ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== SHIPPED ===================== -->
+<section class="on-cream" id="work">
+  <svg class="divider" viewBox="0 0 1440 70" preserveAspectRatio="none" aria-hidden="true" style="background:var(--canopy-2)"><path d="M0,70 C120,12 250,8 370,36 C490,64 610,8 730,30 C850,52 970,6 1090,34 C1210,62 1330,10 1440,40 L1440,70 Z" fill="#FBF3DC"/></svg>
+  <div class="wrap section-pad">
+    <div class="section-head reveal">
+      <span class="eyebrow">git push origin canopy</span>
+      <h2>Shipped from the treetops 🚀</h2>
+      <p>Real products, real founders, real numbers. No coconuts were exaggerated in the making of these results.</p>
+    </div>
+    <div class="work-grid">
+      <a class="work-card feature reveal" href="https://www.brillarix.com/project/trialynx" target="_blank" rel="noopener">
+        <span class="work-tag">AI · Healthcare</span>
+        <h3>Trialynx</h3>
+        <p>Revolutionizing clinical trials — AI agents that generate 90% of trial protocols autonomously, turning months of medical writing into hours.</p>
+        <div class="work-metrics">
+          <div class="metric"><div class="num">50+</div><div class="lbl">trials launched</div></div>
+          <div class="metric"><div class="num">90%</div><div class="lbl">faster writing</div></div>
+          <div class="metric"><div class="num">4</div><div class="lbl">countries</div></div>
+        </div>
+      </a>
+      <a class="work-card reveal" href="https://www.brillarix.com/project/signm" target="_blank" rel="noopener">
+        <span class="work-tag">AI · Fintech</span>
+        <h3>Signm</h3>
+        <p>AI-powered stock analysis monitoring millions of market conversations in real time.</p>
+        <div class="work-metrics">
+          <div class="metric"><div class="num">1,000+</div><div class="lbl">paid customers</div></div>
+        </div>
+      </a>
+      <a class="work-card half reveal" href="https://www.brillarix.com/project/gym-builder" target="_blank" rel="noopener">
+        <span class="work-tag">SaaS · Fitness</span>
+        <h3>Gym Builder</h3>
+        <p>Real-time intelligence dashboards and AI analytics for gym owners — retention up, churn down.</p>
+        <div class="work-metrics">
+          <div class="metric"><div class="num">8–10%</div><div class="lbl">conversion lift</div></div>
+        </div>
+      </a>
+      <a class="work-card half reveal" href="https://www.brillarix.com/project/pt-metrics" target="_blank" rel="noopener">
+        <span class="work-tag">MVP · Fitness</span>
+        <h3>PT Metrics</h3>
+        <p>Personal training platform with custom workout &amp; nutrition plans, serving studios across New York.</p>
+        <div class="work-metrics">
+          <div class="metric"><div class="num">2 wks</div><div class="lbl">idea → MVP</div></div>
+        </div>
+      </a>
+      <a class="work-card reveal" href="https://www.brillarix.com/project/visionary-clouds" target="_blank" rel="noopener">
+        <span class="work-tag">Web · Media</span>
+        <h3>Visionary Clouds</h3>
+        <p>Premium commercial film &amp; photography brand — a site that turned visitors into clients.</p>
+        <div class="work-metrics">
+          <div class="metric"><div class="num">80%</div><div class="lbl">client growth</div></div>
+        </div>
+      </a>
+      <a class="work-card reveal" href="#contact" style="background:var(--banana);justify-content:center;align-items:center;text-align:center">
+        <h3 style="font-size:1.8rem">Your product here 🐵</h3>
+        <p style="color:var(--ink);flex:0">The troop has room for one more branch. Toss us a banana ↓</p>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== PROCESS ===================== -->
+<section class="on-dark" id="process">
+  <svg class="divider" viewBox="0 0 1440 70" preserveAspectRatio="none" aria-hidden="true" style="background:var(--cream)"><path d="M0,70 C130,14 250,10 370,38 C490,66 615,8 735,30 C855,52 975,8 1095,36 C1215,64 1330,12 1440,42 L1440,70 Z" fill="#0C2417"/></svg>
+  <div class="wrap section-pad">
+    <div class="section-head reveal">
+      <span class="eyebrow">how we swing</span>
+      <h2 style="color:var(--milk)">From sniffing the fruit to swinging it live 🌴</h2>
+      <p>Our AI-powered process saves 25–50% of build time at every step. Same vine, five knots.</p>
+    </div>
+    <div class="process-list">
+      <div class="step reveal">
+        <div class="knot">👃</div>
+        <div class="step-body">
+          <h3>1. Sniff the fruit <span class="save">saves 25–30% time</span></h3>
+          <p>Discovery &amp; strategy. We dig into your goals, your market, and your users with AI-powered insights — so we're climbing the right tree before anyone starts building.</p>
+        </div>
+      </div>
+      <div class="step reveal">
+        <div class="knot">✏️</div>
+        <div class="step-body">
+          <h3>2. Sketch in the sand <span class="save">saves 30–35% time</span></h3>
+          <p>AI-powered prototyping &amp; design. No-code tools let us create, iterate, and validate designs in days — your product takes shape before traditional teams finish their kickoff deck.</p>
+        </div>
+      </div>
+      <div class="step reveal">
+        <div class="knot">🛠️</div>
+        <div class="step-body">
+          <h3>3. Build the treehouse <span class="save">saves 45–50% time</span></h3>
+          <p>Full-stack development at startup speed. AI-enhanced engineering SOPs, scalable architecture, and clean code from front-end leaves to back-end roots.</p>
+        </div>
+      </div>
+      <div class="step reveal">
+        <div class="knot">🪲</div>
+        <div class="step-body">
+          <h3>4. Shake the branches <span class="save">saves 20–25% time</span></h3>
+          <p>Testing &amp; optimization. We shake hard so your users never feel a wobble — AI-powered automation tests multiple iterations at once across every device.</p>
+        </div>
+      </div>
+      <div class="step reveal">
+        <div class="knot">🚀</div>
+        <div class="step-body">
+          <h3>5. Swing it live <span class="save">saves 30–40% time</span></h3>
+          <p>Launch &amp; deployment with CI/CD. Smooth go-live across web and mobile, then continuous delivery so every new feature ships without breaking a branch.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== TESTIMONIALS ===================== -->
+<section class="on-cream" id="testimonials">
+  <svg class="divider" viewBox="0 0 1440 70" preserveAspectRatio="none" aria-hidden="true" style="background:var(--canopy)"><path d="M0,70 C125,12 245,8 365,36 C485,64 605,6 725,28 C845,50 965,8 1085,36 C1205,64 1325,12 1440,40 L1440,70 Z" fill="#FBF3DC"/></svg>
+  <div class="wrap section-pad">
+    <div class="section-head reveal">
+      <span class="eyebrow">word from beyond the treeline</span>
+      <h2>Founders who tossed us a banana 🥥</h2>
+      <p>They came for the software. They stayed for the troop.</p>
+    </div>
+    <div class="testi-grid">
+      <article class="testi reveal" style="--c:#FF6F61">
+        <span class="quote-mark">"</span>
+        <p>In under a year, Brillarix turned our concept into a fully operational business — the catalyst for our expansion into four countries, 90% faster medical writing, and 50+ clinical trials launched.</p>
+        <div class="who"><span class="av">AS</span><div><div class="nm">Angie Schwab</div><div class="co">CEO · Trialynx</div></div></div>
+      </article>
+      <article class="testi reveal" style="--c:#2BB3A3">
+        <span class="quote-mark">"</span>
+        <p>Several years of full-stack development, custom APIs, and infrastructure handling millions of daily events. Over 4,000 users engaged — a testament to the system's robustness.</p>
+        <div class="who"><span class="av">DS</span><div><div class="nm">Daniel S.</div><div class="co">CEO · Signm</div></div></div>
+      </article>
+      <article class="testi reveal" style="--c:#A4E866">
+        <span class="quote-mark">"</span>
+        <p>A game-changer for our visibility. We isolate issues in minutes, and gyms on the platform consistently see 8–10%+ jumps in conversions.</p>
+        <div class="who"><span class="av" style="color:var(--ink)">EL</span><div><div class="nm">Evan Lindsay</div><div class="co">Founder · Gym Builder</div></div></div>
+      </article>
+      <article class="testi reveal" style="--c:#FFC53D">
+        <span class="quote-mark">"</span>
+        <p>From low-code foundations to a full-stack transition — their versatility, consistency, and empathy made the whole process seamless. We highly recommend the Brillarix team.</p>
+        <div class="who"><span class="av" style="color:var(--ink)">JG</span><div><div class="nm">Jeff Gottschalk</div><div class="co">Founder · Cleeri</div></div></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FAQ ===================== -->
+<section class="on-cream-2" id="faq">
+  <div class="wrap section-pad">
+    <div class="section-head reveal" style="margin-left:auto;margin-right:auto;text-align:center;max-width:640px">
+      <span class="eyebrow">jungle faq</span>
+      <h2>Questions other explorers asked 🧭</h2>
+    </div>
+    <div class="faq-list reveal">
+      <details class="faq">
+        <summary>How fast can the troop launch my product?</summary>
+        <div class="a">Faster than a monkey spots a ripe banana. With AI-powered prototyping and no-code tools, simple MVPs ship in ~2 weeks; full products go live weeks faster than traditional dev teams.</div>
+      </details>
+      <details class="faq">
+        <summary>Can Brillarix scale with my business as it grows?</summary>
+        <div class="a">That's the whole point of the treehouse. We build resilient, scalable architecture from day one — products we've built handle millions of daily events and thousands of paying users.</div>
+      </details>
+      <details class="faq">
+        <summary>Do you do API development and integrations?</summary>
+        <div class="a">End-to-end. Custom API design, third-party integrations, automation workflows (n8n, Make, Zapier), payment systems, AI orchestration — if it has an endpoint, we'll swing to it.</div>
+      </details>
+      <details class="faq">
+        <summary>Are you actually monkeys?</summary>
+        <div class="a">Legally, we're a team of seven very skilled humans. Spiritually? Look at our team photo and decide for yourself. 🐒</div>
+      </details>
+      <details class="faq">
+        <summary>How do I reach you?</summary>
+        <div class="a">Toss a banana via the form below, email contact@brillarix.com, or book a call directly. We respond within one business day — jungle time zones permitting.</div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== CONTACT ===================== -->
+<section class="contact-bg" id="contact">
+  <svg class="divider" viewBox="0 0 1440 70" preserveAspectRatio="none" aria-hidden="true" style="background:var(--cream-2)"><path d="M0,70 C120,10 240,10 360,40 C480,70 600,5 720,30 C840,55 960,8 1080,35 C1200,62 1320,12 1440,45 L1440,70 Z" fill="#0C2417"/></svg>
+  <span class="firefly" style="top:20%;left:8%" aria-hidden="true"></span>
+  <span class="firefly" style="top:40%;right:10%;animation-delay:1.4s" aria-hidden="true"></span>
+  <span class="firefly" style="bottom:18%;left:20%;animation-delay:.8s" aria-hidden="true"></span>
+  <div class="wrap section-pad">
+    <div class="contact-grid">
+      <div>
+        <!-- FORM -->
+        <div class="form-card" id="formCard">
+          <span class="sign">Toss us a banana 🍌</span>
+          <form id="contactForm" novalidate style="margin-top:14px">
+            <!-- WIRE ME UP: point this form at your backend / Formspree / API route.
+                 Currently it shows the success state + game on submit. -->
+            <div class="field">
+              <label for="fName">Your name</label>
+              <input id="fName" name="name" type="text" required placeholder="Jane Founder" autocomplete="name">
+            </div>
+            <div class="field">
+              <label for="fEmail">Email</label>
+              <input id="fEmail" name="email" type="email" required placeholder="jane@startup.com" autocomplete="email">
+            </div>
+            <div class="field">
+              <label for="fInterest">What are you building?</label>
+              <select id="fInterest" name="interest">
+                <option value="">Pick a branch…</option>
+                <option>Rapid MVP / idea validation</option>
+                <option>Full-stack web product</option>
+                <option>Mobile app</option>
+                <option>AI features / automation</option>
+                <option>Scaling an existing product</option>
+                <option>Something else entirely</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="fMsg">Tell us about it</label>
+              <textarea id="fMsg" name="message" required placeholder="The idea, the dream, the deadline — all of it."></textarea>
+            </div>
+            <div class="form-foot">
+              <button class="btn btn-banana" type="submit">Send it down the river 🥥</button>
+              <span class="form-note">// replies within 1 business day</span>
+            </div>
+          </form>
+        </div>
+
+        <!-- GAME (revealed after submit) -->
+        <div class="game-card" id="gameCard" aria-live="polite">
+          <h3>Banana received! 🎉</h3>
+          <p class="thanks">Your message is swinging its way to the troop. While our monkeys read it — catch some bananas. Dodge the coconuts. You have 30 seconds.</p>
+          <div class="game-hud">
+            <span>Score <b id="hudScore">0</b></span>
+            <span>Time <b id="hudTime">30</b>s</span>
+            <span>Best <b id="hudBest">0</b></span>
+          </div>
+          <canvas id="gameCanvas" width="560" height="400"></canvas>
+          <p class="game-controls">← → keys · mouse · touch — move the monkey</p>
+          <div class="game-over-panel" id="gameOver">
+            <div class="final" id="finalScore"></div>
+            <p style="color:var(--milk-soft);margin:8px 0 16px" id="finalMsg"></p>
+            <button class="btn btn-banana" id="playAgain" type="button">Play again 🍌</button>
+          </div>
+        </div>
+      </div>
+
+      <aside class="contact-aside on-dark">
+        <span class="eyebrow">let's talk about your product</span>
+        <h2 style="margin-top:10px">The jungle is friendlier than it looks</h2>
+        <ul class="reasons">
+          <li>Validating an idea, MVP, or your product's next phase</li>
+          <li>Scaling performance, features, or architecture</li>
+          <li>Curious how our product studio model works</li>
+          <li>Sharing insights, feedback, or partnership ideas</li>
+        </ul>
+        <div class="contact-chips">
+          <a class="chip-link" href="#" title="Replace with your Calendly link">
+            <span class="ic">📅</span>
+            <span class="t"><b>Book a meeting</b><span>30 min · Calendly · no monkey suits required</span></span>
+          </a>
+          <a class="chip-link" href="mailto:contact@brillarix.com">
+            <span class="ic">✉️</span>
+            <span class="t"><b>Email the troop</b><span>contact@brillarix.com</span></span>
+          </a>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <a class="logo" href="#top"><span class="mark">🐒</span>Brilla<b>rix</b></a>
+        <p>An AI-native product studio. Seven monkeys building software that works, matters, and makes an impact.</p>
+      </div>
+      <div class="foot-col">
+        <h4>Explore</h4>
+        <ul>
+          <li><a href="#troop">The Troop</a></li>
+          <li><a href="#services">What We Build</a></li>
+          <li><a href="#work">Shipped</a></li>
+          <li><a href="#process">How We Swing</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h4>Swing by</h4>
+        <ul>
+          <li><a href="https://twitter.com/brillarixtech" target="_blank" rel="noopener">Twitter / X</a></li>
+          <li><a href="https://instagram.com/brillarixtech" target="_blank" rel="noopener">Instagram</a></li>
+          <li><a href="https://www.linkedin.com/company/brillarixtech" target="_blank" rel="noopener">LinkedIn</a></li>
+          <li><a href="mailto:contact@brillarix.com">contact@brillarix.com</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h4>Fine print</h4>
+        <ul>
+          <li><a href="https://www.brillarix.com/privacy-policy">Privacy Policy</a></li>
+          <li><a href="https://www.brillarix.com/terms-of-service">Terms of Service</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Brillarix. All bananas reserved.</span>
+      <span>No monkeys were harmed in the making of this software. 🐒</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ============================================================
+   BRILLARIX JUNGLE — interactions
+   ============================================================ */
+(function(){
+  'use strict';
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---------- Nav: scrolled state + burger ---------- */
+  const nav = document.getElementById('nav');
+  const burger = document.getElementById('burger');
+  const navLinks = document.getElementById('navLinks');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 24);
+  }, {passive:true});
+  burger.addEventListener('click', () => {
+    const open = navLinks.classList.toggle('open');
+    burger.setAttribute('aria-expanded', open);
+  });
+  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    navLinks.classList.remove('open');
+    burger.setAttribute('aria-expanded','false');
+  }));
+
+  /* ---------- Vine monkey climbs as you scroll ---------- */
+  const vineMonkey = document.getElementById('vineMonkey');
+  function updateVine(){
+    const max = document.documentElement.scrollHeight - window.innerHeight;
+    const p = max > 0 ? window.scrollY / max : 0;
+    vineMonkey.style.top = (4 + p * 88) + '%';
+    vineMonkey.style.transform = 'translate(-50%,-10%) rotate(' + (Math.sin(p*14)*10) + 'deg)';
+  }
+  window.addEventListener('scroll', updateVine, {passive:true});
+  updateVine();
+
+  /* ---------- Reveal on scroll ---------- */
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, {threshold:.12});
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  /* ---------- Contact form → success + game ---------- */
+  const form = document.getElementById('contactForm');
+  const formCard = document.getElementById('formCard');
+  const gameCard = document.getElementById('gameCard');
+
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    // basic validation
+    const name = document.getElementById('fName');
+    const email = document.getElementById('fEmail');
+    const msg = document.getElementById('fMsg');
+    let ok = true;
+    [name,email,msg].forEach(f => {
+      f.style.borderColor = '';
+      if(!f.value.trim() || (f===email && !/^\S+@\S+\.\S+$/.test(f.value))){
+        f.style.borderColor = 'var(--blossom)'; ok = false;
+      }
+    });
+    if(!ok) return;
+
+    /* >>> WIRE ME UP <<<
+       Send the lead to your backend here, e.g.:
+       fetch('/api/contact', {method:'POST', headers:{'Content-Type':'application/json'},
+         body: JSON.stringify(Object.fromEntries(new FormData(form)))});
+       The game shows immediately either way — don't make the visitor wait. */
+
+    formCard.style.display = 'none';
+    gameCard.classList.add('visible');
+    gameCard.scrollIntoView({behavior: reduceMotion ? 'auto' : 'smooth', block:'center'});
+    startGame();
+  });
+
+  /* ============================================================
+     BANANA DROP — the thank-you mini-game
+     Catch bananas (+1), golden bananas (+3), dodge coconuts (-2).
+     30 seconds. Best score kept for the session.
+     ============================================================ */
+  const canvas = document.getElementById('gameCanvas');
+  const ctx = canvas.getContext('2d');
+  const hudScore = document.getElementById('hudScore');
+  const hudTime = document.getElementById('hudTime');
+  const hudBest = document.getElementById('hudBest');
+  const overPanel = document.getElementById('gameOver');
+  const finalScore = document.getElementById('finalScore');
+  const finalMsg = document.getElementById('finalMsg');
+  const playAgain = document.getElementById('playAgain');
+
+  const W = canvas.width, H = canvas.height;
+  let state = null;
+  let bestScore = 0;   // in-memory session best
+  let rafId = null;
+
+  function freshState(){
+    return {
+      running:true,
+      score:0,
+      timeLeft:30,
+      lastTick:performance.now(),
+      lastSpawn:0,
+      spawnEvery:820,
+      monkeyX:W/2,
+      monkeyTarget:W/2,
+      items:[],          // {x,y,vy,type:'banana'|'gold'|'coco',rot,vr}
+      pops:[]            // floating score popups {x,y,txt,life,color}
+    };
+  }
+
+  function spawnItem(s){
+    const r = Math.random();
+    const type = r < 0.12 ? 'gold' : (r < 0.40 ? 'coco' : 'banana');
+    s.items.push({
+      x: 28 + Math.random()*(W-56),
+      y: -30,
+      vy: 1.7 + Math.random()*1.6 + (30 - s.timeLeft)*0.04,  // speeds up over time
+      type,
+      rot: Math.random()*Math.PI*2,
+      vr: (Math.random()-.5)*0.12
+    });
+  }
+
+  function drawJungleBg(){
+    // soft canopy gradient already on canvas via CSS bg; add hanging vines
+    ctx.save();
+    ctx.globalAlpha = .25;
+    ctx.strokeStyle = '#2E8B4F';
+    ctx.lineWidth = 3;
+    for(let i=0;i<5;i++){
+      const x = 40 + i*(W-80)/4;
+      ctx.beginPath();
+      ctx.moveTo(x,0);
+      ctx.quadraticCurveTo(x+12, 40, x-6, 86);
+      ctx.stroke();
+      ctx.font = '16px serif';
+      ctx.fillText('🍃', x-12, 92);
+    }
+    ctx.restore();
+  }
+
+  function emoji(e, x, y, size, rot){
+    ctx.save();
+    ctx.translate(x,y);
+    if(rot) ctx.rotate(rot);
+    ctx.font = size + 'px serif';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText(e, 0, 0);
+    ctx.restore();
+  }
+
+  function loop(now){
+    if(!state || !state.running) return;
+    const dt = Math.min(now - state.lastTick, 50);
+    state.lastTick = now;
+
+    // timer
+    state.timeLeft -= dt/1000;
+    if(state.timeLeft <= 0){ endGame(); return; }
+
+    // spawn
+    state.lastSpawn += dt;
+    const every = Math.max(420, state.spawnEvery - (30-state.timeLeft)*12);
+    if(state.lastSpawn > every){ state.lastSpawn = 0; spawnItem(state); }
+
+    // monkey eases toward target
+    state.monkeyX += (state.monkeyTarget - state.monkeyX) * 0.22;
+    state.monkeyX = Math.max(34, Math.min(W-34, state.monkeyX));
+
+    // physics + catch
+    const monkeyY = H - 44;
+    for(let i = state.items.length-1; i >= 0; i--){
+      const it = state.items[i];
+      it.y += it.vy * (dt/16.7);
+      it.rot += it.vr;
+      const caught = Math.abs(it.x - state.monkeyX) < 42 && Math.abs(it.y - monkeyY) < 38;
+      if(caught){
+        if(it.type === 'banana'){ state.score += 1; pop(it.x,it.y,'+1','#FFC53D'); }
+        else if(it.type === 'gold'){ state.score += 3; pop(it.x,it.y,'+3','#A4E866'); }
+        else { state.score = Math.max(0, state.score-2); pop(it.x,it.y,'-2','#FF6F61'); }
+        state.items.splice(i,1);
+        continue;
+      }
+      if(it.y > H + 30) state.items.splice(i,1);
+    }
+
+    // popups decay
+    for(let i = state.pops.length-1; i >= 0; i--){
+      const p = state.pops[i];
+      p.y -= 0.8; p.life -= dt;
+      if(p.life <= 0) state.pops.splice(i,1);
+    }
+
+    // ---- draw ----
+    ctx.clearRect(0,0,W,H);
+    drawJungleBg();
+
+    state.items.forEach(it => {
+      const e = it.type === 'banana' ? '🍌' : it.type === 'gold' ? '🌟' : '🥥';
+      emoji(e, it.x, it.y, it.type === 'gold' ? 30 : 32, it.rot);
+    });
+
+    // monkey + basket
+    emoji('🧺', state.monkeyX, H-26, 34, 0);
+    emoji('🐵', state.monkeyX, H-56, 36, Math.sin(now/200)*0.08);
+
+    // popups
+    state.pops.forEach(p => {
+      ctx.save();
+      ctx.globalAlpha = Math.max(0, p.life/700);
+      ctx.font = 'bold 18px "Space Mono", monospace';
+      ctx.fillStyle = p.color;
+      ctx.textAlign = 'center';
+      ctx.fillText(p.txt, p.x, p.y);
+      ctx.restore();
+    });
+
+    // HUD
+    hudScore.textContent = state.score;
+    hudTime.textContent = Math.ceil(state.timeLeft);
+
+    rafId = requestAnimationFrame(loop);
+  }
+
+  function pop(x,y,txt,color){ state.pops.push({x,y,txt,life:700,color}); }
+
+  function startGame(){
+    if(rafId) cancelAnimationFrame(rafId);
+    overPanel.classList.remove('visible');
+    state = freshState();
+    hudBest.textContent = bestScore;
+    state.lastTick = performance.now();
+    rafId = requestAnimationFrame(loop);
+  }
+
+  function endGame(){
+    state.running = false;
+    if(rafId) cancelAnimationFrame(rafId);
+    bestScore = Math.max(bestScore, state.score);
+    hudBest.textContent = bestScore;
+    finalScore.textContent = '🍌 ' + state.score + ' bananas!';
+    finalMsg.textContent =
+      state.score >= 25 ? 'Certified jungle legend. The troop is impressed — and slightly threatened.' :
+      state.score >= 15 ? 'Strong arms, sharp eyes. You may sit in our tree anytime.' :
+      state.score >= 6  ? 'Solid haul! The coconuts got a few of those, didn\'t they?' :
+                          'The coconuts won this round. Your message still made it through, promise.';
+    overPanel.classList.add('visible');
+    // final frame
+    ctx.clearRect(0,0,W,H);
+    drawJungleBg();
+    emoji('🐵', W/2, H/2 - 20, 64, 0);
+    emoji('🍌', W/2 - 60, H/2 + 30, 30, -0.4);
+    emoji('🍌', W/2 + 60, H/2 + 30, 30, 0.4);
+  }
+
+  /* controls: keyboard, mouse, touch */
+  window.addEventListener('keydown', e => {
+    if(!state || !state.running) return;
+    if(e.key === 'ArrowLeft'){ state.monkeyTarget = Math.max(34, state.monkeyTarget - 46); e.preventDefault(); }
+    if(e.key === 'ArrowRight'){ state.monkeyTarget = Math.min(W-34, state.monkeyTarget + 46); e.preventDefault(); }
+  });
+  function pointTo(clientX){
+    const r = canvas.getBoundingClientRect();
+    const x = (clientX - r.left) / r.width * W;
+    if(state) state.monkeyTarget = x;
+  }
+  canvas.addEventListener('pointermove', e => pointTo(e.clientX));
+  canvas.addEventListener('touchmove', e => { pointTo(e.touches[0].clientX); e.preventDefault(); }, {passive:false});
+  playAgain.addEventListener('click', startGame);
+})();
+</script>
+</body>
+</html>
