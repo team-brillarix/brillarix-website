@@ -1,0 +1,266 @@
+"use client";
+
+import React, { useRef, useEffect, useState } from "react";
+import {
+    motion,
+    useAnimationFrame,
+    useMotionTemplate,
+    useMotionValue,
+    useTransform,
+} from "motion/react";
+import { cn } from "@/lib/utils";
+
+export function Button({
+    borderRadius = "1.75rem",
+    children,
+    as: Component = "button",
+    containerClassName,
+    borderClassName,
+    duration,
+    className,
+    ...otherProps
+}: {
+    borderRadius?: string;
+    children: React.ReactNode;
+    as?: any;
+    containerClassName?: string;
+    borderClassName?: string;
+    duration?: number;
+    className?: string;
+    [key: string]: any;
+}) {
+    return (
+        <Component
+            className={cn(
+                "relative h-16 w-40 overflow-hidden bg-transparent p-px text-xl",
+                containerClassName,
+            )}
+            style={{
+                borderRadius: borderRadius,
+            }}
+            {...otherProps}
+        >
+            <div
+                className="absolute inset-0"
+                style={{ borderRadius: `calc(${borderRadius} * 0.96)` }}
+            >
+                <MovingBorder duration={duration} rx="30%" ry="30%">
+                    <div
+                        className={cn(
+                            "h-20 w-20 rounded-full bg-[radial-gradient(circle_at_center,#0ea5e9_40%,transparent_60%)] opacity-[0.8]",
+                            borderClassName,
+                        )}
+                    />
+                </MovingBorder>
+            </div>
+
+            <div
+                className={cn(
+                    "relative flex h-full w-full items-center justify-center border border-slate-800 bg-slate-900/80 text-sm text-white antialiased backdrop-blur-xl",
+                    className,
+                )}
+                style={{
+                    borderRadius: `calc(${borderRadius} * 0.96)`,
+                }}
+            >
+                {children}
+            </div>
+        </Component>
+    );
+}
+
+type MovingBorderContainerProps = {
+    borderRadius?: string;
+    duration?: number;
+    blobClassName?: string;
+    containerClassName?: string;
+    innerClassName?: string;
+    children: React.ReactNode;
+};
+
+export function MovingBorderContainer({
+    borderRadius = "1rem",
+    duration = 4000,
+    blobClassName = "h-20 w-20 rounded-full bg-[radial-gradient(circle_at_center,#B8B8B8_0%,#292929_100%)] opacity-90",
+    containerClassName,
+    innerClassName,
+    children,
+}: MovingBorderContainerProps) {
+    const containerRef = useRef<HTMLDivElement>(null);
+    const [svgBorderRadius, setSvgBorderRadius] = useState<string>("30%");
+
+    useEffect(() => {
+        const updateBorderRadius = () => {
+            if (!containerRef.current) return;
+
+            const innerDiv = containerRef.current.querySelector('div[style*="border-radius"]') as HTMLElement;
+            if (!innerDiv) return;
+
+            const computedStyle = window.getComputedStyle(innerDiv);
+            const borderRadiusValue = computedStyle.borderRadius;
+            const match = borderRadiusValue.match(/(\d+\.?\d*)px/);
+            if (!match) return;
+
+            const pixels = parseFloat(match[1]);
+            const containerWidth = containerRef.current.offsetWidth;
+            const containerHeight = containerRef.current.offsetHeight;
+            const avgDimension = (containerWidth + containerHeight) / 2;
+            const percentage = (pixels / avgDimension) * 100;
+
+            setSvgBorderRadius(`${percentage}%`);
+        };
+
+        updateBorderRadius();
+
+        const resizeObserver = new ResizeObserver(updateBorderRadius);
+        if (containerRef.current) {
+            resizeObserver.observe(containerRef.current);
+        }
+
+        return () => {
+            resizeObserver.disconnect();
+        };
+    }, [borderRadius]);
+
+    return (
+        <div
+            ref={containerRef}
+            className={cn(
+                "relative h-full overflow-hidden bg-gray-dark-3 p-px",
+                containerClassName,
+            )}
+            style={{ borderRadius }}
+        >
+            <div
+                className="pointer-events-none absolute inset-0"
+                style={{ borderRadius: `calc(${borderRadius} * 0.96)` }}
+            >
+                <MovingBorder duration={duration} rx={svgBorderRadius} ry={svgBorderRadius}>
+                    <div className={blobClassName} />
+                </MovingBorder>
+            </div>
+
+            <div
+                className={cn(
+                    "relative h-full w-full rounded-xl border border-gray-dark-4 bg-background",
+                    innerClassName,
+                )}
+                style={{ borderRadius: `calc(${borderRadius} * 0.96)` }}
+            >
+                {children}
+            </div>
+        </div>
+    );
+}
+
+export const MovingBorder = ({
+    children,
+    duration = 3000,
+    rx,
+    ry,
+    ...otherProps
+}: {
+    children: React.ReactNode;
+    duration?: number;
+    rx?: string;
+    ry?: string;
+    [key: string]: any;
+}) => {
+    const pathRef = useRef<SVGRectElement | null>(null);
+    const svgRef = useRef<SVGSVGElement | null>(null);
+    const progress = useMotionValue<number>(0);
+    const [svgWidth, setSvgWidth] = useState<number>(0);
+
+    useEffect(() => {
+        const updateWidth = () => {
+            if (svgRef.current) {
+                const rect = svgRef.current.getBoundingClientRect();
+                setSvgWidth(rect.width);
+            }
+        };
+
+        updateWidth();
+        const resizeObserver = new ResizeObserver(updateWidth);
+        if (svgRef.current) {
+            resizeObserver.observe(svgRef.current);
+        }
+
+        return () => resizeObserver.disconnect();
+    }, []);
+
+    useAnimationFrame((time) => {
+        const length = pathRef.current?.getTotalLength();
+        if (length) {
+            const pxPerMillisecond = length / duration;
+            progress.set((time * pxPerMillisecond) % length);
+        }
+    });
+
+    const x = useTransform(progress, (val) =>
+        pathRef.current?.getPointAtLength(val).x ?? 0,
+    );
+    const y = useTransform(progress, (val) =>
+        pathRef.current?.getPointAtLength(val).y ?? 0,
+    );
+
+    const rotation = useTransform(x, (val) => {
+        if (!svgWidth) return 0;
+        const transitionZone = 120;
+
+        const easeInOutCubic = (t: number) => {
+            return t < 0.5
+                ? 4 * t * t * t
+                : 1 - Math.pow(-2 * t + 2, 3) / 2;
+        };
+
+        const leftDistance = val;
+        const leftProgress = leftDistance < transitionZone
+            ? 1 - (leftDistance / transitionZone)
+            : 0;
+        const leftRotation = leftProgress > 0 ? easeInOutCubic(leftProgress) * 90 : 0;
+
+        const rightDistance = svgWidth - val;
+        const rightProgress = rightDistance < transitionZone
+            ? 1 - (rightDistance / transitionZone)
+            : 0;
+        const rightRotation = rightProgress > 0 ? easeInOutCubic(rightProgress) * 90 : 0;
+
+        return Math.max(leftRotation, rightRotation);
+    });
+
+    const transform = useMotionTemplate`translateX(${x}px) translateY(${y}px) translateX(-50%) translateY(-50%) rotate(${rotation}deg)`;
+
+    return (
+        <>
+            <svg
+                ref={svgRef}
+                xmlns="http://www.w3.org/2000/svg"
+                preserveAspectRatio="none"
+                className="absolute h-full w-full"
+                width="100%"
+                height="100%"
+                {...otherProps}
+            >
+                <rect
+                    fill="none"
+                    width="100%"
+                    height="100%"
+                    rx={rx}
+                    ry={ry}
+                    ref={pathRef}
+                />
+            </svg>
+            <motion.div
+                style={{
+                    position: "absolute",
+                    top: 0,
+                    left: 0,
+                    display: "inline-block",
+                    transform,
+                }}
+            >
+                {children}
+            </motion.div>
+        </>
+    );
+};
