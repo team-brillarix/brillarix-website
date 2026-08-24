@@ -1,0 +1,16 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: brillarix-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: brillarix
+      POSTGRES_PASSWORD: brillarix_dev_password
+      POSTGRES_DB: brillarix
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:

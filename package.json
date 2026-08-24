@@ -1,0 +1,17 @@
+{
+  "name": "brillarix",
+  "private": true,
+  "packageManager": "pnpm@10.15.0",
+  "scripts": {
+    "dev": "turbo dev",
+    "build": "turbo build",
+    "lint": "turbo lint",
+    "format": "prettier --write .",
+    "db:generate": "pnpm --filter @brillarix/api prisma:generate",
+    "db:migrate": "pnpm --filter @brillarix/api prisma:migrate"
+  },
+  "devDependencies": {
+    "prettier": "^3.6.2",
+    "turbo": "^2.5.6"
+  }
+}
