@@ -1,1 +1,22 @@
-<svg width="121" height="64" viewBox="0 0 121 64" fill="none" xmlns="http://www.w3.org/2000/svg"><defs><style>@keyframes ball-travel{0%{transform:translateX(0)}50%{transform:translateX(100px)}100%{transform:translateX(0)}}.ball-travel{animation:ball-travel 4s ease-in-out infinite}</style></defs><g transform="translate(8, 8)"><path d="M0 23.6a2.133 2.133 0 1 0 4.267 0A2.133 2.133 0 0 0 0 23.6m100 0a2.133 2.133 0 1 0 4.266 0 2.133 2.133 0 0 0-4.266 0m-97.867 0v.4h100v-.8h-100z" fill="#4e4e4e"/><circle cx="0" cy="23.6" r="2.5" fill="#f1f1f1" class="ball-travel"/><rect x="28.483" y=".35" width="47.3" height="47.3" rx="7.65" fill="#696969"/><rect x="28.483" y=".35" width="47.3" height="47.3" rx="7.65" stroke="url(#a)" stroke-width=".7"/><g><path d="M46.533 17a1.4 1.4 0 0 0-1.4 1.4V24h1.4v-2.8h1.4V24h1.4v-5.6a1.4 1.4 0 0 0-1.4-1.4zm0 1.4h1.4v1.4h-1.4m12.6 6.65V25.4a1.4 1.4 0 0 0-1.4-1.4h-2.8v7h2.8a1.4 1.4 0 0 0 1.4-1.4v-1.05a1.08 1.08 0 0 0-1.05-1.05 1.08 1.08 0 0 0 1.05-1.05m-1.4 3.15h-1.4v-1.4h1.4zm0-2.8h-1.4v-1.4h1.4m-9.947 5.327-1.106-.854 9.8-12.6 1.106.854z" fill="#f1f1f1"/></g></g><defs><linearGradient id="a" x1="52.133" y1="0" x2="52.133" y2="48" gradientUnits="userSpaceOnUse"><stop stop-color="gray"/><stop offset=".534" stop-color="#2f2f2f"/></linearGradient></defs></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title description">
+  <title id="title">Quality assurance and optimization</title>
+  <desc id="description">A shield with a verified check and performance signal representing testing, reliability, and optimization.</desc>
+  <defs>
+    <linearGradient id="shield" x1="14" y1="8" x2="51" y2="57" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F4F4F4"/>
+      <stop offset="1" stop-color="#747474"/>
+    </linearGradient>
+    <linearGradient id="shieldFill" x1="19" y1="13" x2="44" y2="51" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#2B2B2B"/>
+      <stop offset="1" stop-color="#111111"/>
+    </linearGradient>
+  </defs>
+
+  <path d="M32 7.5L51 14.5V28.25C51 41.3 43.75 51.2 32 57C20.25 51.2 13 41.3 13 28.25V14.5L32 7.5Z" fill="url(#shieldFill)" stroke="url(#shield)" stroke-width="2" stroke-linejoin="round"/>
+  <path d="M19 18.75L32 14L45 18.75V28C45 37.1 40.35 44.5 32 49.25C23.65 44.5 19 37.1 19 28V18.75Z" fill="none" stroke="#525252" stroke-width="1.4"/>
+
+  <path d="M22.5 31.5L28.75 37.25L41.75 23.5" fill="none" stroke="#EEEEEE" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <path d="M47.5 8.5V12.5M45.5 10.5H49.5M53 14.5V17.5M51.5 16H54.5" stroke="#CFCFCF" stroke-width="1.6" stroke-linecap="round"/>
+  <path d="M17 46.5L13.5 50M47 46.5L50.5 50" stroke="#6E6E6E" stroke-width="1.6" stroke-linecap="round"/>
+</svg>

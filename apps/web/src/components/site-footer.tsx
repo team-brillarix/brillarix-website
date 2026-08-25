@@ -1,4 +1,5 @@
 import { ArrowUpRight, Instagram, Linkedin } from 'lucide-react';
+import Image from 'next/image';
 import Link from 'next/link';
 
 const footerNavigation = [
@@ -25,7 +26,15 @@ export function SiteFooter() {
       <div className="site-footer-shell">
         <div className="site-footer-primary">
           <Link className="site-footer-wordmark" href="/#top" aria-label="Brillarix home" data-cursor>
-            brillarix
+            <Image
+              className="site-footer-brand-mark"
+              src="/brillarix-mark.png"
+              alt=""
+              width={1256}
+              height={1256}
+              sizes="48px"
+            />
+            <span>brillarix</span>
           </Link>
 
           <nav className="site-footer-navigation" aria-label="Footer navigation">

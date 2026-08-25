@@ -1,6 +1,6 @@
 'use client';
 
-import { BadgeCheck, Orbit, Star } from 'lucide-react';
+import { Check, Orbit, Star } from 'lucide-react';
 import { motion, useReducedMotion, type Variants } from 'framer-motion';
 import Image from 'next/image';
 import { Fragment } from 'react';
@@ -82,37 +82,66 @@ export function WhyBrillarixSection() {
           viewport={{ once: true, amount: 0.2 }}
           variants={whyCardGridVariants}
         >
-          <motion.article className="recognition-card why-pop-card is-aqua" variants={whyCardVariants}>
-            <div className="recognition-brand recognition-bubble">
+          <motion.article
+            className="recognition-card recognition-bubble-card why-pop-card is-aqua"
+            variants={whyCardVariants}
+            whileHover={shouldReduceMotion ? undefined : { y: -4, transition: { duration: 0.35, ease: [0.22, 1, 0.36, 1] } }}
+          >
+            <div className="recognition-card-body recognition-bubble">
               <Image src="/recognition/bubble-logo-user.jpg" alt="Bubble" width={200} height={200} />
             </div>
-            <p className="recognition-caption">Silver Agency Partner <BadgeCheck aria-hidden="true" /></p>
+            <div className="recognition-card-divider" aria-hidden="true" />
+            <p className="recognition-card-footer">
+              <span className="recognition-status-icon"><Check aria-hidden="true" /></span>
+              <span>Silver Agency Partner</span>
+            </p>
           </motion.article>
 
-          <motion.article className="recognition-card recognition-reviews-card why-pop-card is-lavender" variants={whyCardVariants}>
-            <Star aria-hidden="true" strokeWidth={1.55} />
+          <motion.article
+            className="recognition-card recognition-reviews-card why-pop-card is-lavender"
+            variants={whyCardVariants}
+            whileHover={shouldReduceMotion ? undefined : { y: -4, transition: { duration: 0.35, ease: [0.22, 1, 0.36, 1] } }}
+          >
+            <span className="recognition-corner-icon"><Star aria-hidden="true" strokeWidth={1.55} /></span>
             <div className="recognition-reviews-stat">
               <strong>40+</strong>
               <span>Reviews</span>
             </div>
           </motion.article>
 
-          <motion.article className="recognition-card why-pop-card is-aqua" variants={whyCardVariants}>
-            <div className="recognition-brand recognition-upwork" aria-label="Upwork Top Rated Plus">
+          <motion.article
+            className="recognition-card recognition-upwork-card why-pop-card is-aqua"
+            variants={whyCardVariants}
+            whileHover={shouldReduceMotion ? undefined : { y: -4, transition: { duration: 0.35, ease: [0.22, 1, 0.36, 1] } }}
+          >
+            <div className="recognition-upwork" aria-label="Top Rated Plus on Upwork">
               <span className="recognition-upwork-icon" aria-hidden="true">
                 <Image src="/recognition/upwork-top-rated-plus.png" alt="" width={272} height={82} />
               </span>
-              <span className="recognition-upwork-text">Top Rated Plus</span>
+              <span className="recognition-upwork-copy">
+                <strong>Top Rated Plus</strong>
+                <span>
+                  on Upwork
+                  <span className="recognition-verification is-green"><Check aria-hidden="true" /></span>
+                </span>
+              </span>
             </div>
-            <p className="recognition-caption">Top Rated Plus on Upwork <BadgeCheck aria-hidden="true" /></p>
           </motion.article>
 
-          <motion.article className="recognition-card why-pop-card is-lavender" variants={whyCardVariants}>
-            <div className="recognition-brand recognition-contra">
+          <motion.article
+            className="recognition-card recognition-contra-card why-pop-card is-lavender"
+            variants={whyCardVariants}
+            whileHover={shouldReduceMotion ? undefined : { y: -4, transition: { duration: 0.35, ease: [0.22, 1, 0.36, 1] } }}
+          >
+            <div className="recognition-card-body recognition-contra">
               <Image src="/recognition/contra-logo-user.jpg" alt="Contra" width={200} height={200} />
               <span>contra</span>
             </div>
-            <p className="recognition-caption"><span>Featured on <strong>Contra</strong></span> <BadgeCheck aria-hidden="true" /></p>
+            <div className="recognition-card-divider" aria-hidden="true" />
+            <p className="recognition-card-footer">
+              <span className="recognition-status-icon"><Check aria-hidden="true" /></span>
+              <span>Featured on <strong>Contra</strong></span>
+            </p>
           </motion.article>
 
           <motion.article
@@ -120,8 +149,10 @@ export function WhyBrillarixSection() {
             variants={whyCardVariants}
             whileHover={shouldReduceMotion ? undefined : { y: -4, transition: { duration: 0.35, ease: [0.22, 1, 0.36, 1] } }}
           >
-            <Orbit aria-hidden="true" strokeWidth={1.55} />
-            <p className="why-brillarix-card-copy">One accountable team from product strategy to production</p>
+            <span className="recognition-corner-icon"><Orbit aria-hidden="true" strokeWidth={1.55} /></span>
+            <p className="why-brillarix-card-copy">
+              One team, accountable<br />from <strong>strategy</strong> to <strong>launch.</strong>
+            </p>
           </motion.article>
         </motion.div>
       </div>

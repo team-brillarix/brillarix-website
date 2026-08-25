@@ -14,11 +14,11 @@ import { SiteFooter } from '@/components/site-footer';
 import { AiNativeExplainer } from '@/components/ai-native-explainer';
 
 const heroTitleLines = [
-  { words: ['The', 'AI-Native', 'Product', 'Studio'], startDelay: 0.03 },
-  { words: ['for', 'Modern', 'Founders.'], startDelay: 0.27 },
+  { words: ['AI', 'Product', 'Development', '&'], startDelay: 0.03 },
+  { words: ['MVP', 'Studio', 'for', 'Founders'], startDelay: 0.27 },
 ];
 
-const heroCopyWords = 'Brillarix is an AI product development and custom software studio helping founders launch scalable MVPs, web applications, and digital platforms—faster, with AI-assisted strategy, design, and engineering.'.split(' ');
+const heroCopyWords = 'We build scalable MVPs, web applications, and custom software for founders. AI-assisted strategy, design, and engineering, from prototype to production.'.split(' ');
 
 export default function Home() {
   const [pageReady, setPageReady] = useState(false);
@@ -42,7 +42,7 @@ export default function Home() {
   }, []);
 
   return (
-    <main className="home-page overflow-x-clip bg-[var(--paper)]" data-home-ready={pageReady}>
+    <main id="main-content" tabIndex={-1} className="home-page overflow-x-clip bg-[var(--paper)]" data-home-ready={pageReady}>
       <div className="home-load-veil" aria-hidden="true" />
       <SiteHeader introReady={pageReady} />
       <section id="top" className="reference-hero">
@@ -83,10 +83,10 @@ export default function Home() {
           </p>
         </div>
         <div className="reference-hero-actions">
-          <a className="reference-hero-cta reference-hero-cta--primary" href="#contact">
+          <a className="reference-hero-cta reference-hero-cta--primary" href="#contact" data-cursor>
             Discuss your product
           </a>
-          <a className="reference-hero-cta reference-hero-cta--secondary" href="#impact">
+          <a className="reference-hero-cta reference-hero-cta--secondary" href="#impact" data-cursor>
             See client results
           </a>
         </div>

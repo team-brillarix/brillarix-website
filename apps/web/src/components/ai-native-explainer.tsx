@@ -19,7 +19,7 @@ export function AiNativeExplainer() {
             viewport={{ once: true, amount: 0.65 }}
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           >
-            What AI-native means at Brillarix
+            How We Use AI in Product Development
           </motion.p>
           <motion.div
             className="ai-native-explainer-content"
@@ -30,9 +30,9 @@ export function AiNativeExplainer() {
           >
             <h2 id="ai-native-heading">Human product judgment. AI-accelerated execution.</h2>
             <p>
-              At Brillarix, AI-native describes how we work—not a promise to add AI to every product. We use AI across discovery, prototyping, engineering, testing, and documentation to shorten feedback loops. Our strategists, designers, and engineers remain responsible for product decisions, architecture, security, and final quality.
+              At Brillarix, AI-native describes how we work—not a promise to add AI to every product. We use AI across discovery, prototyping, engineering, testing, and documentation to shorten feedback loops. Our strategists, designers, and engineers remain responsible for product decisions, architecture, security, and final quality. You own the code, the IP, and the infrastructure from day one.
             </p>
-            <a href="#process">
+            <a href="#process" data-cursor>
               <span>Explore our process</span>
               <ArrowUpRight aria-hidden="true" strokeWidth={1.8} />
             </a>

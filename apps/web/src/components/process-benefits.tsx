@@ -157,36 +157,49 @@ export function ProcessDivider({ className = '' }: { className?: string }) {
   );
 }
 
-const benefits = [
+type ProcessBenefit = {
+  icon: string;
+  title: string;
+  label?: string;
+  text: string;
+  duration?: string;
+  deliverables?: string;
+};
+
+const benefits: ProcessBenefit[] = [
   {
     icon: '/process-icons/1.svg',
     title: 'Discovery & Product Strategy',
-    label: 'Validate the opportunity before committing to build.',
-    text: 'We align business goals, user needs, market evidence, and technical constraints. The outcome is a focused product brief, a prioritized roadmap, and a measurable definition of success.',
+    duration: '1–2 weeks',
+    text: 'We align business goals, user needs, market evidence, and technical constraints before any code is written.',
+    deliverables: 'product brief, prioritized roadmap, measurable definition of success.',
   },
   {
     icon: '/process-icons/2.svg',
     title: 'Rapid Prototyping & UX Design',
-    label: 'Test the experience before full development.',
-    text: 'AI-assisted research and rapid prototypes help us explore flows, test assumptions, and collect useful feedback early. You see how the product works before investing in a production build.',
+    duration: '2–3 weeks',
+    text: 'AI-assisted research and rapid prototypes let us explore flows, test assumptions, and gather feedback before you invest in a production build.',
+    deliverables: 'interactive prototype, validated user flows, UX design system.',
   },
   {
     icon: '/process-icons/3.svg',
     title: 'Full-Stack Product Development',
-    label: 'Build a secure foundation that can grow.',
-    text: 'Our engineers turn validated product flows into production software, connecting frontend experiences, APIs, data, and cloud infrastructure. Architecture, security, and maintainability are considered from the first release.',
+    duration: '4–8 weeks',
+    text: 'Our engineers turn validated flows into production software across the frontend, APIs, data, and cloud infrastructure, with architecture, security, and maintainability built in from the first release.',
+    deliverables: 'production application, API layer, cloud infrastructure, deployment pipeline.',
   },
   {
     icon: '/process-icons/4.svg',
     title: 'Quality Assurance & Optimization',
-    label: 'Verify reliability, usability, and performance.',
-    text: 'Automated and manual testing cover critical workflows, devices, integrations, accessibility, and performance. We resolve issues before launch and use evidence—not assumptions—to refine the experience.',
+    duration: '1–2 weeks',
+    text: 'Automated and manual tests cover critical workflows, devices, integrations, accessibility, and performance. Every issue is resolved based on evidence, not assumption, before launch.',
+    deliverables: 'test coverage report, performance benchmarks, accessibility audit.',
   },
   {
     icon: '/process-icons/5.svg',
     title: 'Launch, Measurement & Iteration',
-    label: 'Release confidently and improve with evidence.',
-    text: 'We prepare deployment, monitoring, analytics, and continuous delivery so your team can launch with visibility. After release, real usage and feedback guide the next product decisions.',
+    text: 'We set up deployment, monitoring, analytics, and continuous delivery so you launch with full visibility. Real usage and feedback then guide the next release.',
+    deliverables: 'analytics and monitoring dashboards, release checklist, post-launch iteration plan.',
   },
 ];
 
@@ -277,10 +290,18 @@ export function ProcessBenefits() {
                   <span className="process-benefit-icon-shell" aria-hidden="true">
                     <img className="process-benefit-icon" src={benefit.icon} alt="" />
                   </span>
-                  <p className="process-benefit-title">{benefit.title}</p>
+                  <p className="process-benefit-title">
+                    {benefit.title}
+                    {benefit.duration ? <span className="process-benefit-duration">{benefit.duration}</span> : null}
+                  </p>
                   <div className="process-benefit-copy">
-                    <p className="process-benefit-label">{benefit.label}</p>
+                    {benefit.label ? <p className="process-benefit-label">{benefit.label}</p> : null}
                     <p>{benefit.text}</p>
+                    {benefit.deliverables ? (
+                      <p className="process-benefit-deliverables">
+                        <em>Deliverables:</em> {benefit.deliverables}
+                      </p>
+                    ) : null}
                   </div>
                 </div>
               </motion.article>

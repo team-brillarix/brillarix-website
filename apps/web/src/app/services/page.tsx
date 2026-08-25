@@ -3,7 +3,7 @@ import { SiteHeader } from '@/components/site-header';
 
 export default function ServicesPage() {
   return (
-    <main className="services-page">
+    <main id="main-content" tabIndex={-1} className="services-page">
       <SiteHeader />
       <section id="top" className="services-intro">
         <p>AI &amp; custom software development</p>

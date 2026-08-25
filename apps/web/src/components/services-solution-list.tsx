@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import Link from 'next/link';
 import { ElasticDivider } from './elastic-divider';
 
 const services = [
@@ -48,7 +49,7 @@ export function ServicesSolutionList() {
                 <div className="solution-details">
                   <h3>{service.title}</h3>
                   <p>{service.description}</p>
-                  <a href="/#contact">{service.cta}</a>
+                  <Link href="/#contact">{service.cta}</Link>
                 </div>
               </div>
             </motion.article>
