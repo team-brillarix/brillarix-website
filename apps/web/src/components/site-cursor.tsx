@@ -27,13 +27,18 @@ export function SiteCursor() {
 
     const updateHoverState = (event: PointerEvent) => {
       const target = event.target;
-      const isInteractive = target instanceof Element && Boolean(target.closest('[data-cursor]'));
+      const element = target instanceof Element ? target : null;
+      const isInteractive = Boolean(element?.closest('[data-cursor]'));
+      // Project cards swap the dot for a filled disc carrying an arrow, the way
+      // the reference listing signals "this opens".
+      cursor.dataset.arrow = String(Boolean(element?.closest('[data-cursor-arrow]')));
       cursor.dataset.expanded = String(isInteractive);
     };
 
     const hideCursor = () => {
       cursor.dataset.visible = 'false';
       cursor.dataset.expanded = 'false';
+      cursor.dataset.arrow = 'false';
     };
 
     const render = () => {
@@ -56,5 +61,13 @@ export function SiteCursor() {
     };
   }, []);
 
-  return <div ref={cursorRef} className="site-cursor" aria-hidden="true" />;
+  return (
+    <div ref={cursorRef} className="site-cursor" aria-hidden="true">
+      {/* Drawn in black so the parent's difference blend renders it white
+          against the disc, without a second blend context. */}
+      <svg className="site-cursor-arrow" viewBox="0 0 24 24" fill="none">
+        <path d="M7 17 17 7M9 7h8v8" stroke="#000" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
+      </svg>
+    </div>
+  );
 }

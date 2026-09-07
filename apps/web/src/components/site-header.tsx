@@ -104,8 +104,8 @@ export function SiteHeader({ introReady }: { introReady?: boolean }) {
           className="site-brand-mark"
           src="/brillarix-mark.png"
           alt=""
-          width={1256}
-          height={1256}
+          width={1287}
+          height={1222}
           sizes="48px"
           priority
         />

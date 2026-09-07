@@ -24,10 +24,19 @@ export function SmoothScroll() {
 
     // Lenis' own `anchors` option does not preventDefault, so the browser jump
     // and the eased scroll would both run. This does one or the other.
+    //
+    // Runs in the capture phase because in-page links rendered as next/link
+    // (`/#impact` in the header) preventDefault in their own React handler, and
+    // a bubble-phase listener would only ever see the click already claimed.
+    // preventDefault alone is enough to make Link stand down — deliberately no
+    // stopPropagation, so sibling handlers such as the mobile menu's close
+    // still run.
     const onDocumentClick = (event: MouseEvent) => {
       if (event.defaultPrevented || event.button !== 0) return;
       if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
-      if (lenis.isSmooth === false) return;
+      // Not `lenis.isSmooth` — that reports whether a smooth scroll is running
+      // right now, which is false on an idle page and would bail on every click.
+      if (lenis.prefersReducedMotion) return;
 
       const anchor = (event.target as Element | null)?.closest?.('a[href]');
       if (!(anchor instanceof HTMLAnchorElement) || anchor.target === '_blank') return;
@@ -48,20 +57,44 @@ export function SmoothScroll() {
       target.focus({ preventScroll: true });
     };
 
+    // Arriving from another route (a project page back to /#impact) lands via
+    // the router, not a click this listener sees. Settle onto the target once
+    // the section has been laid out.
+    let landingFrame = 0;
+    const settleOnHash = () => {
+      if (!window.location.hash) return;
+      let target: Element | null = null;
+      try {
+        target = document.querySelector(window.location.hash);
+      } catch {
+        return;
+      }
+      if (!(target instanceof HTMLElement)) return;
+
+      landingFrame = requestAnimationFrame(() => {
+        lenis.scrollTo(target as HTMLElement, { immediate: true, offset: -anchorOffset() });
+        (target as HTMLElement).focus({ preventScroll: true });
+      });
+    };
+
     window.addEventListener('brillarix:load-motion-stop', stopForLoadMotion);
     window.addEventListener('brillarix:load-motion-start', startAfterLoadMotion);
     window.addEventListener('brillarix:scroll-lock', stopForLoadMotion);
     window.addEventListener('brillarix:scroll-unlock', startAfterLoadMotion);
-    document.addEventListener('click', onDocumentClick);
+    document.addEventListener('click', onDocumentClick, true);
+    window.addEventListener('hashchange', settleOnHash);
     if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches && document.querySelector('.home-page[data-home-ready="false"]')) lenis.stop();
     frame = requestAnimationFrame(raf);
+    settleOnHash();
     return () => {
       cancelAnimationFrame(frame);
+      cancelAnimationFrame(landingFrame);
       window.removeEventListener('brillarix:load-motion-stop', stopForLoadMotion);
       window.removeEventListener('brillarix:load-motion-start', startAfterLoadMotion);
       window.removeEventListener('brillarix:scroll-lock', stopForLoadMotion);
       window.removeEventListener('brillarix:scroll-unlock', startAfterLoadMotion);
-      document.removeEventListener('click', onDocumentClick);
+      document.removeEventListener('click', onDocumentClick, true);
+      window.removeEventListener('hashchange', settleOnHash);
       lenis.destroy();
     };
   }, []);

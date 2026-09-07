@@ -3,28 +3,26 @@
 import { motion } from 'framer-motion';
 import { useEffect, useRef } from 'react';
 
-const viewBoxWidth = 1328;
-const baseline = 48;
-const motionStart = 160;
-const motionEnd = viewBoxWidth - motionStart;
+// Reference geometry: a single quadratic whose ends are pinned and whose one
+// control point is the whole animation — `M0,100 Q483.5,100 967,100` at rest.
+const viewBoxWidth = 967;
+const baseline = 100;
+const restControlX = viewBoxWidth / 2;
 
-function createStringPath(x: number, y: number) {
-  const leftSpan = x - motionStart;
-  const rightSpan = motionEnd - x;
-  const peakY = baseline + y;
+// A quadratic peaks at half its control-point offset, so the control point has
+// to travel twice as far as the displacement you actually want to see.
+const controlGain = 2;
+const maxVisualPull = 30;
 
-  // The outer 160 units on each side are literal straight lines. This pins
-  // both ends in place and confines the string motion to the middle.
-  return [
-    `M 0 ${baseline}`,
-    `L ${motionStart} ${baseline}`,
-    `C ${(motionStart + leftSpan * 0.35).toFixed(2)} ${baseline}, ${(x - leftSpan * 0.18).toFixed(2)} ${peakY.toFixed(2)}, ${x.toFixed(2)} ${peakY.toFixed(2)}`,
-    `C ${(x + rightSpan * 0.18).toFixed(2)} ${peakY.toFixed(2)}, ${(motionEnd - rightSpan * 0.35).toFixed(2)} ${baseline}, ${motionEnd} ${baseline}`,
-    `L ${viewBoxWidth} ${baseline}`,
-  ].join(' ');
+// Trailing zeros trimmed so the resting path is literally the reference's
+// `M0,100 Q483.5,100 967,100`.
+const trim = (n: number) => Number(n.toFixed(1)).toString();
+
+function createStringPath(controlX: number, controlY: number) {
+  return `M0,${baseline} Q${trim(controlX)},${trim(baseline + controlY * controlGain)} ${viewBoxWidth},${baseline}`;
 }
 
-const restingPath = createStringPath(viewBoxWidth / 2, 0);
+const restingPath = createStringPath(restControlX, 0);
 
 type StringMotion = {
   x: number;
@@ -39,10 +37,10 @@ type StringMotion = {
 export function ElasticDivider() {
   const pathRef = useRef<SVGPathElement>(null);
   const motionRef = useRef<StringMotion>({
-    x: viewBoxWidth / 2,
+    x: restControlX,
     y: 0,
     velocityY: 0,
-    targetX: viewBoxWidth / 2,
+    targetX: restControlX,
     targetY: 0,
     hovering: false,
     frame: null,
@@ -61,7 +59,7 @@ export function ElasticDivider() {
       string.velocityY += -string.y * 0.026;
       string.velocityY *= 0.935;
       string.y += string.velocityY;
-      string.x += (viewBoxWidth / 2 - string.x) * 0.025;
+      string.x += (restControlX - string.x) * 0.025;
     }
 
     pathRef.current?.setAttribute('d', createStringPath(string.x, string.y));
@@ -70,10 +68,10 @@ export function ElasticDivider() {
       !string.hovering &&
       Math.abs(string.y) < 0.08 &&
       Math.abs(string.velocityY) < 0.08 &&
-      Math.abs(string.x - viewBoxWidth / 2) < 0.15;
+      Math.abs(string.x - restControlX) < 0.15;
 
     if (hasSettled) {
-      string.x = viewBoxWidth / 2;
+      string.x = restControlX;
       string.y = 0;
       string.velocityY = 0;
       string.frame = null;
@@ -94,17 +92,16 @@ export function ElasticDivider() {
   const handleMove = (event: React.PointerEvent<SVGSVGElement>) => {
     const bounds = event.currentTarget.getBoundingClientRect();
     const string = motionRef.current;
-    const normalizedX = ((event.clientX - bounds.left) / bounds.width) * viewBoxWidth;
-    const normalizedY = ((event.clientY - bounds.top) / bounds.height) * baseline * 2;
-    const progress = Math.max(0, Math.min(1, normalizedX / viewBoxWidth));
-    const easedProgress = progress * progress * (3 - 2 * progress);
-    const edgeDistance = Math.min(progress, 1 - progress) * 2;
-    const edgeInfluence = Math.max(0, Math.min(1, edgeDistance / 0.34));
-    const motionRange = motionEnd - motionStart - 140;
+    const progress = Math.max(0, Math.min(1, (event.clientX - bounds.left) / bounds.width));
+    const pointerY = ((event.clientY - bounds.top) / bounds.height) * baseline * 2;
+
+    // Taper towards the pinned ends, where a real string can barely move.
+    const edgeInfluence = Math.max(0, Math.min(1, (Math.min(progress, 1 - progress) * 2) / 0.34));
 
     string.hovering = true;
-    string.targetX = motionStart + 70 + motionRange * easedProgress;
-    string.targetY = Math.max(-34, Math.min(34, normalizedY - baseline)) * edgeInfluence;
+    string.targetX = progress * viewBoxWidth;
+    string.targetY =
+      Math.max(-maxVisualPull, Math.min(maxVisualPull, pointerY - baseline)) * edgeInfluence;
     startMotion();
   };
 
@@ -126,11 +123,8 @@ export function ElasticDivider() {
   return (
     <motion.svg
       className="elastic-divider"
-      viewBox="0 0 1328 96"
+      viewBox={`0 0 ${viewBoxWidth} ${baseline * 2}`}
       preserveAspectRatio="none"
-      width="1328"
-      height="96"
-      style={{ maxWidth: 'calc(100vw - 48px)', width: '1328px' }}
       onPointerEnter={handleMove}
       onPointerMove={handleMove}
       onPointerLeave={releaseString}

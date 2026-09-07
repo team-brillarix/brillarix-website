@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     title: siteTitle,
     description: siteDescription,
     locale: 'en_US',
-    images: [{ url: '/brillarix-mark.png', width: 1256, height: 1256, alt: siteName }],
+    images: [{ url: '/brillarix-mark.png', width: 1287, height: 1222, alt: siteName }],
   },
   twitter: {
     card: 'summary',

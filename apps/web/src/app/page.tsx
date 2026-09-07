@@ -6,6 +6,7 @@ import { ProcessBenefits } from '@/components/process-benefits';
 import { ClientTrustSection } from '@/components/client-trust-section';
 import { WhyBrillarixSection } from '@/components/why-brillarix-section';
 import { ScrollCardShowcase } from '@/components/scroll-card-showcase';
+import { ProjectsShowcase } from '@/components/projects-showcase';
 import { IndustryExpertise } from '@/components/industry-expertise';
 import { FaqSection } from '@/components/faq-section';
 import { ContactSection } from '@/components/contact-section';
@@ -97,6 +98,8 @@ export default function Home() {
       <AiNativeExplainer />
 
       <ProcessBenefits />
+
+      <ProjectsShowcase />
 
       <ClientTrustSection />
       <WhyBrillarixSection />

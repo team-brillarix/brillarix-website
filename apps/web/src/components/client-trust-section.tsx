@@ -130,7 +130,7 @@ export function ClientTrustSection() {
   const shouldReduceMotion = useReducedMotion();
 
   return (
-    <section id="impact" className="client-trust-section" aria-labelledby="client-trust-heading">
+    <section id="clients" className="client-trust-section" aria-labelledby="client-trust-heading">
       <div className="client-trust-shell">
         <motion.h2
           id="client-trust-heading"
