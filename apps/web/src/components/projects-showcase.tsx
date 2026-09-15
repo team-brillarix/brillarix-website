@@ -27,9 +27,17 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
   const shouldReduceMotion = useReducedMotion();
   const videoRef = useRef<HTMLVideoElement>(null);
 
-  // The poster carries the card until a pointer arrives; only then is the clip
-  // worth the bandwidth, so it stays `preload="none"` until the first hover.
-  // Projects with only a still have no video element to drive at all.
+  // A clip usually waits for a pointer: the still carries the card, and fetching
+  // the reel before anyone asks for it would cost every visitor the download.
+  // Two cases make it the card's resting state instead -- loaded up front,
+  // running, and never paused back out when the pointer leaves: a project with
+  // no still, where the card would otherwise sit empty, and one asking for it
+  // outright because the reel is the thing worth seeing.
+  const clipRunsAtRest =
+    (project.cardClipAlways || !project.poster) &&
+    Boolean(project.video) &&
+    !project.cardStillOnly;
+
   const playPreview = useCallback(() => {
     const video = videoRef.current;
     if (!video || shouldReduceMotion) return;
@@ -38,10 +46,10 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
 
   const pausePreview = useCallback(() => {
     const video = videoRef.current;
-    if (!video) return;
+    if (!video || clipRunsAtRest) return;
     video.pause();
     video.currentTime = 0;
-  }, []);
+  }, [clipRunsAtRest]);
 
   return (
     <motion.article
@@ -61,27 +69,34 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
         onFocus={playPreview}
         onBlur={pausePreview}
       >
-        <span className="project-card-media">
-          <Image
-            className="project-card-poster"
-            src={project.poster}
-            alt=""
-            width={project.posterWidth}
-            height={project.posterHeight}
-            sizes="(max-width: 900px) 92vw, 44vw"
-            priority={index < 2}
-          />
-          {project.video ? (
+        <span
+          className="project-card-media"
+          data-placeholder={project.poster || clipRunsAtRest ? undefined : true}
+          data-clip-runs={clipRunsAtRest ? true : undefined}
+        >
+          {project.poster ? (
+            <Image
+              className="project-card-poster"
+              src={project.poster}
+              alt=""
+              width={project.posterWidth}
+              height={project.posterHeight}
+              sizes="(max-width: 900px) 92vw, 44vw"
+              priority={index < 2}
+            />
+          ) : null}
+          {project.video && !project.cardStillOnly ? (
             <video
               className="project-card-video"
               ref={videoRef}
+              autoPlay={clipRunsAtRest}
               muted
               loop
               playsInline
-              preload="none"
+              preload={clipRunsAtRest ? 'auto' : 'none'}
               tabIndex={-1}
               aria-hidden="true"
-              src={project.video}
+              src={project.cardVideo ?? project.video}
             />
           ) : null}
         </span>

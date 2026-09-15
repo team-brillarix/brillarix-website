@@ -134,14 +134,16 @@ export function ElasticDivider() {
       viewport={{ once: true, amount: 0.65 }}
       transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
     >
-      <motion.path
-        ref={pathRef}
-        d={restingPath}
-        initial={{ pathLength: 0 }}
-        whileInView={{ pathLength: 1 }}
-        viewport={{ once: true, amount: 0.65 }}
-        transition={{ duration: 0.85, ease: [0.22, 1, 0.36, 1] }}
-      />
+      {/*
+        Deliberately no `pathLength` draw-in. It works by animating
+        `stroke-dasharray`, and `vector-effect: non-scaling-stroke` on this path
+        makes dash lengths screen-relative rather than user-space. The dash
+        therefore only ever covered `viewBoxWidth` screen pixels, so on any
+        string rendered wider than that the tail simply fell in the gap and was
+        never painted -- the line looked capped at 967px however wide its box
+        got. The svg's own fade-in above carries the entrance instead.
+      */}
+      <path ref={pathRef} d={restingPath} />
     </motion.svg>
   );
 }

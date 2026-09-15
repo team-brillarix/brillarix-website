@@ -15,6 +15,10 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   if (!project) return {};
 
+  // A project still waiting on its artwork falls back to the site card, rather
+  // than advertising an image URL that is not there yet.
+  const shareImage = project.poster;
+
   return {
     title: `${project.name} — ${project.heroTitle}`,
     description: project.tagline,
@@ -24,13 +28,13 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       url: `/projects/${project.slug}`,
       title: `${project.name} — ${project.heroTitle}`,
       description: project.tagline,
-      images: [{ url: project.poster, alt: project.name }],
+      ...(shareImage ? { images: [{ url: shareImage, alt: project.name }] } : {}),
     },
     twitter: {
-      card: 'summary_large_image',
+      card: shareImage ? 'summary_large_image' : 'summary',
       title: `${project.name} — ${project.heroTitle}`,
       description: project.tagline,
-      images: [project.poster],
+      ...(shareImage ? { images: [shareImage] } : {}),
     },
   };
 }

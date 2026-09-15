@@ -124,8 +124,8 @@ export function SiteHeader({ introReady }: { introReady?: boolean }) {
             </a>
           )
         ))}
-        <Link className="partner-cta" href="/#contact" data-cursor>
-          Start a project
+        <Link className="partner-cta roll-button" href="/#contact" data-cursor>
+          <span className="roll-label">Start a project</span>
         </Link>
       </nav>
 
@@ -163,12 +163,12 @@ export function SiteHeader({ introReady }: { introReady?: boolean }) {
           ))}
         </nav>
         <Link
-          className="mobile-navigation-cta"
+          className="mobile-navigation-cta roll-button"
           href="/#contact"
           onClick={closeMenu}
           style={{ '--nav-index': navigation.length } as React.CSSProperties}
         >
-          Start a project
+          <span className="roll-label">Start a project</span>
         </Link>
       </div>
     </header>

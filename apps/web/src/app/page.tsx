@@ -84,11 +84,11 @@ export default function Home() {
           </p>
         </div>
         <div className="reference-hero-actions">
-          <a className="reference-hero-cta reference-hero-cta--primary" href="#contact" data-cursor>
-            Discuss your product
+          <a className="reference-hero-cta reference-hero-cta--primary roll-button" href="#contact" data-cursor>
+            <span className="roll-label">Discuss your product</span>
           </a>
-          <a className="reference-hero-cta reference-hero-cta--secondary" href="#impact" data-cursor>
-            See client results
+          <a className="reference-hero-cta reference-hero-cta--secondary roll-button" href="#impact" data-cursor>
+            <span className="roll-label">See client results</span>
           </a>
         </div>
       </section>

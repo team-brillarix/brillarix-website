@@ -32,8 +32,8 @@ export function AiNativeExplainer() {
             <p>
               At Brillarix, AI-native describes how we work—not a promise to add AI to every product. We use AI across discovery, prototyping, engineering, testing, and documentation to shorten feedback loops. Our strategists, designers, and engineers remain responsible for product decisions, architecture, security, and final quality. You own the code, the IP, and the infrastructure from day one.
             </p>
-            <a href="#process" data-cursor>
-              <span>Explore our process</span>
+            <a className="roll-button" href="#process" data-cursor>
+              <span className="roll-label">Explore our process</span>
               <ArrowUpRight aria-hidden="true" strokeWidth={1.8} />
             </a>
           </motion.div>

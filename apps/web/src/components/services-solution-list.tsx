@@ -49,7 +49,9 @@ export function ServicesSolutionList() {
                 <div className="solution-details">
                   <h3>{service.title}</h3>
                   <p>{service.description}</p>
-                  <Link href="/#contact">{service.cta}</Link>
+                  <Link className="roll-button" href="/#contact">
+                    <span className="roll-label">{service.cta}</span>
+                  </Link>
                 </div>
               </div>
             </motion.article>

@@ -71,7 +71,7 @@ export function ContactSection() {
               <textarea id="contact-message" name="message" placeholder="Tell us about your product" rows={4} maxLength={2000} required />
             </div>
 
-            <button className="contact-submit" type="submit"><span>Send project brief</span><ArrowUpRight aria-hidden="true" /></button>
+            <button className="contact-submit roll-button" type="submit"><span className="roll-label">Send project brief</span><ArrowUpRight aria-hidden="true" /></button>
             <p className="contact-form-note"><LockKeyhole aria-hidden="true" />Sending opens your preferred email app with these details ready.</p>
           </form>
           </div>

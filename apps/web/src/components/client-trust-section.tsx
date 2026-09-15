@@ -54,8 +54,16 @@ const reviews: Review[] = [
     title: 'Exceptional Service',
   },
   {
-    company: 'Trialynx',
+    company: 'KW Fitness',
     id: 'review-05',
+    name: 'Kevin Webb',
+    role: 'Founder',
+    text: 'Working with Brillarix on PT Metrics was exceptional. They transformed my vision into a clean, powerful platform with flawless execution and communication. Their partnership and creative problem-solving helped build a product that will truly elevate our business.',
+    title: 'Ideas to Reality',
+  },
+  {
+    company: 'Trialynx',
+    id: 'review-06',
     name: 'Angie Schwab',
     role: 'CEO',
     text: 'In under a year, Brillarix helped us transform our initial concept into a fully operational business with a recurring client base. Their platform was the catalyst for our expansion into four countries, accelerating our medical writing speed by 90% and enabling the launch of over 50 clinical trials.',
@@ -63,10 +71,13 @@ const reviews: Review[] = [
   },
 ];
 
-const fanX = [180, 0, -150, 150, -150];
-const fanY = [80, 0, 80, -340, -340];
-const fanRotation = [-10, 0, 10, -18, 18];
-const fanStack = [1, 3, 2, 4, 5];
+const fanX = [180, 0, -150, 180, 0, -180];
+// Each resting offset carries +131px: the deck reserves its opened grid's
+// 1220px, the fan fills 958px of it, and this centres the fan in the rest, so
+// it opens outward in both directions rather than leaving a void beneath it.
+const fanY = [211, 131, 211, -209, -249, -209];
+const fanRotation = [-10, 0, 10, -18, 0, 18];
+const fanStack = [1, 3, 2, 4, 6, 5];
 const trustHeadingWords = 'Trusted by our clients'.split(' ');
 
 const trustHeadingVariants: Variants = {
